@@ -50,10 +50,36 @@ apis:
         url: https://developer.withings.com/developer-guide/v3/data-api/all-available-health-data/
       - type: OpenAPI
         url: https://developer.withings.com/api-reference/
+      - type: OpenAPI
+        url: openapi/withings-data-api-openapi.yml
       - type: Authentication
         url: https://developer.withings.com/developer-guide/v3/integration-guide/public-health-data-api/get-access/oauth-web-flow/
       - type: Webhooks
         url: https://developer.withings.com/developer-guide/v3/data-api/notifications/notification-overview/
+      - type: JSONSchema
+        url: json-schema/withings-activity-object.json
+      - type: JSONSchema
+        url: json-schema/withings-measuregrp-object.json
+      - type: JSONSchema
+        url: json-schema/withings-measure-object.json
+      - type: JSONSchema
+        url: json-schema/withings-sleep-summary-object.json
+      - type: JSONSchema
+        url: json-schema/withings-workout-object.json
+      - type: JSONSchema
+        url: json-schema/withings-notify-object.json
+      - type: JSONSchema
+        url: json-schema/withings-user-device-object.json
+      - type: JSONSchema
+        url: json-schema/withings-heart-measurement-object.json
+      - type: Example
+        url: examples/withings-measure-example.json
+      - type: Example
+        url: examples/withings-sleep-summary-example.json
+      - type: Example
+        url: examples/withings-activity-example.json
+      - type: Example
+        url: examples/withings-oauth2-token-example.json
   - name: Withings Mobile SDK
     description: >-
       The Withings Mobile SDK allows developers to integrate Withings health
@@ -119,6 +145,10 @@ common:
     url: rate-limits/withings-rate-limits.yml
   - type: FinOps
     url: finops/withings-finops.yml
+  - type: Vocabulary
+    url: vocabulary/withings-vocabulary.yml
+  - type: JSONLDContext
+    url: json-ld/withings-context.jsonld
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com

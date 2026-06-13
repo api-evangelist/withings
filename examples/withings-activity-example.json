@@ -1,0 +1,35 @@
+{
+  "summary": "Daily activity summary",
+  "description": "Example daily activity data from Withings activity tracker",
+  "value": {
+    "status": 0,
+    "body": {
+      "activities": [
+        {
+          "date": "2020-05-20",
+          "timezone": "Europe/Paris",
+          "deviceid": "abc123",
+          "hash_deviceid": "hashedid",
+          "brand": 0,
+          "is_tracker": true,
+          "steps": 8543,
+          "distance": 6234.5,
+          "elevation": 25.0,
+          "soft": 2340,
+          "moderate": 1200,
+          "intense": 600,
+          "active": 1800,
+          "calories": 312.5,
+          "totalcalories": 2150.0,
+          "hr_average": 72,
+          "hr_min": 55,
+          "hr_max": 145,
+          "hr_zone_0": 3600,
+          "hr_zone_1": 1800,
+          "hr_zone_2": 900,
+          "hr_zone_3": 300
+        }
+      ]
+    }
+  }
+}

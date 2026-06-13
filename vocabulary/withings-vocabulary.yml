@@ -1,0 +1,255 @@
+vocabulary:
+  name: Withings API Vocabulary
+  description: >-
+    Key terms, concepts, and domain vocabulary used in the Withings Health API for
+    connected health devices, body composition, sleep tracking, activity, and remote
+    patient monitoring.
+  url: https://developer.withings.com/
+
+terms:
+  # Authentication & Authorization
+  - term: OAuth2
+    definition: >-
+      The authorization framework used by the Withings API. Supports Authorization
+      Code Flow for server-side applications. Access tokens expire after 3 hours;
+      refresh tokens are used to obtain new access tokens.
+    category: Authentication
+
+  - term: access_token
+    definition: >-
+      A short-lived token (expires_in seconds, typically 10800 = 3 hours) used
+      to authenticate API requests on behalf of a user.
+    category: Authentication
+
+  - term: refresh_token
+    definition: >-
+      A long-lived token used to obtain new access tokens when the current one
+      expires, without requiring user re-authorization.
+    category: Authentication
+
+  - term: scope
+    definition: >-
+      Comma-separated list of permissions requested during OAuth2 authorization.
+      Examples: user.activity, user.sleepevents, user.metrics, user.info.
+    category: Authentication
+
+  # Measurement concepts
+  - term: measuregrp
+    definition: >-
+      A measurement group (grpid) representing a single measurement session
+      containing one or more individual measures taken at the same time.
+    category: Measurement
+
+  - term: measure_type
+    definition: >-
+      Numeric code identifying the type of health measurement. Examples:
+      1=Weight(kg), 4=Height(m), 5=Fat Free Mass(kg), 6=Fat Ratio(%),
+      8=Fat Mass Weight(kg), 9=Diastolic BP(mmHg), 10=Systolic BP(mmHg),
+      11=Heart Pulse(bpm), 12=Temperature(celsius), 54=SpO2(%),
+      71=Body Temperature, 73=Skin Temperature, 76=Muscle Mass(kg),
+      77=Hydration(kg), 88=Bone Mass(kg), 91=Pulse Wave Velocity(m/s),
+      123=VO2 max, 135=QRS interval, 136=PR interval, 137=QT interval.
+    category: Measurement
+
+  - term: measure_unit
+    definition: >-
+      Power of 10 multiplier applied to the measure value. To get the real
+      value: value * 10^unit. E.g., value=7500, unit=-2 means 75.00 kg.
+    category: Measurement
+
+  - term: attrib
+    definition: >-
+      Measurement attribution indicating the source: 0=device captured without
+      ambiguity, 1=device but may be attributed to another user, 2=manual input,
+      4=manual input during sleep, 5=aggregated measurement, 7=measured by coach.
+    category: Measurement
+
+  - term: category
+    definition: >-
+      Measurement category: 1=real measurements, 2=user objectives/goals.
+    category: Measurement
+
+  # Body Composition
+  - term: body_composition
+    definition: >-
+      Measurements of body composition including weight, fat mass, fat free mass,
+      fat ratio, muscle mass, hydration, and bone mass typically collected by
+      smart scales.
+    category: Body Composition
+
+  - term: fat_ratio
+    definition: >-
+      Percentage of body weight that is fat mass. Measure type 6.
+    category: Body Composition
+
+  - term: fat_mass_weight
+    definition: >-
+      Absolute weight of body fat in kilograms. Measure type 8.
+    category: Body Composition
+
+  - term: muscle_mass
+    definition: >-
+      Total muscle mass weight in kilograms. Measure type 76.
+    category: Body Composition
+
+  - term: hydration
+    definition: >-
+      Body water content in kilograms. Measure type 77.
+    category: Body Composition
+
+  - term: bone_mass
+    definition: >-
+      Bone mass weight in kilograms. Measure type 88.
+    category: Body Composition
+
+  # Cardiovascular
+  - term: heart_pulse
+    definition: >-
+      Heart rate in beats per minute (bpm). Measure type 11.
+    category: Cardiovascular
+
+  - term: systolic_bp
+    definition: >-
+      Systolic blood pressure in mmHg (the higher number). Measure type 10.
+    category: Cardiovascular
+
+  - term: diastolic_bp
+    definition: >-
+      Diastolic blood pressure in mmHg (the lower number). Measure type 9.
+    category: Cardiovascular
+
+  - term: pulse_wave_velocity
+    definition: >-
+      Arterial stiffness measurement in meters per second (m/s). Measure type 91.
+    category: Cardiovascular
+
+  - term: ECG
+    definition: >-
+      Electrocardiogram signal data in micro-volts (μV) recorded by Withings
+      devices. Accessed via Heart API services.
+    category: Cardiovascular
+
+  # Sleep
+  - term: sleep_efficiency
+    definition: >-
+      Percentage of time in bed actually spent sleeping. Calculated as
+      total_sleep_time / total_timeinbed * 100.
+    category: Sleep
+
+  - term: sleep_latency
+    definition: >-
+      Time in minutes from going to bed until falling asleep.
+    category: Sleep
+
+  - term: deepsleepduration
+    definition: >-
+      Total time in seconds spent in deep (slow-wave) sleep stage.
+    category: Sleep
+
+  - term: remsleepduration
+    definition: >-
+      Total time in seconds spent in REM (rapid eye movement) sleep stage.
+    category: Sleep
+
+  - term: lightsleepduration
+    definition: >-
+      Total time in seconds spent in light sleep stage.
+    category: Sleep
+
+  - term: wakeupduration
+    definition: >-
+      Total time in seconds spent awake after initial sleep onset (WASO).
+    category: Sleep
+
+  - term: snoring
+    definition: >-
+      Total duration of snoring in seconds detected during the night.
+    category: Sleep
+
+  - term: breathing_disturbances_intensity
+    definition: >-
+      Score indicating breathing disturbance intensity during sleep, related to
+      sleep-disordered breathing events.
+    category: Sleep
+
+  # Activity
+  - term: steps
+    definition: >-
+      Total number of steps taken during the day as counted by the activity tracker.
+    category: Activity
+
+  - term: distance
+    definition: >-
+      Total distance covered in meters during the day.
+    category: Activity
+
+  - term: active_calories
+    definition: >-
+      Calories burned specifically from physical activity (not including basal metabolic rate).
+    category: Activity
+
+  - term: totalcalories
+    definition: >-
+      Total calories burned including both active and basal metabolic rate (BMR).
+    category: Activity
+
+  - term: hr_zone
+    definition: >-
+      Heart rate zones during activity. Zone 0=light, Zone 1=moderate, Zone 2=vigorous,
+      Zone 3=maximum. Values represent time in seconds spent in each zone.
+    category: Activity
+
+  # Devices
+  - term: deviceid
+    definition: >-
+      Unique identifier for a Withings device. May be a MAC address or internal ID.
+    category: Devices
+
+  - term: hash_deviceid
+    definition: >-
+      Hashed version of the device ID used for privacy-preserving device identification
+      while allowing device-level data correlation.
+    category: Devices
+
+  - term: model_id
+    definition: >-
+      Numeric identifier for the device model type (e.g., smart scale variant,
+      blood pressure monitor model, sleep tracker type).
+    category: Devices
+
+  # Notifications
+  - term: notify_appli
+    definition: >-
+      Application code identifying the type of data update that triggers a webhook
+      notification. Examples: 1=Weight, 4=Heart rate, 16=Blood pressure,
+      44=Sleep, 46=Activity, 52=Bedtime summary.
+    category: Notifications
+
+  - term: callbackurl
+    definition: >-
+      The webhook URL registered to receive POST notifications when new health
+      data is available for subscribed data types.
+    category: Notifications
+
+  # Clinical / Research
+  - term: rawdata
+    definition: >-
+      Raw sensor data from Withings devices including high-frequency signals
+      for clinical and research analysis.
+    category: Clinical
+
+  - term: SpO2
+    definition: >-
+      Blood oxygen saturation percentage measured by pulse oximetry. Measure type 54.
+    category: Clinical
+
+  - term: VO2_max
+    definition: >-
+      Maximum oxygen uptake (aerobic capacity) measurement. Measure type 123.
+    category: Clinical
+
+  - term: RPM
+    definition: >-
+      Remote Patient Monitoring - clinical workflow integrating Withings device
+      data into healthcare provider systems for ongoing patient monitoring.
+    category: Clinical

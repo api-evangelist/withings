@@ -1,0 +1,37 @@
+{
+  "type": "object",
+  "properties": {
+    "value": {
+      "type": "integer",
+      "description": "Value for the measure in S.I. units (kilograms, meters etc...). Value should be multiplied by 10 to the power of ```units``` to get the real value.\n\nFor ```meastype``` **130** (Atrial fibrillation result), the value is a classification integer and does not represent a physical measurement:\n\n| Value | Description |\n|---|---|\n|0 | Negative |\n|1 | Positive |\n|2 | Inconclusive |\n|3 | No signal |\n|4 | Other |\n|5 | Noise |\n|6 | Low Heart Rate |\n|7 | High Heart Rate |\n|8 | Inconclusive US |\n|9 | Negative normal HR |\n|10 | Negative high HR |\n|11 | Positive normal HR |\n|12 | Positive high HR |\n|13 | No Diagnosis |",
+      "example": 65750
+    },
+    "type": {
+      "type": "integer",
+      "description": "Type of the measure. See ```meastype``` input parameter.",
+      "example": 1
+    },
+    "unit": {
+      "type": "integer",
+      "description": "Power of ten to multiply the ```value``` field to get the real value.<br>Formula: ```value * 10^unit = real value```.<br>Eg: ```value = 20 and unit = -1 => real value = 2```.",
+      "example": -3
+    },
+    "algo": {
+      "type": "integer",
+      "description": "Deprecated.",
+      "example": 3425
+    },
+    "fm": {
+      "type": "integer",
+      "description": "Deprecated."
+    },
+    "position": {
+      "type": "integer",
+      "description": "The device's position during the measure.\n\n\n| Value | Description|\n|---|---|\n|0 | Right Wrist|\n|1 | Left Wrist|\n|2 | Right Arm|\n|3 | Left Arm|\n|4 | Right Foot|\n|5 | Left Foot|\n|6 | Between Legs|\n|8 | Left part of the body|\n|9 | Right part of the body|\n|10 | Left leg|\n|11 | Right leg|\n|12 | Torso|\n|13 | Left hand|\n|14 | Right hand|\n|15 | Cardiovascular aortic area|\n|16 | Cardiovascular pulmonic area|\n|17 | Cardiovascular tricuspid area|\n|18 | Cardiovascular mitral area|\n|19 | Cardiovascular apex area|\n|20 | Pulmonary front upper right area|\n|21 | Pulmonary front upper left area|\n|22 | Pulmonary front bottom right area|\n|23 | Pulmonary front bottom left area|\n|24 | Pulmonary back upper left area|\n|25 | Pulmonary back upper right area|\n|26 | Pulmonary back bottom left area|\n|27 | Pulmonary back bottom right area|\n|28 | Wide mode area|\n|29 | Between arms|\n|30 | Hold Right|\n|31 | Hold Left|\n",
+      "example": 1
+    }
+  },
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://developer.withings.com/schemas/measure_object",
+  "title": "Measure Object"
+}

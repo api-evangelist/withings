@@ -1,0 +1,23 @@
+{
+  "type": "object",
+  "properties": {
+    "appli": {
+      "type": "integer",
+      "description": "Refer to the [Notifications section](/developer-guide/v3/data-api/notifications/notification-overview/) to know the meaning of each values.\n",
+      "example": 1
+    },
+    "callbackurl": {
+      "type": "string",
+      "description": "Callback url of the notification.",
+      "example": "https://www.withings.com"
+    },
+    "comment": {
+      "type": "string",
+      "description": "Comment entered when creating the notification configuration.",
+      "example": "My notification subscription"
+    }
+  },
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://developer.withings.com/schemas/notify_object",
+  "title": "Notify Object"
+}

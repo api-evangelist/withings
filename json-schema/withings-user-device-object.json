@@ -1,0 +1,79 @@
+{
+  "type": "object",
+  "properties": {
+    "type": {
+      "type": "string",
+      "description": "Type of the device. Value can be:\n\n\n| Value|\n|---|\n|Scale|\n|Babyphone|\n|Blood Pressure Monitor|\n|Activity Tracker|\n|Sleep Monitor|\n|Smart Connected Thermometer|\n|Gateway|\n|iGlucose|\n|HealthKit Apple|\n|HealthKit Google|\n|HealthKit Huawei|\n|Lingo|\n",
+      "example": "Scale"
+    },
+    "model": {
+      "type": "string",
+      "description": "Device model. Value can be:\n\n\n| Value | Description|\n|---|---|\n|Withings WBS01 | Scale|\n|WS30 | Scale|\n|Kid Scale | Scale|\n|Smart Body Analyzer | Scale|\n|Body+ | Scale|\n|Body Cardio | Scale|\n|Body | Scale|\n|Body Scan | Scale|\n|Body Pro | Scale|\n|WBS10 | Scale|\n|WBS11 | Scale|\n|Body Comp | Scale|\n|Smart Baby Monitor | Babyphone|\n|Withings Home | Babyphone|\n|Withings Blood Pressure Monitor V1 | Blood Pressure Monitor|\n|Withings Blood Pressure Monitor V2 | Blood Pressure Monitor|\n|Withings Blood Pressure Monitor V3 | Blood Pressure Monitor|\n|BPM Core | Blood Pressure Monitor|\n|BPM Connect | Blood Pressure Monitor|\n|BPM Connect Pro | Blood Pressure Monitor|\n|BPM Pro 2 | Blood Pressure Monitor|\n|BPM Vision | Blood Pressure Monitor|\n|Pulse | Activity Tracker|\n|Activite | Activity Tracker|\n|Activite (Pop, Steel) | Activity Tracker|\n|Withings Go | Activity Tracker|\n|Activite Steel HR | Activity Tracker|\n|Activite Steel HR Sport Edition | Activity Tracker|\n|Pulse HR | Activity Tracker|\n|Move | Activity Tracker|\n|Move ECG | Activity Tracker|\n|ScanWatch | Activity Tracker|\n|ScanWatch 2 | Activity Tracker|\n|ScanWatch Light | Activity Tracker|\n|Aura Dock | Sleep Monitor|\n|Aura Sensor | Sleep Monitor|\n|Aura Sensor V2 | Sleep Monitor|\n|Thermo | Smart Connected Thermometer|\n|BeamO | Smart Connected Thermometer|\n|WUP01 | Gateway|\n|Iglucose glucometer | iGlucose|\n|iOS step tracker | HealthKit Apple|\n|HealthKit step iPhone tracker | HealthKit Apple|\n|HealthKit step Apple Watch tracker | HealthKit Apple|\n|HealthKit other step tracker | HealthKit Apple|\n|Android step tracker | HealthKit Google|\n|GoogleFit tracker | HealthKit Google|\n|Samsung Health tracker | HealthKit Google|\n|Google Health Connect | HealthKit Google|\n|Huawei tracker | HealthKit Huawei|\n|Lingo Sensor | Lingo|\n",
+      "example": "Body Cardio"
+    },
+    "model_id": {
+      "type": "integer",
+      "description": "\n\n| Value | Description|\n|---|---|\n|1 | Withings WBS01|\n|2 | WS30|\n|3 | Kid Scale|\n|4 | Smart Body Analyzer|\n|5 | Body+|\n|6 | Body Cardio|\n|7 | Body|\n|10 | Body Scan|\n|9 | Body Pro|\n|11 | WBS10|\n|12 | WBS11|\n|18 | Body Comp|\n|21 | Smart Baby Monitor|\n|22 | Withings Home|\n|41 | Withings Blood Pressure Monitor V1|\n|42 | Withings Blood Pressure Monitor V2|\n|43 | Withings Blood Pressure Monitor V3|\n|44 | BPM Core|\n|45 | BPM Connect|\n|46 | BPM Connect Pro|\n|47 | BPM Pro 2|\n|48 | BPM Vision|\n|51 | Pulse|\n|52 | Activite|\n|53 | Activite (Pop, Steel)|\n|54 | Withings Go|\n|55 | Activite Steel HR|\n|59 | Activite Steel HR Sport Edition|\n|58 | Pulse HR|\n|90 | Move|\n|91 | Move ECG|\n|92 | Move ECG|\n|93 | ScanWatch|\n|94 | ScanWatch 2|\n|95 | ScanWatch Light|\n|60 | Aura Dock|\n|61 | Aura Sensor|\n|63 | Aura Sensor V2|\n|70 | Thermo|\n|71 | BeamO|\n|100 | WUP01|\n|1061 | Iglucose glucometer|\n|1051 | iOS step tracker|\n|1052 | iOS step tracker|\n|1057 | HealthKit step iPhone tracker|\n|1058 | HealthKit step Apple Watch tracker|\n|1059 | HealthKit other step tracker|\n|1053 | Android step tracker|\n|1054 | Android step tracker|\n|1055 | GoogleFit tracker|\n|1056 | Samsung Health tracker|\n|1060 | Google Health Connect|\n|1062 | Huawei tracker|\n|1063 | Lingo Sensor|\n",
+      "example": 6
+    },
+    "battery": {
+      "type": "string",
+      "description": "Battery level: high (> 75%), medium (> 30%) or low",
+      "example": "medium"
+    },
+    "deviceid": {
+      "type": "string",
+      "description": "ID of the device. This ID is returned in other services to know which device tracked a data. Then device's model or type can be known using this information.",
+      "example": "892359876fd8805ac45bab078c4828692f0276b1"
+    },
+    "mac_address": {
+      "type": "string",
+      "description": "Mac address of the device (advanced partners only).",
+      "example": "00:24:e4:69:b2:30"
+    },
+    "fw": {
+      "type": "string",
+      "description": "Device's firmware (advanced partners only).",
+      "example": "1124"
+    },
+    "network": {
+      "type": "string",
+      "description": "Network used by the device (advanced partners only).",
+      "example": "1"
+    },
+    "last_used_network": {
+      "type": "string",
+      "description": "Last network used by the device (advanced partners only).",
+      "example": "1"
+    },
+    "hash_deviceid": {
+      "type": "string",
+      "description": "ID of the device. This ID is returned in other services to know which device tracked a data. Then device's model or type can be known using this information.",
+      "example": "892359876fd8805ac45bab078c4828692f0276b1"
+    },
+    "timezone": {
+      "type": "string",
+      "description": "Timezone of the device.",
+      "example": "Europe/Paris"
+    },
+    "first_session_date": {
+      "type": "integer",
+      "description": "The timestamp of the first server connection of the device",
+      "format": "timestamp",
+      "example": 1594159644
+    },
+    "last_session_date": {
+      "type": "integer",
+      "description": "The timestamp of the last server connection of the device",
+      "format": "timestamp",
+      "example": 1594159644
+    },
+    "sim_status": {
+      "type": "string",
+      "example": "STANDBY"
+    }
+  },
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://developer.withings.com/schemas/user_device_object",
+  "title": "User Device Object"
+}

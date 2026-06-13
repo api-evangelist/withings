@@ -1,0 +1,78 @@
+{
+  "type": "object",
+  "properties": {
+    "deviceid": {
+      "type": "string",
+      "description": "ID of device that tracked the data. To retrieve information about this device, refer to : <a href='/api-reference/#operation/userv2-getdevice'>User v2 - Getdevice</a>.",
+      "example": "892359876fd8805ac45bab078c4828692f0276b1"
+    },
+    "model": {
+      "type": "integer",
+      "description": "The source of the recording.\n\n\n| Value | Description|\n|---|---|\n|44 | BPM Core|\n|91 | Move ECG|\n",
+      "example": 44
+    },
+    "ecg": {
+      "type": "object",
+      "properties": {
+        "signalid": {
+          "type": "integer",
+          "description": "Id of the signal.",
+          "example": 48
+        },
+        "afib": {
+          "type": "integer",
+          "description": "Atrial fibrillation classification.\n\n\n| Value | Description|\n|---|---|\n|0 | Negative|\n|1 | Positive|\n|2 | Inconclusive|\n",
+          "example": 1
+        }
+      }
+    },
+    "bloodpressure": {
+      "type": "object",
+      "properties": {
+        "diastole": {
+          "type": "integer",
+          "description": "Diastole value.",
+          "example": 100
+        },
+        "systole": {
+          "type": "integer",
+          "description": "Systole value.",
+          "example": 101
+        }
+      }
+    },
+    "stetho": {
+      "type": "object",
+      "properties": {
+        "signalid": {
+          "type": "integer",
+          "description": "Id of the signal.",
+          "example": 48
+        },
+        "vhd": {
+          "type": "integer"
+        }
+      }
+    },
+    "heart_rate": {
+      "type": "integer",
+      "description": "Average recorded heart rate.",
+      "example": 82
+    },
+    "modified": {
+      "type": "integer",
+      "description": "The timestamp of the last modification.",
+      "format": "timestamp",
+      "example": 1594159644
+    },
+    "timestamp": {
+      "type": "integer",
+      "description": "Timestamp of the recording.",
+      "format": "timestamp",
+      "example": 1594159644
+    }
+  },
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://developer.withings.com/schemas/heart_measurement_object",
+  "title": "Heart Measurement Object"
+}

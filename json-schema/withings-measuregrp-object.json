@@ -1,0 +1,74 @@
+{
+  "type": "object",
+  "properties": {
+    "grpid": {
+      "type": "integer",
+      "description": "Unique identifier of the measure group.",
+      "format": "int64",
+      "example": 12
+    },
+    "attrib": {
+      "type": "integer",
+      "description": "The way the measure was attributed to the user:\n\n\n| Value | Description|\n|---|---|\n|0 | The measuregroup has been captured by a device and is known to belong to this user (and is not ambiguous)|\n|1 | The measuregroup has been captured by a device but may belong to other users as well as this one (it is ambiguous)|\n|2 | The measuregroup has been entered manually for this particular user|\n|4 | The measuregroup has been entered manually during user creation (and may not be accurate)|\n|5 | Measure auto, it's only for the Blood Pressure Monitor. This device can make many measures and computed the best value|\n|7 | Measure confirmed. You can get this value if the user confirmed a detected activity|\n|8 | Same as attrib 0|\n|15 | The measure has been performed in specific guided conditions. Apply to Nerve Health Score|\n",
+      "example": 1
+    },
+    "date": {
+      "type": "integer",
+      "description": "UNIX timestamp when measures were taken.",
+      "format": "timestamp",
+      "example": 1594245600
+    },
+    "created": {
+      "type": "integer",
+      "description": "UNIX timestamp when measures were stored.",
+      "format": "timestamp",
+      "example": 1594246600
+    },
+    "modified": {
+      "type": "integer",
+      "description": "UNIX timestamp when measures were last updated.",
+      "format": "timestamp",
+      "example": 1594257200
+    },
+    "category": {
+      "type": "integer",
+      "description": "Category for the measures in the group (see category input parameter).",
+      "example": 1594257200
+    },
+    "deviceid": {
+      "type": "string",
+      "description": "ID of device that tracked the data. To retrieve information about this device, refer to : <a href='/api-reference/#operation/userv2-getdevice'>User v2 - Getdevice</a>.",
+      "example": "892359876fd8805ac45bab078c4828692f0276b1"
+    },
+    "hash_deviceid": {
+      "type": "string",
+      "description": "ID of device that tracked the data. To retrieve information about this device, refer to : <a href='/api-reference/#operation/userv2-getdevice'>User v2 - Getdevice</a>.",
+      "example": "892359876fd8805ac45bab078c4828692f0276b1"
+    },
+    "measures": {
+      "type": "array",
+      "description": "List of measures in the group.",
+      "items": {
+        "$ref": "#/components/schemas/measure_object"
+      }
+    },
+    "model": {
+      "type": "string",
+      "description": "Device model. Value can be:\n\n\n| Value | Description|\n|---|---|\n|Withings WBS01 | Scale|\n|WS30 | Scale|\n|Kid Scale | Scale|\n|Smart Body Analyzer | Scale|\n|Body+ | Scale|\n|Body Cardio | Scale|\n|Body | Scale|\n|Body Scan | Scale|\n|Body Pro | Scale|\n|WBS10 | Scale|\n|WBS11 | Scale|\n|Body Comp | Scale|\n|Smart Baby Monitor | Babyphone|\n|Withings Home | Babyphone|\n|Withings Blood Pressure Monitor V1 | Blood Pressure Monitor|\n|Withings Blood Pressure Monitor V2 | Blood Pressure Monitor|\n|Withings Blood Pressure Monitor V3 | Blood Pressure Monitor|\n|BPM Core | Blood Pressure Monitor|\n|BPM Connect | Blood Pressure Monitor|\n|BPM Connect Pro | Blood Pressure Monitor|\n|BPM Pro 2 | Blood Pressure Monitor|\n|BPM Vision | Blood Pressure Monitor|\n|Pulse | Activity Tracker|\n|Activite | Activity Tracker|\n|Activite (Pop, Steel) | Activity Tracker|\n|Withings Go | Activity Tracker|\n|Activite Steel HR | Activity Tracker|\n|Activite Steel HR Sport Edition | Activity Tracker|\n|Pulse HR | Activity Tracker|\n|Move | Activity Tracker|\n|Move ECG | Activity Tracker|\n|ScanWatch | Activity Tracker|\n|ScanWatch 2 | Activity Tracker|\n|ScanWatch Light | Activity Tracker|\n|Aura Dock | Sleep Monitor|\n|Aura Sensor | Sleep Monitor|\n|Aura Sensor V2 | Sleep Monitor|\n|Thermo | Smart Connected Thermometer|\n|BeamO | Smart Connected Thermometer|\n|WUP01 | Gateway|\n|Iglucose glucometer | iGlucose|\n|iOS step tracker | HealthKit Apple|\n|HealthKit step iPhone tracker | HealthKit Apple|\n|HealthKit step Apple Watch tracker | HealthKit Apple|\n|HealthKit other step tracker | HealthKit Apple|\n|Android step tracker | HealthKit Google|\n|GoogleFit tracker | HealthKit Google|\n|Samsung Health tracker | HealthKit Google|\n|Google Health Connect | HealthKit Google|\n|Huawei tracker | HealthKit Huawei|\n|Lingo Sensor | Lingo|\n",
+      "example": "Body Cardio"
+    },
+    "model_id": {
+      "type": "integer",
+      "description": "\n\n| Value | Description|\n|---|---|\n|1 | Withings WBS01|\n|2 | WS30|\n|3 | Kid Scale|\n|4 | Smart Body Analyzer|\n|5 | Body+|\n|6 | Body Cardio|\n|7 | Body|\n|10 | Body Scan|\n|9 | Body Pro|\n|11 | WBS10|\n|12 | WBS11|\n|18 | Body Comp|\n|21 | Smart Baby Monitor|\n|22 | Withings Home|\n|41 | Withings Blood Pressure Monitor V1|\n|42 | Withings Blood Pressure Monitor V2|\n|43 | Withings Blood Pressure Monitor V3|\n|44 | BPM Core|\n|45 | BPM Connect|\n|46 | BPM Connect Pro|\n|47 | BPM Pro 2|\n|48 | BPM Vision|\n|51 | Pulse|\n|52 | Activite|\n|53 | Activite (Pop, Steel)|\n|54 | Withings Go|\n|55 | Activite Steel HR|\n|59 | Activite Steel HR Sport Edition|\n|58 | Pulse HR|\n|90 | Move|\n|91 | Move ECG|\n|92 | Move ECG|\n|93 | ScanWatch|\n|94 | ScanWatch 2|\n|95 | ScanWatch Light|\n|60 | Aura Dock|\n|61 | Aura Sensor|\n|63 | Aura Sensor V2|\n|70 | Thermo|\n|71 | BeamO|\n|100 | WUP01|\n|1061 | Iglucose glucometer|\n|1051 | iOS step tracker|\n|1052 | iOS step tracker|\n|1057 | HealthKit step iPhone tracker|\n|1058 | HealthKit step Apple Watch tracker|\n|1059 | HealthKit other step tracker|\n|1053 | Android step tracker|\n|1054 | Android step tracker|\n|1055 | GoogleFit tracker|\n|1056 | Samsung Health tracker|\n|1060 | Google Health Connect|\n|1062 | Huawei tracker|\n|1063 | Lingo Sensor|\n",
+      "example": 6
+    },
+    "comment": {
+      "type": "string",
+      "description": "Deprecated. This property will always be empty.",
+      "example": "A measurement comment"
+    }
+  },
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://developer.withings.com/schemas/measuregrp_object",
+  "title": "Measuregrp Object"
+}

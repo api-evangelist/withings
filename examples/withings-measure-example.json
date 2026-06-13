@@ -1,0 +1,36 @@
+{
+  "summary": "Body weight measurement",
+  "description": "Example of a body weight measurement response from Withings scale",
+  "value": {
+    "status": 0,
+    "body": {
+      "updatetime": 1590000000,
+      "timezone": "Europe/Paris",
+      "measuregrps": [
+        {
+          "grpid": 123456789,
+          "attrib": 0,
+          "date": 1590000000,
+          "created": 1590000100,
+          "modified": 1590000100,
+          "category": 1,
+          "deviceid": "abc123def456",
+          "hash_deviceid": "hasheddeviceid",
+          "measures": [
+            {
+              "value": 7500,
+              "type": 1,
+              "unit": -2
+            },
+            {
+              "value": 180,
+              "type": 6,
+              "unit": -1
+            }
+          ],
+          "comment": null
+        }
+      ]
+    }
+  }
+}

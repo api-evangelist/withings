@@ -1,0 +1,165 @@
+{
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "integer",
+      "example": 12345
+    },
+    "category": {
+      "type": "integer",
+      "description": "Category of workout: \n\n\n| Value | Description|\n|---|---|\n|1 | Walk|\n|2 | Run|\n|3 | Hiking|\n|4 | Skating|\n|5 | BMX|\n|6 | Bicycling|\n|7 | Swimming|\n|8 | Surfing|\n|9 | Kitesurfing|\n|10 | Windsurfing|\n|11 | Bodyboard|\n|12 | Tennis|\n|13 | Table tennis|\n|14 | Squash|\n|15 | Badminton|\n|16 | Lift weights|\n|17 | Fitness|\n|18 | Elliptical|\n|19 | Pilates|\n|20 | Basket-ball|\n|21 | Soccer|\n|22 | Football|\n|23 | Rugby|\n|24 | Volley-ball|\n|25 | Waterpolo|\n|26 | Horse riding|\n|27 | Golf|\n|28 | Yoga|\n|29 | Dancing|\n|30 | Boxing|\n|31 | Fencing|\n|32 | Wrestling|\n|33 | Martial arts|\n|34 | Skiing|\n|35 | Snowboarding|\n|36 | Other|\n|128 | No activity|\n|187 | Rowing|\n|188 | Zumba|\n|191 | Baseball|\n|192 | Handball|\n|193 | Hockey|\n|194 | Ice hockey|\n|195 | Climbing|\n|196 | Ice skating|\n|272 | Multi-sport|\n|306 | Indoor walk|\n|307 | Indoor running|\n|308 | Indoor cycling|\n|455 | Standup Paddleboarding|\n|456 | Padel|\n|457 | Gaming|\n|490 | Beach volleyball|\n|491 | Stair Stepper|\n|492 | Skateboarding|\n|493 | Parkour|\n|494 | Kayaking|\n|495 | Canoeing|\n|496 | Sailing|\n|497 | Fishing|\n|498 | Trail Running|\n|499 | Snowshoeing|\n|500 | Paintball|\n|501 | Archery|\n|502 | Scuba Diving|\n|503 | Baseball Training|\n|504 | Biathlon|\n|505 | Bocce|\n|506 | P\u00e9tanque|\n|507 | Paragliding|\n|508 | Frisbee|\n|509 | Skydiving|\n|510 | Pickleball|\n|511 | Cornhole|\n|512 | Dodgeball|\n|513 | Ultimate|\n|514 | Teqball|\n|515 | Pushing a Wheelchair (Running Pace)|\n|516 | Pushing a Wheelchair (Walking Pace)|\n|517 | Athletics|\n|518 | Track Cycling|\n|519 | Pentathlon|\n|520 | Sport Shooting|\n|521 | Triathlon|\n|522 | Diving|\n|523 | Mountain Biking|\n|524 | Gravel Biking|\n|525 | E-Biking|\n|526 | E-Mountain Biking|\n|527 | Handcycling|\n|528 | Velomobile|\n|529 | Backcountry Skiing|\n|530 | Nordic Skiing|\n|531 | Roller Skiing|\n|532 | Racquetball|\n|534 | Hip Hop|\n|535 | Muaythai|\n|536 | Taekwondo|\n|537 | Judo|\n|538 | Trampoline|\n|539 | Standing Frame|\n|540 | Seated Strenght|\n|541 | Seated Cardio|\n|542 | Walk With Walker|\n|543 | Walk With Cane|\n|544 | Breaking|\n|545 | Chores|\n|546 | Crossfit|\n|547 | Spinclass|\n|548 | Cricket|\n|549 | Flamenco Dancing|\n|550 | HIIT|\n|551 | Meditation|\n|552 | Stretching|\n|553 | Yard Work Gardening|\n|554 | Cleaning|\n|555 | Public Speaking|\n|556 | Spikeball|\n|557 | Lacrosse|\n|558 | Baby Wearing|\n|559 | Dog Walking|\n|560 | Breathing excercises|\n|561 | Balance Drills|\n|562 | Pushing a Stroller|\n|563 | Toddler Wearing|\n|564 | Bowling|\n|565 | Lasertag|\n|566 | Nordic Walking|\n|567 | Sumo Wrestling|\n|568 | Cooking|\n",
+      "example": 36
+    },
+    "timezone": {
+      "type": "string",
+      "description": "Timezone for the date.",
+      "example": "Europe/Paris"
+    },
+    "model": {
+      "type": "integer",
+      "description": "Source for the workout. Value can be:\n\n\n| Value | Description|\n|---|---|\n|1 | Withings WBS01, type: 1|\n|2 | Withings WBS03, type: 1|\n|3 | Kid Scale, type: 1|\n|4 | Withings WBS02, type: 1|\n|5 | Body+, type: 1|\n|6 | Body Cardio, type: 1|\n|7 | Body, type: 1|\n|13 | Body+, type: 1|\n|21 | Smart Baby Monitor, type: 2|\n|22 | Withings Home, type: 2|\n|41 | Withings Blood Pressure V1, type: 4|\n|42 | Withings Blood Pressure V2, type: 4|\n|43 | Withings Blood Pressure V3, type: 4|\n|44 | BPM Core, type: 4|\n|45 | BPM Connect, type: 4|\n|51 | Pulse, type: 16|\n|52 | Activite, type: 16|\n|53 | Activite (Pop, Steel), type: 16|\n|54 | Withings Go, type: 16|\n|55 | Activite Steel HR, type: 16|\n|58 | Pulse HR, type: 16|\n|59 | Activite Steel HR Sport Edition, type: 16|\n|60 | Aura dock, type: 32|\n|61 | Aura sensor, type: 32|\n|62 | Aura dock, type: 32|\n|63 | Sleep sensor, type: 32|\n|70 | Thermo, type: 64|\n|91 | Move ECG|\n|92 | Move ECG|\n|1051 | iOS step tracker, type 16|\n|1052 | iOS step tracker, type 16|\n|1053 | Android step tracker, type 16|\n|1054 | Android step tracker, type 16|\n|1055 | GoogleFit tracker, type 16|\n|1056 | Samsung Health tracker, type 16|\n|1057 | HealthKit step iPhone tracker, type 16|\n|1058 | HealthKit step Apple Watch tracker, type 16|\n|1059 | HealthKit other step tracker, type 16|\n|1060 | Google Health Connect, type 16|\n|1062 | Huawei tracker, type 16|\n|1063 | Lingo Sensor, type 1007|\n",
+      "example": 59
+    },
+    "attrib": {
+      "type": "integer",
+      "description": "The way the measure was attributed to the user:\n\n\n| Value | Description|\n|---|---|\n|0 | The measuregroup has been captured by a device and is known to belong to this user (and is not ambiguous)|\n|1 | The measuregroup has been captured by a device but may belong to other users as well as this one (it is ambiguous)|\n|2 | The measuregroup has been entered manually for this particular user|\n|4 | The measuregroup has been entered manually during user creation (and may not be accurate)|\n|5 | Measure auto, it's only for the Blood Pressure Monitor. This device can make many measures and computed the best value|\n|7 | Measure confirmed. You can get this value if the user confirmed a detected activity|\n|8 | Same as attrib 0|\n|15 | The measure has been performed in specific guided conditions. Apply to Nerve Health Score|\n"
+    },
+    "startdate": {
+      "type": "integer",
+      "description": "The starting datetime for workouts data.",
+      "format": "timestamp",
+      "example": 1594245600
+    },
+    "enddate": {
+      "type": "integer",
+      "description": "The ending datetime for workouts data.",
+      "format": "timestamp",
+      "example": 1594257200
+    },
+    "date": {
+      "type": "string",
+      "description": "Date at which the measure was taken or entered.",
+      "example": "2020-07-09"
+    },
+    "modified": {
+      "type": "integer",
+      "description": "The timestamp of the last modification.",
+      "format": "timestamp",
+      "example": 1594257200
+    },
+    "deviceid": {
+      "type": "string",
+      "description": "ID of device that tracked the data. To retrieve information about this device, refer to : <a href='/api-reference/#operation/userv2-getdevice'>User v2 - Getdevice</a>.",
+      "example": "892359876fd8805ac45bab078c4828692f0276b1"
+    },
+    "data": {
+      "type": "object",
+      "description": "Details of workout.",
+      "properties": {
+        "algo_pause_duration": {
+          "type": "integer",
+          "description": "*Available for all categories except Multi-sport, Breathing excercises*<br><br>Total pause time in seconds detected by Withings device (swim only)"
+        },
+        "calories": {
+          "type": "integer",
+          "description": "*Available for all categories except Multi-sport, Breathing excercises*<br><br>Active calories burned (in Kcal). *(Use 'data_fields' to request this data.)*"
+        },
+        "core_body_temperature_avg": {
+          "type": "integer",
+          "description": "*Available for all categories except Multi-sport, Breathing excercises*<br><br>Avenage core body temperature (in celsius degrees). *(Use 'data_fields' to request this data.)*"
+        },
+        "core_body_temperature_max": {
+          "type": "integer",
+          "description": "*Available for all categories except Multi-sport, Breathing excercises*<br><br>Maximal core body temperature (in celsius degrees). *(Use 'data_fields' to request this data.)*"
+        },
+        "core_body_temperature_min": {
+          "type": "integer",
+          "description": "*Available for all categories except Multi-sport, Breathing excercises*<br><br>Minimal core body temperature (in celsius degrees). *(Use 'data_fields' to request this data.)*"
+        },
+        "core_body_temperature_status": {
+          "type": "integer",
+          "description": "*Available for all categories except Multi-sport, Breathing excercises*<br><br>Status of the temperature. *(Use 'data_fields' to request this data)* Value can be: 'unknown', 'usual' or 'elevated'.\n \n\n| Value|\n|---|\n|unknown|\n|usual|\n|elevated|\n"
+        },
+        "distance": {
+          "type": "integer",
+          "description": "*Available for all categories except Swimming, Multi-sport, Breathing excercises*<br><br>Distance travelled (in meters). *(Use 'data_fields' to request this data.)*"
+        },
+        "elevation": {
+          "type": "integer",
+          "description": "*Available for all categories except Swimming, Multi-sport, Breathing excercises*<br><br>Number of floors climbed. *(Use 'data_fields' to request this data.)*"
+        },
+        "hr_average": {
+          "type": "integer",
+          "description": "*Available for all categories except Multi-sport, Breathing excercises*<br><br>Average heart rate. (beats per minute).*(Use 'data_fields' to request this data.)*"
+        },
+        "hr_max": {
+          "type": "integer",
+          "description": "*Available for all categories except Multi-sport, Breathing excercises*<br><br>Maximal heart rate (beats per minute).. *(Use 'data_fields' to request this data.)*"
+        },
+        "hr_min": {
+          "type": "integer",
+          "description": "*Available for all categories except Multi-sport, Breathing excercises*<br><br>Minimal heart rate (beats per minute). *(Use 'data_fields' to request this data.)*"
+        },
+        "hr_zone_0": {
+          "type": "integer",
+          "description": "*Available for all categories except Multi-sport, Breathing excercises*<br><br>Duration in seconds when heart rate was in a light zone (cf. <a href='/api-reference/#section/Glossary'>Glossary</a>). *(Use 'data_fields' to request this data.)*"
+        },
+        "hr_zone_1": {
+          "type": "integer",
+          "description": "*Available for all categories except Multi-sport, Breathing excercises*<br><br>Duration in seconds when heart rate was in a moderate zone (cf. <a href='/api-reference/#section/Glossary'>Glossary</a>). *(Use 'data_fields' to request this data.)*"
+        },
+        "hr_zone_2": {
+          "type": "integer",
+          "description": "*Available for all categories except Multi-sport, Breathing excercises*<br><br>Duration in seconds when heart rate was in an intense zone (cf. <a href='/api-reference/#section/Glossary'>Glossary</a>). *(Use 'data_fields' to request this data.)*"
+        },
+        "hr_zone_3": {
+          "type": "integer",
+          "description": "*Available for all categories except Multi-sport, Breathing excercises*<br><br>Duration in seconds when heart rate was in maximal zone (cf. <a href='/api-reference/#section/Glossary'>Glossary</a>). *(Use 'data_fields' to request this data.)*"
+        },
+        "intensity": {
+          "type": "integer",
+          "description": "*Available for all categories except Multi-sport, Breathing excercises*<br><br>Intensity of the workout, from 0 to 100, as inputed by the user. If the user didn't manually give the intensity of his workout, the value will be 0."
+        },
+        "manual_calories": {
+          "type": "integer",
+          "description": "*Available for all categories except Multi-sport, Breathing excercises*<br><br>Active calories burned manually entered by user (in Kcal). *(Use 'data_fields' to request this data.)*"
+        },
+        "manual_distance": {
+          "type": "integer",
+          "description": "*Available for all categories except Multi-sport, Breathing excercises*<br><br>Distance travelled manually entered by user (in meters). *(Use 'data_fields' to request this data.)*"
+        },
+        "manual_intensity": {
+          "type": "integer",
+          "description": "*Available for all categories except Multi-sport, Breathing excercises*<br><br>Intensity of the workout, from 0 to 100, entered by the user. If the user didn't manually give the intensity of his workout, the value will be 0."
+        },
+        "pause_duration": {
+          "type": "integer",
+          "description": "*Available for all categories except Multi-sport, Breathing excercises*<br><br>Total pause time in second filled by user"
+        },
+        "pool_laps": {
+          "type": "integer",
+          "description": "*Available only for Swimming*<br><br>Number of pool laps. *(Use 'data_fields' to request this data.)*"
+        },
+        "pool_length": {
+          "type": "integer",
+          "description": "*Available only for Swimming*<br><br>Length of the pool. *(Use 'data_fields' to request this data.)*"
+        },
+        "spo2_average": {
+          "type": "integer",
+          "description": "*Available for all categories except Multi-sport, Breathing excercises*<br><br>Average percent of SpO2 percent value during a workout"
+        },
+        "steps": {
+          "type": "integer",
+          "description": "*Available for all categories except Swimming, Multi-sport, Breathing excercises*<br><br>Number of steps. *(Use 'data_fields' to request this data.)*"
+        },
+        "strokes": {
+          "type": "integer",
+          "description": "*Available only for Swimming*<br><br>Number of strokes. *(Use 'data_fields' to request this data.)*"
+        }
+      }
+    }
+  },
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://developer.withings.com/schemas/workout_object",
+  "title": "Workout Object"
+}

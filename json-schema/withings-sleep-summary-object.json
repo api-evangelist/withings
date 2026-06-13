@@ -1,0 +1,254 @@
+{
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "integer",
+      "example": 12345
+    },
+    "timezone": {
+      "type": "string",
+      "description": "Timezone for the date.",
+      "example": "Europe/Paris"
+    },
+    "model": {
+      "type": "integer",
+      "description": "The source for sleep data. Value can be 16 for a tracker or 32 for a Sleep Monitor.",
+      "example": 16
+    },
+    "model_id": {
+      "type": "integer",
+      "description": "\n\n| Value | Description|\n|---|---|\n|60 | Aura Dock|\n|61 | Aura Sensor|\n|63 | Aura Sensor V2|\n|51 | Pulse|\n|52 | Activite|\n|53 | Activite (Pop, Steel)|\n|54 | Withings Go|\n|55 | Activite Steel HR|\n|59 | Activite Steel HR Sport Edition|\n|58 | Pulse HR|\n|90 | Move|\n|91 | Move ECG|\n|92 | Move ECG|\n|93 | ScanWatch|\n|94 | ScanWatch 2|\n|95 | ScanWatch Light|\n",
+      "example": 51
+    },
+    "startdate": {
+      "type": "integer",
+      "description": "The starting datetime for the sleep state data.",
+      "format": "timestamp",
+      "example": 1594245600
+    },
+    "enddate": {
+      "type": "integer",
+      "description": "The end datetime for the sleep data. A single call can span up to 7 days maximum. To cover a wider time range, you will need to perform multiple calls.",
+      "format": "timestamp",
+      "example": 1594257200
+    },
+    "date": {
+      "type": "string",
+      "description": "Date at which the measure was taken or entered.",
+      "example": "2020-07-09"
+    },
+    "created": {
+      "type": "integer",
+      "format": "timestamp",
+      "example": 1594257200
+    },
+    "modified": {
+      "type": "integer",
+      "description": "The timestamp of the last modification.",
+      "format": "timestamp",
+      "example": 1594257200
+    },
+    "hash_deviceid": {
+      "type": "string",
+      "description": "ID of device that tracked the data. To retrieve information about this device, refer to : <a href='/api-reference/#operation/userv2-getdevice'>User v2 - Getdevice</a>.",
+      "example": "892359876fd8805ac45bab078c4828692f0276b1"
+    },
+    "completed": {
+      "type": "boolean",
+      "example": true
+    },
+    "data": {
+      "type": "object",
+      "description": "Details of sleep.",
+      "properties": {
+        "total_timeinbed": {
+          "type": "integer",
+          "description": "Total time spent in bed (seconds). *(Use 'data_fields' to request this data.)*"
+        },
+        "total_sleep_time": {
+          "type": "integer",
+          "description": "Total time spent asleep. Sum of light, deep and rem durations (seconds). *(Use 'data_fields' to request this data.)*"
+        },
+        "asleepduration": {
+          "type": "integer",
+          "description": "Duration of sleep when night comes from external source (seconds).<br>Light, Deep and Rem sleep durations are null in this case. *(Use 'data_fields' to request this data.)*"
+        },
+        "lightsleepduration": {
+          "type": "integer",
+          "description": "Duration in state light sleep (seconds). *(Use 'data_fields' to request this data.)*"
+        },
+        "remsleepduration": {
+          "type": "integer",
+          "description": "Duration in state REM sleep (seconds). *(Use 'data_fields' to request this data.)*"
+        },
+        "deepsleepduration": {
+          "type": "integer",
+          "description": "Duration in state deep sleep (seconds). *(Use 'data_fields' to request this data.)*"
+        },
+        "sleep_efficiency": {
+          "type": "number",
+          "description": "Ratio of the total sleep time over the time spent in bed. *(Use 'data_fields' to request this data.)*"
+        },
+        "sleep_latency": {
+          "type": "integer",
+          "description": "Time spent in bed before falling asleep (seconds). *(Use 'data_fields' to request this data.)*"
+        },
+        "wakeup_latency": {
+          "type": "integer",
+          "description": "Time spent in bed after waking up (seconds). *(Use 'data_fields' to request this data.)*"
+        },
+        "wakeupduration": {
+          "type": "integer",
+          "description": "Time spent awake (seconds). *(Use 'data_fields' to request this data.)*"
+        },
+        "wakeupcount": {
+          "type": "integer",
+          "description": "Number of times the user woke up while in bed. Does not include the number of times the user got out of bed. *(Use 'data_fields' to request this data.)*"
+        },
+        "waso": {
+          "type": "integer",
+          "description": "Time spent awake in bed after falling asleep for the 1st time during the night (seconds). *(Use 'data_fields' to request this data.)*"
+        },
+        "nb_rem_episodes": {
+          "type": "integer",
+          "description": "Count of the REM sleep phases. *(Use 'data_fields' to request this data.)*"
+        },
+        "durationtosleep": {
+          "type": "integer",
+          "description": "Time to sleep (seconds). (deprecated) *(Use 'data_fields' to request this data.)*"
+        },
+        "durationtowakeup": {
+          "type": "integer",
+          "description": "Time to wake up (seconds). (deprecated) *(Use 'data_fields' to request this data.)*"
+        },
+        "out_of_bed_count": {
+          "type": "integer",
+          "description": "Number of times the user got out of bed during the night. *(Use 'data_fields' to request this data.)*"
+        },
+        "hr_average": {
+          "type": "integer",
+          "description": "Average heart rate. (beats per minute).*(Use 'data_fields' to request this data.)*"
+        },
+        "hr_min": {
+          "type": "integer",
+          "description": "Minimal heart rate (beats per minute). *(Use 'data_fields' to request this data.)*"
+        },
+        "hr_max": {
+          "type": "integer",
+          "description": "Maximal heart rate (beats per minute).. *(Use 'data_fields' to request this data.)*"
+        },
+        "rr_average": {
+          "type": "integer",
+          "description": "Average respiration rate (breaths per minute).  *(Use 'data_fields' to request this data.)*"
+        },
+        "rr_min": {
+          "type": "integer",
+          "description": "Minimal respiration rate (breaths per minute). *(Use 'data_fields' to request this data.)*"
+        },
+        "rr_max": {
+          "type": "integer",
+          "description": "Maximal respiration rate (breaths per minute). *(Use 'data_fields' to request this data.)*"
+        },
+        "breathing_quality_assessment": {
+          "type": "integer",
+          "description": "Intensity of <a href='/api-reference/#section/Glossary'>breathing disturbances</a>.<br>Available for all Sleep and Sleep Analyzer devices (wellness metric). "
+        },
+        "breathing_disturbances_intensity": {
+          "type": "integer",
+          "description": "Intensity of <a href='/api-reference/#section/Glossary'>breathing disturbances</a>.<br>Available for all Sleep and Sleep Analyzer devices (wellness metric). "
+        },
+        "snoring": {
+          "type": "integer",
+          "description": "Total snoring time (seconds)."
+        },
+        "snoringepisodecount": {
+          "type": "integer",
+          "description": "Numbers of snoring episodes of at least one minute."
+        },
+        "sleep_score": {
+          "type": "integer",
+          "description": "Sleep score"
+        },
+        "night_events": {
+          "type": "array",
+          "description": "Summary of sleep events that happened during the sleep activity.\n\nIt is structured as a dictionary, where keys are the type of event, and the value is an array of timestamps relative to the activity startdate.\n\nTypes of events can be one of the following : \n\n<table><thead><tr><td>Value</td><td>Description</td></tr></thead><tbody><tr><td>1</td><td>got in bed</td></tr><tr><td>2</td><td>fell asleep</td></tr><tr><td>3</td><td>woke up</td></tr><tr><td>4</td><td>got out of bed</td></tr><tr><td>5</td><td>start of asleep period that was manually input</td></tr><tr><td>6</td><td>start of awake period that was manually input</td></tr></tbody></table>\n\n"
+        },
+        "apnea_hypopnea_index": {
+          "type": "integer",
+          "description": "Medical grade AHI. Average number of hypopnea and apnea episodes per hour, that occured during sleep time.<br>Only available for devices purchased in Europe and Australia, with the sleep apnea detection feature activated. "
+        },
+        "mvt_score_avg": {
+          "type": "integer",
+          "description": "Track the average movement score in bed throughout the night. The score ranges from 0 to 255, representing the intensity of movement. This metric is only available for Sleep Analyzer devices in the EU and prescription-based devices in the US (Sleep Rx)."
+        },
+        "mvt_active_duration": {
+          "type": "integer",
+          "description": "Track the duration (in seconds) of movement in bed. Only available for Sleep Analyzer devices (EU) and devices under prescriptions in the US (Sleep Rx)"
+        },
+        "rmssd_start_avg": {
+          "type": "number",
+          "description": "Heart rate variability - Start average"
+        },
+        "rmssd_end_avg": {
+          "type": "number",
+          "description": "Heart rate variability - End average"
+        },
+        "chest_movement_rate_wellness_average": {
+          "type": "integer",
+          "description": "Average respiration rate (breaths per minute).  *(Use 'data_fields' to request this data.)*"
+        },
+        "chest_movement_rate_wellness_min": {
+          "type": "integer",
+          "description": "Minimal respiration rate (breaths per minute). *(Use 'data_fields' to request this data.)*"
+        },
+        "chest_movement_rate_wellness_max": {
+          "type": "integer",
+          "description": "Maximal respiration rate (breaths per minute). *(Use 'data_fields' to request this data.)*"
+        },
+        "withings_index": {
+          "type": "integer",
+          "description": "Withings Sleep Rx (FDA Cleared) allows to estimate gaps in breathing sounds and to generate an index. This index corresponds to the number of breathing events per hour.\n\n\n<table><thead><tr><td>Value</td><td>Description</td></tr></thead><tbody><tr><td>0-15 (events per hour on average)</td><td>No/Mild</td></tr><tr><td>15-30 (events per hour on average)</td><td>Moderate</td></tr><tr><td>> 30 (events per hour on average)</td><td>Severe</td></tr></tbody></table>\n\n\nNote: 5 hours of sleep are required in order to calculate the Withings Index."
+        },
+        "breathing_sounds": {
+          "type": "integer",
+          "description": "Total time when breathing sounds were tracked. (seconds) *(Use 'data_fields' to request this data.)*"
+        },
+        "breathing_sounds_episode_count": {
+          "type": "integer",
+          "description": "Numbers of breathing sounds episodes of at least one minute. *(Use 'data_fields' to request this data.)*"
+        },
+        "chest_movement_rate_average": {
+          "type": "integer",
+          "description": "Average chest movement rate (events per minute). *(Use 'data_fields' to request this data.)*"
+        },
+        "chest_movement_rate_min": {
+          "type": "integer",
+          "description": "Minimal chest movement rate (events per minute). *(Use 'data_fields' to request this data.)*"
+        },
+        "chest_movement_rate_max": {
+          "type": "integer",
+          "description": "Maximal chest movement rate (events per minute). *(Use 'data_fields' to request this data.)*"
+        },
+        "core_body_temperature_min": {
+          "type": "number",
+          "description": "Minimal core body temperature (in celsius degrees). *(Use 'data_fields' to request this data.)*"
+        },
+        "core_body_temperature_max": {
+          "type": "number",
+          "description": "Maximal core body temperature (in celsius degrees). *(Use 'data_fields' to request this data.)*"
+        },
+        "core_body_temperature_avg": {
+          "type": "number",
+          "description": "Avenage core body temperature (in celsius degrees). *(Use 'data_fields' to request this data.)*"
+        },
+        "core_body_temperature_status": {
+          "type": "string",
+          "description": "Status of the temperature. *(Use 'data_fields' to request this data)* Value can be: 'unknown', 'usual' or 'elevated'.\n \n\n| Value|\n|---|\n|unknown|\n|usual|\n|elevated|\n"
+        }
+      }
+    }
+  },
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://developer.withings.com/schemas/sleep_summary_object",
+  "title": "Sleep Summary Object"
+}

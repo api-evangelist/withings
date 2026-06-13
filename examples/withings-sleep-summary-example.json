@@ -1,0 +1,45 @@
+{
+  "summary": "Sleep summary for a night",
+  "description": "Example sleep summary data from Withings sleep tracker",
+  "value": {
+    "status": 0,
+    "body": {
+      "series": [
+        {
+          "id": 987654321,
+          "timezone": "Europe/Paris",
+          "model": 63,
+          "model_id": 60,
+          "startdate": 1589932800,
+          "enddate": 1589961600,
+          "date": "2020-05-20",
+          "created": 1589961700,
+          "modified": 1589961700,
+          "data": {
+            "nb_rem_episodes": 3,
+            "sleep_efficiency": 85,
+            "sleep_latency": 12,
+            "total_sleep_time": 25200,
+            "total_timeinbed": 28800,
+            "wakeupcount": 2,
+            "durationtosleep": 12,
+            "durationtowakeup": 5,
+            "hr_average": 58,
+            "hr_min": 48,
+            "hr_max": 75,
+            "rr_average": 15,
+            "rr_min": 12,
+            "rr_max": 20,
+            "breathing_disturbances_intensity": 5,
+            "deepsleepduration": 5400,
+            "lightsleepduration": 10800,
+            "remsleepduration": 7200,
+            "wakeupduration": 1800,
+            "snoring": 300,
+            "snoringepisodecount": 4
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,133 @@
+{
+  "type": "object",
+  "properties": {
+    "date": {
+      "type": "string",
+      "description": "Date of the aggregated data.",
+      "example": "2020-06-24"
+    },
+    "timezone": {
+      "type": "string",
+      "description": "Timezone for the date.",
+      "example": "Europe/Paris"
+    },
+    "deviceid": {
+      "type": "string",
+      "description": "ID of device that tracked the data. To retrieve information about this device, refer to : <a href='/api-reference/#operation/userv2-getdevice'>User v2 - Getdevice</a>.",
+      "example": "892359876fd8805ac45bab078c4828692f0276b1"
+    },
+    "hash_deviceid": {
+      "type": "string",
+      "description": "ID of device that tracked the data. To retrieve information about this device, refer to : <a href='/api-reference/#operation/userv2-getdevice'>User v2 - Getdevice</a>.",
+      "example": "892359876fd8805ac45bab078c4828692f0276b1"
+    },
+    "brand": {
+      "type": "integer",
+      "description": "Specifies if data comes from Withings (device or mobile application tracker) or an external way (Value is 1 for Withings and 18 for external)",
+      "example": 18
+    },
+    "is_tracker": {
+      "type": "boolean",
+      "description": "Is true if data was tracked by a Withings tracker (such as Pulse, Go and Watches) otherwise data was tracked by a mobile application or an external way"
+    },
+    "modified": {
+      "type": "integer",
+      "description": "The timestamp of the last modification.",
+      "format": "timestamp",
+      "example": 1594257200
+    },
+    "model": {
+      "type": "string",
+      "description": "Device model. Value can be:\n\n\n| Value | Description|\n|---|---|\n|Withings WBS01 | Scale|\n|WS30 | Scale|\n|Kid Scale | Scale|\n|Smart Body Analyzer | Scale|\n|Body+ | Scale|\n|Body Cardio | Scale|\n|Body | Scale|\n|Body Scan | Scale|\n|Body Pro | Scale|\n|WBS10 | Scale|\n|WBS11 | Scale|\n|Body Comp | Scale|\n|Smart Baby Monitor | Babyphone|\n|Withings Home | Babyphone|\n|Withings Blood Pressure Monitor V1 | Blood Pressure Monitor|\n|Withings Blood Pressure Monitor V2 | Blood Pressure Monitor|\n|Withings Blood Pressure Monitor V3 | Blood Pressure Monitor|\n|BPM Core | Blood Pressure Monitor|\n|BPM Connect | Blood Pressure Monitor|\n|BPM Connect Pro | Blood Pressure Monitor|\n|BPM Pro 2 | Blood Pressure Monitor|\n|BPM Vision | Blood Pressure Monitor|\n|Pulse | Activity Tracker|\n|Activite | Activity Tracker|\n|Activite (Pop, Steel) | Activity Tracker|\n|Withings Go | Activity Tracker|\n|Activite Steel HR | Activity Tracker|\n|Activite Steel HR Sport Edition | Activity Tracker|\n|Pulse HR | Activity Tracker|\n|Move | Activity Tracker|\n|Move ECG | Activity Tracker|\n|ScanWatch | Activity Tracker|\n|ScanWatch 2 | Activity Tracker|\n|ScanWatch Light | Activity Tracker|\n|Aura Dock | Sleep Monitor|\n|Aura Sensor | Sleep Monitor|\n|Aura Sensor V2 | Sleep Monitor|\n|Thermo | Smart Connected Thermometer|\n|BeamO | Smart Connected Thermometer|\n|WUP01 | Gateway|\n|Iglucose glucometer | iGlucose|\n|iOS step tracker | HealthKit Apple|\n|HealthKit step iPhone tracker | HealthKit Apple|\n|HealthKit step Apple Watch tracker | HealthKit Apple|\n|HealthKit other step tracker | HealthKit Apple|\n|Android step tracker | HealthKit Google|\n|GoogleFit tracker | HealthKit Google|\n|Samsung Health tracker | HealthKit Google|\n|Google Health Connect | HealthKit Google|\n|Huawei tracker | HealthKit Huawei|\n|Lingo Sensor | Lingo|\n",
+      "example": "Pulse HR"
+    },
+    "modelid": {
+      "type": "integer",
+      "description": "\n\n| Value | Description|\n|---|---|\n|1 | Withings WBS01|\n|2 | WS30|\n|3 | Kid Scale|\n|4 | Smart Body Analyzer|\n|5 | Body+|\n|6 | Body Cardio|\n|7 | Body|\n|10 | Body Scan|\n|9 | Body Pro|\n|11 | WBS10|\n|12 | WBS11|\n|18 | Body Comp|\n|21 | Smart Baby Monitor|\n|22 | Withings Home|\n|41 | Withings Blood Pressure Monitor V1|\n|42 | Withings Blood Pressure Monitor V2|\n|43 | Withings Blood Pressure Monitor V3|\n|44 | BPM Core|\n|45 | BPM Connect|\n|46 | BPM Connect Pro|\n|47 | BPM Pro 2|\n|48 | BPM Vision|\n|51 | Pulse|\n|52 | Activite|\n|53 | Activite (Pop, Steel)|\n|54 | Withings Go|\n|55 | Activite Steel HR|\n|59 | Activite Steel HR Sport Edition|\n|58 | Pulse HR|\n|90 | Move|\n|91 | Move ECG|\n|92 | Move ECG|\n|93 | ScanWatch|\n|94 | ScanWatch 2|\n|95 | ScanWatch Light|\n|60 | Aura Dock|\n|61 | Aura Sensor|\n|63 | Aura Sensor V2|\n|70 | Thermo|\n|71 | BeamO|\n|100 | WUP01|\n|1061 | Iglucose glucometer|\n|1051 | iOS step tracker|\n|1052 | iOS step tracker|\n|1057 | HealthKit step iPhone tracker|\n|1058 | HealthKit step Apple Watch tracker|\n|1059 | HealthKit other step tracker|\n|1053 | Android step tracker|\n|1054 | Android step tracker|\n|1055 | GoogleFit tracker|\n|1056 | Samsung Health tracker|\n|1060 | Google Health Connect|\n|1062 | Huawei tracker|\n|1063 | Lingo Sensor|\n",
+      "example": 59
+    },
+    "steps": {
+      "type": "integer",
+      "description": "Number of steps. *(Use 'data_fields' to request this data.)*",
+      "example": 6200
+    },
+    "distance": {
+      "type": "number",
+      "description": "Distance travelled (in meters). *(Use 'data_fields' to request this data.)*",
+      "example": 3000
+    },
+    "elevation": {
+      "type": "number",
+      "description": "Number of floors climbed. *(Use 'data_fields' to request this data.)*",
+      "example": 100
+    },
+    "soft": {
+      "type": "integer",
+      "description": "Duration of soft activities (in seconds). *(Use 'data_fields' to request this data.)*",
+      "example": 800
+    },
+    "moderate": {
+      "type": "integer",
+      "description": "Duration of moderate activities (in seconds). *(Use 'data_fields' to request this data.)*",
+      "example": 1000
+    },
+    "intense": {
+      "type": "integer",
+      "description": "Duration of intense activities (in seconds). *(Use 'data_fields' to request this data.)*",
+      "example": 700
+    },
+    "active": {
+      "type": "integer",
+      "description": "Sum of intense and moderate activity durations (in seconds). *(Use 'data_fields' to request this data.)*",
+      "example": 2300
+    },
+    "calories": {
+      "type": "number",
+      "description": "Active calories burned (in Kcal). Calculated by mixing fine granularity calories estimation, workouts estimated calories and calories manually set by the user. *(Use 'data_fields' to request this data.)*",
+      "example": 1200
+    },
+    "totalcalories": {
+      "type": "number",
+      "description": "Total calories burned (in Kcal). Obtained by adding active calories (see ```calories```) and passive calories.",
+      "example": 3500
+    },
+    "hr_average": {
+      "type": "integer",
+      "description": "Average heart rate. (beats per minute).*(Use 'data_fields' to request this data.)*",
+      "example": 80
+    },
+    "hr_min": {
+      "type": "integer",
+      "description": "Minimal heart rate (beats per minute). *(Use 'data_fields' to request this data.)*",
+      "example": 70
+    },
+    "hr_max": {
+      "type": "integer",
+      "description": "Maximal heart rate (beats per minute).. *(Use 'data_fields' to request this data.)*",
+      "example": 80
+    },
+    "hr_zone_0": {
+      "type": "integer",
+      "description": "Duration in seconds when heart rate was in a light zone (cf. <a href='/api-reference/#section/Glossary'>Glossary</a>). *(Use 'data_fields' to request this data.)*",
+      "example": 100
+    },
+    "hr_zone_1": {
+      "type": "integer",
+      "description": "Duration in seconds when heart rate was in a moderate zone (cf. <a href='/api-reference/#section/Glossary'>Glossary</a>). *(Use 'data_fields' to request this data.)*",
+      "example": 200
+    },
+    "hr_zone_2": {
+      "type": "integer",
+      "description": "Duration in seconds when heart rate was in an intense zone (cf. <a href='/api-reference/#section/Glossary'>Glossary</a>). *(Use 'data_fields' to request this data.)*",
+      "example": 300
+    },
+    "hr_zone_3": {
+      "type": "integer",
+      "description": "Duration in seconds when heart rate was in maximal zone (cf. <a href='/api-reference/#section/Glossary'>Glossary</a>). *(Use 'data_fields' to request this data.)*",
+      "example": 400
+    }
+  },
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://developer.withings.com/schemas/activity_object",
+  "title": "Activity Object"
+}

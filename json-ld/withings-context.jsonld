@@ -1,0 +1,334 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "schema": "https://schema.org/",
+    "withings": "https://developer.withings.com/vocab/",
+    "fhir": "http://hl7.org/fhir/",
+
+    "WithingsAPI": {
+      "@id": "withings:WithingsAPI",
+      "@type": "@id"
+    },
+
+    "MeasureGroup": {
+      "@id": "withings:MeasureGroup",
+      "@type": "@id"
+    },
+
+    "Measure": {
+      "@id": "withings:Measure",
+      "@type": "@id"
+    },
+
+    "SleepSummary": {
+      "@id": "withings:SleepSummary",
+      "@type": "@id"
+    },
+
+    "ActivityData": {
+      "@id": "withings:ActivityData",
+      "@type": "@id"
+    },
+
+    "HeartMeasurement": {
+      "@id": "withings:HeartMeasurement",
+      "@type": "@id"
+    },
+
+    "UserDevice": {
+      "@id": "withings:UserDevice",
+      "@type": "@id"
+    },
+
+    "Notification": {
+      "@id": "withings:Notification",
+      "@type": "@id"
+    },
+
+    "grpid": {
+      "@id": "withings:grpid",
+      "@type": "xsd:integer"
+    },
+
+    "attrib": {
+      "@id": "withings:attrib",
+      "@type": "xsd:integer"
+    },
+
+    "date": {
+      "@id": "withings:date",
+      "@type": "xsd:integer"
+    },
+
+    "created": {
+      "@id": "withings:created",
+      "@type": "xsd:integer"
+    },
+
+    "modified": {
+      "@id": "withings:modified",
+      "@type": "xsd:integer"
+    },
+
+    "category": {
+      "@id": "withings:category",
+      "@type": "xsd:integer"
+    },
+
+    "deviceid": {
+      "@id": "withings:deviceid",
+      "@type": "xsd:string"
+    },
+
+    "hash_deviceid": {
+      "@id": "withings:hash_deviceid",
+      "@type": "xsd:string"
+    },
+
+    "model": {
+      "@id": "withings:model",
+      "@type": "xsd:integer"
+    },
+
+    "model_id": {
+      "@id": "withings:model_id",
+      "@type": "xsd:integer"
+    },
+
+    "measures": {
+      "@id": "withings:measures",
+      "@container": "@list"
+    },
+
+    "value": {
+      "@id": "withings:value",
+      "@type": "xsd:integer"
+    },
+
+    "type": {
+      "@id": "withings:type",
+      "@type": "xsd:integer"
+    },
+
+    "unit": {
+      "@id": "withings:unit",
+      "@type": "xsd:integer"
+    },
+
+    "timezone": {
+      "@id": "withings:timezone",
+      "@type": "xsd:string"
+    },
+
+    "startdate": {
+      "@id": "withings:startdate",
+      "@type": "xsd:integer"
+    },
+
+    "enddate": {
+      "@id": "withings:enddate",
+      "@type": "xsd:integer"
+    },
+
+    "steps": {
+      "@id": "withings:steps",
+      "@type": "xsd:integer"
+    },
+
+    "distance": {
+      "@id": "withings:distance",
+      "@type": "xsd:double"
+    },
+
+    "elevation": {
+      "@id": "withings:elevation",
+      "@type": "xsd:double"
+    },
+
+    "calories": {
+      "@id": "withings:calories",
+      "@type": "xsd:double"
+    },
+
+    "totalcalories": {
+      "@id": "withings:totalcalories",
+      "@type": "xsd:double"
+    },
+
+    "active": {
+      "@id": "withings:active",
+      "@type": "xsd:integer"
+    },
+
+    "soft": {
+      "@id": "withings:soft",
+      "@type": "xsd:integer"
+    },
+
+    "moderate": {
+      "@id": "withings:moderate",
+      "@type": "xsd:integer"
+    },
+
+    "intense": {
+      "@id": "withings:intense",
+      "@type": "xsd:integer"
+    },
+
+    "hr_average": {
+      "@id": "withings:hr_average",
+      "@type": "xsd:integer"
+    },
+
+    "hr_min": {
+      "@id": "withings:hr_min",
+      "@type": "xsd:integer"
+    },
+
+    "hr_max": {
+      "@id": "withings:hr_max",
+      "@type": "xsd:integer"
+    },
+
+    "sleep_efficiency": {
+      "@id": "withings:sleep_efficiency",
+      "@type": "xsd:integer"
+    },
+
+    "sleep_latency": {
+      "@id": "withings:sleep_latency",
+      "@type": "xsd:integer"
+    },
+
+    "total_sleep_time": {
+      "@id": "withings:total_sleep_time",
+      "@type": "xsd:integer"
+    },
+
+    "total_timeinbed": {
+      "@id": "withings:total_timeinbed",
+      "@type": "xsd:integer"
+    },
+
+    "deepsleepduration": {
+      "@id": "withings:deepsleepduration",
+      "@type": "xsd:integer"
+    },
+
+    "lightsleepduration": {
+      "@id": "withings:lightsleepduration",
+      "@type": "xsd:integer"
+    },
+
+    "remsleepduration": {
+      "@id": "withings:remsleepduration",
+      "@type": "xsd:integer"
+    },
+
+    "wakeupduration": {
+      "@id": "withings:wakeupduration",
+      "@type": "xsd:integer"
+    },
+
+    "wakeupcount": {
+      "@id": "withings:wakeupcount",
+      "@type": "xsd:integer"
+    },
+
+    "snoring": {
+      "@id": "withings:snoring",
+      "@type": "xsd:integer"
+    },
+
+    "breathing_disturbances_intensity": {
+      "@id": "withings:breathing_disturbances_intensity",
+      "@type": "xsd:integer"
+    },
+
+    "nb_rem_episodes": {
+      "@id": "withings:nb_rem_episodes",
+      "@type": "xsd:integer"
+    },
+
+    "appli": {
+      "@id": "withings:appli",
+      "@type": "xsd:integer"
+    },
+
+    "callbackurl": {
+      "@id": "withings:callbackurl",
+      "@type": "xsd:anyURI"
+    },
+
+    "comment": {
+      "@id": "withings:comment",
+      "@type": "xsd:string"
+    },
+
+    "access_token": {
+      "@id": "withings:access_token",
+      "@type": "xsd:string"
+    },
+
+    "refresh_token": {
+      "@id": "withings:refresh_token",
+      "@type": "xsd:string"
+    },
+
+    "expires_in": {
+      "@id": "withings:expires_in",
+      "@type": "xsd:integer"
+    },
+
+    "scope": {
+      "@id": "withings:scope",
+      "@type": "xsd:string"
+    },
+
+    "userid": {
+      "@id": "withings:userid",
+      "@type": "xsd:string"
+    },
+
+    "battery": {
+      "@id": "withings:battery",
+      "@type": "xsd:string"
+    },
+
+    "fw": {
+      "@id": "withings:fw",
+      "@type": "xsd:string"
+    },
+
+    "mac_address": {
+      "@id": "withings:mac_address",
+      "@type": "xsd:string"
+    },
+
+    "serial_number": {
+      "@id": "withings:serial_number",
+      "@type": "xsd:string"
+    },
+
+    "weight": {
+      "@id": "schema:weight",
+      "@type": "xsd:double"
+    },
+
+    "height": {
+      "@id": "schema:height",
+      "@type": "xsd:double"
+    },
+
+    "heartRate": {
+      "@id": "schema:heartRate",
+      "@type": "xsd:integer"
+    },
+
+    "bloodPressure": {
+      "@id": "schema:bloodPressure",
+      "@type": "@id"
+    }
+  }
+}
