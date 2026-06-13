@@ -1,0 +1,69 @@
+name: Withings API Rate Limits
+description: >-
+  Withings enforces rate limits on API requests to ensure platform stability
+  and fair usage across all integrations. The standard limit applies across
+  all applications on the Public API plan. Withings recommends using the
+  webhook notification system to reduce unnecessary polling and stay within
+  rate limits. Enterprise plan customers receive higher limits and dedicated
+  support for high-volume use cases.
+specificationVersion: "0.1"
+url: https://developer.withings.com/developer-guide/v3/data-api/notifications/notification-overview/
+rateLimits:
+  - name: Standard Application Rate Limit
+    description: >-
+      The default rate limit applied to all API applications on the Public API
+      plan. This limit is enforced across the entire application (not per user)
+      and applies to all API endpoints including data retrieval, OAuth token
+      operations, and notification management.
+    scope: application
+    limit: 120
+    period: minute
+    periodUnit: requests-per-minute
+    plan: Public API
+    enforcement: hard
+    headers:
+      - name: X-RateLimit-Limit
+        description: The maximum number of requests allowed per minute
+      - name: X-RateLimit-Remaining
+        description: The number of requests remaining in the current window
+    httpStatusOnExceeded: 429
+    notes: >-
+      Withings recommends using the webhook/notification system as an alternative
+      to polling, which significantly reduces API call volume and helps stay within
+      rate limits. Webhooks send real-time push notifications when new health data
+      is available so partners can fetch only the data they need when it matters.
+  - name: Enterprise Application Rate Limit
+    description: >-
+      Higher rate limits available for Enterprise plan customers. Specific limits
+      are negotiated as part of the Enterprise plan agreement and may include
+      higher per-minute request thresholds and dedicated capacity allocations.
+    scope: application
+    limit: null
+    period: minute
+    periodUnit: requests-per-minute
+    plan: Enterprise
+    enforcement: hard
+    notes: >-
+      Contact Withings to learn about Enterprise plan rate limits and SLA options.
+      Enterprise customers also receive dedicated support for managing high-volume
+      API integrations.
+recommendations:
+  - title: Use Webhook Notifications
+    description: >-
+      Instead of polling the API at regular intervals, subscribe to Withings
+      webhook notifications. When a user syncs a device, Withings sends a
+      push notification to your callback URL. You can then fetch only the
+      specific data that was updated, minimizing API calls.
+    url: https://developer.withings.com/developer-guide/v3/data-api/notifications/notification-overview/
+  - title: Implement Exponential Backoff
+    description: >-
+      If your application receives a 429 rate limit response, implement
+      exponential backoff with jitter before retrying. This prevents thundering
+      herd issues and ensures your integration handles rate limit scenarios
+      gracefully.
+  - title: Upgrade to Enterprise for High Volume
+    description: >-
+      If your application consistently approaches the 120 requests-per-minute
+      limit, consider upgrading to the Enterprise plan which provides higher
+      limits and a dedicated SLA.
+    url: https://developer.withings.com/developer-guide/v3/withings-solutions/withings-api-plans/

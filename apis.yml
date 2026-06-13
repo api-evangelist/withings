@@ -1,0 +1,124 @@
+aid: withings
+name: Withings
+description: >-
+  Withings is a connected health device platform providing a REST API for
+  accessing data from smart scales, blood pressure monitors, sleep trackers,
+  thermometers, and fitness watches. The API uses OAuth2 for authentication and
+  provides access to a wide range of health biomarkers including body
+  composition, cardiovascular data, sleep metrics, activity tracking, and
+  clinical-grade measurements. Partners and developers can integrate Withings
+  health data into their applications for remote patient monitoring, wellness
+  platforms, and research applications.
+type: Index
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+url: https://raw.githubusercontent.com/api-evangelist/withings/refs/heads/main/apis.yml
+created: "2026-06-13"
+modified: "2026-06-13"
+specificationVersion: "0.19"
+tags:
+  - Health
+  - Wearables
+  - Connected Devices
+  - Body Composition
+  - Sleep Tracking
+  - Blood Pressure
+  - Activity Tracking
+  - Remote Patient Monitoring
+  - OAuth2
+  - Webhooks
+apis:
+  - name: Withings Data API
+    description: >-
+      The Withings Data API provides access to health metrics collected by
+      Withings connected devices including smart scales, blood pressure monitors,
+      sleep trackers, thermometers, and fitness watches. Data includes body
+      composition, cardiovascular health, sleep quality, activity levels, and
+      clinical biomarkers. Access is secured via OAuth2 and the API supports
+      webhook notifications for real-time data updates.
+    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    humanURL: https://developer.withings.com/
+    baseURL: https://wbsapi.withings.net
+    tags:
+      - Health Data
+      - Body Composition
+      - Sleep
+      - Activity
+      - Blood Pressure
+      - OAuth2
+    properties:
+      - type: Documentation
+        url: https://developer.withings.com/developer-guide/v3/data-api/all-available-health-data/
+      - type: OpenAPI
+        url: https://developer.withings.com/api-reference/
+      - type: Authentication
+        url: https://developer.withings.com/developer-guide/v3/integration-guide/public-health-data-api/get-access/oauth-web-flow/
+      - type: Webhooks
+        url: https://developer.withings.com/developer-guide/v3/data-api/notifications/notification-overview/
+  - name: Withings Mobile SDK
+    description: >-
+      The Withings Mobile SDK allows developers to integrate Withings health
+      data directly into iOS and Android mobile applications. The SDK handles
+      device pairing, data synchronization, and health metric collection with
+      native implementations for both platforms.
+    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    humanURL: https://developer.withings.com/developer-guide/v3/integration-guide/sdk-integration-guides/
+    baseURL: https://developer.withings.com
+    tags:
+      - Mobile SDK
+      - iOS
+      - Android
+      - Health Data
+    properties:
+      - type: Documentation
+        url: https://developer.withings.com/developer-guide/v3/integration-guide/sdk-integration-guides/
+      - type: iOSResources
+        url: https://developer.withings.com/sdk/v2/tree/sources/ios/
+      - type: AndroidResources
+        url: https://developer.withings.com/sdk/v2/tree/sources/android/
+  - name: Withings Advanced Research API
+    description: >-
+      The Withings Advanced Research API provides access to detailed and
+      granular health biomarker data for academic and clinical research
+      purposes, including full biomarker packs with extended data sets beyond
+      the standard API offering.
+    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    humanURL: https://developer.withings.com/developer-guide/v3/withings-solutions/withings-api-plans/
+    baseURL: https://wbsapi.withings.net
+    tags:
+      - Research
+      - Biomarkers
+      - Clinical Data
+      - Health Analytics
+    properties:
+      - type: Documentation
+        url: https://developer.withings.com/developer-guide/v3/withings-solutions/withings-api-plans/
+common:
+  - type: Website
+    url: https://www.withings.com/
+  - type: Documentation
+    url: https://developer.withings.com/
+  - type: APIReference
+    url: https://developer.withings.com/api-reference/
+  - type: Authentication
+    url: https://developer.withings.com/developer-guide/v3/integration-guide/public-health-data-api/get-access/oauth-web-flow/
+  - type: Webhooks
+    url: https://developer.withings.com/developer-guide/v3/data-api/notifications/notification-overview/
+  - type: StatusPage
+    url: https://status.withings.io/
+  - type: LinkedIn
+    url: https://www.linkedin.com/company/withings
+  - type: X
+    url: https://x.com/withings
+  - type: Blog
+    url: https://www.withings.com/blog/
+  - type: Postman
+    url: https://www.postman.com/withings/withings-health-solutions/documentation/hx5ar4t/withings-public-api-integration
+  - type: Plans
+    url: plans/withings-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/withings-rate-limits.yml
+  - type: FinOps
+    url: finops/withings-finops.yml
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

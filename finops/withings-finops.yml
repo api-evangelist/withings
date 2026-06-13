@@ -1,0 +1,104 @@
+name: Withings API FinOps
+description: >-
+  Financial operations framework for managing costs and resource consumption
+  associated with Withings API integrations. Withings offers a free Public API
+  tier and a contact-for-pricing Enterprise tier. Cost management focuses on
+  efficient API usage patterns, webhook adoption to reduce polling costs, and
+  appropriate plan selection based on scale and SLA requirements.
+specificationVersion: "1.0"
+url: https://developer.withings.com/developer-guide/v3/withings-solutions/withings-api-plans/
+focus:
+  schema: FOCUS 1.0
+  currency: USD
+costModel:
+  type: tiered
+  description: >-
+    Withings uses a tiered model with a free Public API plan and a paid
+    Enterprise plan. The Public API is free with standard rate limits.
+    Enterprise pricing is negotiated based on volume, SLA requirements,
+    and specific feature needs such as advanced biomarker packs and
+    cellular solutions.
+tiers:
+  - tier: Public API
+    monthlyCost: 0
+    currency: USD
+    includedFeatures:
+      - Core health biomarker access
+      - OAuth2 authentication
+      - Webhook notifications
+      - Standard developer dashboard
+      - 120 requests/minute rate limit
+    overageCost: null
+    overageNotes: >-
+      No overage charges on the Public API. Requests are throttled at 120
+      per minute. Applications exceeding this limit should upgrade to Enterprise.
+  - tier: Enterprise
+    monthlyCost: null
+    currency: USD
+    pricingModel: custom
+    contactUrl: https://developer.withings.com/
+    includedFeatures:
+      - All Public API features
+      - Higher rate limits
+      - Dedicated support
+      - Enhanced SLA
+      - Advanced Research API (Basic and Total Biomarker Packs)
+      - Cellular device integration
+      - Logistics API
+      - RPM solution support
+      - HIPAA and HDS compliance
+    overageCost: null
+    overageNotes: >-
+      Enterprise pricing is custom. Contact Withings sales for volume-based
+      pricing and SLA terms.
+costOptimization:
+  strategies:
+    - name: Webhook-First Architecture
+      description: >-
+        Use Withings webhook notifications as the primary mechanism for
+        receiving health data updates rather than polling the API. Webhooks
+        eliminate unnecessary API requests by pushing notifications when device
+        syncs occur, significantly reducing request counts and keeping usage
+        within free tier limits.
+      estimatedSavings: high
+      url: https://developer.withings.com/developer-guide/v3/data-api/notifications/notification-overview/
+    - name: Right-Size Plan Selection
+      description: >-
+        Assess actual request volume before upgrading to Enterprise. Most
+        integrations that use webhooks efficiently can remain on the free
+        Public API plan. Only upgrade when consistently hitting 120 req/min
+        or when formal SLA guarantees are required for production health
+        monitoring applications.
+      estimatedSavings: medium
+    - name: Selective Data Retrieval
+      description: >-
+        Use Withings notification payloads to identify which specific data
+        types were updated and fetch only that data. Avoid fetching all
+        available biomarkers on each sync; instead retrieve only the changed
+        measurements to minimize API call volume.
+      estimatedSavings: medium
+      url: https://developer.withings.com/developer-guide/v3/data-api/keep-user-data-up-to-date/
+    - name: Token Refresh Optimization
+      description: >-
+        Manage OAuth2 access and refresh tokens efficiently. Store tokens
+        securely and reuse them until expiration. Avoid unnecessary token
+        refresh calls that count against rate limits.
+      estimatedSavings: low
+      url: https://developer.withings.com/developer-guide/data-api/authentication/
+visibility:
+  monitoring:
+    - type: StatusPage
+      url: https://status.withings.io/
+      description: Monitor Withings API operational status for EU Services, US Services, and Home Streaming
+    - type: DeveloperDashboard
+      url: https://developer.withings.com/dashboard/
+      description: >-
+        The Withings Developer Dashboard provides tools for managing API
+        applications, registering callback URLs, and testing server connectivity
+        for webhook integrations.
+compliance:
+  standards:
+    - name: HIPAA
+      description: Withings cloud health data storage is HIPAA compliant for US deployments
+    - name: HDS (Health Data Hosting)
+      description: Withings cloud health data storage is HDS certified for EU/French deployments

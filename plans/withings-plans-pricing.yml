@@ -1,0 +1,57 @@
+name: Withings API Plans
+description: >-
+  Withings offers tiered API access plans for developers and partners integrating
+  connected health device data. The Public API plan is available to individuals
+  and companies without a formal contract, while the Enterprise Plan provides
+  higher request limits, dedicated support, and enhanced SLAs for production
+  use cases such as remote patient monitoring and large-scale health platforms.
+specificationVersion: "0.1"
+url: https://developer.withings.com/developer-guide/v3/withings-solutions/withings-api-plans/
+plans:
+  - name: Public API
+    description: >-
+      Free tier for individuals and partners integrating Withings health data
+      into apps without a formal contract. Users grant OAuth2 consent via the
+      standard web flow and the partner retrieves health data using access
+      tokens. Suitable for personal projects, prototyping, and small-scale
+      integrations.
+    label: Public API
+    price: 0
+    priceCurrency: USD
+    billingPeriod: monthly
+    features:
+      - OAuth2 authentication via web flow
+      - Access to core health biomarkers (body composition, activity, sleep, blood pressure)
+      - Real-time webhook notifications for data updates
+      - Standard API rate limits (120 requests per minute)
+      - Developer Dashboard access
+      - Standard documentation and integration guides
+      - Postman collection for testing
+    rateLimits:
+      - type: requests-per-minute
+        limit: 120
+        scope: application
+  - name: Enterprise Plan
+    description: >-
+      Enterprise tier for companies requiring higher API request limits, formal
+      SLAs, and dedicated support. Designed for remote patient monitoring (RPM),
+      EHR integrations, research platforms, and large-scale health deployments.
+      Includes access to advanced biomarker packs, cellular solutions, and
+      logistics services. Pricing is available upon request from Withings.
+    label: Enterprise
+    price: null
+    priceCurrency: USD
+    billingPeriod: monthly
+    contactSales: true
+    contactUrl: https://developer.withings.com/
+    features:
+      - All Public API features
+      - Higher API request rate limits
+      - Dedicated support and account management
+      - Enhanced SLA guarantees
+      - Access to Advanced Research API biomarker packs (Basic Biomarker Pack, Total Biomarker Pack)
+      - Cellular device solutions integration
+      - Logistics API access
+      - RPM (Remote Patient Monitoring) solution support
+      - HIPAA and HDS compliance support
+      - Multiple callback URL registration
