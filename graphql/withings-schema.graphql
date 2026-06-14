@@ -1,0 +1,690 @@
+"""
+Withings GraphQL Schema
+Conceptual schema derived from the Withings Data API (https://developer.withings.com/api-reference/).
+Covers health measures, body composition, sleep, activity, cardiovascular, and device management.
+"""
+
+scalar DateTime
+scalar JSON
+
+# ─── Authentication & Authorization ──────────────────────────────────────────
+
+"""OAuth2 access and refresh token pair for Withings API authorization."""
+type OAuth2Token {
+  userId: ID!
+  accessToken: String!
+  refreshToken: String!
+  scope: String!
+  expiresIn: Int!
+  tokenType: String!
+  createdAt: DateTime!
+}
+
+"""Lightweight API key credential used for server-to-server calls."""
+type APIKey {
+  id: ID!
+  key: String!
+  description: String
+  createdAt: DateTime!
+  expiresAt: DateTime
+  scopes: [String!]!
+}
+
+"""Generic token wrapper returned by the OAuth2 token endpoint."""
+type Token {
+  oauth2Token: OAuth2Token
+  apiKey: APIKey
+  status: Int!
+}
+
+# ─── User ─────────────────────────────────────────────────────────────────────
+
+"""Core Withings account identity."""
+type User {
+  id: ID!
+  externalId: String
+  details: UserDetails
+  profile: UserProfile
+  devices: [Device!]
+  goals: [Goal!]
+  subscriptions: [Subscription!]
+}
+
+"""Extended demographic and account details for a Withings user."""
+type UserDetails {
+  userId: ID!
+  firstname: String
+  lastname: String
+  birthdate: DateTime
+  gender: Int
+  email: String
+  timezone: String
+  unit: Int
+  locale: String
+  createdAt: DateTime!
+  modifiedAt: DateTime!
+}
+
+"""Public-facing profile attributes surfaced in partner integrations."""
+type UserProfile {
+  userId: ID!
+  displayName: String
+  shortname: String
+  publicKey: String
+  consentDate: DateTime
+}
+
+# ─── Devices ──────────────────────────────────────────────────────────────────
+
+"""A Withings hardware device paired to a user account."""
+type Device {
+  id: ID!
+  userId: ID!
+  type: DeviceType!
+  model: DeviceModel!
+  details: DeviceDetails
+  battery: Battery
+  firstSessionDate: DateTime
+  lastSessionDate: DateTime
+}
+
+"""Extended technical details for a paired device."""
+type DeviceDetails {
+  deviceId: ID!
+  serialNumber: String
+  firmwareVersion: String
+  hardwareVersion: String
+  macAddress: String
+  timezone: String
+  createdAt: DateTime!
+}
+
+"""Category of Withings device (scale, blood pressure monitor, etc.)."""
+type DeviceType {
+  id: ID!
+  code: Int!
+  name: String!
+  description: String
+}
+
+"""Specific product model within a device type category."""
+type DeviceModel {
+  id: ID!
+  deviceTypeId: ID!
+  code: Int!
+  name: String!
+  capabilities: [String!]
+}
+
+"""Battery level and status for a device."""
+type Battery {
+  deviceId: ID!
+  level: Int
+  status: String
+  lastCheckedAt: DateTime
+}
+
+# ─── Measures ─────────────────────────────────────────────────────────────────
+
+"""A group of measures taken at the same time and date, from a single device."""
+type MeasureGroup {
+  id: ID!
+  userId: ID!
+  attrib: Int!
+  date: DateTime!
+  timezone: String
+  category: Int!
+  deviceId: String
+  measures: [Measure!]!
+  comment: String
+}
+
+"""A single measurement value within a measure group."""
+type Measure {
+  id: ID!
+  groupId: ID!
+  type: MeasureType!
+  value: Float!
+  unit: Int!
+  details: MeasureDetails
+}
+
+"""Metadata about what a measure represents."""
+type MeasureDetails {
+  measureId: ID!
+  algo: Int
+  fm: Int
+  fw: String
+}
+
+"""Lookup type for Withings measure type codes (e.g., 1=Weight, 6=Fat Ratio)."""
+type MeasureType {
+  code: Int!
+  name: String!
+  unit: String!
+  description: String
+}
+
+# ─── Body Composition ─────────────────────────────────────────────────────────
+
+"""Body weight measurement in kilograms (measure type 1)."""
+type Weight {
+  groupId: ID!
+  userId: ID!
+  value: Float!
+  unit: String!
+  date: DateTime!
+}
+
+"""Body Mass Index derived from weight and height (measure type 2)."""
+type BMI {
+  groupId: ID!
+  userId: ID!
+  value: Float!
+  date: DateTime!
+}
+
+"""Body fat percentage measured by bioelectrical impedance (measure type 6)."""
+type BodyFatPercent {
+  groupId: ID!
+  userId: ID!
+  value: Float!
+  date: DateTime!
+}
+
+"""Fat-free / lean body mass in kilograms (measure type 5)."""
+type Lean {
+  groupId: ID!
+  userId: ID!
+  value: Float!
+  unit: String!
+  date: DateTime!
+}
+
+"""Bone mass in kilograms derived from bioelectrical impedance (measure type 88)."""
+type BoneM {
+  groupId: ID!
+  userId: ID!
+  value: Float!
+  unit: String!
+  date: DateTime!
+}
+
+"""Muscle mass in kilograms (measure type 76)."""
+type Muscle {
+  groupId: ID!
+  userId: ID!
+  value: Float!
+  unit: String!
+  date: DateTime!
+}
+
+"""Total body water / hydration percentage (measure type 77)."""
+type Hydration {
+  groupId: ID!
+  userId: ID!
+  value: Float!
+  unit: String!
+  date: DateTime!
+}
+
+"""Visceral fat rating (measure type 170)."""
+type VisceralFat {
+  groupId: ID!
+  userId: ID!
+  value: Float!
+  date: DateTime!
+}
+
+"""Standing height in meters (measure type 4)."""
+type Height {
+  groupId: ID!
+  userId: ID!
+  value: Float!
+  unit: String!
+  date: DateTime!
+}
+
+# ─── Cardiovascular ───────────────────────────────────────────────────────────
+
+"""A blood pressure reading containing systolic, diastolic, and pulse."""
+type BloodPressure {
+  groupId: ID!
+  userId: ID!
+  systolic: Systolic!
+  diastolic: Diastolic!
+  pulse: Pulse
+  date: DateTime!
+  deviceId: String
+}
+
+"""Systolic blood pressure in mmHg (measure type 9)."""
+type Systolic {
+  groupId: ID!
+  value: Float!
+  unit: String!
+}
+
+"""Diastolic blood pressure in mmHg (measure type 10)."""
+type Diastolic {
+  groupId: ID!
+  value: Float!
+  unit: String!
+}
+
+"""Heart rate / pulse in beats per minute (measure type 11)."""
+type Pulse {
+  groupId: ID!
+  value: Float!
+  unit: String!
+}
+
+"""Instantaneous heart rate sample (from ScanWatch / activity data)."""
+type HeartRate {
+  id: ID!
+  userId: ID!
+  value: Int!
+  date: DateTime!
+  deviceId: String
+}
+
+"""An ECG recording session from a ScanWatch device."""
+type ECG {
+  id: ID!
+  userId: ID!
+  deviceId: String
+  date: DateTime!
+  duration: Int
+  afib: AFib
+  signal: ECGSignal
+  wearPosition: Int
+}
+
+"""Raw ECG signal data sampled at 300 Hz."""
+type ECGSignal {
+  ecgId: ID!
+  samplingFrequency: Int!
+  signalSamples: [Float!]!
+}
+
+"""Atrial fibrillation classification result from an ECG session."""
+type AFib {
+  ecgId: ID!
+  classification: String!
+  confidence: Float
+}
+
+# ─── Metabolic & Clinical ─────────────────────────────────────────────────────
+
+"""Blood glucose measurement."""
+type Glucose {
+  id: ID!
+  userId: ID!
+  value: Float!
+  unit: String!
+  date: DateTime!
+  details: GlucoseDetails
+}
+
+"""Extended metadata for a glucose reading."""
+type GlucoseDetails {
+  glucoseId: ID!
+  mealContext: String
+  deviceId: String
+  notes: String
+}
+
+"""Body temperature in Celsius (measure type 71)."""
+type Temperature {
+  groupId: ID!
+  userId: ID!
+  value: Float!
+  unit: String!
+  date: DateTime!
+}
+
+"""Wrist skin temperature in Celsius from ScanWatch Horizon (measure type 168)."""
+type SkinTemperature {
+  groupId: ID!
+  userId: ID!
+  value: Float!
+  unit: String!
+  date: DateTime!
+}
+
+"""Blood oxygen saturation (SpO2) percentage (measure type 54)."""
+type SPO2 {
+  id: ID!
+  userId: ID!
+  value: Float!
+  date: DateTime!
+  details: SPO2Details
+}
+
+"""Additional detail captured alongside an SpO2 measurement."""
+type SPO2Details {
+  spo2Id: ID!
+  deviceId: String
+  sessionDuration: Int
+  minValue: Float
+  maxValue: Float
+}
+
+# ─── Sleep ────────────────────────────────────────────────────────────────────
+
+"""A sleep session retrieved from the Withings Sleep API."""
+type Sleep {
+  id: ID!
+  userId: ID!
+  startDate: DateTime!
+  endDate: DateTime!
+  timezone: String
+  model: Int
+  summary: SleepSummary
+  details: SleepDetails
+  score: SleepScore
+}
+
+"""Aggregated nightly sleep statistics."""
+type SleepSummary {
+  sleepId: ID!
+  userId: ID!
+  date: DateTime!
+  startDate: DateTime!
+  endDate: DateTime!
+  timezone: String
+  duration: SleepDuration!
+  hrVariability: HRVariability
+  breathingDisturbances: BreathingDisturbances
+  snoringTime: SnoringTime
+  wakeUps: [WakeUp!]
+  score: SleepScore
+}
+
+"""Granular sleep stage data (light, deep, REM, awake) in 30-second epochs."""
+type SleepDetails {
+  sleepId: ID!
+  startDate: DateTime!
+  endDate: DateTime!
+  state: [SleepStateEpoch!]
+}
+
+"""A single 30-second epoch of sleep stage data."""
+type SleepStateEpoch {
+  timestamp: DateTime!
+  state: Int!
+}
+
+"""Withings Sleep Score summarizing overall sleep quality (0–100)."""
+type SleepScore {
+  sleepId: ID!
+  globalScore: Int!
+  lightSleepScore: Int
+  deepSleepScore: Int
+  remSleepScore: Int
+  durationScore: Int
+  awakeningsScore: Int
+  hrScore: Int
+  respiratoryScore: Int
+}
+
+"""Breakdown of time spent in each sleep stage in seconds."""
+type SleepDuration {
+  sleepId: ID!
+  totalSleep: Int!
+  lightSleep: Int!
+  deepSleep: Int!
+  remSleep: Int!
+  awake: Int!
+}
+
+"""Heart rate variability metrics captured during sleep."""
+type HRVariability {
+  sleepId: ID!
+  rmssd: Float
+  sdnn: Float
+  coverage: Float
+}
+
+"""Breathing disturbance index during sleep (events per hour)."""
+type BreathingDisturbances {
+  sleepId: ID!
+  count: Int!
+  durationSeconds: Int
+  index: Float
+}
+
+"""Total snoring duration detected during a sleep session."""
+type SnoringTime {
+  sleepId: ID!
+  totalSeconds: Int!
+  longestEpisodeSeconds: Int
+}
+
+"""A single wake-up event detected during a sleep session."""
+type WakeUp {
+  sleepId: ID!
+  startDate: DateTime!
+  endDate: DateTime!
+  durationSeconds: Int!
+}
+
+# ─── Activity ─────────────────────────────────────────────────────────────────
+
+"""Daily activity record retrieved from the Withings Activity API."""
+type Activity {
+  id: ID!
+  userId: ID!
+  date: DateTime!
+  timezone: String
+  deviceId: String
+  summary: ActivitySummary!
+  steps: Steps
+  calories: Calories
+  distance: Distance
+  elevation: Elevation
+  intensity: Intensity
+}
+
+"""High-level daily activity statistics aggregated from device data."""
+type ActivitySummary {
+  activityId: ID!
+  date: DateTime!
+  totalCalories: Float!
+  activeCalories: Float!
+  totalSteps: Int!
+  totalDistance: Float!
+  elevationClimbed: Float
+  softActivityDuration: Int
+  moderateActivityDuration: Int
+  intenseActivityDuration: Int
+}
+
+"""Step count data for an activity record."""
+type Steps {
+  activityId: ID!
+  total: Int!
+  goal: Int
+}
+
+"""Calorie expenditure breakdown for an activity record."""
+type Calories {
+  activityId: ID!
+  total: Float!
+  active: Float!
+  basal: Float!
+  unit: String!
+}
+
+"""Distance covered during an activity record in meters."""
+type Distance {
+  activityId: ID!
+  value: Float!
+  unit: String!
+}
+
+"""Elevation gained during an activity record in meters."""
+type Elevation {
+  activityId: ID!
+  value: Float!
+  unit: String!
+}
+
+"""Activity intensity breakdown in minutes per zone."""
+type Intensity {
+  activityId: ID!
+  softMinutes: Int!
+  moderateMinutes: Int!
+  intenseMinutes: Int!
+}
+
+# ─── Workouts ─────────────────────────────────────────────────────────────────
+
+"""A structured workout session recorded by a Withings device."""
+type Workout {
+  id: ID!
+  userId: ID!
+  type: WorkoutType!
+  startDate: DateTime!
+  endDate: DateTime!
+  deviceId: String
+  details: WorkoutDetails
+}
+
+"""Detailed metrics captured during a workout session."""
+type WorkoutDetails {
+  workoutId: ID!
+  calories: Float
+  distance: Float
+  steps: Int
+  elevationClimbed: Float
+  avgHeartRate: Int
+  maxHeartRate: Int
+  minHeartRate: Int
+  pauseDuration: Int
+  effortScore: Int
+  speedAvg: Float
+  speedMax: Float
+}
+
+"""Classification of workout type (e.g., running, cycling, swimming)."""
+type WorkoutType {
+  code: Int!
+  name: String!
+  category: String
+  description: String
+}
+
+# ─── Notifications ────────────────────────────────────────────────────────────
+
+"""A webhook notification subscription registered with the Withings API."""
+type Subscription {
+  id: ID!
+  userId: ID!
+  callbackUrl: String!
+  appli: Int!
+  comment: String
+  expires: DateTime
+  createdAt: DateTime!
+}
+
+"""A single webhook notification event received from Withings."""
+type Notification {
+  id: ID!
+  userId: ID!
+  appli: Int!
+  startDate: DateTime!
+  endDate: DateTime!
+  callbackUrl: String
+  details: NotificationDetails
+}
+
+"""Extended payload included in a notification callback."""
+type NotificationDetails {
+  notificationId: ID!
+  deviceId: String
+  rawPayload: JSON
+  receivedAt: DateTime!
+}
+
+# ─── Goals ────────────────────────────────────────────────────────────────────
+
+"""A user-defined health or activity goal."""
+type Goal {
+  id: ID!
+  userId: ID!
+  type: String!
+  value: Float!
+  unit: String
+  details: GoalDetails
+  createdAt: DateTime!
+  modifiedAt: DateTime
+}
+
+"""Additional context for a user goal."""
+type GoalDetails {
+  goalId: ID!
+  startDate: DateTime
+  endDate: DateTime
+  progress: Float
+  achieved: Boolean!
+}
+
+# ─── Queries ──────────────────────────────────────────────────────────────────
+
+type Query {
+  """Fetch the authenticated user's account."""
+  user(userId: ID!): User
+
+  """List all devices paired to a user."""
+  devices(userId: ID!): [Device!]
+
+  """Retrieve measure groups for a user within a date range."""
+  measureGroups(userId: ID!, startDate: DateTime, endDate: DateTime, measureTypes: [Int!]): [MeasureGroup!]
+
+  """Retrieve daily activity records for a user."""
+  activities(userId: ID!, startDate: DateTime, endDate: DateTime): [Activity!]
+
+  """Retrieve sleep sessions for a user."""
+  sleepSessions(userId: ID!, startDate: DateTime, endDate: DateTime): [Sleep!]
+
+  """Retrieve sleep summaries for a user."""
+  sleepSummaries(userId: ID!, startDate: DateTime, endDate: DateTime): [SleepSummary!]
+
+  """Retrieve workout sessions for a user."""
+  workouts(userId: ID!, startDate: DateTime, endDate: DateTime, workoutType: Int): [Workout!]
+
+  """Retrieve ECG recordings for a user."""
+  ecgRecordings(userId: ID!, startDate: DateTime, endDate: DateTime): [ECG!]
+
+  """Retrieve SpO2 measurements for a user."""
+  spo2Measurements(userId: ID!, startDate: DateTime, endDate: DateTime): [SPO2!]
+
+  """Retrieve active notification subscriptions for a user."""
+  subscriptions(userId: ID!): [Subscription!]
+
+  """Retrieve goals for a user."""
+  goals(userId: ID!): [Goal!]
+
+  """Retrieve OAuth2 token information."""
+  token(accessToken: String!): Token
+}
+
+# ─── Mutations ────────────────────────────────────────────────────────────────
+
+type Mutation {
+  """Create or update a notification subscription (webhook)."""
+  upsertSubscription(userId: ID!, callbackUrl: String!, appli: Int!, comment: String): Subscription
+
+  """Revoke a notification subscription."""
+  deleteSubscription(userId: ID!, callbackUrl: String!, appli: Int!): Boolean
+
+  """Set or update a health goal for a user."""
+  upsertGoal(userId: ID!, type: String!, value: Float!, unit: String): Goal
+
+  """Refresh an OAuth2 access token using the refresh token."""
+  refreshToken(refreshToken: String!, clientId: String!, clientSecret: String!): OAuth2Token
+
+  """Revoke an OAuth2 token."""
+  revokeToken(accessToken: String!): Boolean
+}
