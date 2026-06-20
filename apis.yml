@@ -8,7 +8,7 @@ description: Withings is a connected health device platform providing a REST API
   and developers can integrate Withings health data into their applications for remote
   patient monitoring, wellness platforms, and research applications.
 type: Index
-image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 url: https://raw.githubusercontent.com/api-evangelist/withings/refs/heads/main/apis.yml
 created: '2026-06-13'
 modified: '2026-06-13'
@@ -31,7 +31,7 @@ apis:
     trackers, thermometers, and fitness watches. Data includes body composition, cardiovascular
     health, sleep quality, activity levels, and clinical biomarkers. Access is secured
     via OAuth2 and the API supports webhook notifications for real-time data updates.
-  image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
   humanURL: https://developer.withings.com/
   baseURL: https://wbsapi.withings.net
   tags:
@@ -83,7 +83,7 @@ apis:
     data directly into iOS and Android mobile applications. The SDK handles device
     pairing, data synchronization, and health metric collection with native implementations
     for both platforms.
-  image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
   humanURL: https://developer.withings.com/developer-guide/v3/integration-guide/sdk-integration-guides/
   baseURL: https://developer.withings.com
   tags:
@@ -102,7 +102,7 @@ apis:
   description: The Withings Advanced Research API provides access to detailed and
     granular health biomarker data for academic and clinical research purposes, including
     full biomarker packs with extended data sets beyond the standard API offering.
-  image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
   humanURL: https://developer.withings.com/developer-guide/v3/withings-solutions/withings-api-plans/
   baseURL: https://wbsapi.withings.net
   tags:
