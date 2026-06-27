@@ -68,13 +68,13 @@ apis:
     url: json-schema/withings-user-device-object.json
   - type: JSONSchema
     url: json-schema/withings-heart-measurement-object.json
-  - type: Example
+  - type: Examples
     url: examples/withings-measure-example.json
-  - type: Example
+  - type: Examples
     url: examples/withings-sleep-summary-example.json
-  - type: Example
+  - type: Examples
     url: examples/withings-activity-example.json
-  - type: Example
+  - type: Examples
     url: examples/withings-oauth2-token-example.json
   - url: graphql/withings-graphql.md
     type: GraphQL
