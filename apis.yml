@@ -114,6 +114,8 @@ apis:
   - type: Documentation
     url: https://developer.withings.com/developer-guide/v3/withings-solutions/withings-api-plans/
 common:
+- type: DomainSecurity
+  url: security/withings-domain-security.yml
 - type: Website
   url: https://www.withings.com/
 - type: Documentation
