@@ -114,6 +114,8 @@ apis:
   - type: Documentation
     url: https://developer.withings.com/developer-guide/v3/withings-solutions/withings-api-plans/
 common:
+- type: AgenticAccess
+  url: agentic-access/withings-agentic-access.yml
 - type: DomainSecurity
   url: security/withings-domain-security.yml
 - type: Website
