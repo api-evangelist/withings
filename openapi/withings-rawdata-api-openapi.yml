@@ -1,0 +1,276 @@
+openapi: 3.0.3
+info:
+  version: '2.0'
+  title: Withings developer documentation answers rawdata API
+  description: These webservices allows you to get user's answers from surveys
+servers:
+- url: https://wbsapi.withings.net/
+tags:
+- name: rawdata
+  x-displayName: Raw Data
+  description: Raw Data webservices are part of the Advanced research API that allows to collect high frequency PPG and accelerometer data (around 25Hz). These APIs are compatible only with the Withings ScanWatch. If you need more information about how to use these APIs and how to parse the data, please have a look the [dedicated integration guide](/developer-guide/v3/integration-guide/public-health-data-api/data-api/raw-data).
+paths:
+  'https://wbsapi.withings.net/v2/rawdata ':
+    post:
+      tags:
+      - rawdata
+      description: This service allows to activate Raw Data collection on a given device that is already set up, and set the date at which the raw data collection will stop (enddate). The raw data capture will be activated as soon as the watch is able to sync with the Withings app following the API call. The capture will stop automatically at the enddate provided in the API call.
+      summary: Rawdata v2  - Activate
+      operationId: rawdatav2-activate
+      parameters:
+      - name: action
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Service action name. Must take the string value ```activate```.
+      - name: hash_deviceid
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Public device id. For any device installed on a user account, can be found by calling the User v2 - Get webservice.
+      - name: rawdata_type
+        in: query
+        required: true
+        schema:
+          type: integer
+        description: The type of raw data you want to act upon. Set to 1 for accelerometer, set to 2 for optical sensor.
+      - name: enddate
+        in: query
+        required: false
+        schema:
+          type: integer
+        description: Data end date as a unix timestamp.
+        format: timestamp
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+        description: 'Used to pass your access token. Must take value: ```Bearer {your access_token}``` Replace {your access_token} with the access_token'
+      responses:
+        200:
+          description: ' (Click to unfold)'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    description: Response status. See <a href='#section/Response-status'>Status</a> section for details.
+                  body:
+                    type: object
+                    description: Response data.
+                    properties: []
+      x-codeSamples:
+      - lang: PHP
+        source: "<?php\n\n$ch = curl_init();\n\ncurl_setopt($ch, CURLOPT_URL, \"https://wbsapi.withings.net/v2/rawdata \");\n\ncurl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);\n\ncurl_setopt($ch, CURLOPT_HTTPHEADER, [\n\t'Authorization: Bearer YOUR_ACCESS_TOKEN'\n]);\n\ncurl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query([ \n\t'action' => 'activate',\n\t'hash_deviceid' => 'string',\n\t'rawdata_type' => 'int',\n\t'enddate' => 'enddate'\n]));\n\n$rsp = curl_exec($ch);\ncurl_close($ch);\n\nvar_dump($rsp);\n\n?>"
+      - lang: CURL
+        source: 'curl --header "Authorization: Bearer YOUR_ACCESS_TOKEN" --data "action=activate&hash_deviceid=string&rawdata_type=int&enddate=enddate" ''https://wbsapi.withings.net/v2/rawdata '''
+  'https://wbsapi.withings.net/v2/rawdata  ':
+    post:
+      tags:
+      - rawdata
+      description: This service allows the de-activation of raw data collection. Raw Data de-activation will occur as soon as the Withings device is able to sync with the Withings app.
+      summary: Rawdata v2  - Deactivate
+      operationId: rawdatav2-deactivate
+      parameters:
+      - name: action
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Service action name. Must take the string value ```deactivate```.
+      - name: hash_deviceid
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Public device id. For any device installed on a user account, can be found by calling the User v2 - Get webservice.
+      - name: rawdata_type
+        in: query
+        required: false
+        schema:
+          type: integer
+        description: The type of raw data you want to act upon. Set to 1 for accelerometer, set to 2 for optical sensor.
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+        description: 'Used to pass your access token. Must take value: ```Bearer {your access_token}``` Replace {your access_token} with the access_token'
+      responses:
+        200:
+          description: ' (Click to unfold)'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    description: Response status. See <a href='#section/Response-status'>Status</a> section for details.
+                  body:
+                    type: object
+                    description: Response data.
+                    properties: []
+      x-codeSamples:
+      - lang: PHP
+        source: "<?php\n\n$ch = curl_init();\n\ncurl_setopt($ch, CURLOPT_URL, \"https://wbsapi.withings.net/v2/rawdata  \");\n\ncurl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);\n\ncurl_setopt($ch, CURLOPT_HTTPHEADER, [\n\t'Authorization: Bearer YOUR_ACCESS_TOKEN'\n]);\n\ncurl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query([ \n\t'action' => 'deactivate',\n\t'hash_deviceid' => 'string',\n\t'rawdata_type' => 'int'\n]));\n\n$rsp = curl_exec($ch);\ncurl_close($ch);\n\nvar_dump($rsp);\n\n?>"
+      - lang: CURL
+        source: 'curl --header "Authorization: Bearer YOUR_ACCESS_TOKEN" --data "action=deactivate&hash_deviceid=string&rawdata_type=int" ''https://wbsapi.withings.net/v2/rawdata  '''
+  https://wbsapi.withings.net/v2/rawdata:
+    post:
+      tags:
+      - rawdata
+      description: This service allows to fetch raw data of a specific type that were captured and synchronized by a Withings device. Detailled information about the data structure can be found in the [Raw Data structure section](/developer-guide/v3/integration-guide/public-health-data-api/data-api/raw-data).
+      summary: Rawdata v2  - Get
+      operationId: rawdatav2-get
+      parameters:
+      - name: action
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Service action name. Must take the string value ```get```.
+      - name: hash_deviceid
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Public device id. For any device installed on a user account, can be found by calling the User v2 - Get webservice.
+      - name: rawdata_type
+        in: query
+        required: true
+        schema:
+          type: integer
+        description: The type of raw data you want to act upon. Set to 1 for accelerometer, set to 2 for optical sensor.
+      - name: startdate
+        in: query
+        required: true
+        schema:
+          type: integer
+        description: Data start date as a unix timestamp.
+        format: timestamp
+      - name: enddate
+        in: query
+        required: true
+        schema:
+          type: integer
+        description: Data end date as a unix timestamp.
+        format: timestamp
+      - name: offset
+        in: query
+        required: false
+        schema:
+          type: integer
+        description: When a first call returns ```more:true``` and ```offset:XX```, set value ```XX``` in this parameter to retrieve next available rows.
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+        description: 'Used to pass your access token. Must take value: ```Bearer {your access_token}``` Replace {your access_token} with the access_token'
+      responses:
+        200:
+          description: ' (Click to unfold)'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    description: Response status. See <a href='#section/Response-status'>Status</a> section for details.
+                  body:
+                    type: object
+                    description: Response data.
+                    properties:
+                      rawdata:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/rawdata_get_rawdata_object'
+                      more:
+                        type: boolean
+                        description: To know if there is more data to fetch or not.
+                      offset:
+                        type: integer
+                        description: Offset to use to retrieve the next data.
+              examples:
+                OK:
+                  value:
+                    status: 0
+                    body:
+                      rawdata:
+                      - data: ''
+                        hash_deviceid: 00d27f2d3b8d778ac56a831663ebec528085faa0
+                        type: 2
+                        format_version: 1
+                        firmware_version: 2561
+                        sensor_name: MAX86142_RAW
+                        startdate: 1656518088
+                        enddate: 1656518088
+                      more: true
+                      offset: 1
+      x-codeSamples:
+      - lang: PHP
+        source: "<?php\n\n$ch = curl_init();\n\ncurl_setopt($ch, CURLOPT_URL, \"https://wbsapi.withings.net/v2/rawdata\");\n\ncurl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);\n\ncurl_setopt($ch, CURLOPT_HTTPHEADER, [\n\t'Authorization: Bearer YOUR_ACCESS_TOKEN'\n]);\n\ncurl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query([ \n\t'action' => 'get',\n\t'hash_deviceid' => 'string',\n\t'rawdata_type' => 'int',\n\t'startdate' => 'startdate',\n\t'enddate' => 'enddate',\n\t'offset' => 'offset'\n]));\n\n$rsp = curl_exec($ch);\ncurl_close($ch);\n\nvar_dump($rsp);\n\n?>"
+      - lang: CURL
+        source: 'curl --header "Authorization: Bearer YOUR_ACCESS_TOKEN" --data "action=get&hash_deviceid=string&rawdata_type=int&startdate=startdate&enddate=enddate&offset=offset" ''https://wbsapi.withings.net/v2/rawdata'''
+components:
+  schemas:
+    rawdata_get_rawdata_object:
+      type: object
+      properties:
+        data:
+          type: string
+          example: JSON of rawdata
+        hash_deviceid:
+          type: string
+          description: ID of the device. This ID is returned in other services to know which device tracked a data. Then device's model or type can be known using this information.
+          example: 892359876fd8805ac45bab078c4828692f0276b1
+        type:
+          type: integer
+          description: Type of the measure. See ```meastype``` input parameter.
+          example: 2
+        format_version:
+          type: integer
+          example: 1
+        firmware_version:
+          type: integer
+          example: 2561
+        sensor_name:
+          type: string
+          example: MAX86142_RAW
+        startdate:
+          type: integer
+          description: The starting datetime for the sleep state data.
+          format: timestamp
+        enddate:
+          type: integer
+          description: The end datetime for the sleep data. A single call can span up to 7 days maximum. To cover a wider time range, you will need to perform multiple calls.
+          format: timestamp
+x-tagGroups:
+- name: Api Reference Content
+  tags:
+  - oauth2
+  - dropshipment
+  - order
+  - user
+  - measure
+  - heart
+  - stetho
+  - sleep
+  - notify
+  - survey
+  - answers
+  - signature
+  - rawdata
+  - device
+  - models
+  - response_status
+  - Glossary
+  - nudge
+  - nudgecampaign

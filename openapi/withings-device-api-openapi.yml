@@ -1,0 +1,247 @@
+openapi: 3.0.3
+info:
+  version: '2.0'
+  title: Withings developer documentation answers device API
+  description: These webservices allows you to get user's answers from surveys
+servers:
+- url: https://wbsapi.withings.net/
+tags:
+- name: device
+  x-displayName: Device
+  description: ''
+paths:
+  'https://wbsapi.withings.net/v2/device  ':
+    post:
+      tags:
+      - device
+      description: ''
+      summary: Device v2  - Disablefeature
+      operationId: devicev2-disablefeature
+      parameters:
+      - name: action
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Service action name. Must take the string value ```disablefeature```.
+      - name: client_id
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Id of the client
+      - name: signature
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Hash of params (Cf. [Signature hash protocol](/developer-guide/v3/get-access/sign-your-requests)).
+      - name: nonce
+        in: query
+        required: true
+        schema:
+          type: string
+        description: A random token used to prevent replay attacks (Cf. [Signature v2 - Getnonce](#operation/signaturev2-getnonce))
+      - name: feature_name
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Name of the feature to enable / disable. Cf [Feature Name List](/developer-guide/v3/integration-guide/features-api/features-api-enable#available-features)
+      - name: userid
+        in: query
+        required: true
+        schema:
+          type: rawint32
+        description: User's identifier.
+      - name: model
+        in: query
+        required: true
+        schema:
+          type: integer
+        description: Model integer value of a device or a consumable
+      responses:
+        200:
+          description: ' (Click to unfold)'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    description: Response status. See <a href='#section/Response-status'>Status</a> section for details.
+                  body:
+                    type: object
+                    description: Response data.
+                    properties: []
+      x-codeSamples:
+      - lang: PHP
+        source: "<?php\n\n$ch = curl_init();\n\ncurl_setopt($ch, CURLOPT_URL, \"https://wbsapi.withings.net/v2/device  \");\n\ncurl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);\n\ncurl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query([ \n\t'action' => 'disablefeature',\n\t'client_id' => 'client_id',\n\t'signature' => 'signature',\n\t'nonce' => 'string',\n\t'feature_name' => 'string',\n\t'userid' => 'rawint32',\n\t'model' => 'int'\n]));\n\n$rsp = curl_exec($ch);\ncurl_close($ch);\n\nvar_dump($rsp);\n\n?>"
+      - lang: CURL
+        source: curl --data "action=disablefeature&client_id=client_id&signature=signature&nonce=string&feature_name=string&userid=rawint32&model=int" 'https://wbsapi.withings.net/v2/device  '
+  'https://wbsapi.withings.net/v2/device ':
+    post:
+      tags:
+      - device
+      description: ''
+      summary: Device v2  - Enablefeature
+      operationId: devicev2-enablefeature
+      parameters:
+      - name: action
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Service action name. Must take the string value ```enablefeature```.
+      - name: client_id
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Id of the client
+      - name: signature
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Hash of params (Cf. [Signature hash protocol](/developer-guide/v3/get-access/sign-your-requests)).
+      - name: nonce
+        in: query
+        required: true
+        schema:
+          type: string
+        description: A random token used to prevent replay attacks (Cf. [Signature v2 - Getnonce](#operation/signaturev2-getnonce))
+      - name: feature_name
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Name of the feature to enable / disable. Cf [Feature Name List](/developer-guide/v3/integration-guide/features-api/features-api-enable#available-features)
+      - name: userid
+        in: query
+        required: true
+        schema:
+          type: rawint32
+        description: User's identifier.
+      - name: model
+        in: query
+        required: true
+        schema:
+          type: integer
+        description: Model integer value of a device or a consumable
+      responses:
+        200:
+          description: ' (Click to unfold)'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    description: Response status. See <a href='#section/Response-status'>Status</a> section for details.
+                  body:
+                    type: object
+                    description: Response data.
+                    properties: []
+      x-codeSamples:
+      - lang: PHP
+        source: "<?php\n\n$ch = curl_init();\n\ncurl_setopt($ch, CURLOPT_URL, \"https://wbsapi.withings.net/v2/device \");\n\ncurl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);\n\ncurl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query([ \n\t'action' => 'enablefeature',\n\t'client_id' => 'client_id',\n\t'signature' => 'signature',\n\t'nonce' => 'string',\n\t'feature_name' => 'string',\n\t'userid' => 'rawint32',\n\t'model' => 'int'\n]));\n\n$rsp = curl_exec($ch);\ncurl_close($ch);\n\nvar_dump($rsp);\n\n?>"
+      - lang: CURL
+        source: curl --data "action=enablefeature&client_id=client_id&signature=signature&nonce=string&feature_name=string&userid=rawint32&model=int" 'https://wbsapi.withings.net/v2/device '
+  https://wbsapi.withings.net/v2/device:
+    post:
+      tags:
+      - device
+      description: '**Important:** Read the [Terminate Device](/developer-guide/v3/tutorials/device-cellular-connectivity/) Section before calling this webservice.'
+      summary: Device v2  - Endpartnerprogram
+      operationId: devicev2-endpartnerprogram
+      parameters:
+      - name: action
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Service action name. Must take the string value ```endpartnerprogram```.
+      - name: client_id
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Id of the client
+      - name: signature
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Hash of params (Cf. [Signature hash protocol](/developer-guide/v3/get-access/sign-your-requests)).
+      - name: nonce
+        in: query
+        required: true
+        schema:
+          type: string
+        description: A random token used to prevent replay attacks (Cf. [Signature v2 - Getnonce](#operation/signaturev2-getnonce))
+      - name: mac_address
+        in: query
+        required: true
+        schema:
+          type: macaddress
+        description: The mac address of the target device.
+      - name: status
+        in: query
+        required: true
+        schema:
+          type: string
+        description: The status
+      responses:
+        200:
+          description: ' (Click to unfold)'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    description: Response status. See <a href='#section/Response-status'>Status</a> section for details.
+                  body:
+                    type: object
+                    description: Response data.
+                    properties:
+                      new_sim_status:
+                        type: string
+                        description: New status of the SIM.
+                        example: STANDBY
+                      termination_date:
+                        type: integer
+                        description: Timestamp when the SIM will be terminated *(Only if required status was ```TERMINATED```)*
+                        format: timestamp
+                        example: 1656518088
+      x-codeSamples:
+      - lang: PHP
+        source: "<?php\n\n$ch = curl_init();\n\ncurl_setopt($ch, CURLOPT_URL, \"https://wbsapi.withings.net/v2/device\");\n\ncurl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);\n\ncurl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query([ \n\t'action' => 'endpartnerprogram',\n\t'client_id' => 'client_id',\n\t'signature' => 'signature',\n\t'nonce' => 'string',\n\t'mac_address' => 'macaddress',\n\t'status' => 'string'\n]));\n\n$rsp = curl_exec($ch);\ncurl_close($ch);\n\nvar_dump($rsp);\n\n?>"
+      - lang: CURL
+        source: curl --data "action=endpartnerprogram&client_id=client_id&signature=signature&nonce=string&mac_address=macaddress&status=string" 'https://wbsapi.withings.net/v2/device'
+x-tagGroups:
+- name: Api Reference Content
+  tags:
+  - oauth2
+  - dropshipment
+  - order
+  - user
+  - measure
+  - heart
+  - stetho
+  - sleep
+  - notify
+  - survey
+  - answers
+  - signature
+  - rawdata
+  - device
+  - models
+  - response_status
+  - Glossary
+  - nudge
+  - nudgecampaign

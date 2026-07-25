@@ -1,0 +1,566 @@
+openapi: 3.0.3
+info:
+  version: '2.0'
+  title: Withings developer documentation answers oauth2 API
+  description: These webservices allows you to get user's answers from surveys
+servers:
+- url: https://wbsapi.withings.net/
+tags:
+- name: oauth2
+  x-displayName: OAuth2
+  description: "<br>The Withings API uses OAuth 2.0, an industry-standard protocol for authorization.<br> OAuth 2.0 enables your application to access user-specific data with a secure and seamless way without requiring users to share their Withings credentials with your app.<br>\n                  <br>\n                  The Withings API supports the Authorization Code Flow, which is suitable for server-side applications. In this flow, your application will obtain an authorization code from the user, which can then be exchanged for an access token and refresh token.\n                  <br><br>\n                  There are two ways to obtain the authorization code:<br>\n                  <br>\n                  1. **Web Authorization Flow**: Redirect the user to the Withings authorization endpoint, where they can grant permission for your app to access their Withings data.<br>\n                  2. **Account Creation Flow (contract partners only)**: Obtain the authorization code after account creation (Cellular Devices/SDK only) .<br>\n                  <br>\n                  To use OAuth 2.0 with the Withings API, follow these general steps:<br>\n                  <br>\n                  1. **Request user authorization/Create an account**: Use one of the two methods mentioned above to obtain an authorization code from the user.<br>\n                  2. **Obtain an access token**: Exchange the authorization code for an access token and refresh token.<br>\n                  3. **Access the API**: Include the access token in your API requests to access user-specific data from the Withings API.<br>\n                  4. **Refresh tokens**: Use the refresh token to obtain new access tokens when the current ones expire.<br>\n                  <br>\n                  Please refer to the appropriate [Integration Guide](https://developer.withings.com/developer-guide/v3/withings-solutions/integration-guides) to know which method you should use."
+paths:
+  https://account.withings.com/oauth2_user/authorize2:
+    get:
+      tags:
+      - oauth2
+      description: 'To use the Web Authorization Flow, you''ll need to construct an authorization URL with the appropriate query parameters. Here''s an example of an authorization URL:<br><br>
+
+        ```
+
+        https://account.withings.com/oauth2_user/authorize2?response_type=code&client_id=YOUR_CLIENT_ID&scope=user.info,user.metrics,user.activity&redirect_uri=YOUR_REDIRECT_URI&state=YOUR_STATE
+
+        ```
+
+        Replace ```YOUR_CLIENT_ID```, ```YOUR_REDIRECT_URI```, and ```YOUR_STATE``` with your actual values.<br><br>
+
+        When someone navigates to this URL, they will be asked to authorize your application for the requested scopes. Upon granting permissions, the user will be redirected to your specified redirect_uri, which will include an additional query string parameter called code. The state parameter will also be returned and should be validated at this point.
+
+        <br><br>
+
+        Please note that the authorization code is only valid for 30 seconds.'
+      summary: Authorization URL
+      operationId: oauth2-authorize
+      parameters:
+      - name: response_type
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Must take the constant string value ```code```.
+      - name: client_id
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Your ```Client ID```.
+      - name: state
+        in: query
+        required: true
+        schema:
+          type: string
+        description: A value you define. This can be used to make sure that the redirect back to your site or app wasn’t spoofed.
+      - name: scope
+        in: query
+        required: true
+        schema:
+          type: string
+        description: A comma-separated list of permission scopes to request from the user. See the [available scopes](/developer-guide/v3/integration-guide/public-health-data-api/get-access/oauth-authorization-url/#scopes) for the full list and the actions they allow.
+      - name: redirect_uri
+        in: query
+        required: true
+        schema:
+          type: string
+        description: "The URI we should redirect the user to after choosing to authorize or not your app. This URI must be set as ```Callback Url``` in your partner application. It is possible to use multiple URLs by separating them with a comma.<br />Examples:<br />\n\t\t\t\t\t\t\t\t\t<ul>\n\t\t\t\t\t\t\t\t\t\t<li>Callbacks: https://mydomain.com/</li>\n\t\t\t\t\t\t\t\t\t\t<li>Callback: https://mydomain.com/,https://mydomain2.com/</li>\n\t\t\t\t\t\t\t\t\t\t<li>Valid URL: https://mydomain.com/relative_path?args=value</li>\n\t\t\t\t\t\t\t\t\t</ul>"
+      - name: mode
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Only set to use the demo user. For demo user must take the constant string value ```demo```.
+      responses:
+        200:
+          description: ' (Click to unfold)'
+      x-codeSamples: []
+  https://wbsapi.withings.net/v2/oauth2:
+    post:
+      tags:
+      - oauth2
+      description: Use this endpoint to request an ```access token``` and ```refresh token``` from an ```authorization code``` or refresh an existing ```access token```.<br><br> <span class='oauth2-request-token-notes'> **Important:** Don't forget to save the userid included in the response in your database.<br><br> **Note:** You can use this webservice either by signing the call or using the secret. Toggle the request body schema to see the parameters for the 2 options.<br><br> **Note:** Toggle the ```grant_type``` to see the different parameters that must be used depending if you're refreshing a token or using an authorization code. </span>
+      summary: OAuth 2.0 - Request Access and Refresh Tokens
+      operationId: oauth2-getaccesstoken
+      requestBody:
+        required: true
+        content:
+          Using client secret:
+            schema:
+              type: object
+              discriminator:
+                propertyName: grant_type
+                required:
+                - grant_type
+                - action
+                mapping:
+                  authorization_code: '#/components/schemas/TokenRequestWithClientSecret'
+                  refresh_token: '#/components/schemas/TokenRequestRefreshWithClientSecret'
+              properties:
+                action:
+                  type: string
+                  description: Must take the value ```requesttoken```.
+          Using signature:
+            schema:
+              type: object
+              discriminator:
+                propertyName: grant_type
+                required:
+                - grant_type
+                - action
+                mapping:
+                  authorization_code: '#/components/schemas/TokenRequestWithSignature'
+                  refresh_token: '#/components/schemas/TokenRequestRefreshWithSignature'
+              properties:
+                action:
+                  type: string
+                  description: Must take the value ```requesttoken```.
+      responses:
+        200:
+          description: ' (Click to unfold)'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    description: Response status. See <a href='#section/Response-status'>Status</a> section for details.
+                  body:
+                    type: object
+                    description: Response data.
+                    properties:
+                      userid:
+                        type: integer
+                        description: The id of the user.
+                        example: 363
+                      access_token:
+                        type: string
+                        description: Your new Access Token.
+                        example: a075f8c14fb8df40b08ebc8508533dc332a6910a
+                      refresh_token:
+                        type: string
+                        description: Your Refresh Token.
+                        example: f631236f02b991810feb774765b6ae8e6c6839ca
+                      expires_in:
+                        type: integer
+                        description: Access token expiry delay in seconds.
+                        example: 10800
+                      scope:
+                        type: string
+                        description: You can get only the scope that the user accepted with the Token you have. Scopes can be 'user.info' 'user.metrics' 'user.activity' 'user.sleepevents'  and must be separated by a coma.
+                        example: user.info,user.metrics
+                      csrf_token:
+                        type: string
+                        example: PACnnxwHTaBQOzF7bQqwFUUotIuvtzSM
+                      token_type:
+                        type: string
+                        description: 'HTTP Authorization Header format: Bearer'
+                        example: Bearer
+      x-codeSamples:
+      - lang: PHP
+        source: "<?php\n\n$ch = curl_init();\n\ncurl_setopt($ch, CURLOPT_URL, \"https://wbsapi.withings.net/v2/oauth2\");\n\ncurl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);\n\ncurl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query([ \n\t'action' => 'requesttoken',\n\t'grant_type' => 'authorization_code',\n\t'client_id' => '7573fd4a4c421ddd102dac406dc6e0e0e22f683c4a5e81ff0a5caf8b65abed67',\n\t'client_secret' => 'd9286311451fc6ed71b372a075c58c5058be158f56a77865e43ab3783255424f',\n\t'code' => 'mtwsikawoqleuroqcluggflrqilrnqbgqvqeuhhh',\n\t'redirect_uri' => 'https://www.withings.com'\n]));\n\n$rsp = curl_exec($ch);\ncurl_close($ch);\n\nvar_dump($rsp);\n\n?>"
+      - lang: CURL
+        source: curl --data "action=requesttoken&grant_type=authorization_code&client_id=7573fd4a4c421ddd102dac406dc6e0e0e22f683c4a5e81ff0a5caf8b65abed67&client_secret=d9286311451fc6ed71b372a075c58c5058be158f56a77865e43ab3783255424f&code=mtwsikawoqleuroqcluggflrqilrnqbgqvqeuhhh&redirect_uri=https://www.withings.com" 'https://wbsapi.withings.net/v2/oauth2'
+  '  https://wbsapi.withings.net/v2/oauth2':
+    post:
+      tags:
+      - oauth2
+      description: '**This service will only work for partners having signed a contract with Withings (Withings Mobile SDK or Withings Cellular).** To generate a new authorization code for standard end-user accounts, your user will have to authorize your application to the Web Authorization Flow again.<br/><br/>This service allows you to retrieve a new authorization code in the event that the refresh token is invalid for a user belonging to your namespace.
+
+        '
+      summary: OAuth 2.0 - Retrieve a new authorization code
+      operationId: oauth2-recoverauthorizationcode
+      parameters:
+      - name: action
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Must take the string value ```recoverauthorizationcode```.
+      - name: client_id
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Your ```Client ID```.
+      - name: nonce
+        in: query
+        required: true
+        schema:
+          type: string
+        description: A random token used to prevent replay attacks (Cf. [Signature v2 - Getnonce](#operation/signaturev2-getnonce)).
+      - name: signature
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Hash of params (Cf. [Signature hash protocol](/developer-guide/v3/get-access/sign-your-requests)).
+      - name: userid
+        in: query
+        required: true
+        schema:
+          type: integer
+        description: User's identifier
+      responses:
+        200:
+          description: ' (Click to unfold)'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    description: Response status. See <a href='#section/Response-status'>Status</a> section for details.
+                  body:
+                    type: object
+                    description: Response data.
+                    properties:
+                      user:
+                        type: object
+                        properties:
+                          code:
+                            type: string
+                            description: Authorization Code that must be used to retrieve access_token and refresh_token. (Read the "Get access to your user's data" section of your [integration guide](/developer-guide/v3/withings-solutions/integration-guides) to learn more about how to get this parameter.)
+                            example: 490ed603fe9bd2ce10027bdba0c932069cd27085
+      x-codeSamples:
+      - lang: PHP
+        source: "<?php\n\n$ch = curl_init();\n\ncurl_setopt($ch, CURLOPT_URL, \"https://wbsapi.withings.net/v2/oauth2\");\n\ncurl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);\n\ncurl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query([ \n\t'action' => 'recoverauthorizationcode',\n\t'client_id' => '7573fd4a4c421ddd102dac406dc6e0e0e22f683c4a5e81ff0a5caf8b65abed67',\n\t'signature' => '58c0c4ad271fb20df9b96c63dc68d6c550c0b7896f743262fc4c5b9261f32ab2',\n\t'nonce' => 'c455541b8f9111689adb647d32fac07a6ffe462d',\n\t'userid' => 489418\n]));\n\n$rsp = curl_exec($ch);\ncurl_close($ch);\n\nvar_dump($rsp);\n\n?>"
+      - lang: CURL
+        source: curl --data "action=recoverauthorizationcode&client_id=7573fd4a4c421ddd102dac406dc6e0e0e22f683c4a5e81ff0a5caf8b65abed67&signature=58c0c4ad271fb20df9b96c63dc68d6c550c0b7896f743262fc4c5b9261f32ab2&nonce=c455541b8f9111689adb647d32fac07a6ffe462d&userid=489418" 'https://wbsapi.withings.net/v2/oauth2'
+  '   https://wbsapi.withings.net/v2/oauth2':
+    post:
+      tags:
+      - oauth2
+      description: 'This service allows you to get a list of all users that have authorized your application to fetch their data.
+
+
+        **This service is limited to partners who are integrating with Withings Pro solutions. This service will only work for partners having signed a contract with Withings.**'
+      summary: OAuth 2.0 - Get user list
+      operationId: oauth2-listusers
+      parameters:
+      - name: action
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Must take the string value ```listusers```.
+      - name: client_id
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Your ```Client ID```.
+      - name: nonce
+        in: query
+        required: true
+        schema:
+          type: string
+        description: A random token used to prevent replay attacks (Cf. [Signature v2 - Getnonce](#operation/signaturev2-getnonce)).
+      - name: signature
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Hash of params (Cf. [Signature hash protocol](/developer-guide/v3/get-access/sign-your-requests)).
+      - name: offset
+        in: query
+        required: false
+        schema:
+          type: integer
+        description: When a first call returns ```more:true``` and ```offset:XX```, set value ```XX``` in this parameter to retrieve next available rows.
+      responses:
+        200:
+          description: ' (Click to unfold)'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    description: Response status. See <a href='#section/Response-status'>Status</a> section for details.
+                  body:
+                    type: object
+                    description: Response data.
+                    properties:
+                      hash_userid:
+                        type: string
+                        example: b1e4ea9c8bf584c8210ff308b19d656e15e9a074cd69178f833f687b95d8a2b5
+                      userid:
+                        type: integer
+                        description: The id of the user.
+                        example: 2685485
+                      email:
+                        type: string
+                        description: User's email address
+                        example: example@mailprovider.com
+                      fully_owned:
+                        type: boolean
+                        description: Whether or not this user has been created by your oauth2 application. Having created the account gives your application additional rights on this account, such as automatically granted authorizations and access to the retrieve tokens webservice.
+                      more:
+                        type: boolean
+                        description: To know if there is more data to fetch or not.
+                      offset:
+                        type: integer
+                        description: Offset to use to retrieve the next data.
+      x-codeSamples:
+      - lang: PHP
+        source: "<?php\n\n$ch = curl_init();\n\ncurl_setopt($ch, CURLOPT_URL, \"https://wbsapi.withings.net/v2/oauth2\");\n\ncurl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);\n\ncurl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query([ \n\t'action' => 'listusers',\n\t'client_id' => '7573fd4a4c421ddd102dac406dc6e0e0e22f683c4a5e81ff0a5caf8b65abed67',\n\t'signature' => '58c0c4ad271fb20df9b96c63dc68d6c550c0b7896f743262fc4c5b9261f32ab2',\n\t'nonce' => 'c455541b8f9111689adb647d32fac07a6ffe462d',\n\t'offset' => 0\n]));\n\n$rsp = curl_exec($ch);\ncurl_close($ch);\n\nvar_dump($rsp);\n\n?>"
+      - lang: CURL
+        source: curl --data "action=listusers&client_id=7573fd4a4c421ddd102dac406dc6e0e0e22f683c4a5e81ff0a5caf8b65abed67&signature=58c0c4ad271fb20df9b96c63dc68d6c550c0b7896f743262fc4c5b9261f32ab2&nonce=c455541b8f9111689adb647d32fac07a6ffe462d&offset=0" 'https://wbsapi.withings.net/v2/oauth2'
+  '    https://wbsapi.withings.net/v2/oauth2':
+    post:
+      tags:
+      - oauth2
+      description: This service allows to revoke the access your application have been granted to a user's data. After calling this webservice, your access and refresh tokens for this user will become invalid, and the data update notifications for this user will be automatically unsubscribed.
+      summary: OAuth 2.0 - Revoke user access
+      operationId: oauth2-revoke
+      parameters:
+      - name: action
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Must take the string value ```revoke```.
+      - name: client_id
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Your ```Client ID```.
+      - name: nonce
+        in: query
+        required: true
+        schema:
+          type: string
+        description: A random token used to prevent replay attacks (Cf. [Signature v2 - Getnonce](#operation/signaturev2-getnonce)).
+      - name: signature
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Hash of params (Cf. [Signature hash protocol](/developer-guide/v3/get-access/sign-your-requests)).
+      - name: userid
+        in: query
+        required: true
+        schema:
+          type: integer
+        description: User's identifier.
+      responses:
+        200:
+          description: ' (Click to unfold)'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    description: Response status. See <a href='#section/Response-status'>Status</a> section for details.
+                  body:
+                    type: object
+                    description: Response data.
+                    properties: []
+      x-codeSamples:
+      - lang: PHP
+        source: "<?php\n\n$ch = curl_init();\n\ncurl_setopt($ch, CURLOPT_URL, \"https://wbsapi.withings.net/v2/oauth2\");\n\ncurl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);\n\ncurl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query([ \n\t'action' => 'revoke',\n\t'client_id' => '7573fd4a4c421ddd102dac406dc6e0e0e22f683c4a5e81ff0a5caf8b65abed67',\n\t'signature' => '58c0c4ad271fb20df9b96c63dc68d6c550c0b7896f743262fc4c5b9261f32ab2',\n\t'nonce' => 'c455541b8f9111689adb647d32fac07a6ffe462d',\n\t'userid' => 489418\n]));\n\n$rsp = curl_exec($ch);\ncurl_close($ch);\n\nvar_dump($rsp);\n\n?>"
+      - lang: CURL
+        source: curl --data "action=revoke&client_id=7573fd4a4c421ddd102dac406dc6e0e0e22f683c4a5e81ff0a5caf8b65abed67&signature=58c0c4ad271fb20df9b96c63dc68d6c550c0b7896f743262fc4c5b9261f32ab2&nonce=c455541b8f9111689adb647d32fac07a6ffe462d&userid=489418" 'https://wbsapi.withings.net/v2/oauth2'
+  '     https://wbsapi.withings.net/v2/oauth2':
+    post:
+      tags:
+      - oauth2
+      description: This webservice gives your clientID access to a demo account containing dummy data
+      summary: OAuth 2.0 - Get access to demo account
+      operationId: oauth2-getdemoaccess
+      parameters:
+      - name: action
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Must take the string value ```getdemoaccess```.
+      - name: client_id
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Your ```Client ID```.
+      - name: nonce
+        in: query
+        required: true
+        schema:
+          type: string
+        description: A random token used to prevent replay attacks (Cf. [Signature v2 - Getnonce](#operation/signaturev2-getnonce)).
+      - name: signature
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Hash of params (Cf. [Signature hash protocol](/developer-guide/v3/get-access/sign-your-requests)).
+      - name: scope_oauth2
+        in: query
+        required: true
+        schema:
+          type: string
+        description: A comma-separated list of permission scopes to request from the user. See the [available scopes](/developer-guide/v3/integration-guide/public-health-data-api/get-access/oauth-authorization-url/#scopes) for the full list and the actions they allow.
+      responses:
+        200:
+          description: ' (Click to unfold)'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    description: Response status. See <a href='#section/Response-status'>Status</a> section for details.
+                  body:
+                    type: object
+                    description: Response data.
+                    properties:
+                      access_token:
+                        type: string
+                        description: Your new Access Token.
+                        example: a075f8c14fb8df40b08ebc8508533dc332a6910a
+                      refresh_token:
+                        type: string
+                        description: Your Refresh Token.
+                        example: f631236f02b991810feb774765b6ae8e6c6839ca
+                      expires_in:
+                        type: integer
+                        description: Access token expiry delay in seconds.
+                        example: 10800
+      x-codeSamples:
+      - lang: PHP
+        source: "<?php\n\n$ch = curl_init();\n\ncurl_setopt($ch, CURLOPT_URL, \"https://wbsapi.withings.net/v2/oauth2\");\n\ncurl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);\n\ncurl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query([ \n\t'action' => 'getdemoaccess',\n\t'client_id' => '7573fd4a4c421ddd102dac406dc6e0e0e22f683c4a5e81ff0a5caf8b65abed67',\n\t'signature' => '58c0c4ad271fb20df9b96c63dc68d6c550c0b7896f743262fc4c5b9261f32ab2',\n\t'nonce' => 'c455541b8f9111689adb647d32fac07a6ffe462d',\n\t'scope_oauth2' => 'user.activity,user.metrics'\n]));\n\n$rsp = curl_exec($ch);\ncurl_close($ch);\n\nvar_dump($rsp);\n\n?>"
+      - lang: CURL
+        source: curl --data "action=getdemoaccess&client_id=7573fd4a4c421ddd102dac406dc6e0e0e22f683c4a5e81ff0a5caf8b65abed67&signature=58c0c4ad271fb20df9b96c63dc68d6c550c0b7896f743262fc4c5b9261f32ab2&nonce=c455541b8f9111689adb647d32fac07a6ffe462d&scope_oauth2=user.activity,user.metrics" 'https://wbsapi.withings.net/v2/oauth2'
+  '      https://wbsapi.withings.net/v2/oauth2':
+    post:
+      tags:
+      - oauth2
+      description: 'This service allows creation of a new OAuth 2.0 application.
+
+
+        **This service is part of Withings Pro Solutions. You won''t be able to use it if you did not sign a contract with Withings.
+
+        Uncontracted partners should use the developer dashboard to create their applications.**'
+      summary: OAuth 2.0 - Create OAuth2.0 application
+      operationId: oauth2-createclient
+      parameters:
+      - name: action
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Must take the string value ```createclient```.
+      - name: client_id
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Your ```Client ID```.
+      - name: nonce
+        in: query
+        required: true
+        schema:
+          type: string
+        description: A random token used to prevent replay attacks (Cf. [Signature v2 - Getnonce](#operation/signaturev2-getnonce)).
+      - name: signature
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Hash of params (Cf. [Signature hash protocol](/developer-guide/v3/get-access/sign-your-requests)).
+      - name: name
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Specifies the OAuth2.0 application's name
+      - name: description
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Brief summary of the application
+      - name: intended_environment
+        in: query
+        required: true
+        schema:
+          type: string
+        description: 'Indicates intended operation environment. Allowed values are: ```dev```, ```stage``` and ```prod```'
+      - name: intended_integrations
+        in: query
+        required: true
+        schema:
+          type: array of strings
+        description: 'Specifies Withings Solutions to be used. Allowed values are: ```app_to_app```, ```sdk```, ```cellular``` and ```logistics```'
+      - name: redirect_uris
+        in: query
+        required: true
+        schema:
+          type: array of strings
+        description: List of redirect uris
+      responses:
+        200:
+          description: ' (Click to unfold)'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    description: Response status. See <a href='#section/Response-status'>Status</a> section for details.
+                  body:
+                    type: object
+                    description: Response data.
+                    properties:
+                      client_id:
+                        type: string
+                        example: 1130b57432f560c3a686803901e56954f46082c9825a0a598a1a827c56177ca5
+                      client_secret:
+                        type: string
+                        example: 40eac75e29c642223793bbdd1faa85e9772638b542c016738b8106d64cc6c1ea
+                      name:
+                        type: string
+                        example: App Name
+                      desc:
+                        type: string
+                        example: App Description
+                      img:
+                        type: string
+                        example: \/uploads\/image.png
+                      is_restricted:
+                        type: boolean
+                      organization_id:
+                        type: integer
+                        example: 12345
+      x-codeSamples:
+      - lang: PHP
+        source: "<?php\n\n$ch = curl_init();\n\ncurl_setopt($ch, CURLOPT_URL, \"https://wbsapi.withings.net/v2/oauth2\");\n\ncurl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);\n\ncurl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query([ \n\t'action' => 'createclient',\n\t'organization_id' => 12345,\n\t'name' => 'My OAuth2.0 Application',\n\t'description' => 'An OAuth2.0 Application',\n\t'redirect_uris' => '[\"https:\\\\/\\\\/www.withings.com\",\"https:\\\\/\\\\/www.test.com\"]',\n\t'intended_integrations' => '[\"app_to_app\"]',\n\t'intended_environment' => 'dev'\n]));\n\n$rsp = curl_exec($ch);\ncurl_close($ch);\n\nvar_dump($rsp);\n\n?>"
+      - lang: CURL
+        source: curl --data "action=createclient&organization_id=12345&name=My OAuth2.0 Application&description=An OAuth2.0 Application&redirect_uris=["https:\\/\\/www.withings.com","https:\\/\\/www.test.com"]&intended_integrations=["app_to_app"]&intended_environment=dev" 'https://wbsapi.withings.net/v2/oauth2'
+x-tagGroups:
+- name: Api Reference Content
+  tags:
+  - oauth2
+  - dropshipment
+  - order
+  - user
+  - measure
+  - heart
+  - stetho
+  - sleep
+  - notify
+  - survey
+  - answers
+  - signature
+  - rawdata
+  - device
+  - models
+  - response_status
+  - Glossary
+  - nudge
+  - nudgecampaign

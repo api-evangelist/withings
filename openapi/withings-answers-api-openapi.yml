@@ -1,0 +1,135 @@
+openapi: 3.0.3
+info:
+  version: '2.0'
+  title: Withings developer documentation answers API
+  description: These webservices allows you to get user's answers from surveys
+servers:
+- url: https://wbsapi.withings.net/
+tags:
+- name: answers
+  x-displayName: Answers
+  description: These webservices allows you to get user's answers from surveys
+paths:
+  https://wbsapi.withings.net/v2/answers:
+    post:
+      tags:
+      - answers
+      description: ''
+      summary: Answers v2  - Get
+      operationId: answersv2-get
+      parameters:
+      - name: action
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Service action name. Must take the string value ```get```.
+      - name: signature
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Hash of params (Cf. [Signature hash protocol](/developer-guide/v3/get-access/sign-your-requests)).
+      - name: client_id
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Id of the client
+      - name: nonce
+        in: query
+        required: true
+        schema:
+          type: string
+        description: A random token used to prevent replay attacks (Cf. [Signature v2 - Getnonce](#operation/signaturev2-getnonce))
+      - name: userid
+        in: query
+        required: true
+        schema:
+          type: rawint32
+        description: User's identifier.
+      - name: startdate
+        in: query
+        required: true
+        schema:
+          type: integer
+        description: Data start date as a unix timestamp.
+        format: timestamp
+      - name: enddate
+        in: query
+        required: false
+        schema:
+          type: integer
+        description: Data end date as a unix timestamp.
+        format: timestamp
+      - name: surveyid
+        in: query
+        required: false
+        schema:
+          type: string
+        description: ID of a survey
+      responses:
+        200:
+          description: ' (Click to unfold)'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    description: Response status. See <a href='#section/Response-status'>Status</a> section for details.
+                  body:
+                    type: object
+                    description: Response data.
+                    properties:
+                      answers:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/answers_list'
+      x-codeSamples:
+      - lang: PHP
+        source: "<?php\n\n$ch = curl_init();\n\ncurl_setopt($ch, CURLOPT_URL, \"https://wbsapi.withings.net/v2/answers\");\n\ncurl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);\n\ncurl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query([ \n\t'action' => 'get',\n\t'signature' => 'signature',\n\t'client_id' => 'client_id',\n\t'nonce' => 'string',\n\t'userid' => 'rawint32',\n\t'startdate' => 'startdate',\n\t'enddate' => 'enddate',\n\t'surveyid' => 'string'\n]));\n\n$rsp = curl_exec($ch);\ncurl_close($ch);\n\nvar_dump($rsp);\n\n?>"
+      - lang: CURL
+        source: curl --data "action=get&signature=signature&client_id=client_id&nonce=string&userid=rawint32&startdate=startdate&enddate=enddate&surveyid=string" 'https://wbsapi.withings.net/v2/answers'
+components:
+  schemas:
+    answers_list:
+      type: object
+      properties:
+        surveyid:
+          type: integer
+          example: 102
+        grpid:
+          type: integer
+          description: Unique identifier of the measure group.
+          example: 42
+        answers:
+          type: array
+        timestamp:
+          type: integer
+          description: Timestamp of the recording.
+          format: timestamp
+          example: 1712008389
+x-tagGroups:
+- name: Api Reference Content
+  tags:
+  - oauth2
+  - dropshipment
+  - order
+  - user
+  - measure
+  - heart
+  - stetho
+  - sleep
+  - notify
+  - survey
+  - answers
+  - signature
+  - rawdata
+  - device
+  - models
+  - response_status
+  - Glossary
+  - nudge
+  - nudgecampaign

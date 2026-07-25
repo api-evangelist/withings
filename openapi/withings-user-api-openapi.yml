@@ -1,0 +1,1394 @@
+openapi: 3.0.3
+info:
+  version: '2.0'
+  title: Withings developer documentation answers user API
+  description: These webservices allows you to get user's answers from surveys
+servers:
+- url: https://wbsapi.withings.net/
+tags:
+- name: user
+  x-displayName: User
+  description: ''
+paths:
+  'https://wbsapi.withings.net/v2/user ':
+    post:
+      tags:
+      - user
+      description: 'Creates a Withings user, links the devices related to the provided ```mac_addresses``` and activates the cellular devices service and invoicing.
+
+
+        Please refer to the [Access and refresh tokens section](/developer-guide/v3/integration-guide/bulkship-cellular/get-access/access-and-refresh-tokens) to learn how to use the authorization code you''ll get in return of this service in order to fetch user data. The authorization code is only valid for *10 minutes*.
+
+
+        **Important**:
+
+
+        - Please note that to activate the Withings HUB cellular service, the ```mac_address``` of the Withings HUB needs to be passed included in the input mac_addresses along with the other Withings devices.
+
+        - Please note that the devices need to be authorized to be linked by API by the Partner. Please [contact Withings](mailto:partner-api@withings.com) for more information on device authorization.
+
+
+        *This service is part of Withings Pro Solutions. You won''t be able to use it if you did not sign a contract with Withings.*
+
+        *Use this service only if you''re integrating Withings Cellular Solutions with bulkshipment.*'
+      summary: User v2  - Activate
+      operationId: userv2-activate
+      parameters:
+      - name: action
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Service action name. Must take the string value ```activate```.
+      - name: client_id
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Id of the client
+      - name: nonce
+        in: query
+        required: true
+        schema:
+          type: string
+        description: A random token used to prevent replay attacks (Cf. [Signature v2 - Getnonce](#operation/signaturev2-getnonce))
+      - name: signature
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Hash of params (Cf. [Signature hash protocol](/developer-guide/v3/get-access/sign-your-requests)).
+      - name: mailingpref
+        in: query
+        required: true
+        schema:
+          type: boolean
+        description: Specifies if customer accepted Withings commercial contacts.
+      - name: birthdate
+        in: query
+        required: true
+        schema:
+          type: integer
+        description: Unix timestamp of user's birthdate
+      - name: measures
+        in: query
+        required: true
+        schema:
+          type: json_string
+        description: User measures (Cf. [Measures](#tag/models/Measures) model).
+      - name: gender
+        in: query
+        required: true
+        schema:
+          type: integer
+        description: '0: man, 1: woman'
+      - name: preflang
+        in: query
+        required: true
+        schema:
+          type: string
+        description: 'User language preference. Examples: en_EN / en_US / de_DE / es_ES / fr_FR / it_IT / ja_JA / ko_KR / nl_NL / pt_PT / ru_RU / zh_CN'
+      - name: unit_pref
+        in: query
+        required: true
+        schema:
+          type: json
+        description: Unit pref (cf. [Unit preferences](#tag/models/Unit-preferences) model).
+      - name: email
+        in: query
+        required: true
+        schema:
+          type: email
+        description: User's email address
+      - name: timezone
+        in: query
+        required: true
+        schema:
+          type: timezone
+        description: 'User''s timezone. Examples: "Europe/Paris" / "America/New_York". A complete list of all possible timezones can be found on the "TZ database name" column of this page : https://en.wikipedia.org/wiki/List_of_tz_database_time_zones'
+      - name: shortname
+        in: query
+        required: true
+        schema:
+          type: string
+        description: '3 characters representing the end user (ex: for a user named Robert, you could set the shortname param to ROB). These characters will be displayed on device screens when used.<br>Shortname must respect the following regex: /^[a-zA-Z0-9]{3}$/ (either letters or numbers, special characters and spaces are not allowed).'
+      - name: external_id
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Unique identifier used by the partner to identify the end-user.
+      - name: mac_addresses
+        in: query
+        required: true
+        schema:
+          type: macaddress
+        description: 'List of Withings device MAC addresses that will be linked to the created user. Example: ["00:24:e4:xx:xx:xx","00:24:e4:xx:xx:xx"]'
+      - name: firstname
+        in: query
+        required: false
+        schema:
+          type: string
+        description: User's firstname (if not set, will take the same value as shortname)
+      - name: lastname
+        in: query
+        required: false
+        schema:
+          type: string
+        description: User's lastname (if not set, will take the same value as shortname)
+      - name: phonenumber
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Phone number in E.164 format. End user will receive a verification code on this phone number for 2 factor authentication if they wish to securely access the data of their program in the withings app in the future (recommended)
+      - name: recovery_code
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Recovery code can be used by end user as a 2nd authentication factor in the withings app if they wish to securely access the data of their program in the future.  You will be responsible of securely providing this recovery code to your user if he asks for it.
+      - name: goals
+        in: query
+        required: false
+        schema:
+          type: json
+        description: Goals (cf. [Goals](#tag/models/Goals) model).
+      - name: redirect_uri
+        in: query
+        required: false
+        schema:
+          type: partner_redirect_uri
+        description: '
+
+          The URI we should redirect the user to after choosing to authorize or not your app. This URI must be set as ```Callback Url``` in your partner application. It is possible to use multiple URLs by separating them with a comma.
+
+
+          Examples:
+
+
+          - Callbacks: https://mydomain.com/
+
+          - Callback: https://mydomain.com/,https://mydomain2.com/
+
+          - Valid URL: https://mydomain.com/relative_path?args=value'
+      responses:
+        200:
+          description: ' (Click to unfold)'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    description: Response status. See <a href='#section/Response-status'>Status</a> section for details.
+                  body:
+                    type: object
+                    description: Response data.
+                    properties:
+                      user:
+                        type: object
+                        properties:
+                          code:
+                            type: string
+                            description: Authorization Code that must be used to retrieve access_token and refresh_token. (Read the "Get access to your user's data" section of your [integration guide](/developer-guide/v3/withings-solutions/integration-guides) to learn more about how to get this parameter.)
+                            example: 490ed603fe9bd2ce10027bdba0c932069cd27085
+                          external_id:
+                            type: string
+                            description: Unique identifier used by partner to identify the end-user.
+                            example: 3b7a6db0-ec7e-479b-9675-2a3d8d6a7e51
+                      devices:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/user_device_mac_object'
+      x-codeSamples:
+      - lang: PHP
+        source: "<?php\n\n$ch = curl_init();\n\ncurl_setopt($ch, CURLOPT_URL, \"https://wbsapi.withings.net/v2/user \");\n\ncurl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);\n\ncurl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query([ \n\t'action' => 'activate',\n\t'client_id' => 'client_id',\n\t'nonce' => 'string',\n\t'signature' => 'signature',\n\t'mailingpref' => 'mailingpref',\n\t'birthdate' => 1563746400,\n\t'measures' => 'measures',\n\t'gender' => 'int',\n\t'preflang' => 'en_EN',\n\t'unit_pref' => 'unit_pref',\n\t'email' => 'email',\n\t'timezone' => 'Europe/Paris',\n\t'shortname' => 'shortname',\n\t'external_id' => 'external_id',\n\t'mac_addresses' => '[\"00:24:e4:xx:xx:xx\",\"00:24:e4:xx:xx:xx\"]',\n\t'firstname' => 'firstname',\n\t'lastname' => 'lastname',\n\t'phonenumber' => 'string',\n\t'recovery_code' => 'string',\n\t'goals' => 'json',\n\t'redirect_uri' => 'redirect_uri'\n]));\n\n$rsp = curl_exec($ch);\ncurl_close($ch);\n\nvar_dump($rsp);\n\n?>"
+      - lang: CURL
+        source: curl --data "action=activate&client_id=client_id&nonce=string&signature=signature&mailingpref=mailingpref&birthdate=1563746400&measures=measures&gender=int&preflang=en_EN&unit_pref=unit_pref&email=email&timezone=Europe/Paris&shortname=shortname&external_id=external_id&mac_addresses=["00:24:e4:xx:xx:xx","00:24:e4:xx:xx:xx"]&firstname=firstname&lastname=lastname&phonenumber=string&recovery_code=string&goals=json&redirect_uri=redirect_uri" 'https://wbsapi.withings.net/v2/user '
+  'https://wbsapi.withings.net/v2/user      ':
+    post:
+      tags:
+      - user
+      description: 'This API allows you to add an existing user to the Withings Remote Patient Monitoring platform as a patient. Note: A Withings Remote Patient Monitoring contract is required to use this API.'
+      summary: User v2  - Addtorpm
+      operationId: userv2-addtorpm
+      parameters:
+      - name: action
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Service action name. Must take the string value ```addtorpm```.
+      - name: signature
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Hash of params (Cf. [Signature hash protocol](/developer-guide/v3/get-access/sign-your-requests)).
+      - name: client_id
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Id of the client
+      - name: nonce
+        in: query
+        required: true
+        schema:
+          type: string
+        description: A random token used to prevent replay attacks (Cf. [Signature v2 - Getnonce](#operation/signaturev2-getnonce))
+      - name: userid
+        in: query
+        required: true
+        schema:
+          type: rawint32
+        description: User's identifier.
+      - name: programid
+        in: query
+        required: true
+        schema:
+          type: integer
+        description: The Care team you would like your patient to be created in. You can find the programid in the URL of your withings dashboard when connected to a specific care team /team/{programid}
+      - name: sms_onboarding
+        in: query
+        required: false
+        schema:
+          type: boolean
+        description: A sequence of SMS text message will be sent to the patient to help them follow shipment and give instructions on the device setup
+      - name: assistance_onboarding
+        in: query
+        required: false
+        schema:
+          type: boolean
+        description: Withings team will automatically contact patients with issues during their setup after a few days to help them finalize the installation.
+      - name: icdcodeids
+        in: query
+        required: false
+        schema:
+          type: array of integer
+        description: 'Should be a json encoded array. Each item should correspond to an id create for your program. Exemple: [66, 307, 4]'
+      - name: external_ids
+        in: query
+        required: false
+        schema:
+          type: array of object
+        description: 'IDs from your software or EHR (MRN or other external id useful to uniquely identify your patient in the Withings RPM platform). Exemple: [{"type": "MRN", "identifier": "BB8C3P0R2D2"}]'
+      - name: category
+        in: query
+        required: false
+        schema:
+          type: integer
+        description: 'The section in which your patient will appear in the Withings RPM platform. Accepted value are: 0 (patient is in the program and doesn''t have alert) or -6 (patient need manual validation)'
+      responses:
+        200:
+          description: ' (Click to unfold)'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    description: Response status. See <a href='#section/Response-status'>Status</a> section for details.
+                  body:
+                    type: object
+                    description: Response data.
+                    properties:
+                      user:
+                        type: object
+                        properties:
+                          preflang:
+                            type: string
+                            description: 'User''s language preference. Examples: en_EN / en_US / de_DE / es_ES / fr_FR / it_IT / ja_JA / ko_KR / nl_NL / pt_PT / ru_RU / zh_CN'
+                            example: fr_FR
+                          height:
+                            type: object
+                            properties:
+                              value_measure:
+                                type: integer
+                                example: 180
+                              unit_measure:
+                                type: integer
+                                example: -2
+                              type_measure:
+                                type: integer
+                                example: 4
+                          sms_reminder:
+                            type: boolean
+                            example: true
+                          sms_onboarding:
+                            type: boolean
+                            example: true
+                          assistance_onboarding:
+                            type: boolean
+                            example: true
+                          category:
+                            type: integer
+                            example: -6
+                          device_types:
+                            type: array
+                            example: '[1231,5675]'
+                            items:
+                              type: integer
+                          device_models:
+                            type: array
+                            example: '[765,15]'
+                            items:
+                              type: integer
+                          external_ids:
+                            type: array
+                            items:
+                              $ref: '#/components/schemas/user_add_to_rpm_external_ids'
+                          sms_notification:
+                            type: boolean
+                            example: true
+                          icd_codes:
+                            type: array
+                            example: '[66,455]'
+                            items:
+                              type: integer
+                          userid:
+                            type: integer
+                            description: The id of the user.
+                            example: 363
+                      program:
+                        type: object
+                        properties:
+                          id:
+                            type: integer
+                            example: 50
+                          cohortid:
+                            type: integer
+                            example: 18035
+                          name:
+                            type: string
+                            example: Glucose Care Team
+                          timezone:
+                            type: string
+                            description: Timezone for the date.
+                            example: Europe/Paris
+      x-codeSamples:
+      - lang: PHP
+        source: "<?php\n\n$ch = curl_init();\n\ncurl_setopt($ch, CURLOPT_URL, \"https://wbsapi.withings.net/v2/user      \");\n\ncurl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);\n\ncurl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query([ \n\t'action' => 'addtorpm',\n\t'signature' => 'signature',\n\t'client_id' => 'client_id',\n\t'nonce' => 'string',\n\t'userid' => 'rawint32',\n\t'programid' => 'int',\n\t'sms_onboarding' => 'boolean',\n\t'assistance_onboarding' => 'boolean',\n\t'icdcodeids' => 'array of integer',\n\t'external_ids' => 'array of object',\n\t'category' => 'category'\n]));\n\n$rsp = curl_exec($ch);\ncurl_close($ch);\n\nvar_dump($rsp);\n\n?>"
+      - lang: CURL
+        source: curl --data "action=addtorpm&signature=signature&client_id=client_id&nonce=string&userid=rawint32&programid=int&sms_onboarding=boolean&assistance_onboarding=boolean&icdcodeids=array of integer&external_ids=array of object&category=category" 'https://wbsapi.withings.net/v2/user      '
+  https://wbsapi.withings.net/v2/user:
+    post:
+      tags:
+      - user
+      description: 'Returns user information.
+
+
+        **For data privacy reasons, this webservice is only available for integration solutions for which the provider is responsible for the account creation (ie Withings Cellular Solutions and Withings Mobile SDK integrations).**
+
+        **This webservice will return an error the above condition is not met.**'
+      summary: User v2  - Get
+      operationId: userv2-get
+      parameters:
+      - name: action
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Service action name. Must take the string value ```get```.
+      - name: client_id
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Id of the client
+      - name: nonce
+        in: query
+        required: true
+        schema:
+          type: string
+        description: A random token used to prevent replay attacks (Cf. [Signature v2 - Getnonce](#operation/signaturev2-getnonce))
+      - name: signature
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Hash of params (Cf. [Signature hash protocol](/developer-guide/v3/get-access/sign-your-requests)).
+      - name: email
+        in: query
+        required: false
+        schema:
+          type: email
+        description: User's email address
+      - name: userid
+        in: query
+        required: false
+        schema:
+          type: rawint32
+        description: User's identifier.
+      responses:
+        200:
+          description: ' (Click to unfold)'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    description: Response status. See <a href='#section/Response-status'>Status</a> section for details.
+                  body:
+                    type: object
+                    description: Response data.
+                    properties:
+                      user:
+                        type: object
+                        properties:
+                          email:
+                            type: string
+                            description: User's email address
+                            example: john.doe@my.email
+                          firstname:
+                            type: string
+                            description: User's firstname
+                            example: John
+                          lastname:
+                            type: string
+                            description: User's lastname
+                            example: Doe
+                          shortname:
+                            type: string
+                            description: User's shortname
+                            example: JDO
+                          gender:
+                            type: integer
+                            description: 'User''s gender (0: man, 1: woman)'
+                          birthdate:
+                            type: integer
+                            description: Unix timestamp of user's birthdate
+                            example: 1577829600
+                          preflang:
+                            type: string
+                            description: 'User''s language preference. Examples: en_EN / en_US / de_DE / es_ES / fr_FR / it_IT / ja_JA / ko_KR / nl_NL / pt_PT / ru_RU / zh_CN'
+                            example: fr_FR
+                          timezone:
+                            type: string
+                            description: 'User''s timezone. Examples: "Europe/Paris" / "America/New_York". A complete list of all possible timezones can be found on the "TZ database name" column of this page : https://en.wikipedia.org/wiki/List_of_tz_database_time_zones'
+                            example: Europe/Paris
+                          mailingpref:
+                            type: boolean
+                            description: 'User consent to receiving sales and marketing communication from Withings (0: user does not consent, 1: user does consent)'
+                            example: true
+                          unit_pref:
+                            type: object
+                            description: User's unit preferences (cf. [Unit preferences](#tag/models/Unit-preferences) model).
+                            properties:
+                              weight:
+                                type: integer
+                                example: 1
+                              height:
+                                type: integer
+                                example: 6
+                              temperature:
+                                type: integer
+                                example: 11
+                              distance:
+                                type: integer
+                                example: 6
+                          phonenumber:
+                            type: string
+                            description: User's phone number. *(Only if set)*
+                            example: '+33612345678'
+      x-codeSamples:
+      - lang: PHP
+        source: "<?php\n\n$ch = curl_init();\n\ncurl_setopt($ch, CURLOPT_URL, \"https://wbsapi.withings.net/v2/user\");\n\ncurl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);\n\ncurl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query([ \n\t'action' => 'get',\n\t'client_id' => 'client_id',\n\t'nonce' => 'string',\n\t'signature' => 'signature',\n\t'email' => 'email',\n\t'userid' => 'rawint32'\n]));\n\n$rsp = curl_exec($ch);\ncurl_close($ch);\n\nvar_dump($rsp);\n\n?>"
+      - lang: CURL
+        source: curl --data "action=get&client_id=client_id&nonce=string&signature=signature&email=email&userid=rawint32" 'https://wbsapi.withings.net/v2/user'
+  'https://wbsapi.withings.net/v2/user   ':
+    post:
+      tags:
+      - user
+      description: Returns the list of user linked devices.
+      summary: User v2  - Getdevice
+      operationId: userv2-getdevice
+      parameters:
+      - name: action
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Service action name. Must take the string value ```getdevice```.
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+        description: 'Used to pass your access token. Must take value: ```Bearer {your access_token}``` Replace {your access_token} with the access_token'
+      responses:
+        200:
+          description: ' (Click to unfold)'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    description: Response status. See <a href='#section/Response-status'>Status</a> section for details.
+                  body:
+                    type: object
+                    description: Response data.
+                    properties:
+                      devices:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/user_device_object'
+      x-codeSamples:
+      - lang: PHP
+        source: "<?php\n\n$ch = curl_init();\n\ncurl_setopt($ch, CURLOPT_URL, \"https://wbsapi.withings.net/v2/user   \");\n\ncurl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);\n\ncurl_setopt($ch, CURLOPT_HTTPHEADER, [\n\t'Authorization: Bearer YOUR_ACCESS_TOKEN'\n]);\n\ncurl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query([ \n\t'action' => 'getdevice'\n]));\n\n$rsp = curl_exec($ch);\ncurl_close($ch);\n\nvar_dump($rsp);\n\n?>"
+      - lang: CURL
+        source: 'curl --header "Authorization: Bearer YOUR_ACCESS_TOKEN" --data "action=getdevice" ''https://wbsapi.withings.net/v2/user   '''
+  'https://wbsapi.withings.net/v2/user     ':
+    post:
+      tags:
+      - user
+      description: Returns the goals of a user.
+      summary: User v2  - Getgoals
+      operationId: userv2-getgoals
+      parameters:
+      - name: action
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Service action name. Must take the string value ```getgoals```.
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+        description: 'Used to pass your access token. Must take value: ```Bearer {your access_token}``` Replace {your access_token} with the access_token'
+      responses:
+        200:
+          description: ' (Click to unfold)'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    description: Response status. See <a href='#section/Response-status'>Status</a> section for details.
+                  body:
+                    type: object
+                    description: Response data.
+                    properties:
+                      goals:
+                        type: object
+                        properties:
+                          steps:
+                            type: integer
+                            description: Number of steps per day.
+                            example: 10000
+                          sleep:
+                            type: integer
+                            description: Sleep duration (seconds).
+                            example: 28800
+                          weight:
+                            type: object
+                            description: Weight.
+                            properties:
+                              value:
+                                type: integer
+                                description: 'Value for the measure in S.I. units (kilograms, meters etc...). Value should be multiplied by 10 to the power of ```units``` to get the real value.
+
+
+                                  For ```meastype``` **130** (Atrial fibrillation result), the value is a classification integer and does not represent a physical measurement:
+
+
+                                  | Value | Description |
+
+                                  |---|---|
+
+                                  |0 | Negative |
+
+                                  |1 | Positive |
+
+                                  |2 | Inconclusive |
+
+                                  |3 | No signal |
+
+                                  |4 | Other |
+
+                                  |5 | Noise |
+
+                                  |6 | Low Heart Rate |
+
+                                  |7 | High Heart Rate |
+
+                                  |8 | Inconclusive US |
+
+                                  |9 | Negative normal HR |
+
+                                  |10 | Negative high HR |
+
+                                  |11 | Positive normal HR |
+
+                                  |12 | Positive high HR |
+
+                                  |13 | No Diagnosis |'
+                                example: 70500
+                              unit:
+                                type: integer
+                                description: 'Power of ten to multiply the ```value``` field to get the real value.<br>Formula: ```value * 10^unit = real value```.<br>Eg: ```value = 20 and unit = -1 => real value = 2```.'
+                                example: -3
+      x-codeSamples:
+      - lang: PHP
+        source: "<?php\n\n$ch = curl_init();\n\ncurl_setopt($ch, CURLOPT_URL, \"https://wbsapi.withings.net/v2/user     \");\n\ncurl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);\n\ncurl_setopt($ch, CURLOPT_HTTPHEADER, [\n\t'Authorization: Bearer YOUR_ACCESS_TOKEN'\n]);\n\ncurl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query([ \n\t'action' => 'getgoals'\n]));\n\n$rsp = curl_exec($ch);\ncurl_close($ch);\n\nvar_dump($rsp);\n\n?>"
+      - lang: CURL
+        source: 'curl --header "Authorization: Bearer YOUR_ACCESS_TOKEN" --data "action=getgoals" ''https://wbsapi.withings.net/v2/user     '''
+  'https://wbsapi.withings.net/v2/user  ':
+    post:
+      tags:
+      - user
+      description: 'Links the devices related to the provided ```mac_addresses``` and the user related to the provided ```access_token```. If a cellular device is listed in the ```mac_address``` field, it will activate this device''s cellular service and invoicing.
+
+
+        **Important**:
+
+
+        - Please note that the devices need to be authorized to be linked by API by the Partner. Please [contact Withings](mailto:partner-api@withings.com) for more information on device authorization.'
+      summary: User v2  - Link
+      operationId: userv2-link
+      parameters:
+      - name: action
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Service action name. Must take the string value ```link```.
+      - name: mac_addresses
+        in: query
+        required: true
+        schema:
+          type: macaddress
+        description: 'List of Withings device MAC addresses that will be linked to the created user. Example: ["00:24:e4:xx:xx:xx","00:24:e4:xx:xx:xx"]'
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+        description: 'Used to pass your access token. Must take value: ```Bearer {your access_token}``` Replace {your access_token} with the access_token'
+      responses:
+        200:
+          description: ' (Click to unfold)'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    description: Response status. See <a href='#section/Response-status'>Status</a> section for details.
+                  body:
+                    type: object
+                    description: Response data.
+                    properties:
+                      devices:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/user_device_mac_object'
+      x-codeSamples:
+      - lang: PHP
+        source: "<?php\n\n$ch = curl_init();\n\ncurl_setopt($ch, CURLOPT_URL, \"https://wbsapi.withings.net/v2/user  \");\n\ncurl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);\n\ncurl_setopt($ch, CURLOPT_HTTPHEADER, [\n\t'Authorization: Bearer YOUR_ACCESS_TOKEN'\n]);\n\ncurl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query([ \n\t'action' => 'link',\n\t'mac_addresses' => '[\"00:24:e4:xx:xx:xx\",\"00:24:e4:xx:xx:xx\"]'\n]));\n\n$rsp = curl_exec($ch);\ncurl_close($ch);\n\nvar_dump($rsp);\n\n?>"
+      - lang: CURL
+        source: 'curl --header "Authorization: Bearer YOUR_ACCESS_TOKEN" --data "action=link&mac_addresses=["00:24:e4:xx:xx:xx","00:24:e4:xx:xx:xx"]" ''https://wbsapi.withings.net/v2/user  '''
+  'https://wbsapi.withings.net/v2/user    ':
+    post:
+      tags:
+      - user
+      description: Unlinks the device related to the provided ```mac_address``` and the user related to the provided ```access_token```.
+      summary: User v2  - Unlink
+      operationId: userv2-unlink
+      parameters:
+      - name: action
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Service action name. Must take the string value ```unlink```.
+      - name: mac_address
+        in: query
+        required: true
+        schema:
+          type: macaddress
+        description: The mac address of the target device.
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+        description: 'Used to pass your access token. Must take value: ```Bearer {your access_token}``` Replace {your access_token} with the access_token'
+      responses:
+        200:
+          description: ' (Click to unfold)'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    description: Response status. See <a href='#section/Response-status'>Status</a> section for details.
+                  body:
+                    type: object
+                    description: Response data.
+                    properties: []
+      x-codeSamples:
+      - lang: PHP
+        source: "<?php\n\n$ch = curl_init();\n\ncurl_setopt($ch, CURLOPT_URL, \"https://wbsapi.withings.net/v2/user    \");\n\ncurl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);\n\ncurl_setopt($ch, CURLOPT_HTTPHEADER, [\n\t'Authorization: Bearer YOUR_ACCESS_TOKEN'\n]);\n\ncurl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query([ \n\t'action' => 'unlink',\n\t'mac_address' => 'macaddress'\n]));\n\n$rsp = curl_exec($ch);\ncurl_close($ch);\n\nvar_dump($rsp);\n\n?>"
+      - lang: CURL
+        source: 'curl --header "Authorization: Bearer YOUR_ACCESS_TOKEN" --data "action=unlink&mac_address=macaddress" ''https://wbsapi.withings.net/v2/user    '''
+components:
+  schemas:
+    user_device_object:
+      type: object
+      properties:
+        type:
+          type: string
+          description: 'Type of the device. Value can be:
+
+
+
+            | Value|
+
+            |---|
+
+            |Scale|
+
+            |Babyphone|
+
+            |Blood Pressure Monitor|
+
+            |Activity Tracker|
+
+            |Sleep Monitor|
+
+            |Smart Connected Thermometer|
+
+            |Gateway|
+
+            |iGlucose|
+
+            |HealthKit Apple|
+
+            |HealthKit Google|
+
+            |HealthKit Huawei|
+
+            |Lingo|
+
+            '
+          example: Scale
+        model:
+          type: string
+          description: 'Device model. Value can be:
+
+
+
+            | Value | Description|
+
+            |---|---|
+
+            |Withings WBS01 | Scale|
+
+            |WS30 | Scale|
+
+            |Kid Scale | Scale|
+
+            |Smart Body Analyzer | Scale|
+
+            |Body+ | Scale|
+
+            |Body Cardio | Scale|
+
+            |Body | Scale|
+
+            |Body Scan | Scale|
+
+            |Body Pro | Scale|
+
+            |WBS10 | Scale|
+
+            |WBS11 | Scale|
+
+            |Body Comp | Scale|
+
+            |Smart Baby Monitor | Babyphone|
+
+            |Withings Home | Babyphone|
+
+            |Withings Blood Pressure Monitor V1 | Blood Pressure Monitor|
+
+            |Withings Blood Pressure Monitor V2 | Blood Pressure Monitor|
+
+            |Withings Blood Pressure Monitor V3 | Blood Pressure Monitor|
+
+            |BPM Core | Blood Pressure Monitor|
+
+            |BPM Connect | Blood Pressure Monitor|
+
+            |BPM Connect Pro | Blood Pressure Monitor|
+
+            |BPM Pro 2 | Blood Pressure Monitor|
+
+            |BPM Vision | Blood Pressure Monitor|
+
+            |Pulse | Activity Tracker|
+
+            |Activite | Activity Tracker|
+
+            |Activite (Pop, Steel) | Activity Tracker|
+
+            |Withings Go | Activity Tracker|
+
+            |Activite Steel HR | Activity Tracker|
+
+            |Activite Steel HR Sport Edition | Activity Tracker|
+
+            |Pulse HR | Activity Tracker|
+
+            |Move | Activity Tracker|
+
+            |Move ECG | Activity Tracker|
+
+            |ScanWatch | Activity Tracker|
+
+            |ScanWatch 2 | Activity Tracker|
+
+            |ScanWatch Light | Activity Tracker|
+
+            |Aura Dock | Sleep Monitor|
+
+            |Aura Sensor | Sleep Monitor|
+
+            |Aura Sensor V2 | Sleep Monitor|
+
+            |Thermo | Smart Connected Thermometer|
+
+            |BeamO | Smart Connected Thermometer|
+
+            |WUP01 | Gateway|
+
+            |Iglucose glucometer | iGlucose|
+
+            |iOS step tracker | HealthKit Apple|
+
+            |HealthKit step iPhone tracker | HealthKit Apple|
+
+            |HealthKit step Apple Watch tracker | HealthKit Apple|
+
+            |HealthKit other step tracker | HealthKit Apple|
+
+            |Android step tracker | HealthKit Google|
+
+            |GoogleFit tracker | HealthKit Google|
+
+            |Samsung Health tracker | HealthKit Google|
+
+            |Google Health Connect | HealthKit Google|
+
+            |Huawei tracker | HealthKit Huawei|
+
+            |Lingo Sensor | Lingo|
+
+            '
+          example: Body Cardio
+        model_id:
+          type: integer
+          description: '
+
+
+            | Value | Description|
+
+            |---|---|
+
+            |1 | Withings WBS01|
+
+            |2 | WS30|
+
+            |3 | Kid Scale|
+
+            |4 | Smart Body Analyzer|
+
+            |5 | Body+|
+
+            |6 | Body Cardio|
+
+            |7 | Body|
+
+            |10 | Body Scan|
+
+            |9 | Body Pro|
+
+            |11 | WBS10|
+
+            |12 | WBS11|
+
+            |18 | Body Comp|
+
+            |21 | Smart Baby Monitor|
+
+            |22 | Withings Home|
+
+            |41 | Withings Blood Pressure Monitor V1|
+
+            |42 | Withings Blood Pressure Monitor V2|
+
+            |43 | Withings Blood Pressure Monitor V3|
+
+            |44 | BPM Core|
+
+            |45 | BPM Connect|
+
+            |46 | BPM Connect Pro|
+
+            |47 | BPM Pro 2|
+
+            |48 | BPM Vision|
+
+            |51 | Pulse|
+
+            |52 | Activite|
+
+            |53 | Activite (Pop, Steel)|
+
+            |54 | Withings Go|
+
+            |55 | Activite Steel HR|
+
+            |59 | Activite Steel HR Sport Edition|
+
+            |58 | Pulse HR|
+
+            |90 | Move|
+
+            |91 | Move ECG|
+
+            |92 | Move ECG|
+
+            |93 | ScanWatch|
+
+            |94 | ScanWatch 2|
+
+            |95 | ScanWatch Light|
+
+            |60 | Aura Dock|
+
+            |61 | Aura Sensor|
+
+            |63 | Aura Sensor V2|
+
+            |70 | Thermo|
+
+            |71 | BeamO|
+
+            |100 | WUP01|
+
+            |1061 | Iglucose glucometer|
+
+            |1051 | iOS step tracker|
+
+            |1052 | iOS step tracker|
+
+            |1057 | HealthKit step iPhone tracker|
+
+            |1058 | HealthKit step Apple Watch tracker|
+
+            |1059 | HealthKit other step tracker|
+
+            |1053 | Android step tracker|
+
+            |1054 | Android step tracker|
+
+            |1055 | GoogleFit tracker|
+
+            |1056 | Samsung Health tracker|
+
+            |1060 | Google Health Connect|
+
+            |1062 | Huawei tracker|
+
+            |1063 | Lingo Sensor|
+
+            '
+          example: 6
+        battery:
+          type: string
+          description: 'Battery level: high (> 75%), medium (> 30%) or low'
+          example: medium
+        deviceid:
+          type: string
+          description: ID of the device. This ID is returned in other services to know which device tracked a data. Then device's model or type can be known using this information.
+          example: 892359876fd8805ac45bab078c4828692f0276b1
+        mac_address:
+          type: string
+          description: Mac address of the device (advanced partners only).
+          example: 00:24:e4:69:b2:30
+        fw:
+          type: string
+          description: Device's firmware (advanced partners only).
+          example: '1124'
+        network:
+          type: string
+          description: Network used by the device (advanced partners only).
+          example: '1'
+        last_used_network:
+          type: string
+          description: Last network used by the device (advanced partners only).
+          example: '1'
+        hash_deviceid:
+          type: string
+          description: ID of the device. This ID is returned in other services to know which device tracked a data. Then device's model or type can be known using this information.
+          example: 892359876fd8805ac45bab078c4828692f0276b1
+        timezone:
+          type: string
+          description: Timezone of the device.
+          example: Europe/Paris
+        first_session_date:
+          type: integer
+          description: The timestamp of the first server connection of the device
+          format: timestamp
+          example: 1594159644
+        last_session_date:
+          type: integer
+          description: The timestamp of the last server connection of the device
+          format: timestamp
+          example: 1594159644
+        sim_status:
+          type: string
+          example: STANDBY
+    user_device_mac_object:
+      type: object
+      properties:
+        mac_address:
+          type: string
+          description: Mac address of the device.
+          example: 00:24:e4:69:b2:30
+        type:
+          type: string
+          description: 'Type of the device. Value can be:
+
+
+
+            | Value|
+
+            |---|
+
+            |Scale|
+
+            |Babyphone|
+
+            |Blood Pressure Monitor|
+
+            |Activity Tracker|
+
+            |Sleep Monitor|
+
+            |Smart Connected Thermometer|
+
+            |Gateway|
+
+            |iGlucose|
+
+            |HealthKit Apple|
+
+            |HealthKit Google|
+
+            |HealthKit Huawei|
+
+            |Lingo|
+
+            '
+          example: Scale
+        model:
+          type: string
+          description: 'Device model. Value can be:
+
+
+
+            | Value | Description|
+
+            |---|---|
+
+            |Withings WBS01 | Scale|
+
+            |WS30 | Scale|
+
+            |Kid Scale | Scale|
+
+            |Smart Body Analyzer | Scale|
+
+            |Body+ | Scale|
+
+            |Body Cardio | Scale|
+
+            |Body | Scale|
+
+            |Body Scan | Scale|
+
+            |Body Pro | Scale|
+
+            |WBS10 | Scale|
+
+            |WBS11 | Scale|
+
+            |Body Comp | Scale|
+
+            |Smart Baby Monitor | Babyphone|
+
+            |Withings Home | Babyphone|
+
+            |Withings Blood Pressure Monitor V1 | Blood Pressure Monitor|
+
+            |Withings Blood Pressure Monitor V2 | Blood Pressure Monitor|
+
+            |Withings Blood Pressure Monitor V3 | Blood Pressure Monitor|
+
+            |BPM Core | Blood Pressure Monitor|
+
+            |BPM Connect | Blood Pressure Monitor|
+
+            |BPM Connect Pro | Blood Pressure Monitor|
+
+            |BPM Pro 2 | Blood Pressure Monitor|
+
+            |BPM Vision | Blood Pressure Monitor|
+
+            |Pulse | Activity Tracker|
+
+            |Activite | Activity Tracker|
+
+            |Activite (Pop, Steel) | Activity Tracker|
+
+            |Withings Go | Activity Tracker|
+
+            |Activite Steel HR | Activity Tracker|
+
+            |Activite Steel HR Sport Edition | Activity Tracker|
+
+            |Pulse HR | Activity Tracker|
+
+            |Move | Activity Tracker|
+
+            |Move ECG | Activity Tracker|
+
+            |ScanWatch | Activity Tracker|
+
+            |ScanWatch 2 | Activity Tracker|
+
+            |ScanWatch Light | Activity Tracker|
+
+            |Aura Dock | Sleep Monitor|
+
+            |Aura Sensor | Sleep Monitor|
+
+            |Aura Sensor V2 | Sleep Monitor|
+
+            |Thermo | Smart Connected Thermometer|
+
+            |BeamO | Smart Connected Thermometer|
+
+            |WUP01 | Gateway|
+
+            |Iglucose glucometer | iGlucose|
+
+            |iOS step tracker | HealthKit Apple|
+
+            |HealthKit step iPhone tracker | HealthKit Apple|
+
+            |HealthKit step Apple Watch tracker | HealthKit Apple|
+
+            |HealthKit other step tracker | HealthKit Apple|
+
+            |Android step tracker | HealthKit Google|
+
+            |GoogleFit tracker | HealthKit Google|
+
+            |Samsung Health tracker | HealthKit Google|
+
+            |Google Health Connect | HealthKit Google|
+
+            |Huawei tracker | HealthKit Huawei|
+
+            |Lingo Sensor | Lingo|
+
+            '
+          example: Body Cardio
+        model_id:
+          type: integer
+          description: '
+
+
+            | Value | Description|
+
+            |---|---|
+
+            |1 | Withings WBS01|
+
+            |2 | WS30|
+
+            |3 | Kid Scale|
+
+            |4 | Smart Body Analyzer|
+
+            |5 | Body+|
+
+            |6 | Body Cardio|
+
+            |7 | Body|
+
+            |10 | Body Scan|
+
+            |9 | Body Pro|
+
+            |11 | WBS10|
+
+            |12 | WBS11|
+
+            |18 | Body Comp|
+
+            |21 | Smart Baby Monitor|
+
+            |22 | Withings Home|
+
+            |41 | Withings Blood Pressure Monitor V1|
+
+            |42 | Withings Blood Pressure Monitor V2|
+
+            |43 | Withings Blood Pressure Monitor V3|
+
+            |44 | BPM Core|
+
+            |45 | BPM Connect|
+
+            |46 | BPM Connect Pro|
+
+            |47 | BPM Pro 2|
+
+            |48 | BPM Vision|
+
+            |51 | Pulse|
+
+            |52 | Activite|
+
+            |53 | Activite (Pop, Steel)|
+
+            |54 | Withings Go|
+
+            |55 | Activite Steel HR|
+
+            |59 | Activite Steel HR Sport Edition|
+
+            |58 | Pulse HR|
+
+            |90 | Move|
+
+            |91 | Move ECG|
+
+            |92 | Move ECG|
+
+            |93 | ScanWatch|
+
+            |94 | ScanWatch 2|
+
+            |95 | ScanWatch Light|
+
+            |60 | Aura Dock|
+
+            |61 | Aura Sensor|
+
+            |63 | Aura Sensor V2|
+
+            |70 | Thermo|
+
+            |71 | BeamO|
+
+            |100 | WUP01|
+
+            |1061 | Iglucose glucometer|
+
+            |1051 | iOS step tracker|
+
+            |1052 | iOS step tracker|
+
+            |1057 | HealthKit step iPhone tracker|
+
+            |1058 | HealthKit step Apple Watch tracker|
+
+            |1059 | HealthKit other step tracker|
+
+            |1053 | Android step tracker|
+
+            |1054 | Android step tracker|
+
+            |1055 | GoogleFit tracker|
+
+            |1056 | Samsung Health tracker|
+
+            |1060 | Google Health Connect|
+
+            |1062 | Huawei tracker|
+
+            |1063 | Lingo Sensor|
+
+            '
+          example: 6
+        battery:
+          type: string
+          description: 'Battery level: high (> 75%), medium (> 30%) or low'
+          example: medium
+        deviceid:
+          type: string
+          description: ID of the device. This ID is returned in other services to know which device tracked a data. Then device's model or type can be known using this information.
+          example: 892359876fd8805ac45bab078c4828692f0276b1
+        timezone:
+          type: string
+          description: Timezone of the device.
+          example: Europe/Paris
+        last_session_date:
+          type: integer
+          description: The timestamp of the last server connection of the device
+          format: timestamp
+          example: 1594159644
+        serial_number:
+          type: string
+          description: Serial number of the device.
+          example: SN-001122334455
+    user_add_to_rpm_external_ids:
+      type: object
+      properties:
+        type:
+          type: string
+          description: Type of the measure. See ```meastype``` input parameter.
+        identifier:
+          type: string
+x-tagGroups:
+- name: Api Reference Content
+  tags:
+  - oauth2
+  - dropshipment
+  - order
+  - user
+  - measure
+  - heart
+  - stetho
+  - sleep
+  - notify
+  - survey
+  - answers
+  - signature
+  - rawdata
+  - device
+  - models
+  - response_status
+  - Glossary
+  - nudge
+  - nudgecampaign

@@ -1,0 +1,1785 @@
+openapi: 3.0.3
+info:
+  version: '2.0'
+  title: Withings developer documentation answers measure API
+  description: These webservices allows you to get user's answers from surveys
+servers:
+- url: https://wbsapi.withings.net/
+tags:
+- name: measure
+  x-displayName: Measure
+  description: The following services gives access to several types of Health Data collected by a user. The data are only available once a synchronization occured between the device and Withings servers (which might include synchronizing with Withings mobile application or via Withings Mobile SDK).
+paths:
+  https://wbsapi.withings.net/measure:
+    post:
+      tags:
+      - measure
+      description: Provides measures stored at a specific date among the types below. Please refer to the following responses for details.
+      summary: Measure  - Getmeas
+      operationId: measure-getmeas
+      parameters:
+      - name: action
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Service action name. Must take the string value ```getmeas```.
+      - name: meastype
+        in: query
+        required: false
+        schema:
+          type: integer
+        description: 'Requested measure type :
+
+
+
+          |Value | Description|
+
+          |---|---|
+
+          |1 | Weight (kg)|
+
+          |4 | Height (meter)|
+
+          |5 | Fat Free Mass (kg)|
+
+          |6 | Fat Ratio (%)|
+
+          |8 | Fat Mass Weight (kg)|
+
+          |9 | Diastolic Blood Pressure (mmHg)|
+
+          |10 | Systolic Blood Pressure (mmHg)|
+
+          |11 | Heart Pulse (bpm) - only for BPM and scale devices|
+
+          |12 | Temperature (celsius)|
+
+          |54 | SP02 (%)|
+
+          |71 | Body Temperature (celsius)|
+
+          |73 | Skin Temperature (celsius)|
+
+          |76 | Muscle Mass (kg)|
+
+          |77 | Hydration (kg)|
+
+          |88 | Bone Mass (kg)|
+
+          |91 | Pulse Wave Velocity (m/s)|
+
+          |123 | VO2 max is a numerical measurement of your body’s ability to consume oxygen (ml/min/kg).|
+
+          |130 | Atrial fibrillation result|
+
+          |135 | QRS interval duration based on ECG signal|
+
+          |136 | PR interval duration based on ECG signal|
+
+          |137 | QT interval duration based on ECG signal|
+
+          |138 | Corrected QT interval duration based on ECG signal|
+
+          |139 | Atrial fibrillation result from PPG|
+
+          |155 | Vascular age|
+
+          |167 | Nerve Health Score Conductance 2 electrodes Feet|
+
+          |168 | Extracellular Water in kg|
+
+          |169 | Intracellular Water in kg|
+
+          |170 | Visceral Fat (without unity)|
+
+          |173 | Fat Free Mass for segments|
+
+          |174 | Fat Mass for segments in mass unit|
+
+          |175 | Muscle Mass for segments|
+
+          |196 | Electrodermal activity feet|
+
+          |226 | Basal Metabolic Rate (BMR)|
+
+          |227 | Metabolic Age|
+
+          |229 | Electrochemical Skin Conductance (ESC)|
+
+          '
+      - name: meastypes
+        in: query
+        required: false
+        schema:
+          type: list of integers
+        description: 'List of requested measure types (separated by a comma).<br>Ex: meastypes=1,4,12'
+      - name: category
+        in: query
+        required: false
+        schema:
+          type: integer
+        description: '```1``` for real measures, ```2``` for user objectives.'
+      - name: startdate
+        in: query
+        required: false
+        schema:
+          type: integer
+        description: Data start date as a unix timestamp.
+        format: timestamp
+      - name: enddate
+        in: query
+        required: false
+        schema:
+          type: integer
+        description: Data end date as a unix timestamp.
+        format: timestamp
+      - name: lastupdate
+        in: query
+        required: false
+        schema:
+          type: integer
+        description: Timestamp for requesting data that were updated or created after this date.<br>Useful for data synchronization between systems.<br>Use this instead of startdate + enddate.
+      - name: offset
+        in: query
+        required: false
+        schema:
+          type: integer
+        description: When a first call returns ```more:1``` and ```offset:XX```, set value ```XX``` in this parameter to retrieve next available rows.
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+        description: 'Used to pass your access token. Must take value: ```Bearer {your access_token}``` Replace {your access_token} with the access_token'
+      responses:
+        200:
+          description: ' (Click to unfold)'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    description: Response status. See <a href='#section/Response-status'>Status</a> section for details.
+                  body:
+                    type: object
+                    description: Response data.
+                    properties:
+                      updatetime:
+                        type: string
+                        description: Server time at which the answer was generated.
+                      timezone:
+                        type: string
+                        description: Timezone for the date.
+                      measuregrps:
+                        type: array
+                        description: For every measure/measurement made, a measure group is created. The measure group purpose is to group together measures that have been taken at the same time. For instance, when measuring blood pressure you will have a measure group with a systole measure, a diastole measure, and a heartrate measure. Every time a measure is create/updated/deleted, the corresponding measure group is updated.
+                        items:
+                          $ref: '#/components/schemas/measuregrp_object'
+                      more:
+                        type: integer
+                        description: To know if there is more data to fetch or not.
+                      offset:
+                        type: integer
+                        description: Offset to use to retrieve the next data.
+      x-codeSamples:
+      - lang: PHP
+        source: "<?php\n\n$ch = curl_init();\n\ncurl_setopt($ch, CURLOPT_URL, \"https://wbsapi.withings.net/measure\");\n\ncurl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);\n\ncurl_setopt($ch, CURLOPT_HTTPHEADER, [\n\t'Authorization: Bearer YOUR_ACCESS_TOKEN'\n]);\n\ncurl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query([ \n\t'action' => 'getmeas',\n\t'meastype' => 'meastype',\n\t'meastypes' => 'meastypes',\n\t'category' => 'category',\n\t'startdate' => 'startdate',\n\t'enddate' => 'enddate',\n\t'lastupdate' => 'int',\n\t'offset' => 'offset'\n]));\n\n$rsp = curl_exec($ch);\ncurl_close($ch);\n\nvar_dump($rsp);\n\n?>"
+      - lang: CURL
+        source: 'curl --header "Authorization: Bearer YOUR_ACCESS_TOKEN" --data "action=getmeas&meastype=meastype&meastypes=meastypes&category=category&startdate=startdate&enddate=enddate&lastupdate=int&offset=offset" ''https://wbsapi.withings.net/measure'''
+  'https://wbsapi.withings.net/v2/measure   ':
+    post:
+      tags:
+      - measure
+      description: ''
+      summary: Measure v2  - Confirmuser
+      operationId: measurev2-confirmuser
+      parameters:
+      - name: action
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Service action name. Must take the string value ```confirmuser```.
+      - name: grpid
+        in: query
+        required: true
+        schema:
+          type: id64n
+        description: Group ID
+      - name: is_confirmed
+        in: query
+        required: true
+        schema:
+          type: boolean
+        description: Indicates if the measure was confirmed by the user.
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+        description: 'Used to pass your access token. Must take value: ```Bearer {your access_token}``` Replace {your access_token} with the access_token'
+      responses:
+        200:
+          description: ' (Click to unfold)'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    description: Response status. See <a href='#section/Response-status'>Status</a> section for details.
+                  body:
+                    type: object
+                    description: Response data.
+                    properties: []
+      x-codeSamples:
+      - lang: PHP
+        source: "<?php\n\n$ch = curl_init();\n\ncurl_setopt($ch, CURLOPT_URL, \"https://wbsapi.withings.net/v2/measure   \");\n\ncurl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);\n\ncurl_setopt($ch, CURLOPT_HTTPHEADER, [\n\t'Authorization: Bearer YOUR_ACCESS_TOKEN'\n]);\n\ncurl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query([ \n\t'action' => 'confirmuser',\n\t'grpid' => 'id64n',\n\t'is_confirmed' => 'boolean'\n]));\n\n$rsp = curl_exec($ch);\ncurl_close($ch);\n\nvar_dump($rsp);\n\n?>"
+      - lang: CURL
+        source: 'curl --header "Authorization: Bearer YOUR_ACCESS_TOKEN" --data "action=confirmuser&grpid=id64n&is_confirmed=boolean" ''https://wbsapi.withings.net/v2/measure   '''
+  https://wbsapi.withings.net/v2/measure:
+    post:
+      tags:
+      - measure
+      description: Provides daily aggregated activity data of a user.
+      summary: Measure v2  - Getactivity
+      operationId: measurev2-getactivity
+      parameters:
+      - name: action
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Service action name. Must take the string value ```getactivity```.
+      - name: startdateymd
+        in: query
+        required: true
+        schema:
+          type: string
+        description: 'DO NOT USE WITH FOLLOWING PARAMS: [lastupdate]<br>Start date.'
+        format: Y-m-d
+      - name: enddateymd
+        in: query
+        required: true
+        schema:
+          type: string
+        description: 'DO NOT USE WITH FOLLOWING PARAMS: [lastupdate]<br>End date.'
+        format: Y-m-d
+      - name: lastupdate
+        in: query
+        required: true
+        schema:
+          type: integer
+        description: 'DO NOT USE WITH FOLLOWING PARAMS: [startdateymd, enddateymd]<br>Timestamp for requesting data that were updated or created after this date.<br>Useful for data synchronization between systems.<br>Use this instead of startdateymd + enddateymd.'
+      - name: offset
+        in: query
+        required: false
+        schema:
+          type: integer
+        description: When a first call returns ```more:true``` and ```offset:XX```, set value ```XX``` in this parameter to retrieve next available rows.
+      - name: data_fields
+        in: query
+        required: false
+        schema:
+          type: string
+        description: 'List of requested data fields, separated by a comma.<br>Available data fields are listed below.<br><u>Ex</u>: data_fields=steps,distance,elevation<br><br>steps<br>> Number of steps. <br><br>distance<br>> Distance travelled (in meters). <br><br>elevation<br>> Number of floors climbed. <br><br>soft<br>> Duration of soft activities (in seconds). <br><br>moderate<br>> Duration of moderate activities (in seconds). <br><br>intense<br>> Duration of intense activities (in seconds). <br><br>active<br>> Sum of intense and moderate activity durations (in seconds). <br><br>calories<br>> Active calories burned (in Kcal). Calculated by mixing fine granularity calories estimation, workouts estimated calories and calories manually set by the user. <br><br>totalcalories<br>> Total calories burned (in Kcal). Obtained by adding active calories (see ```calories```) and passive calories.<br><br>hr_average<br>> Average heart rate. (beats per minute).<br><br>hr_min<br>> Minimal heart rate (beats per minute). <br><br>hr_max<br>> Maximal heart rate (beats per minute).. <br><br>hr_zone_0<br>> Duration in seconds when heart rate was in a light zone (cf. <a href=''/api-reference/#section/Glossary''>Glossary</a>). <br><br>hr_zone_1<br>> Duration in seconds when heart rate was in a moderate zone (cf. <a href=''/api-reference/#section/Glossary''>Glossary</a>). <br><br>hr_zone_2<br>> Duration in seconds when heart rate was in an intense zone (cf. <a href=''/api-reference/#section/Glossary''>Glossary</a>). <br><br>hr_zone_3<br>> Duration in seconds when heart rate was in maximal zone (cf. <a href=''/api-reference/#section/Glossary''>Glossary</a>). <br><br>'
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+        description: 'Used to pass your access token. Must take value: ```Bearer {your access_token}``` Replace {your access_token} with the access_token'
+      responses:
+        200:
+          description: ' (Click to unfold)'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    description: Response status. See <a href='#section/Response-status'>Status</a> section for details.
+                  body:
+                    type: object
+                    description: Response data.
+                    properties:
+                      activities:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/activity_object'
+                      more:
+                        type: boolean
+                        description: To know if there is more data to fetch or not.
+                      offset:
+                        type: integer
+                        description: Offset to use to retrieve the next data.
+      x-codeSamples:
+      - lang: PHP
+        source: "<?php\n\n$ch = curl_init();\n\ncurl_setopt($ch, CURLOPT_URL, \"https://wbsapi.withings.net/v2/measure\");\n\ncurl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);\n\ncurl_setopt($ch, CURLOPT_HTTPHEADER, [\n\t'Authorization: Bearer YOUR_ACCESS_TOKEN'\n]);\n\ncurl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query([ \n\t'action' => 'getactivity',\n\t'startdateymd' => '2020-07-01',\n\t'enddateymd' => '2020-07-02'\n]));\n\n$rsp = curl_exec($ch);\ncurl_close($ch);\n\nvar_dump($rsp);\n\n?>"
+      - lang: CURL
+        source: 'curl --header "Authorization: Bearer YOUR_ACCESS_TOKEN" --data "action=getactivity&startdateymd=2020-07-01&enddateymd=2020-07-02" ''https://wbsapi.withings.net/v2/measure'''
+  'https://wbsapi.withings.net/v2/measure  ':
+    post:
+      tags:
+      - measure
+      description: "Returns user activity data captured at high frequency.\n\n**Notes:**\n\n - If your input ```startdate``` and ```enddate``` are separated by more than 24h, only the first 24h after ```startdate``` will be returned.\n - If no ```startdate``` and ```enddate``` are passed as parameters, the most recent activity data will be returned."
+      summary: Measure v2  - Getintradayactivity
+      operationId: measurev2-getintradayactivity
+      parameters:
+      - name: action
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Service action name. Must take the string value ```getintradayactivity```.
+      - name: startdate
+        in: query
+        required: false
+        schema:
+          type: integer
+        description: Data start date as a unix timestamp.
+        format: timestamp
+      - name: enddate
+        in: query
+        required: false
+        schema:
+          type: integer
+        description: Data end date as a unix timestamp.
+        format: timestamp
+      - name: data_fields
+        in: query
+        required: false
+        schema:
+          type: string
+        description: 'List of requested data fields, separated by a comma.<br>Available data fields are listed below.<br><u>Ex</u>: data_fields=steps,elevation,calories<br><br>steps<br>> Number of steps. <br><br>elevation<br>> Number of floors climbed. <br><br>calories<br>> Estimation of active calories burned (in Kcal). <br><br>distance<br>> Distance travelled (in meters). <br><br>stroke<br>> Number of strokes performed. <br><br>pool_lap<br>> Number of pool_lap performed. <br><br>duration<br>> Duration of the activity (in seconds). <br><br>heart_rate<br>> Measured heart rate. <br><br>spo2_auto<br>> SpO2 measurement automatically tracked by a device tracker<br><br>rmssd<br>> Heart rate variability - Root mean square of the successive differences over "a few seconds" (in miliseconds).<br><br>sdnn1<br>> Heart rate variability - Standard deviation of the NN over 1 minute (in miliseconds).<br><br>hrv_quality<br>> Heart rate variability - quality score.<br><br>core_body_temperature<br>> The core body temperature<br><br>rr<br>> Respiration Rate (breaths per minute). <br><br>chest_movement_rate<br>> Chest movement rate (events per minute). <br><br>'
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+        description: 'Used to pass your access token. Must take value: ```Bearer {your access_token}``` Replace {your access_token} with the access_token'
+      responses:
+        200:
+          description: ' (Click to unfold)'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    description: Response status. See <a href='#section/Response-status'>Status</a> section for details.
+                  body:
+                    type: object
+                    description: Response data.
+                    properties:
+                      series:
+                        type: object
+                        properties:
+                          $timestamp:
+                            type: object
+                            description: $timestamp represents the epoch value of the intraday data
+                            properties:
+                              deviceid:
+                                type: string
+                                description: 'ID of device that tracked the data. To retrieve information about this device, refer to : <a href=''/api-reference/#operation/userv2-getdevice''>User v2 - Getdevice</a>.'
+                                example: 892359876fd8805ac45bab078c4828692f0276b1
+                              model:
+                                type: string
+                                description: 'Device model. Value can be:
+
+
+
+                                  | Value | Description|
+
+                                  |---|---|
+
+                                  |Withings WBS01 | Scale|
+
+                                  |WS30 | Scale|
+
+                                  |Kid Scale | Scale|
+
+                                  |Smart Body Analyzer | Scale|
+
+                                  |Body+ | Scale|
+
+                                  |Body Cardio | Scale|
+
+                                  |Body | Scale|
+
+                                  |Body Scan | Scale|
+
+                                  |Body Pro | Scale|
+
+                                  |WBS10 | Scale|
+
+                                  |WBS11 | Scale|
+
+                                  |Body Comp | Scale|
+
+                                  |Smart Baby Monitor | Babyphone|
+
+                                  |Withings Home | Babyphone|
+
+                                  |Withings Blood Pressure Monitor V1 | Blood Pressure Monitor|
+
+                                  |Withings Blood Pressure Monitor V2 | Blood Pressure Monitor|
+
+                                  |Withings Blood Pressure Monitor V3 | Blood Pressure Monitor|
+
+                                  |BPM Core | Blood Pressure Monitor|
+
+                                  |BPM Connect | Blood Pressure Monitor|
+
+                                  |BPM Connect Pro | Blood Pressure Monitor|
+
+                                  |BPM Pro 2 | Blood Pressure Monitor|
+
+                                  |BPM Vision | Blood Pressure Monitor|
+
+                                  |Pulse | Activity Tracker|
+
+                                  |Activite | Activity Tracker|
+
+                                  |Activite (Pop, Steel) | Activity Tracker|
+
+                                  |Withings Go | Activity Tracker|
+
+                                  |Activite Steel HR | Activity Tracker|
+
+                                  |Activite Steel HR Sport Edition | Activity Tracker|
+
+                                  |Pulse HR | Activity Tracker|
+
+                                  |Move | Activity Tracker|
+
+                                  |Move ECG | Activity Tracker|
+
+                                  |ScanWatch | Activity Tracker|
+
+                                  |ScanWatch 2 | Activity Tracker|
+
+                                  |ScanWatch Light | Activity Tracker|
+
+                                  |Aura Dock | Sleep Monitor|
+
+                                  |Aura Sensor | Sleep Monitor|
+
+                                  |Aura Sensor V2 | Sleep Monitor|
+
+                                  |Thermo | Smart Connected Thermometer|
+
+                                  |BeamO | Smart Connected Thermometer|
+
+                                  |WUP01 | Gateway|
+
+                                  |Iglucose glucometer | iGlucose|
+
+                                  |iOS step tracker | HealthKit Apple|
+
+                                  |HealthKit step iPhone tracker | HealthKit Apple|
+
+                                  |HealthKit step Apple Watch tracker | HealthKit Apple|
+
+                                  |HealthKit other step tracker | HealthKit Apple|
+
+                                  |Android step tracker | HealthKit Google|
+
+                                  |GoogleFit tracker | HealthKit Google|
+
+                                  |Samsung Health tracker | HealthKit Google|
+
+                                  |Google Health Connect | HealthKit Google|
+
+                                  |Huawei tracker | HealthKit Huawei|
+
+                                  |Lingo Sensor | Lingo|
+
+                                  '
+                                example: Pulse
+                              model_id:
+                                type: integer
+                                description: '
+
+
+                                  | Value | Description|
+
+                                  |---|---|
+
+                                  |1 | Withings WBS01|
+
+                                  |2 | WS30|
+
+                                  |3 | Kid Scale|
+
+                                  |4 | Smart Body Analyzer|
+
+                                  |5 | Body+|
+
+                                  |6 | Body Cardio|
+
+                                  |7 | Body|
+
+                                  |10 | Body Scan|
+
+                                  |9 | Body Pro|
+
+                                  |11 | WBS10|
+
+                                  |12 | WBS11|
+
+                                  |18 | Body Comp|
+
+                                  |21 | Smart Baby Monitor|
+
+                                  |22 | Withings Home|
+
+                                  |41 | Withings Blood Pressure Monitor V1|
+
+                                  |42 | Withings Blood Pressure Monitor V2|
+
+                                  |43 | Withings Blood Pressure Monitor V3|
+
+                                  |44 | BPM Core|
+
+                                  |45 | BPM Connect|
+
+                                  |46 | BPM Connect Pro|
+
+                                  |47 | BPM Pro 2|
+
+                                  |48 | BPM Vision|
+
+                                  |51 | Pulse|
+
+                                  |52 | Activite|
+
+                                  |53 | Activite (Pop, Steel)|
+
+                                  |54 | Withings Go|
+
+                                  |55 | Activite Steel HR|
+
+                                  |59 | Activite Steel HR Sport Edition|
+
+                                  |58 | Pulse HR|
+
+                                  |90 | Move|
+
+                                  |91 | Move ECG|
+
+                                  |92 | Move ECG|
+
+                                  |93 | ScanWatch|
+
+                                  |94 | ScanWatch 2|
+
+                                  |95 | ScanWatch Light|
+
+                                  |60 | Aura Dock|
+
+                                  |61 | Aura Sensor|
+
+                                  |63 | Aura Sensor V2|
+
+                                  |70 | Thermo|
+
+                                  |71 | BeamO|
+
+                                  |100 | WUP01|
+
+                                  |1061 | Iglucose glucometer|
+
+                                  |1051 | iOS step tracker|
+
+                                  |1052 | iOS step tracker|
+
+                                  |1057 | HealthKit step iPhone tracker|
+
+                                  |1058 | HealthKit step Apple Watch tracker|
+
+                                  |1059 | HealthKit other step tracker|
+
+                                  |1053 | Android step tracker|
+
+                                  |1054 | Android step tracker|
+
+                                  |1055 | GoogleFit tracker|
+
+                                  |1056 | Samsung Health tracker|
+
+                                  |1060 | Google Health Connect|
+
+                                  |1062 | Huawei tracker|
+
+                                  |1063 | Lingo Sensor|
+
+                                  '
+                                example: 51
+                              steps:
+                                type: integer
+                                description: Number of steps. *(Use 'data_fields' to request this data.)*
+                              elevation:
+                                type: number
+                                description: Number of floors climbed. *(Use 'data_fields' to request this data.)*
+                              calories:
+                                type: number
+                                description: Estimation of active calories burned (in Kcal). *(Use 'data_fields' to request this data.)*
+                              distance:
+                                type: number
+                                description: Distance travelled (in meters). *(Use 'data_fields' to request this data.)*
+                              stroke:
+                                type: integer
+                                description: Number of strokes performed. *(Use 'data_fields' to request this data.)*
+                              pool_lap:
+                                type: integer
+                                description: Number of pool_lap performed. *(Use 'data_fields' to request this data.)*
+                              duration:
+                                type: integer
+                                description: Duration of the activity (in seconds). *(Use 'data_fields' to request this data.)*
+                              heart_rate:
+                                type: integer
+                                description: Measured heart rate. *(Use 'data_fields' to request this data.)*
+                              spo2_auto:
+                                type: number
+                                description: SpO2 measurement automatically tracked by a device tracker
+                              rmssd:
+                                type: number
+                                description: Heart rate variability - Root mean square of the successive differences over "a few seconds" (in miliseconds).
+                              sdnn1:
+                                type: number
+                                description: Heart rate variability - Standard deviation of the NN over 1 minute (in miliseconds).
+                              hrv_quality:
+                                type: integer
+                                description: Heart rate variability - quality score.
+                              core_body_temperature:
+                                type: number
+                                description: The core body temperature
+                              rr:
+                                type: integer
+                                description: Respiration Rate (breaths per minute). *(Use 'data_fields' to request this data.)*
+                              chest_movement_rate:
+                                type: integer
+                                description: Chest movement rate (events per minute). *(Use 'data_fields' to request this data.)*
+      x-codeSamples:
+      - lang: PHP
+        source: "<?php\n\n$ch = curl_init();\n\ncurl_setopt($ch, CURLOPT_URL, \"https://wbsapi.withings.net/v2/measure  \");\n\ncurl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);\n\ncurl_setopt($ch, CURLOPT_HTTPHEADER, [\n\t'Authorization: Bearer YOUR_ACCESS_TOKEN'\n]);\n\ncurl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query([ \n\t'action' => 'getintradayactivity',\n\t'startdate' => 'startdate',\n\t'enddate' => 'enddate',\n\t'data_fields' => 'data_fields'\n]));\n\n$rsp = curl_exec($ch);\ncurl_close($ch);\n\nvar_dump($rsp);\n\n?>"
+      - lang: CURL
+        source: 'curl --header "Authorization: Bearer YOUR_ACCESS_TOKEN" --data "action=getintradayactivity&startdate=startdate&enddate=enddate&data_fields=data_fields" ''https://wbsapi.withings.net/v2/measure  '''
+  'https://wbsapi.withings.net/v2/measure ':
+    post:
+      tags:
+      - measure
+      description: 'Returns workout summaries, which are an aggregation all data that was captured during that workout.
+
+
+        Use the [Measure v2 - Getintradayactivity](#operation/measurev2-getintradayactivity) service to get the high frequency data used to build this summary.'
+      summary: Measure v2  - Getworkouts
+      operationId: measurev2-getworkouts
+      parameters:
+      - name: action
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Service action name. Must take the string value ```getworkouts```.
+      - name: startdateymd
+        in: query
+        required: true
+        schema:
+          type: string
+        description: 'DO NOT USE WITH FOLLOWING PARAMS: [lastupdate]<br>Start date.'
+        format: Y-m-d
+      - name: enddateymd
+        in: query
+        required: true
+        schema:
+          type: string
+        description: 'DO NOT USE WITH FOLLOWING PARAMS: [lastupdate]<br>End date. Required if startdateymd is provided.'
+        format: Y-m-d
+      - name: lastupdate
+        in: query
+        required: true
+        schema:
+          type: integer
+        description: 'DO NOT USE WITH FOLLOWING PARAMS: [startdateymd, enddateymd]<br>Timestamp for requesting data that were updated or created after this date.<br>Useful for data synchronization between systems.<br>Use this instead of startdateymd + enddateymd.'
+      - name: offset
+        in: query
+        required: false
+        schema:
+          type: integer
+        description: When a first call returns ```more:true``` and ```offset:XX```, set value ```XX``` in this parameter to retrieve next available rows.
+      - name: data_fields
+        in: query
+        required: false
+        schema:
+          type: string
+        description: "List of requested data fields, separated by a comma.<br>Available data fields are listed below.<br><u>Ex</u>: data_fields=calories,intensity,manual_intensity<br><br>calories<br>> Active calories burned (in Kcal). <br><br>intensity<br>> Intensity of the workout, from 0 to 100, as inputed by the user. If the user didn't manually give the intensity of his workout, the value will be 0.<br><br>manual_intensity<br>> Intensity of the workout, from 0 to 100, entered by the user. If the user didn't manually give the intensity of his workout, the value will be 0.<br><br>manual_distance<br>> Distance travelled manually entered by user (in meters). <br><br>manual_calories<br>> Active calories burned manually entered by user (in Kcal). <br><br>hr_average<br>> Average heart rate. (beats per minute).<br><br>hr_min<br>> Minimal heart rate (beats per minute). <br><br>hr_max<br>> Maximal heart rate (beats per minute).. <br><br>hr_zone_0<br>> Duration in seconds when heart rate was in a light zone (cf. <a href='/api-reference/#section/Glossary'>Glossary</a>). <br><br>hr_zone_1<br>> Duration in seconds when heart rate was in a moderate zone (cf. <a href='/api-reference/#section/Glossary'>Glossary</a>). <br><br>hr_zone_2<br>> Duration in seconds when heart rate was in an intense zone (cf. <a href='/api-reference/#section/Glossary'>Glossary</a>). <br><br>hr_zone_3<br>> Duration in seconds when heart rate was in maximal zone (cf. <a href='/api-reference/#section/Glossary'>Glossary</a>). <br><br>pause_duration<br>> Total pause time in second filled by user<br><br>algo_pause_duration<br>> Total pause time in seconds detected by Withings device (swim only)<br><br>spo2_average<br>> Average percent of SpO2 percent value during a workout<br><br>core_body_temperature_avg<br>> Avenage core body temperature (in celsius degrees). <br><br>core_body_temperature_min<br>> Minimal core body temperature (in celsius degrees). <br><br>core_body_temperature_max<br>> Maximal core body temperature (in celsius degrees). <br><br>core_body_temperature_status<br>> Status of the temperature. *(Use 'data_fields' to request this data)* Value can be: 'unknown', 'usual' or 'elevated'.\n <br><br>steps<br>> Number of steps. <br><br>distance<br>> Distance travelled (in meters). <br><br>elevation<br>> Number of floors climbed. <br><br>pool_laps<br>> Number of pool laps. <br><br>strokes<br>> Number of strokes. <br><br>pool_length<br>> Length of the pool. <br><br>"
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+        description: 'Used to pass your access token. Must take value: ```Bearer {your access_token}``` Replace {your access_token} with the access_token'
+      responses:
+        200:
+          description: ' (Click to unfold)'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    description: Response status. See <a href='#section/Response-status'>Status</a> section for details.
+                  body:
+                    type: object
+                    description: Response data.
+                    properties:
+                      series:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/workout_object'
+                      more:
+                        type: boolean
+                        description: To know if there is more data to fetch or not.
+                      offset:
+                        type: integer
+                        description: Offset to use to retrieve the next data.
+      x-codeSamples:
+      - lang: PHP
+        source: "<?php\n\n$ch = curl_init();\n\ncurl_setopt($ch, CURLOPT_URL, \"https://wbsapi.withings.net/v2/measure \");\n\ncurl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);\n\ncurl_setopt($ch, CURLOPT_HTTPHEADER, [\n\t'Authorization: Bearer YOUR_ACCESS_TOKEN'\n]);\n\ncurl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query([ \n\t'action' => 'getworkouts',\n\t'startdateymd' => '2020-07-01',\n\t'enddateymd' => '2020-07-02'\n]));\n\n$rsp = curl_exec($ch);\ncurl_close($ch);\n\nvar_dump($rsp);\n\n?>"
+      - lang: CURL
+        source: 'curl --header "Authorization: Bearer YOUR_ACCESS_TOKEN" --data "action=getworkouts&startdateymd=2020-07-01&enddateymd=2020-07-02" ''https://wbsapi.withings.net/v2/measure '''
+components:
+  schemas:
+    measure_object:
+      type: object
+      properties:
+        value:
+          type: integer
+          description: 'Value for the measure in S.I. units (kilograms, meters etc...). Value should be multiplied by 10 to the power of ```units``` to get the real value.
+
+
+            For ```meastype``` **130** (Atrial fibrillation result), the value is a classification integer and does not represent a physical measurement:
+
+
+            | Value | Description |
+
+            |---|---|
+
+            |0 | Negative |
+
+            |1 | Positive |
+
+            |2 | Inconclusive |
+
+            |3 | No signal |
+
+            |4 | Other |
+
+            |5 | Noise |
+
+            |6 | Low Heart Rate |
+
+            |7 | High Heart Rate |
+
+            |8 | Inconclusive US |
+
+            |9 | Negative normal HR |
+
+            |10 | Negative high HR |
+
+            |11 | Positive normal HR |
+
+            |12 | Positive high HR |
+
+            |13 | No Diagnosis |'
+          example: 65750
+        type:
+          type: integer
+          description: Type of the measure. See ```meastype``` input parameter.
+          example: 1
+        unit:
+          type: integer
+          description: 'Power of ten to multiply the ```value``` field to get the real value.<br>Formula: ```value * 10^unit = real value```.<br>Eg: ```value = 20 and unit = -1 => real value = 2```.'
+          example: -3
+        algo:
+          type: integer
+          description: Deprecated.
+          example: 3425
+        fm:
+          type: integer
+          description: Deprecated.
+        position:
+          type: integer
+          description: 'The device''s position during the measure.
+
+
+
+            | Value | Description|
+
+            |---|---|
+
+            |0 | Right Wrist|
+
+            |1 | Left Wrist|
+
+            |2 | Right Arm|
+
+            |3 | Left Arm|
+
+            |4 | Right Foot|
+
+            |5 | Left Foot|
+
+            |6 | Between Legs|
+
+            |8 | Left part of the body|
+
+            |9 | Right part of the body|
+
+            |10 | Left leg|
+
+            |11 | Right leg|
+
+            |12 | Torso|
+
+            |13 | Left hand|
+
+            |14 | Right hand|
+
+            |15 | Cardiovascular aortic area|
+
+            |16 | Cardiovascular pulmonic area|
+
+            |17 | Cardiovascular tricuspid area|
+
+            |18 | Cardiovascular mitral area|
+
+            |19 | Cardiovascular apex area|
+
+            |20 | Pulmonary front upper right area|
+
+            |21 | Pulmonary front upper left area|
+
+            |22 | Pulmonary front bottom right area|
+
+            |23 | Pulmonary front bottom left area|
+
+            |24 | Pulmonary back upper left area|
+
+            |25 | Pulmonary back upper right area|
+
+            |26 | Pulmonary back bottom left area|
+
+            |27 | Pulmonary back bottom right area|
+
+            |28 | Wide mode area|
+
+            |29 | Between arms|
+
+            |30 | Hold Right|
+
+            |31 | Hold Left|
+
+            '
+          example: 1
+    activity_object:
+      type: object
+      properties:
+        date:
+          type: string
+          description: Date of the aggregated data.
+          example: '2020-06-24'
+        timezone:
+          type: string
+          description: Timezone for the date.
+          example: Europe/Paris
+        deviceid:
+          type: string
+          description: 'ID of device that tracked the data. To retrieve information about this device, refer to : <a href=''/api-reference/#operation/userv2-getdevice''>User v2 - Getdevice</a>.'
+          example: 892359876fd8805ac45bab078c4828692f0276b1
+        hash_deviceid:
+          type: string
+          description: 'ID of device that tracked the data. To retrieve information about this device, refer to : <a href=''/api-reference/#operation/userv2-getdevice''>User v2 - Getdevice</a>.'
+          example: 892359876fd8805ac45bab078c4828692f0276b1
+        brand:
+          type: integer
+          description: Specifies if data comes from Withings (device or mobile application tracker) or an external way (Value is 1 for Withings and 18 for external)
+          example: 18
+        is_tracker:
+          type: boolean
+          description: Is true if data was tracked by a Withings tracker (such as Pulse, Go and Watches) otherwise data was tracked by a mobile application or an external way
+        modified:
+          type: integer
+          description: The timestamp of the last modification.
+          format: timestamp
+          example: 1594257200
+        model:
+          type: string
+          description: 'Device model. Value can be:
+
+
+
+            | Value | Description|
+
+            |---|---|
+
+            |Withings WBS01 | Scale|
+
+            |WS30 | Scale|
+
+            |Kid Scale | Scale|
+
+            |Smart Body Analyzer | Scale|
+
+            |Body+ | Scale|
+
+            |Body Cardio | Scale|
+
+            |Body | Scale|
+
+            |Body Scan | Scale|
+
+            |Body Pro | Scale|
+
+            |WBS10 | Scale|
+
+            |WBS11 | Scale|
+
+            |Body Comp | Scale|
+
+            |Smart Baby Monitor | Babyphone|
+
+            |Withings Home | Babyphone|
+
+            |Withings Blood Pressure Monitor V1 | Blood Pressure Monitor|
+
+            |Withings Blood Pressure Monitor V2 | Blood Pressure Monitor|
+
+            |Withings Blood Pressure Monitor V3 | Blood Pressure Monitor|
+
+            |BPM Core | Blood Pressure Monitor|
+
+            |BPM Connect | Blood Pressure Monitor|
+
+            |BPM Connect Pro | Blood Pressure Monitor|
+
+            |BPM Pro 2 | Blood Pressure Monitor|
+
+            |BPM Vision | Blood Pressure Monitor|
+
+            |Pulse | Activity Tracker|
+
+            |Activite | Activity Tracker|
+
+            |Activite (Pop, Steel) | Activity Tracker|
+
+            |Withings Go | Activity Tracker|
+
+            |Activite Steel HR | Activity Tracker|
+
+            |Activite Steel HR Sport Edition | Activity Tracker|
+
+            |Pulse HR | Activity Tracker|
+
+            |Move | Activity Tracker|
+
+            |Move ECG | Activity Tracker|
+
+            |ScanWatch | Activity Tracker|
+
+            |ScanWatch 2 | Activity Tracker|
+
+            |ScanWatch Light | Activity Tracker|
+
+            |Aura Dock | Sleep Monitor|
+
+            |Aura Sensor | Sleep Monitor|
+
+            |Aura Sensor V2 | Sleep Monitor|
+
+            |Thermo | Smart Connected Thermometer|
+
+            |BeamO | Smart Connected Thermometer|
+
+            |WUP01 | Gateway|
+
+            |Iglucose glucometer | iGlucose|
+
+            |iOS step tracker | HealthKit Apple|
+
+            |HealthKit step iPhone tracker | HealthKit Apple|
+
+            |HealthKit step Apple Watch tracker | HealthKit Apple|
+
+            |HealthKit other step tracker | HealthKit Apple|
+
+            |Android step tracker | HealthKit Google|
+
+            |GoogleFit tracker | HealthKit Google|
+
+            |Samsung Health tracker | HealthKit Google|
+
+            |Google Health Connect | HealthKit Google|
+
+            |Huawei tracker | HealthKit Huawei|
+
+            |Lingo Sensor | Lingo|
+
+            '
+          example: Pulse HR
+        modelid:
+          type: integer
+          description: '
+
+
+            | Value | Description|
+
+            |---|---|
+
+            |1 | Withings WBS01|
+
+            |2 | WS30|
+
+            |3 | Kid Scale|
+
+            |4 | Smart Body Analyzer|
+
+            |5 | Body+|
+
+            |6 | Body Cardio|
+
+            |7 | Body|
+
+            |10 | Body Scan|
+
+            |9 | Body Pro|
+
+            |11 | WBS10|
+
+            |12 | WBS11|
+
+            |18 | Body Comp|
+
+            |21 | Smart Baby Monitor|
+
+            |22 | Withings Home|
+
+            |41 | Withings Blood Pressure Monitor V1|
+
+            |42 | Withings Blood Pressure Monitor V2|
+
+            |43 | Withings Blood Pressure Monitor V3|
+
+            |44 | BPM Core|
+
+            |45 | BPM Connect|
+
+            |46 | BPM Connect Pro|
+
+            |47 | BPM Pro 2|
+
+            |48 | BPM Vision|
+
+            |51 | Pulse|
+
+            |52 | Activite|
+
+            |53 | Activite (Pop, Steel)|
+
+            |54 | Withings Go|
+
+            |55 | Activite Steel HR|
+
+            |59 | Activite Steel HR Sport Edition|
+
+            |58 | Pulse HR|
+
+            |90 | Move|
+
+            |91 | Move ECG|
+
+            |92 | Move ECG|
+
+            |93 | ScanWatch|
+
+            |94 | ScanWatch 2|
+
+            |95 | ScanWatch Light|
+
+            |60 | Aura Dock|
+
+            |61 | Aura Sensor|
+
+            |63 | Aura Sensor V2|
+
+            |70 | Thermo|
+
+            |71 | BeamO|
+
+            |100 | WUP01|
+
+            |1061 | Iglucose glucometer|
+
+            |1051 | iOS step tracker|
+
+            |1052 | iOS step tracker|
+
+            |1057 | HealthKit step iPhone tracker|
+
+            |1058 | HealthKit step Apple Watch tracker|
+
+            |1059 | HealthKit other step tracker|
+
+            |1053 | Android step tracker|
+
+            |1054 | Android step tracker|
+
+            |1055 | GoogleFit tracker|
+
+            |1056 | Samsung Health tracker|
+
+            |1060 | Google Health Connect|
+
+            |1062 | Huawei tracker|
+
+            |1063 | Lingo Sensor|
+
+            '
+          example: 59
+        steps:
+          type: integer
+          description: Number of steps. *(Use 'data_fields' to request this data.)*
+          example: 6200
+        distance:
+          type: number
+          description: Distance travelled (in meters). *(Use 'data_fields' to request this data.)*
+          example: 3000
+        elevation:
+          type: number
+          description: Number of floors climbed. *(Use 'data_fields' to request this data.)*
+          example: 100
+        soft:
+          type: integer
+          description: Duration of soft activities (in seconds). *(Use 'data_fields' to request this data.)*
+          example: 800
+        moderate:
+          type: integer
+          description: Duration of moderate activities (in seconds). *(Use 'data_fields' to request this data.)*
+          example: 1000
+        intense:
+          type: integer
+          description: Duration of intense activities (in seconds). *(Use 'data_fields' to request this data.)*
+          example: 700
+        active:
+          type: integer
+          description: Sum of intense and moderate activity durations (in seconds). *(Use 'data_fields' to request this data.)*
+          example: 2300
+        calories:
+          type: number
+          description: Active calories burned (in Kcal). Calculated by mixing fine granularity calories estimation, workouts estimated calories and calories manually set by the user. *(Use 'data_fields' to request this data.)*
+          example: 1200
+        totalcalories:
+          type: number
+          description: Total calories burned (in Kcal). Obtained by adding active calories (see ```calories```) and passive calories.
+          example: 3500
+        hr_average:
+          type: integer
+          description: Average heart rate. (beats per minute).*(Use 'data_fields' to request this data.)*
+          example: 80
+        hr_min:
+          type: integer
+          description: Minimal heart rate (beats per minute). *(Use 'data_fields' to request this data.)*
+          example: 70
+        hr_max:
+          type: integer
+          description: Maximal heart rate (beats per minute).. *(Use 'data_fields' to request this data.)*
+          example: 80
+        hr_zone_0:
+          type: integer
+          description: Duration in seconds when heart rate was in a light zone (cf. <a href='/api-reference/#section/Glossary'>Glossary</a>). *(Use 'data_fields' to request this data.)*
+          example: 100
+        hr_zone_1:
+          type: integer
+          description: Duration in seconds when heart rate was in a moderate zone (cf. <a href='/api-reference/#section/Glossary'>Glossary</a>). *(Use 'data_fields' to request this data.)*
+          example: 200
+        hr_zone_2:
+          type: integer
+          description: Duration in seconds when heart rate was in an intense zone (cf. <a href='/api-reference/#section/Glossary'>Glossary</a>). *(Use 'data_fields' to request this data.)*
+          example: 300
+        hr_zone_3:
+          type: integer
+          description: Duration in seconds when heart rate was in maximal zone (cf. <a href='/api-reference/#section/Glossary'>Glossary</a>). *(Use 'data_fields' to request this data.)*
+          example: 400
+    workout_object:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 12345
+        category:
+          type: integer
+          description: "Category of workout: \n\n\n| Value | Description|\n|---|---|\n|1 | Walk|\n|2 | Run|\n|3 | Hiking|\n|4 | Skating|\n|5 | BMX|\n|6 | Bicycling|\n|7 | Swimming|\n|8 | Surfing|\n|9 | Kitesurfing|\n|10 | Windsurfing|\n|11 | Bodyboard|\n|12 | Tennis|\n|13 | Table tennis|\n|14 | Squash|\n|15 | Badminton|\n|16 | Lift weights|\n|17 | Fitness|\n|18 | Elliptical|\n|19 | Pilates|\n|20 | Basket-ball|\n|21 | Soccer|\n|22 | Football|\n|23 | Rugby|\n|24 | Volley-ball|\n|25 | Waterpolo|\n|26 | Horse riding|\n|27 | Golf|\n|28 | Yoga|\n|29 | Dancing|\n|30 | Boxing|\n|31 | Fencing|\n|32 | Wrestling|\n|33 | Martial arts|\n|34 | Skiing|\n|35 | Snowboarding|\n|36 | Other|\n|128 | No activity|\n|187 | Rowing|\n|188 | Zumba|\n|191 | Baseball|\n|192 | Handball|\n|193 | Hockey|\n|194 | Ice hockey|\n|195 | Climbing|\n|196 | Ice skating|\n|272 | Multi-sport|\n|306 | Indoor walk|\n|307 | Indoor running|\n|308 | Indoor cycling|\n|455 | Standup Paddleboarding|\n|456 | Padel|\n|457 | Gaming|\n|490 | Beach volleyball|\n|491 | Stair Stepper|\n|492 | Skateboarding|\n|493 | Parkour|\n|494 | Kayaking|\n|495 | Canoeing|\n|496 | Sailing|\n|497 | Fishing|\n|498 | Trail Running|\n|499 | Snowshoeing|\n|500 | Paintball|\n|501 | Archery|\n|502 | Scuba Diving|\n|503 | Baseball Training|\n|504 | Biathlon|\n|505 | Bocce|\n|506 | Pétanque|\n|507 | Paragliding|\n|508 | Frisbee|\n|509 | Skydiving|\n|510 | Pickleball|\n|511 | Cornhole|\n|512 | Dodgeball|\n|513 | Ultimate|\n|514 | Teqball|\n|515 | Pushing a Wheelchair (Running Pace)|\n|516 | Pushing a Wheelchair (Walking Pace)|\n|517 | Athletics|\n|518 | Track Cycling|\n|519 | Pentathlon|\n|520 | Sport Shooting|\n|521 | Triathlon|\n|522 | Diving|\n|523 | Mountain Biking|\n|524 | Gravel Biking|\n|525 | E-Biking|\n|526 | E-Mountain Biking|\n|527 | Handcycling|\n|528 | Velomobile|\n|529 | Backcountry Skiing|\n|530 | Nordic Skiing|\n|531 | Roller Skiing|\n|532 | Racquetball|\n|534 | Hip Hop|\n|535 | Muaythai|\n|536 | Taekwondo|\n|537 | Judo|\n|538 | Trampoline|\n|539 | Standing Frame|\n|540 | Seated Strenght|\n|541 | Seated Cardio|\n|542 | Walk With Walker|\n|543 | Walk With Cane|\n|544 | Breaking|\n|545 | Chores|\n|546 | Crossfit|\n|547 | Spinclass|\n|548 | Cricket|\n|549 | Flamenco Dancing|\n|550 | HIIT|\n|551 | Meditation|\n|552 | Stretching|\n|553 | Yard Work Gardening|\n|554 | Cleaning|\n|555 | Public Speaking|\n|556 | Spikeball|\n|557 | Lacrosse|\n|558 | Baby Wearing|\n|559 | Dog Walking|\n|560 | Breathing excercises|\n|561 | Balance Drills|\n|562 | Pushing a Stroller|\n|563 | Toddler Wearing|\n|564 | Bowling|\n|565 | Lasertag|\n|566 | Nordic Walking|\n|567 | Sumo Wrestling|\n|568 | Cooking|\n"
+          example: 36
+        timezone:
+          type: string
+          description: Timezone for the date.
+          example: Europe/Paris
+        model:
+          type: integer
+          description: 'Source for the workout. Value can be:
+
+
+
+            | Value | Description|
+
+            |---|---|
+
+            |1 | Withings WBS01, type: 1|
+
+            |2 | Withings WBS03, type: 1|
+
+            |3 | Kid Scale, type: 1|
+
+            |4 | Withings WBS02, type: 1|
+
+            |5 | Body+, type: 1|
+
+            |6 | Body Cardio, type: 1|
+
+            |7 | Body, type: 1|
+
+            |13 | Body+, type: 1|
+
+            |21 | Smart Baby Monitor, type: 2|
+
+            |22 | Withings Home, type: 2|
+
+            |41 | Withings Blood Pressure V1, type: 4|
+
+            |42 | Withings Blood Pressure V2, type: 4|
+
+            |43 | Withings Blood Pressure V3, type: 4|
+
+            |44 | BPM Core, type: 4|
+
+            |45 | BPM Connect, type: 4|
+
+            |51 | Pulse, type: 16|
+
+            |52 | Activite, type: 16|
+
+            |53 | Activite (Pop, Steel), type: 16|
+
+            |54 | Withings Go, type: 16|
+
+            |55 | Activite Steel HR, type: 16|
+
+            |58 | Pulse HR, type: 16|
+
+            |59 | Activite Steel HR Sport Edition, type: 16|
+
+            |60 | Aura dock, type: 32|
+
+            |61 | Aura sensor, type: 32|
+
+            |62 | Aura dock, type: 32|
+
+            |63 | Sleep sensor, type: 32|
+
+            |70 | Thermo, type: 64|
+
+            |91 | Move ECG|
+
+            |92 | Move ECG|
+
+            |1051 | iOS step tracker, type 16|
+
+            |1052 | iOS step tracker, type 16|
+
+            |1053 | Android step tracker, type 16|
+
+            |1054 | Android step tracker, type 16|
+
+            |1055 | GoogleFit tracker, type 16|
+
+            |1056 | Samsung Health tracker, type 16|
+
+            |1057 | HealthKit step iPhone tracker, type 16|
+
+            |1058 | HealthKit step Apple Watch tracker, type 16|
+
+            |1059 | HealthKit other step tracker, type 16|
+
+            |1060 | Google Health Connect, type 16|
+
+            |1062 | Huawei tracker, type 16|
+
+            |1063 | Lingo Sensor, type 1007|
+
+            '
+          example: 59
+        attrib:
+          type: integer
+          description: 'The way the measure was attributed to the user:
+
+
+
+            | Value | Description|
+
+            |---|---|
+
+            |0 | The measuregroup has been captured by a device and is known to belong to this user (and is not ambiguous)|
+
+            |1 | The measuregroup has been captured by a device but may belong to other users as well as this one (it is ambiguous)|
+
+            |2 | The measuregroup has been entered manually for this particular user|
+
+            |4 | The measuregroup has been entered manually during user creation (and may not be accurate)|
+
+            |5 | Measure auto, it''s only for the Blood Pressure Monitor. This device can make many measures and computed the best value|
+
+            |7 | Measure confirmed. You can get this value if the user confirmed a detected activity|
+
+            |8 | Same as attrib 0|
+
+            |15 | The measure has been performed in specific guided conditions. Apply to Nerve Health Score|
+
+            '
+        startdate:
+          type: integer
+          description: The starting datetime for workouts data.
+          format: timestamp
+          example: 1594245600
+        enddate:
+          type: integer
+          description: The ending datetime for workouts data.
+          format: timestamp
+          example: 1594257200
+        date:
+          type: string
+          description: Date at which the measure was taken or entered.
+          example: '2020-07-09'
+        modified:
+          type: integer
+          description: The timestamp of the last modification.
+          format: timestamp
+          example: 1594257200
+        deviceid:
+          type: string
+          description: 'ID of device that tracked the data. To retrieve information about this device, refer to : <a href=''/api-reference/#operation/userv2-getdevice''>User v2 - Getdevice</a>.'
+          example: 892359876fd8805ac45bab078c4828692f0276b1
+        data:
+          type: object
+          description: Details of workout.
+          properties:
+            algo_pause_duration:
+              type: integer
+              description: '*Available for all categories except Multi-sport, Breathing excercises*<br><br>Total pause time in seconds detected by Withings device (swim only)'
+            calories:
+              type: integer
+              description: '*Available for all categories except Multi-sport, Breathing excercises*<br><br>Active calories burned (in Kcal). *(Use ''data_fields'' to request this data.)*'
+            core_body_temperature_avg:
+              type: integer
+              description: '*Available for all categories except Multi-sport, Breathing excercises*<br><br>Avenage core body temperature (in celsius degrees). *(Use ''data_fields'' to request this data.)*'
+            core_body_temperature_max:
+              type: integer
+              description: '*Available for all categories except Multi-sport, Breathing excercises*<br><br>Maximal core body temperature (in celsius degrees). *(Use ''data_fields'' to request this data.)*'
+            core_body_temperature_min:
+              type: integer
+              description: '*Available for all categories except Multi-sport, Breathing excercises*<br><br>Minimal core body temperature (in celsius degrees). *(Use ''data_fields'' to request this data.)*'
+            core_body_temperature_status:
+              type: integer
+              description: "*Available for all categories except Multi-sport, Breathing excercises*<br><br>Status of the temperature. *(Use 'data_fields' to request this data)* Value can be: 'unknown', 'usual' or 'elevated'.\n \n\n| Value|\n|---|\n|unknown|\n|usual|\n|elevated|\n"
+            distance:
+              type: integer
+              description: '*Available for all categories except Swimming, Multi-sport, Breathing excercises*<br><br>Distance travelled (in meters). *(Use ''data_fields'' to request this data.)*'
+            elevation:
+              type: integer
+              description: '*Available for all categories except Swimming, Multi-sport, Breathing excercises*<br><br>Number of floors climbed. *(Use ''data_fields'' to request this data.)*'
+            hr_average:
+              type: integer
+              description: '*Available for all categories except Multi-sport, Breathing excercises*<br><br>Average heart rate. (beats per minute).*(Use ''data_fields'' to request this data.)*'
+            hr_max:
+              type: integer
+              description: '*Available for all categories except Multi-sport, Breathing excercises*<br><br>Maximal heart rate (beats per minute).. *(Use ''data_fields'' to request this data.)*'
+            hr_min:
+              type: integer
+              description: '*Available for all categories except Multi-sport, Breathing excercises*<br><br>Minimal heart rate (beats per minute). *(Use ''data_fields'' to request this data.)*'
+            hr_zone_0:
+              type: integer
+              description: '*Available for all categories except Multi-sport, Breathing excercises*<br><br>Duration in seconds when heart rate was in a light zone (cf. <a href=''/api-reference/#section/Glossary''>Glossary</a>). *(Use ''data_fields'' to request this data.)*'
+            hr_zone_1:
+              type: integer
+              description: '*Available for all categories except Multi-sport, Breathing excercises*<br><br>Duration in seconds when heart rate was in a moderate zone (cf. <a href=''/api-reference/#section/Glossary''>Glossary</a>). *(Use ''data_fields'' to request this data.)*'
+            hr_zone_2:
+              type: integer
+              description: '*Available for all categories except Multi-sport, Breathing excercises*<br><br>Duration in seconds when heart rate was in an intense zone (cf. <a href=''/api-reference/#section/Glossary''>Glossary</a>). *(Use ''data_fields'' to request this data.)*'
+            hr_zone_3:
+              type: integer
+              description: '*Available for all categories except Multi-sport, Breathing excercises*<br><br>Duration in seconds when heart rate was in maximal zone (cf. <a href=''/api-reference/#section/Glossary''>Glossary</a>). *(Use ''data_fields'' to request this data.)*'
+            intensity:
+              type: integer
+              description: '*Available for all categories except Multi-sport, Breathing excercises*<br><br>Intensity of the workout, from 0 to 100, as inputed by the user. If the user didn''t manually give the intensity of his workout, the value will be 0.'
+            manual_calories:
+              type: integer
+              description: '*Available for all categories except Multi-sport, Breathing excercises*<br><br>Active calories burned manually entered by user (in Kcal). *(Use ''data_fields'' to request this data.)*'
+            manual_distance:
+              type: integer
+              description: '*Available for all categories except Multi-sport, Breathing excercises*<br><br>Distance travelled manually entered by user (in meters). *(Use ''data_fields'' to request this data.)*'
+            manual_intensity:
+              type: integer
+              description: '*Available for all categories except Multi-sport, Breathing excercises*<br><br>Intensity of the workout, from 0 to 100, entered by the user. If the user didn''t manually give the intensity of his workout, the value will be 0.'
+            pause_duration:
+              type: integer
+              description: '*Available for all categories except Multi-sport, Breathing excercises*<br><br>Total pause time in second filled by user'
+            pool_laps:
+              type: integer
+              description: '*Available only for Swimming*<br><br>Number of pool laps. *(Use ''data_fields'' to request this data.)*'
+            pool_length:
+              type: integer
+              description: '*Available only for Swimming*<br><br>Length of the pool. *(Use ''data_fields'' to request this data.)*'
+            spo2_average:
+              type: integer
+              description: '*Available for all categories except Multi-sport, Breathing excercises*<br><br>Average percent of SpO2 percent value during a workout'
+            steps:
+              type: integer
+              description: '*Available for all categories except Swimming, Multi-sport, Breathing excercises*<br><br>Number of steps. *(Use ''data_fields'' to request this data.)*'
+            strokes:
+              type: integer
+              description: '*Available only for Swimming*<br><br>Number of strokes. *(Use ''data_fields'' to request this data.)*'
+    measuregrp_object:
+      type: object
+      properties:
+        grpid:
+          type: integer
+          description: Unique identifier of the measure group.
+          format: int64
+          example: 12
+        attrib:
+          type: integer
+          description: 'The way the measure was attributed to the user:
+
+
+
+            | Value | Description|
+
+            |---|---|
+
+            |0 | The measuregroup has been captured by a device and is known to belong to this user (and is not ambiguous)|
+
+            |1 | The measuregroup has been captured by a device but may belong to other users as well as this one (it is ambiguous)|
+
+            |2 | The measuregroup has been entered manually for this particular user|
+
+            |4 | The measuregroup has been entered manually during user creation (and may not be accurate)|
+
+            |5 | Measure auto, it''s only for the Blood Pressure Monitor. This device can make many measures and computed the best value|
+
+            |7 | Measure confirmed. You can get this value if the user confirmed a detected activity|
+
+            |8 | Same as attrib 0|
+
+            |15 | The measure has been performed in specific guided conditions. Apply to Nerve Health Score|
+
+            '
+          example: 1
+        date:
+          type: integer
+          description: UNIX timestamp when measures were taken.
+          format: timestamp
+          example: 1594245600
+        created:
+          type: integer
+          description: UNIX timestamp when measures were stored.
+          format: timestamp
+          example: 1594246600
+        modified:
+          type: integer
+          description: UNIX timestamp when measures were last updated.
+          format: timestamp
+          example: 1594257200
+        category:
+          type: integer
+          description: Category for the measures in the group (see category input parameter).
+          example: 1594257200
+        deviceid:
+          type: string
+          description: 'ID of device that tracked the data. To retrieve information about this device, refer to : <a href=''/api-reference/#operation/userv2-getdevice''>User v2 - Getdevice</a>.'
+          example: 892359876fd8805ac45bab078c4828692f0276b1
+        hash_deviceid:
+          type: string
+          description: 'ID of device that tracked the data. To retrieve information about this device, refer to : <a href=''/api-reference/#operation/userv2-getdevice''>User v2 - Getdevice</a>.'
+          example: 892359876fd8805ac45bab078c4828692f0276b1
+        measures:
+          type: array
+          description: List of measures in the group.
+          items:
+            $ref: '#/components/schemas/measure_object'
+        model:
+          type: string
+          description: 'Device model. Value can be:
+
+
+
+            | Value | Description|
+
+            |---|---|
+
+            |Withings WBS01 | Scale|
+
+            |WS30 | Scale|
+
+            |Kid Scale | Scale|
+
+            |Smart Body Analyzer | Scale|
+
+            |Body+ | Scale|
+
+            |Body Cardio | Scale|
+
+            |Body | Scale|
+
+            |Body Scan | Scale|
+
+            |Body Pro | Scale|
+
+            |WBS10 | Scale|
+
+            |WBS11 | Scale|
+
+            |Body Comp | Scale|
+
+            |Smart Baby Monitor | Babyphone|
+
+            |Withings Home | Babyphone|
+
+            |Withings Blood Pressure Monitor V1 | Blood Pressure Monitor|
+
+            |Withings Blood Pressure Monitor V2 | Blood Pressure Monitor|
+
+            |Withings Blood Pressure Monitor V3 | Blood Pressure Monitor|
+
+            |BPM Core | Blood Pressure Monitor|
+
+            |BPM Connect | Blood Pressure Monitor|
+
+            |BPM Connect Pro | Blood Pressure Monitor|
+
+            |BPM Pro 2 | Blood Pressure Monitor|
+
+            |BPM Vision | Blood Pressure Monitor|
+
+            |Pulse | Activity Tracker|
+
+            |Activite | Activity Tracker|
+
+            |Activite (Pop, Steel) | Activity Tracker|
+
+            |Withings Go | Activity Tracker|
+
+            |Activite Steel HR | Activity Tracker|
+
+            |Activite Steel HR Sport Edition | Activity Tracker|
+
+            |Pulse HR | Activity Tracker|
+
+            |Move | Activity Tracker|
+
+            |Move ECG | Activity Tracker|
+
+            |ScanWatch | Activity Tracker|
+
+            |ScanWatch 2 | Activity Tracker|
+
+            |ScanWatch Light | Activity Tracker|
+
+            |Aura Dock | Sleep Monitor|
+
+            |Aura Sensor | Sleep Monitor|
+
+            |Aura Sensor V2 | Sleep Monitor|
+
+            |Thermo | Smart Connected Thermometer|
+
+            |BeamO | Smart Connected Thermometer|
+
+            |WUP01 | Gateway|
+
+            |Iglucose glucometer | iGlucose|
+
+            |iOS step tracker | HealthKit Apple|
+
+            |HealthKit step iPhone tracker | HealthKit Apple|
+
+            |HealthKit step Apple Watch tracker | HealthKit Apple|
+
+            |HealthKit other step tracker | HealthKit Apple|
+
+            |Android step tracker | HealthKit Google|
+
+            |GoogleFit tracker | HealthKit Google|
+
+            |Samsung Health tracker | HealthKit Google|
+
+            |Google Health Connect | HealthKit Google|
+
+            |Huawei tracker | HealthKit Huawei|
+
+            |Lingo Sensor | Lingo|
+
+            '
+          example: Body Cardio
+        model_id:
+          type: integer
+          description: '
+
+
+            | Value | Description|
+
+            |---|---|
+
+            |1 | Withings WBS01|
+
+            |2 | WS30|
+
+            |3 | Kid Scale|
+
+            |4 | Smart Body Analyzer|
+
+            |5 | Body+|
+
+            |6 | Body Cardio|
+
+            |7 | Body|
+
+            |10 | Body Scan|
+
+            |9 | Body Pro|
+
+            |11 | WBS10|
+
+            |12 | WBS11|
+
+            |18 | Body Comp|
+
+            |21 | Smart Baby Monitor|
+
+            |22 | Withings Home|
+
+            |41 | Withings Blood Pressure Monitor V1|
+
+            |42 | Withings Blood Pressure Monitor V2|
+
+            |43 | Withings Blood Pressure Monitor V3|
+
+            |44 | BPM Core|
+
+            |45 | BPM Connect|
+
+            |46 | BPM Connect Pro|
+
+            |47 | BPM Pro 2|
+
+            |48 | BPM Vision|
+
+            |51 | Pulse|
+
+            |52 | Activite|
+
+            |53 | Activite (Pop, Steel)|
+
+            |54 | Withings Go|
+
+            |55 | Activite Steel HR|
+
+            |59 | Activite Steel HR Sport Edition|
+
+            |58 | Pulse HR|
+
+            |90 | Move|
+
+            |91 | Move ECG|
+
+            |92 | Move ECG|
+
+            |93 | ScanWatch|
+
+            |94 | ScanWatch 2|
+
+            |95 | ScanWatch Light|
+
+            |60 | Aura Dock|
+
+            |61 | Aura Sensor|
+
+            |63 | Aura Sensor V2|
+
+            |70 | Thermo|
+
+            |71 | BeamO|
+
+            |100 | WUP01|
+
+            |1061 | Iglucose glucometer|
+
+            |1051 | iOS step tracker|
+
+            |1052 | iOS step tracker|
+
+            |1057 | HealthKit step iPhone tracker|
+
+            |1058 | HealthKit step Apple Watch tracker|
+
+            |1059 | HealthKit other step tracker|
+
+            |1053 | Android step tracker|
+
+            |1054 | Android step tracker|
+
+            |1055 | GoogleFit tracker|
+
+            |1056 | Samsung Health tracker|
+
+            |1060 | Google Health Connect|
+
+            |1062 | Huawei tracker|
+
+            |1063 | Lingo Sensor|
+
+            '
+          example: 6
+        comment:
+          type: string
+          description: Deprecated. This property will always be empty.
+          example: A measurement comment
+x-tagGroups:
+- name: Api Reference Content
+  tags:
+  - oauth2
+  - dropshipment
+  - order
+  - user
+  - measure
+  - heart
+  - stetho
+  - sleep
+  - notify
+  - survey
+  - answers
+  - signature
+  - rawdata
+  - device
+  - models
+  - response_status
+  - Glossary
+  - nudge
+  - nudgecampaign

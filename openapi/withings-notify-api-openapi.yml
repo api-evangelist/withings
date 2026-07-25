@@ -1,0 +1,385 @@
+openapi: 3.0.3
+info:
+  version: '2.0'
+  title: Withings developer documentation answers notify API
+  description: These webservices allows you to get user's answers from surveys
+servers:
+- url: https://wbsapi.withings.net/
+tags:
+- name: notify
+  x-displayName: Notify
+  description: "These services will allow you to be notified when new data is collected by Withings devices, or when specific events happen.\n\t\tLearn more about our notification services in [the dedicated section](/developer-guide/v3/data-api/notifications/notification-overview/)"
+paths:
+  'https://wbsapi.withings.net/notify ':
+    post:
+      tags:
+      - notify
+      description: Returns the last notification service that was subscribed for a user and for a given appli. If no appli is specified, appli=1 will be considered.
+      summary: Notify  - Get
+      operationId: notify-get
+      parameters:
+      - name: action
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Service action name. Must take the string value ```get```.
+      - name: callbackurl
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Your ```Callback URL```.
+      - name: appli
+        in: query
+        required: false
+        schema:
+          type: integer
+        description: Refer to the [Notifications section](/developer-guide/v3/data-api/notifications/notification-overview/) to know which value you should use.
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+        description: 'Used to pass your access token. Must take value: ```Bearer {your access_token}``` Replace {your access_token} with the access_token'
+      responses:
+        200:
+          description: ' (Click to unfold)'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    description: Response status. See <a href='#section/Response-status'>Status</a> section for details.
+                  body:
+                    type: object
+                    description: Response data.
+                    properties:
+                      appli:
+                        type: integer
+                        description: 'Refer to the [Notifications section](/developer-guide/v3/data-api/notifications/notification-overview/) to know the meaning of each values.
+
+                          '
+                        example: 4
+                      callbackurl:
+                        type: string
+                        description: Callback url of the notification.
+                        example: https://www.withings.com
+                      comment:
+                        type: string
+                        description: Comment entered when creating the notification configuration.
+                        example: My notification subcription comment
+      x-codeSamples:
+      - lang: PHP
+        source: "<?php\n\n$ch = curl_init();\n\ncurl_setopt($ch, CURLOPT_URL, \"https://wbsapi.withings.net/notify \");\n\ncurl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);\n\ncurl_setopt($ch, CURLOPT_HTTPHEADER, [\n\t'Authorization: Bearer YOUR_ACCESS_TOKEN'\n]);\n\ncurl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query([ \n\t'action' => 'get',\n\t'callbackurl' => 'callbackurl',\n\t'appli' => 'appli'\n]));\n\n$rsp = curl_exec($ch);\ncurl_close($ch);\n\nvar_dump($rsp);\n\n?>"
+      - lang: CURL
+        source: 'curl --header "Authorization: Bearer YOUR_ACCESS_TOKEN" --data "action=get&callbackurl=callbackurl&appli=appli" ''https://wbsapi.withings.net/notify '''
+  'https://wbsapi.withings.net/notify  ':
+    post:
+      tags:
+      - notify
+      description: Lists notification configuration for this user.
+      summary: Notify  - List
+      operationId: notify-list
+      parameters:
+      - name: action
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Service action name. Must take the string value ```list```.
+      - name: appli
+        in: query
+        required: false
+        schema:
+          type: integer
+        description: Refer to the [Notifications section](/developer-guide/v3/data-api/notifications/notification-overview/) to know which value you should use.
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+        description: 'Used to pass your access token. Must take value: ```Bearer {your access_token}``` Replace {your access_token} with the access_token'
+      responses:
+        200:
+          description: ' (Click to unfold)'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    description: Response status. See <a href='#section/Response-status'>Status</a> section for details.
+                  body:
+                    type: object
+                    description: Response data.
+                    properties:
+                      profiles:
+                        type: array
+                        description: List of notification configurations for this user.
+                        items:
+                          $ref: '#/components/schemas/notify_object'
+      x-codeSamples:
+      - lang: PHP
+        source: "<?php\n\n$ch = curl_init();\n\ncurl_setopt($ch, CURLOPT_URL, \"https://wbsapi.withings.net/notify  \");\n\ncurl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);\n\ncurl_setopt($ch, CURLOPT_HTTPHEADER, [\n\t'Authorization: Bearer YOUR_ACCESS_TOKEN'\n]);\n\ncurl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query([ \n\t'action' => 'list',\n\t'appli' => 'appli'\n]));\n\n$rsp = curl_exec($ch);\ncurl_close($ch);\n\nvar_dump($rsp);\n\n?>"
+      - lang: CURL
+        source: 'curl --header "Authorization: Bearer YOUR_ACCESS_TOKEN" --data "action=list&appli=appli" ''https://wbsapi.withings.net/notify  '''
+  'https://wbsapi.withings.net/notify    ':
+    post:
+      tags:
+      - notify
+      description: Disables all notifications for a given user.
+      summary: Notify  - Revoke
+      operationId: notify-revoke
+      parameters:
+      - name: action
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Service action name. Must take the string value ```revoke```.
+      - name: callbackurl
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Your ```Callback URL```.
+      - name: appli
+        in: query
+        required: false
+        schema:
+          type: integer
+        description: Refer to the [Notifications section](/developer-guide/v3/data-api/notifications/notification-overview/) to know which value you should use.
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+        description: 'Used to pass your access token. Must take value: ```Bearer {your access_token}``` Replace {your access_token} with the access_token'
+      responses:
+        200:
+          description: ' (Click to unfold)'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    description: Response status. See <a href='#section/Response-status'>Status</a> section for details.
+                  body:
+                    type: object
+                    description: Response data.
+                    properties: []
+      x-codeSamples:
+      - lang: PHP
+        source: "<?php\n\n$ch = curl_init();\n\ncurl_setopt($ch, CURLOPT_URL, \"https://wbsapi.withings.net/notify    \");\n\ncurl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);\n\ncurl_setopt($ch, CURLOPT_HTTPHEADER, [\n\t'Authorization: Bearer YOUR_ACCESS_TOKEN'\n]);\n\ncurl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query([ \n\t'action' => 'revoke',\n\t'callbackurl' => 'callbackurl',\n\t'appli' => 'appli'\n]));\n\n$rsp = curl_exec($ch);\ncurl_close($ch);\n\nvar_dump($rsp);\n\n?>"
+      - lang: CURL
+        source: 'curl --header "Authorization: Bearer YOUR_ACCESS_TOKEN" --data "action=revoke&callbackurl=callbackurl&appli=appli" ''https://wbsapi.withings.net/notify    '''
+  https://wbsapi.withings.net/notify:
+    post:
+      tags:
+      - notify
+      description: 'This service allows to receive notifications from Withings:
+
+
+        - for the Health Data APIs : your application can subscribe to a variety or events, including user data  creation and updates. Notifications will be sent to your servers when the subscribed events occur. ([more information](/developer-guide/v3/data-api/notifications/notification-overview)). Please note that you need to subscribe for each individual user.
+
+        - for the Logistics APIs: a notification will be sent when there is an order update ([more information](developer-guide/v3/integration-guide/dropship-only/logistics-api/observe-order-updates))
+
+        - for partners integrating Withings Cellular Solutions or Withings Mobile SDK: you can use the ```NO_ACCOUNT_ASSOCIATED``` event to track unassociated devices . Please note you need to subscribe only once per application.
+
+
+        **Note**: depending on your use case, the request parameters may change:
+
+
+        - for the Health Data APIs: use a valid ```access_token``` in the header but don''t use ```signature``` and ```nonce``` in the query parameters.
+
+        - for the Logistics APIs: the subscription is done automatically an order is placed (please refer to the [dedicated documentation section](developer-guide/v3/integration-guide/dropship-only/logistics-api/observe-order-updates#how-to-receive-order-update-notifications))
+
+        - for partners integrating Withings Cellular Solutions or Withings Mobile SDK, to subscribe to the ```NO_ACCOUNT_ASSOCIATED``` event (appli = 53): use ```signature``` and ```nonce``` parameters but don''t include an ```access_token``` in the header.'
+      summary: Notify  - Subscribe
+      operationId: notify-subscribe
+      parameters:
+      - name: action
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Service action name. Must take the string value ```subscribe```.
+      - name: callbackurl
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Your ```Callback URL```.
+      - name: appli
+        in: query
+        required: true
+        schema:
+          type: integer
+        description: Refer to the [Notifications section](/developer-guide/v3/data-api/notifications/notification-overview/) to know which value you should use.
+      - name: signature
+        in: query
+        required: true
+        schema:
+          type: string
+        description: 'DO NOT USE WITH FOLLOWING PARAMS: [access_token]<br>Hash of params (Cf. [Signature hash protocol](/developer-guide/v3/get-access/sign-your-requests)).'
+      - name: nonce
+        in: query
+        required: true
+        schema:
+          type: string
+        description: 'DO NOT USE WITH FOLLOWING PARAMS: [access_token]<br>A random token used to prevent replay attacks (Cf. [Signature v2 - Getnonce](#operation/signaturev2-getnonce))'
+      - name: client_id
+        in: query
+        required: true
+        schema:
+          type: string
+        description: 'DO NOT USE WITH FOLLOWING PARAMS: [access_token]<br>Id of the client'
+      - name: comment
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Comment.
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+        description: 'Used to pass your access token. Must take value: ```Bearer {your access_token}``` Replace {your access_token} with the access_token'
+      responses:
+        200:
+          description: ' (Click to unfold)'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    description: Response status. See <a href='#section/Response-status'>Status</a> section for details.
+                  body:
+                    type: object
+                    description: Response data.
+                    properties: []
+      x-codeSamples:
+      - lang: PHP
+        source: "<?php\n\n$ch = curl_init();\n\ncurl_setopt($ch, CURLOPT_URL, \"https://wbsapi.withings.net/notify\");\n\ncurl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);\n\ncurl_setopt($ch, CURLOPT_HTTPHEADER, [\n\t'Authorization: Bearer YOUR_ACCESS_TOKEN'\n]);\n\ncurl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query([ \n\t'action' => 'subscribe',\n\t'callbackurl' => 'callbackurl',\n\t'appli' => 'appli',\n\t'signature' => 'signature',\n\t'nonce' => 'string',\n\t'client_id' => 'client_id',\n\t'comment' => 'comment'\n]));\n\n$rsp = curl_exec($ch);\ncurl_close($ch);\n\nvar_dump($rsp);\n\n?>"
+      - lang: CURL
+        source: 'curl --header "Authorization: Bearer YOUR_ACCESS_TOKEN" --data "action=subscribe&callbackurl=callbackurl&appli=appli&signature=signature&nonce=string&client_id=client_id&comment=comment" ''https://wbsapi.withings.net/notify'''
+  'https://wbsapi.withings.net/notify   ':
+    post:
+      tags:
+      - notify
+      description: Updates the ```callbackurl``` and/or ```appli``` of a created notification subscription. If multiple subscriptions were made for a given user, ```callbackurl``` and ```appli```, only one of the subscriptions will be updated.
+      summary: Notify  - Update
+      operationId: notify-update
+      parameters:
+      - name: action
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Service action name. Must take the string value ```update```.
+      - name: callbackurl
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Your ```Callback URL```.
+      - name: appli
+        in: query
+        required: true
+        schema:
+          type: integer
+        description: Refer to the [Notifications section](/developer-guide/v3/data-api/notifications/notification-overview/) to know which value you should use.
+      - name: new_callbackurl
+        in: query
+        required: true
+        schema:
+          type: string
+        description: 'DO NOT USE WITH FOLLOWING PARAMS: [new_appli, comment]<br>The new callback url.'
+      - name: new_appli
+        in: query
+        required: true
+        schema:
+          type: integer
+        description: 'DO NOT USE WITH FOLLOWING PARAMS: [new_callbackurl, comment]<br>The new application type.'
+      - name: comment
+        in: query
+        required: true
+        schema:
+          type: string
+        description: 'DO NOT USE WITH FOLLOWING PARAMS: [new_callbackurl, new_appli]<br>Comment.'
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+        description: 'Used to pass your access token. Must take value: ```Bearer {your access_token}``` Replace {your access_token} with the access_token'
+      responses:
+        200:
+          description: ' (Click to unfold)'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    description: Response status. See <a href='#section/Response-status'>Status</a> section for details.
+                  body:
+                    type: object
+                    description: Response data.
+                    properties: []
+      x-codeSamples:
+      - lang: PHP
+        source: "<?php\n\n$ch = curl_init();\n\ncurl_setopt($ch, CURLOPT_URL, \"https://wbsapi.withings.net/notify   \");\n\ncurl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);\n\ncurl_setopt($ch, CURLOPT_HTTPHEADER, [\n\t'Authorization: Bearer YOUR_ACCESS_TOKEN'\n]);\n\ncurl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query([ \n\t'action' => 'update',\n\t'callbackurl' => 'callbackurl',\n\t'appli' => 'appli',\n\t'new_callbackurl' => 'new_callbackurl',\n\t'new_appli' => 'new_appli',\n\t'comment' => 'comment'\n]));\n\n$rsp = curl_exec($ch);\ncurl_close($ch);\n\nvar_dump($rsp);\n\n?>"
+      - lang: CURL
+        source: 'curl --header "Authorization: Bearer YOUR_ACCESS_TOKEN" --data "action=update&callbackurl=callbackurl&appli=appli&new_callbackurl=new_callbackurl&new_appli=new_appli&comment=comment" ''https://wbsapi.withings.net/notify   '''
+components:
+  schemas:
+    notify_object:
+      type: object
+      properties:
+        appli:
+          type: integer
+          description: 'Refer to the [Notifications section](/developer-guide/v3/data-api/notifications/notification-overview/) to know the meaning of each values.
+
+            '
+          example: 1
+        callbackurl:
+          type: string
+          description: Callback url of the notification.
+          example: https://www.withings.com
+        comment:
+          type: string
+          description: Comment entered when creating the notification configuration.
+          example: My notification subscription
+x-tagGroups:
+- name: Api Reference Content
+  tags:
+  - oauth2
+  - dropshipment
+  - order
+  - user
+  - measure
+  - heart
+  - stetho
+  - sleep
+  - notify
+  - survey
+  - answers
+  - signature
+  - rawdata
+  - device
+  - models
+  - response_status
+  - Glossary
+  - nudge
+  - nudgecampaign

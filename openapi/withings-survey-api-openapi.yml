@@ -1,0 +1,418 @@
+openapi: 3.0.3
+info:
+  version: '2.0'
+  title: Withings developer documentation answers survey API
+  description: These webservices allows you to get user's answers from surveys
+servers:
+- url: https://wbsapi.withings.net/
+tags:
+- name: survey
+  x-displayName: Survey
+  description: These webservices allows you to to manage user's surveys
+paths:
+  'https://wbsapi.withings.net/v2/survey ':
+    post:
+      tags:
+      - survey
+      description: ''
+      summary: Survey v2  - Activate
+      operationId: surveyv2-activate
+      parameters:
+      - name: action
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Service action name. Must take the string value ```activate```.
+      - name: signature
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Hash of params (Cf. [Signature hash protocol](/developer-guide/v3/get-access/sign-your-requests)).
+      - name: client_id
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Id of the client
+      - name: nonce
+        in: query
+        required: true
+        schema:
+          type: string
+        description: A random token used to prevent replay attacks (Cf. [Signature v2 - Getnonce](#operation/signaturev2-getnonce))
+      - name: surveyid
+        in: query
+        required: true
+        schema:
+          type: string
+        description: ID of a survey
+      - name: userids
+        in: query
+        required: true
+        schema:
+          type: array of integers
+        description: Array of user ids
+      responses:
+        200:
+          description: ' (Click to unfold)'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    description: Response status. See <a href='#section/Response-status'>Status</a> section for details.
+                  body:
+                    type: object
+                    description: Response data.
+                    properties: []
+      x-codeSamples:
+      - lang: PHP
+        source: "<?php\n\n$ch = curl_init();\n\ncurl_setopt($ch, CURLOPT_URL, \"https://wbsapi.withings.net/v2/survey \");\n\ncurl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);\n\ncurl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query([ \n\t'action' => 'activate',\n\t'signature' => 'signature',\n\t'client_id' => 'client_id',\n\t'nonce' => 'string',\n\t'surveyid' => 'string',\n\t'userids' => 'array of integers'\n]));\n\n$rsp = curl_exec($ch);\ncurl_close($ch);\n\nvar_dump($rsp);\n\n?>"
+      - lang: CURL
+        source: curl --data "action=activate&signature=signature&client_id=client_id&nonce=string&surveyid=string&userids=array of integers" 'https://wbsapi.withings.net/v2/survey '
+  'https://wbsapi.withings.net/v2/survey  ':
+    post:
+      tags:
+      - survey
+      description: ''
+      summary: Survey v2  - Deactivate
+      operationId: surveyv2-deactivate
+      parameters:
+      - name: action
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Service action name. Must take the string value ```deactivate```.
+      - name: signature
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Hash of params (Cf. [Signature hash protocol](/developer-guide/v3/get-access/sign-your-requests)).
+      - name: client_id
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Id of the client
+      - name: nonce
+        in: query
+        required: true
+        schema:
+          type: string
+        description: A random token used to prevent replay attacks (Cf. [Signature v2 - Getnonce](#operation/signaturev2-getnonce))
+      - name: surveyid
+        in: query
+        required: true
+        schema:
+          type: string
+        description: ID of a survey
+      - name: userids
+        in: query
+        required: true
+        schema:
+          type: array of integers
+        description: Array of user ids
+      responses:
+        200:
+          description: ' (Click to unfold)'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    description: Response status. See <a href='#section/Response-status'>Status</a> section for details.
+                  body:
+                    type: object
+                    description: Response data.
+                    properties: []
+      x-codeSamples:
+      - lang: PHP
+        source: "<?php\n\n$ch = curl_init();\n\ncurl_setopt($ch, CURLOPT_URL, \"https://wbsapi.withings.net/v2/survey  \");\n\ncurl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);\n\ncurl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query([ \n\t'action' => 'deactivate',\n\t'signature' => 'signature',\n\t'client_id' => 'client_id',\n\t'nonce' => 'string',\n\t'surveyid' => 'string',\n\t'userids' => 'array of integers'\n]));\n\n$rsp = curl_exec($ch);\ncurl_close($ch);\n\nvar_dump($rsp);\n\n?>"
+      - lang: CURL
+        source: curl --data "action=deactivate&signature=signature&client_id=client_id&nonce=string&surveyid=string&userids=array of integers" 'https://wbsapi.withings.net/v2/survey  '
+  https://wbsapi.withings.net/v2/survey:
+    post:
+      tags:
+      - survey
+      description: ''
+      summary: Survey v2  - Get
+      operationId: surveyv2-get
+      parameters:
+      - name: action
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Service action name. Must take the string value ```get```.
+      - name: signature
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Hash of params (Cf. [Signature hash protocol](/developer-guide/v3/get-access/sign-your-requests)).
+      - name: client_id
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Id of the client
+      - name: nonce
+        in: query
+        required: true
+        schema:
+          type: string
+        description: A random token used to prevent replay attacks (Cf. [Signature v2 - Getnonce](#operation/signaturev2-getnonce))
+      - name: surveyid
+        in: query
+        required: true
+        schema:
+          type: string
+        description: ID of a survey
+      - name: lang
+        in: query
+        required: false
+        schema:
+          type: string
+        description: 'Lang in which data are translated (default: en)'
+      responses:
+        200:
+          description: ' (Click to unfold)'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    description: Response status. See <a href='#section/Response-status'>Status</a> section for details.
+                  body:
+                    type: object
+                    description: Response data.
+                    properties:
+                      survey:
+                        type: object
+                        properties:
+                          id:
+                            type: integer
+                            example: 3
+                          name:
+                            type: string
+                            example: Name
+                          description:
+                            type: string
+                            example: Description
+                          trigger_type:
+                            type: integer
+                            example: 3
+                          trigger_conditions:
+                            type: array
+                          answer_type:
+                            type: integer
+                            example: 3
+                          category:
+                            type: integer
+                            example: 3
+                          data:
+                            type: array
+      x-codeSamples:
+      - lang: PHP
+        source: "<?php\n\n$ch = curl_init();\n\ncurl_setopt($ch, CURLOPT_URL, \"https://wbsapi.withings.net/v2/survey\");\n\ncurl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);\n\ncurl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query([ \n\t'action' => 'get',\n\t'signature' => 'signature',\n\t'client_id' => 'client_id',\n\t'nonce' => 'string',\n\t'surveyid' => 'string',\n\t'lang' => 'string'\n]));\n\n$rsp = curl_exec($ch);\ncurl_close($ch);\n\nvar_dump($rsp);\n\n?>"
+      - lang: CURL
+        source: curl --data "action=get&signature=signature&client_id=client_id&nonce=string&surveyid=string&lang=string" 'https://wbsapi.withings.net/v2/survey'
+  'https://wbsapi.withings.net/v2/survey   ':
+    post:
+      tags:
+      - survey
+      description: ''
+      summary: Survey v2  - List
+      operationId: surveyv2-list
+      parameters:
+      - name: action
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Service action name. Must take the string value ```list```.
+      - name: signature
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Hash of params (Cf. [Signature hash protocol](/developer-guide/v3/get-access/sign-your-requests)).
+      - name: client_id
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Id of the client
+      - name: nonce
+        in: query
+        required: true
+        schema:
+          type: string
+        description: A random token used to prevent replay attacks (Cf. [Signature v2 - Getnonce](#operation/signaturev2-getnonce))
+      - name: offset
+        in: query
+        required: false
+        schema:
+          type: integer
+        description: When a first call returns ```more:true``` and ```offset:XX```, set value ```XX``` in this parameter to retrieve next available rows.
+      responses:
+        200:
+          description: ' (Click to unfold)'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    description: Response status. See <a href='#section/Response-status'>Status</a> section for details.
+                  body:
+                    type: object
+                    description: Response data.
+                    properties:
+                      surveys:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/survey_list'
+                      more:
+                        type: boolean
+                        description: To know if there is more data to fetch or not.
+                      offset:
+                        type: integer
+                        description: Offset to use to retrieve the next data.
+      x-codeSamples:
+      - lang: PHP
+        source: "<?php\n\n$ch = curl_init();\n\ncurl_setopt($ch, CURLOPT_URL, \"https://wbsapi.withings.net/v2/survey   \");\n\ncurl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);\n\ncurl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query([ \n\t'action' => 'list',\n\t'signature' => 'signature',\n\t'client_id' => 'client_id',\n\t'nonce' => 'string',\n\t'offset' => 'offset'\n]));\n\n$rsp = curl_exec($ch);\ncurl_close($ch);\n\nvar_dump($rsp);\n\n?>"
+      - lang: CURL
+        source: curl --data "action=list&signature=signature&client_id=client_id&nonce=string&offset=offset" 'https://wbsapi.withings.net/v2/survey   '
+  'https://wbsapi.withings.net/v2/survey    ':
+    post:
+      tags:
+      - survey
+      description: ''
+      summary: Survey v2  - Listusers
+      operationId: surveyv2-listusers
+      parameters:
+      - name: action
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Service action name. Must take the string value ```listusers```.
+      - name: signature
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Hash of params (Cf. [Signature hash protocol](/developer-guide/v3/get-access/sign-your-requests)).
+      - name: client_id
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Id of the client
+      - name: nonce
+        in: query
+        required: true
+        schema:
+          type: string
+        description: A random token used to prevent replay attacks (Cf. [Signature v2 - Getnonce](#operation/signaturev2-getnonce))
+      - name: surveyid
+        in: query
+        required: true
+        schema:
+          type: string
+        description: ID of a survey
+      responses:
+        200:
+          description: ' (Click to unfold)'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    description: Response status. See <a href='#section/Response-status'>Status</a> section for details.
+                  body:
+                    type: object
+                    description: Response data.
+                    properties:
+                      users:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/survey_list_users'
+      x-codeSamples:
+      - lang: PHP
+        source: "<?php\n\n$ch = curl_init();\n\ncurl_setopt($ch, CURLOPT_URL, \"https://wbsapi.withings.net/v2/survey    \");\n\ncurl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);\n\ncurl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query([ \n\t'action' => 'listusers',\n\t'signature' => 'signature',\n\t'client_id' => 'client_id',\n\t'nonce' => 'string',\n\t'surveyid' => 'string'\n]));\n\n$rsp = curl_exec($ch);\ncurl_close($ch);\n\nvar_dump($rsp);\n\n?>"
+      - lang: CURL
+        source: curl --data "action=listusers&signature=signature&client_id=client_id&nonce=string&surveyid=string" 'https://wbsapi.withings.net/v2/survey    '
+components:
+  schemas:
+    survey_list_users:
+      type: object
+      properties:
+        userid:
+          type: integer
+          description: The id of the user.
+          example: 102
+        activation_date:
+          type: integer
+          description: Timestamp when the survey has been activated for the user
+          format: timestamp
+          example: 1712008389
+    survey_list:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 3
+        name:
+          type: string
+          example: Survey name
+        description:
+          type: string
+          example: Survey description
+        trigger_type:
+          type: integer
+          example: 1
+        trigger_conditions:
+          type: array
+        category:
+          type: integer
+          example: 1
+        answers_type:
+          type: integer
+          example: 1
+x-tagGroups:
+- name: Api Reference Content
+  tags:
+  - oauth2
+  - dropshipment
+  - order
+  - user
+  - measure
+  - heart
+  - stetho
+  - sleep
+  - notify
+  - survey
+  - answers
+  - signature
+  - rawdata
+  - device
+  - models
+  - response_status
+  - Glossary
+  - nudge
+  - nudgecampaign

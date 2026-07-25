@@ -1,0 +1,385 @@
+openapi: 3.0.3
+info:
+  version: '2.0'
+  title: Withings developer documentation answers heart API
+  description: These webservices allows you to get user's answers from surveys
+servers:
+- url: https://wbsapi.withings.net/
+tags:
+- name: heart
+  x-displayName: Heart
+  description: 'Returns ECG (EKG) signal points in micro-volt (μV).
+
+
+    You can use the [Heart - List](#operation/heartv2-list) service to get the list of ECG records and their corresponding ```signalid``` and then use [Heart - Get](#operation/heartv2-get) to get the signal details.
+
+
+    The data are only available once a synchronization occured between the device and Withings servers (which might include synchronizing with Withings mobile application or via Withings Mobile SDK).'
+paths:
+  'https://wbsapi.withings.net/v2/heart ':
+    post:
+      tags:
+      - heart
+      description: "Provides the high frequency data of an ECG recording in micro-volt (μV).\n\n**Duration:**\n\n - BPM Core: 20 seconds.\n - Move ECG: 30 seconds.\n - ScanWatch: 30 seconds.\n\n**Sampling frequency:**\n\n - BPM Core: 500 Hz.\n - Move ECG: 300 Hz.\n - ScanWatch: 300 Hz."
+      summary: Heart v2  - Get
+      operationId: heartv2-get
+      parameters:
+      - name: action
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Service action name. Must take the string value ```get```.
+      - name: signalid
+        in: query
+        required: true
+        schema:
+          type: id32m64
+        description: 'DO NOT USE WITH FOLLOWING PARAMS: [client_id, signature, nonce, signal_token]<br>ID of a signal'
+      - name: client_id
+        in: query
+        required: true
+        schema:
+          type: string
+        description: 'DO NOT USE WITH FOLLOWING PARAMS: [access_token, signalid]<br>Id of the client'
+      - name: signature
+        in: query
+        required: true
+        schema:
+          type: string
+        description: 'DO NOT USE WITH FOLLOWING PARAMS: [access_token, signalid]<br>Hash of params (Cf. [Signature hash protocol](/developer-guide/v3/get-access/sign-your-requests)).'
+      - name: nonce
+        in: query
+        required: true
+        schema:
+          type: string
+        description: 'DO NOT USE WITH FOLLOWING PARAMS: [access_token, signalid]<br>A random token used to prevent replay attacks (Cf. [Signature v2 - Getnonce](#operation/signaturev2-getnonce))'
+      - name: signal_token
+        in: query
+        required: true
+        schema:
+          type: string
+        description: 'DO NOT USE WITH FOLLOWING PARAMS: [access_token, signalid]<br>Signal identifier'
+      - name: with_filtered
+        in: query
+        required: false
+        schema:
+          type: boolean
+        description: Request filtered version of the signal
+      - name: with_intervals
+        in: query
+        required: false
+        schema:
+          type: boolean
+        description: Request features with inactive ones
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+        description: 'Used to pass your access token. Must take value: ```Bearer {your access_token}``` Replace {your access_token} with the access_token'
+      responses:
+        200:
+          description: ' (Click to unfold)'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    description: Response status. See <a href='#section/Response-status'>Status</a> section for details.
+                  body:
+                    type: object
+                    description: Response data.
+                    properties:
+                      signal:
+                        type: array
+                        description: Signal value in micro-volt (μV).
+                        example: '[1,2,3,4,5,6,7,8,9]'
+                        items:
+                          type: integer
+                      sampling_frequency:
+                        type: integer
+                        description: Signal Sampling Frequency (Hz).
+                        example: 500
+                      wearposition:
+                        type: integer
+                        description: 'Where the user is wearing the device.
+
+
+
+                          | Value | Description|
+
+                          |---|---|
+
+                          |0 | Right Wrist|
+
+                          |1 | Left Wrist|
+
+                          |2 | Right Arm|
+
+                          |3 | Left Arm|
+
+                          |4 | Right Foot|
+
+                          |5 | Left Foot|
+
+                          |6 | Between Legs|
+
+                          |8 | Left part of the body|
+
+                          |9 | Right part of the body|
+
+                          |10 | Left leg|
+
+                          |11 | Right leg|
+
+                          |12 | Torso|
+
+                          |13 | Left hand|
+
+                          |14 | Right hand|
+
+                          |15 | Cardiovascular aortic area|
+
+                          |16 | Cardiovascular pulmonic area|
+
+                          |17 | Cardiovascular tricuspid area|
+
+                          |18 | Cardiovascular mitral area|
+
+                          |19 | Cardiovascular apex area|
+
+                          |20 | Pulmonary front upper right area|
+
+                          |21 | Pulmonary front upper left area|
+
+                          |22 | Pulmonary front bottom right area|
+
+                          |23 | Pulmonary front bottom left area|
+
+                          |24 | Pulmonary back upper left area|
+
+                          |25 | Pulmonary back upper right area|
+
+                          |26 | Pulmonary back bottom left area|
+
+                          |27 | Pulmonary back bottom right area|
+
+                          |28 | Wide mode area|
+
+                          |29 | Between arms|
+
+                          |30 | Hold Right|
+
+                          |31 | Hold Left|
+
+                          '
+                        example: 1
+                      model:
+                        type: integer
+                        description: 'The source of the recording.
+
+
+
+                          | Value | Description|
+
+                          |---|---|
+
+                          |44 | BPM Core|
+
+                          |91 | Move ECG|
+
+                          '
+                        example: 44
+                      heart_rate:
+                        type: integer
+                        description: Average recorded heart rate.
+                        example: 82
+      x-codeSamples:
+      - lang: PHP
+        source: "<?php\n\n$ch = curl_init();\n\ncurl_setopt($ch, CURLOPT_URL, \"https://wbsapi.withings.net/v2/heart \");\n\ncurl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);\n\ncurl_setopt($ch, CURLOPT_HTTPHEADER, [\n\t'Authorization: Bearer YOUR_ACCESS_TOKEN'\n]);\n\ncurl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query([ \n\t'action' => 'get',\n\t'signalid' => 'signalid',\n\t'client_id' => 'client_id',\n\t'signature' => 'signature',\n\t'nonce' => 'string',\n\t'signal_token' => 'string',\n\t'with_filtered' => 'boolean',\n\t'with_intervals' => 'boolean'\n]));\n\n$rsp = curl_exec($ch);\ncurl_close($ch);\n\nvar_dump($rsp);\n\n?>"
+      - lang: CURL
+        source: 'curl --header "Authorization: Bearer YOUR_ACCESS_TOKEN" --data "action=get&signalid=signalid&client_id=client_id&signature=signature&nonce=string&signal_token=string&with_filtered=boolean&with_intervals=boolean" ''https://wbsapi.withings.net/v2/heart '''
+  https://wbsapi.withings.net/v2/heart:
+    post:
+      tags:
+      - heart
+      description: 'Returns a list of ECG records and Afib classification for a given period of time.
+
+        To get the full ECG signal, use the [Heart v2 - Get](#operation/heartv2-get) service.
+
+
+        If the ECG recordings have been taken with BPM Core, systole and diastole measurements will also be returned.'
+      summary: Heart v2  - List
+      operationId: heartv2-list
+      parameters:
+      - name: action
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Service action name. Must take the string value ```list```.
+      - name: startdate
+        in: query
+        required: false
+        schema:
+          type: integer
+        description: Data start date as a unix timestamp.
+        format: timestamp
+      - name: enddate
+        in: query
+        required: false
+        schema:
+          type: integer
+        description: Data end date as a unix timestamp.
+        format: timestamp
+      - name: offset
+        in: query
+        required: false
+        schema:
+          type: integer
+        description: When a first call returns ```more:true``` and ```offset:XX```, set value ```XX``` in this parameter to retrieve next available rows.
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+        description: 'Used to pass your access token. Must take value: ```Bearer {your access_token}``` Replace {your access_token} with the access_token'
+      responses:
+        200:
+          description: ' (Click to unfold)'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    description: Response status. See <a href='#section/Response-status'>Status</a> section for details.
+                  body:
+                    type: object
+                    description: Response data.
+                    properties:
+                      series:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/heart_measurement_object'
+                      more:
+                        type: boolean
+                        description: To know if there is more data to fetch or not.
+                      offset:
+                        type: integer
+                        description: Offset to use to retrieve the next data.
+      x-codeSamples:
+      - lang: PHP
+        source: "<?php\n\n$ch = curl_init();\n\ncurl_setopt($ch, CURLOPT_URL, \"https://wbsapi.withings.net/v2/heart\");\n\ncurl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);\n\ncurl_setopt($ch, CURLOPT_HTTPHEADER, [\n\t'Authorization: Bearer YOUR_ACCESS_TOKEN'\n]);\n\ncurl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query([ \n\t'action' => 'list',\n\t'startdate' => 'startdate',\n\t'enddate' => 'enddate',\n\t'offset' => 'offset'\n]));\n\n$rsp = curl_exec($ch);\ncurl_close($ch);\n\nvar_dump($rsp);\n\n?>"
+      - lang: CURL
+        source: 'curl --header "Authorization: Bearer YOUR_ACCESS_TOKEN" --data "action=list&startdate=startdate&enddate=enddate&offset=offset" ''https://wbsapi.withings.net/v2/heart'''
+components:
+  schemas:
+    heart_measurement_object:
+      type: object
+      properties:
+        deviceid:
+          type: string
+          description: 'ID of device that tracked the data. To retrieve information about this device, refer to : <a href=''/api-reference/#operation/userv2-getdevice''>User v2 - Getdevice</a>.'
+          example: 892359876fd8805ac45bab078c4828692f0276b1
+        model:
+          type: integer
+          description: 'The source of the recording.
+
+
+
+            | Value | Description|
+
+            |---|---|
+
+            |44 | BPM Core|
+
+            |91 | Move ECG|
+
+            '
+          example: 44
+        ecg:
+          type: object
+          properties:
+            signalid:
+              type: integer
+              description: Id of the signal.
+              example: 48
+            afib:
+              type: integer
+              description: 'Atrial fibrillation classification.
+
+
+
+                | Value | Description|
+
+                |---|---|
+
+                |0 | Negative|
+
+                |1 | Positive|
+
+                |2 | Inconclusive|
+
+                '
+              example: 1
+        bloodpressure:
+          type: object
+          properties:
+            diastole:
+              type: integer
+              description: Diastole value.
+              example: 100
+            systole:
+              type: integer
+              description: Systole value.
+              example: 101
+        stetho:
+          type: object
+          properties:
+            signalid:
+              type: integer
+              description: Id of the signal.
+              example: 48
+            vhd:
+              type: integer
+        heart_rate:
+          type: integer
+          description: Average recorded heart rate.
+          example: 82
+        modified:
+          type: integer
+          description: The timestamp of the last modification.
+          format: timestamp
+          example: 1594159644
+        timestamp:
+          type: integer
+          description: Timestamp of the recording.
+          format: timestamp
+          example: 1594159644
+x-tagGroups:
+- name: Api Reference Content
+  tags:
+  - oauth2
+  - dropshipment
+  - order
+  - user
+  - measure
+  - heart
+  - stetho
+  - sleep
+  - notify
+  - survey
+  - answers
+  - signature
+  - rawdata
+  - device
+  - models
+  - response_status
+  - Glossary
+  - nudge
+  - nudgecampaign

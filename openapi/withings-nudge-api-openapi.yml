@@ -1,0 +1,513 @@
+openapi: 3.0.3
+info:
+  version: '2.0'
+  title: Withings developer documentation answers nudge API
+  description: These webservices allows you to get user's answers from surveys
+servers:
+- url: https://wbsapi.withings.net/
+tags:
+- name: nudge
+  x-displayName: Nudge
+  description: These webservices allows you to to manage Health Nudges. Read the [Health Nudges Integration Guide](/developer-guide/v3/integration-guide/health-nudges/health-nudge-overview) for more information.
+paths:
+  'https://wbsapi.withings.net/v2/nudge  ':
+    post:
+      tags:
+      - nudge
+      description: ''
+      summary: Nudge v2  - Create
+      operationId: nudgev2-create
+      parameters:
+      - name: action
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Service action name. Must take the string value ```create```.
+      - name: signature
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Hash of params (Cf. [Signature hash protocol](/developer-guide/v3/get-access/sign-your-requests)).
+      - name: client_id
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Id of the client
+      - name: nonce
+        in: query
+        required: true
+        schema:
+          type: string
+        description: A random token used to prevent replay attacks (Cf. [Signature v2 - Getnonce](#operation/signaturev2-getnonce))
+      - name: iconids
+        in: query
+        required: true
+        schema:
+          type: array of integers
+        description: Ids of the Nudge Icon
+      - name: content
+        in: query
+        required: true
+        schema:
+          type: array of strings
+        description: Array with 2 lines of text representing the Nudge text content
+      - name: model
+        in: query
+        required: true
+        schema:
+          type: integer
+        description: Model integer value of a device or a consumable
+      - name: position
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Nudge position in the dynamic screen list. Allowed values are ```first``` and ```last```.
+      responses:
+        200:
+          description: ' (Click to unfold)'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    description: Response status. See <a href='#section/Response-status'>Status</a> section for details.
+                  body:
+                    type: object
+                    description: Response data.
+                    properties:
+                      nudgeid:
+                        type: integer
+                        example: 9
+      x-codeSamples:
+      - lang: PHP
+        source: "<?php\n\n$ch = curl_init();\n\ncurl_setopt($ch, CURLOPT_URL, \"https://wbsapi.withings.net/v2/nudge  \");\n\ncurl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);\n\ncurl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query([ \n\t'action' => 'create',\n\t'signature' => 'signature',\n\t'client_id' => 'client_id',\n\t'nonce' => 'string',\n\t'iconids' => 'array of integers',\n\t'content' => 'array of strings',\n\t'model' => 'int',\n\t'position' => 'string'\n]));\n\n$rsp = curl_exec($ch);\ncurl_close($ch);\n\nvar_dump($rsp);\n\n?>"
+      - lang: CURL
+        source: curl --data "action=create&signature=signature&client_id=client_id&nonce=string&iconids=array of integers&content=array of strings&model=int&position=string" 'https://wbsapi.withings.net/v2/nudge  '
+  'https://wbsapi.withings.net/v2/nudge    ':
+    post:
+      tags:
+      - nudge
+      description: ''
+      summary: Nudge v2  - Delete
+      operationId: nudgev2-delete
+      parameters:
+      - name: action
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Service action name. Must take the string value ```delete```.
+      - name: signature
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Hash of params (Cf. [Signature hash protocol](/developer-guide/v3/get-access/sign-your-requests)).
+      - name: client_id
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Id of the client
+      - name: nonce
+        in: query
+        required: true
+        schema:
+          type: string
+        description: A random token used to prevent replay attacks (Cf. [Signature v2 - Getnonce](#operation/signaturev2-getnonce))
+      - name: nudgeid
+        in: query
+        required: true
+        schema:
+          type: id64
+        description: id of the nudge screen
+      responses:
+        200:
+          description: ' (Click to unfold)'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    description: Response status. See <a href='#section/Response-status'>Status</a> section for details.
+                  body:
+                    type: object
+                    description: Response data.
+                    properties: []
+      x-codeSamples:
+      - lang: PHP
+        source: "<?php\n\n$ch = curl_init();\n\ncurl_setopt($ch, CURLOPT_URL, \"https://wbsapi.withings.net/v2/nudge    \");\n\ncurl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);\n\ncurl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query([ \n\t'action' => 'delete',\n\t'signature' => 'signature',\n\t'client_id' => 'client_id',\n\t'nonce' => 'string',\n\t'nudgeid' => 'id64'\n]));\n\n$rsp = curl_exec($ch);\ncurl_close($ch);\n\nvar_dump($rsp);\n\n?>"
+      - lang: CURL
+        source: curl --data "action=delete&signature=signature&client_id=client_id&nonce=string&nudgeid=id64" 'https://wbsapi.withings.net/v2/nudge    '
+  'https://wbsapi.withings.net/v2/nudge ':
+    post:
+      tags:
+      - nudge
+      description: ''
+      summary: Nudge v2  - Get
+      operationId: nudgev2-get
+      parameters:
+      - name: action
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Service action name. Must take the string value ```get```.
+      - name: signature
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Hash of params (Cf. [Signature hash protocol](/developer-guide/v3/get-access/sign-your-requests)).
+      - name: client_id
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Id of the client
+      - name: nonce
+        in: query
+        required: true
+        schema:
+          type: string
+        description: A random token used to prevent replay attacks (Cf. [Signature v2 - Getnonce](#operation/signaturev2-getnonce))
+      - name: nudgeid
+        in: query
+        required: true
+        schema:
+          type: id64
+        description: id of the nudge screen
+      responses:
+        200:
+          description: ' (Click to unfold)'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    description: Response status. See <a href='#section/Response-status'>Status</a> section for details.
+                  body:
+                    type: object
+                    description: Response data.
+                    properties:
+                      nudge:
+                        type: object
+                        properties:
+                          iconids:
+                            type: array of integers
+                            example:
+                            - 3
+                          content:
+                            type: array of strings
+                            example:
+                            - Line 1
+                            - Line 2
+                          campaignids:
+                            type: array of integers
+                          model:
+                            type: integer
+                            example: 17
+                          position:
+                            type: string
+                            example: first
+                          created:
+                            type: integer
+                            format: timestamp
+                            example: 1712008821
+                          modified:
+                            type: integer
+                            description: The timestamp of the last modification.
+                            format: timestamp
+                            example: 1712008821
+      x-codeSamples:
+      - lang: PHP
+        source: "<?php\n\n$ch = curl_init();\n\ncurl_setopt($ch, CURLOPT_URL, \"https://wbsapi.withings.net/v2/nudge \");\n\ncurl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);\n\ncurl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query([ \n\t'action' => 'get',\n\t'signature' => 'signature',\n\t'client_id' => 'client_id',\n\t'nonce' => 'string',\n\t'nudgeid' => 'id64'\n]));\n\n$rsp = curl_exec($ch);\ncurl_close($ch);\n\nvar_dump($rsp);\n\n?>"
+      - lang: CURL
+        source: curl --data "action=get&signature=signature&client_id=client_id&nonce=string&nudgeid=id64" 'https://wbsapi.withings.net/v2/nudge '
+  https://wbsapi.withings.net/v2/nudge:
+    post:
+      tags:
+      - nudge
+      description: ''
+      summary: Nudge v2  - List
+      operationId: nudgev2-list
+      parameters:
+      - name: action
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Service action name. Must take the string value ```list```.
+      - name: signature
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Hash of params (Cf. [Signature hash protocol](/developer-guide/v3/get-access/sign-your-requests)).
+      - name: client_id
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Id of the client
+      - name: nonce
+        in: query
+        required: true
+        schema:
+          type: string
+        description: A random token used to prevent replay attacks (Cf. [Signature v2 - Getnonce](#operation/signaturev2-getnonce))
+      - name: offset
+        in: query
+        required: false
+        schema:
+          type: integer
+        description: When a first call returns ```more:true``` and ```offset:XX```, set value ```XX``` in this parameter to retrieve next available rows.
+      responses:
+        200:
+          description: ' (Click to unfold)'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    description: Response status. See <a href='#section/Response-status'>Status</a> section for details.
+                  body:
+                    type: object
+                    description: Response data.
+                    properties:
+                      nudges:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/nudge'
+                      more:
+                        type: boolean
+                        description: To know if there is more data to fetch or not.
+                      offset:
+                        type: integer
+                        description: Offset to use to retrieve the next data.
+      x-codeSamples:
+      - lang: PHP
+        source: "<?php\n\n$ch = curl_init();\n\ncurl_setopt($ch, CURLOPT_URL, \"https://wbsapi.withings.net/v2/nudge\");\n\ncurl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);\n\ncurl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query([ \n\t'action' => 'list',\n\t'signature' => 'signature',\n\t'client_id' => 'client_id',\n\t'nonce' => 'string',\n\t'offset' => 'offset'\n]));\n\n$rsp = curl_exec($ch);\ncurl_close($ch);\n\nvar_dump($rsp);\n\n?>"
+      - lang: CURL
+        source: curl --data "action=list&signature=signature&client_id=client_id&nonce=string&offset=offset" 'https://wbsapi.withings.net/v2/nudge'
+  'https://wbsapi.withings.net/v2/nudge   ':
+    post:
+      tags:
+      - nudge
+      description: ''
+      summary: Nudge v2  - Update
+      operationId: nudgev2-update
+      parameters:
+      - name: action
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Service action name. Must take the string value ```update```.
+      - name: signature
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Hash of params (Cf. [Signature hash protocol](/developer-guide/v3/get-access/sign-your-requests)).
+      - name: client_id
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Id of the client
+      - name: nonce
+        in: query
+        required: true
+        schema:
+          type: string
+        description: A random token used to prevent replay attacks (Cf. [Signature v2 - Getnonce](#operation/signaturev2-getnonce))
+      - name: nudgeid
+        in: query
+        required: true
+        schema:
+          type: id64
+        description: id of the nudge screen
+      - name: iconids
+        in: query
+        required: false
+        schema:
+          type: array of integers
+        description: Ids of the Nudge Icon
+      - name: content
+        in: query
+        required: false
+        schema:
+          type: array of strings
+        description: Array with 2 lines of text representing the Nudge text content
+      - name: model
+        in: query
+        required: false
+        schema:
+          type: integer
+        description: Model integer value of a device or a consumable
+      - name: position
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Nudge position in the dynamic screen list. Allowed values are ```first``` and ```last```.
+      responses:
+        200:
+          description: ' (Click to unfold)'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    description: Response status. See <a href='#section/Response-status'>Status</a> section for details.
+                  body:
+                    type: object
+                    description: Response data.
+                    properties: []
+      x-codeSamples:
+      - lang: PHP
+        source: "<?php\n\n$ch = curl_init();\n\ncurl_setopt($ch, CURLOPT_URL, \"https://wbsapi.withings.net/v2/nudge   \");\n\ncurl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);\n\ncurl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query([ \n\t'action' => 'update',\n\t'signature' => 'signature',\n\t'client_id' => 'client_id',\n\t'nonce' => 'string',\n\t'nudgeid' => 'id64',\n\t'iconids' => 'array of integers',\n\t'content' => 'array of strings',\n\t'model' => 'int',\n\t'position' => 'string'\n]));\n\n$rsp = curl_exec($ch);\ncurl_close($ch);\n\nvar_dump($rsp);\n\n?>"
+      - lang: CURL
+        source: curl --data "action=update&signature=signature&client_id=client_id&nonce=string&nudgeid=id64&iconids=array of integers&content=array of strings&model=int&position=string" 'https://wbsapi.withings.net/v2/nudge   '
+components:
+  schemas:
+    nudge:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 9
+        iconids:
+          type: array of integers
+          example:
+          - 3
+        content:
+          type: array of strings
+          example:
+          - Line 1
+          - Line 2
+        campaignids:
+          type: array of integers
+        model:
+          type: integer
+          example: 17
+        position:
+          type: string
+          description: 'The device''s position during the measure.
+
+
+
+            | Value | Description|
+
+            |---|---|
+
+            |0 | Right Wrist|
+
+            |1 | Left Wrist|
+
+            |2 | Right Arm|
+
+            |3 | Left Arm|
+
+            |4 | Right Foot|
+
+            |5 | Left Foot|
+
+            |6 | Between Legs|
+
+            |8 | Left part of the body|
+
+            |9 | Right part of the body|
+
+            |10 | Left leg|
+
+            |11 | Right leg|
+
+            |12 | Torso|
+
+            |13 | Left hand|
+
+            |14 | Right hand|
+
+            |15 | Cardiovascular aortic area|
+
+            |16 | Cardiovascular pulmonic area|
+
+            |17 | Cardiovascular tricuspid area|
+
+            |18 | Cardiovascular mitral area|
+
+            |19 | Cardiovascular apex area|
+
+            |20 | Pulmonary front upper right area|
+
+            |21 | Pulmonary front upper left area|
+
+            |22 | Pulmonary front bottom right area|
+
+            |23 | Pulmonary front bottom left area|
+
+            |24 | Pulmonary back upper left area|
+
+            |25 | Pulmonary back upper right area|
+
+            |26 | Pulmonary back bottom left area|
+
+            |27 | Pulmonary back bottom right area|
+
+            |28 | Wide mode area|
+
+            |29 | Between arms|
+
+            |30 | Hold Right|
+
+            |31 | Hold Left|
+
+            '
+          example: first
+        created:
+          type: integer
+          format: timestamp
+          example: 1712008821
+        modified:
+          type: integer
+          description: The timestamp of the last modification.
+          format: timestamp
+          example: 1712008821
+x-tagGroups:
+- name: Api Reference Content
+  tags:
+  - oauth2
+  - dropshipment
+  - order
+  - user
+  - measure
+  - heart
+  - stetho
+  - sleep
+  - notify
+  - survey
+  - answers
+  - signature
+  - rawdata
+  - device
+  - models
+  - response_status
+  - Glossary
+  - nudge
+  - nudgecampaign

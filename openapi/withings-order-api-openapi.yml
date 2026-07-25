@@ -1,0 +1,500 @@
+openapi: 3.0.3
+info:
+  version: '2.0'
+  title: Withings developer documentation answers order API
+  description: These webservices allows you to get user's answers from surveys
+servers:
+- url: https://wbsapi.withings.net/
+tags:
+- name: order
+  x-displayName: Order
+  description: The following services are part of the Logistics APIs. Refer to [this section](/developer-guide/v3/integration-guide/dropship-only/logistics-api/overview-create-order) for more information.
+paths:
+  https://wbsapi.withings.net/v2/order:
+    post:
+      tags:
+      - order
+      description: 'Returns detailed information about bulkshipment or dropshipment orders.
+
+
+        *This service is part of Withings Pro Solutions. You won''t be able to use it if you did not sign a contract with Withings.*'
+      summary: Order v2  - Getdetail
+      operationId: orderv2-getdetail
+      parameters:
+      - name: action
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Service action name. Must take the string value ```getdetail```.
+      - name: client_id
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Id of the client
+      - name: nonce
+        in: query
+        required: true
+        schema:
+          type: string
+        description: A random token used to prevent replay attacks (Cf. [Signature v2 - Getnonce](#operation/signaturev2-getnonce))
+      - name: signature
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Hash of params (Cf. [Signature hash protocol](/developer-guide/v3/get-access/sign-your-requests)).
+      - name: order_ids
+        in: query
+        required: true
+        schema:
+          type: json
+        description: 'DO NOT USE WITH FOLLOWING PARAMS: [customer_ref_ids]<br>List of order_id'
+      - name: customer_ref_ids
+        in: query
+        required: true
+        schema:
+          type: json
+        description: 'DO NOT USE WITH FOLLOWING PARAMS: [order_ids]<br>Movement reference number of dropshipment orderlines'
+      - name: customerid
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Your dropshipment billing ID. If you don't know it, ignore this parameter.
+      responses:
+        200:
+          description: ' (Click to unfold)'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    description: Response status. See <a href='#section/Response-status'>Status</a> section for details.
+                  body:
+                    type: object
+                    description: Response data.
+                    properties:
+                      orders:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/dropshipment_get_order_status_object'
+      x-codeSamples:
+      - lang: PHP
+        source: "<?php\n\n$ch = curl_init();\n\ncurl_setopt($ch, CURLOPT_URL, \"https://wbsapi.withings.net/v2/order\");\n\ncurl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);\n\ncurl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query([ \n\t'action' => 'getdetail',\n\t'client_id' => 'client_id',\n\t'nonce' => 'string',\n\t'signature' => 'signature',\n\t'order_ids' => 'json',\n\t'customer_ref_ids' => 'json',\n\t'customerid' => 'customerid'\n]));\n\n$rsp = curl_exec($ch);\ncurl_close($ch);\n\nvar_dump($rsp);\n\n?>"
+      - lang: CURL
+        source: curl --data "action=getdetail&client_id=client_id&nonce=string&signature=signature&order_ids=json&customer_ref_ids=json&customerid=customerid" 'https://wbsapi.withings.net/v2/order'
+components:
+  schemas:
+    dropshipment_get_order_status_product_object:
+      type: object
+      properties:
+        ean:
+          type: string
+          description: EAN of the product.
+          example: '3700546702518'
+        partner_ref:
+          type: string
+          example: REF-12345
+        devices:
+          type: array
+          items:
+            $ref: '#/components/schemas/dropshipment_get_order_status_product_device_object'
+        quantity:
+          type: integer
+          description: Quantity of products.
+          example: 3
+        mac_addresses:
+          type: array
+          description: List of device MAC addresses. *(Only if order has been shipped)*
+          example:
+          - 00:24:e4:xx:xx:xx
+          - 00:24:e4:xx:xx:xx
+          - 00:24:e4:xx:xx:xx
+          items:
+            type: macaddress
+        hash_deviceids:
+          type: array
+          example:
+          - 892359876fd8805ac45bab078c4828692f0276b1
+          - a1b2c3d4e5f6
+        serial_numbers:
+          type: array
+          example:
+          - SN-001122334455
+          - SN-001122334456
+    dropshipment_get_order_status_object:
+      type: object
+      properties:
+        order_id:
+          type: string
+          description: Withings generated identifier used to track your order.
+          example: D12345678
+        customer_ref_id:
+          type: string
+          description: Random identifier you must provide in input parameters. It is used to track your order and must be unique.
+          example: MOUVEMENTREFERENCE12345678
+        status:
+          type: string
+          description: 'Status of the order. Value can be:
+
+
+
+            | Value|
+
+            |---|
+
+            |CREATED|
+
+            |ADDRESS VERIFICATION|
+
+            |ADDRESS ERROR|
+
+            |VERIFIED|
+
+            |PROCESSING|
+
+            |FAILED|
+
+            |OPEN|
+
+            |SHIPPED|
+
+            |TRASHED|
+
+            |BACKHOLD|
+
+            '
+          example: SHIPPED
+        products:
+          type: array
+          items:
+            $ref: '#/components/schemas/dropshipment_get_order_status_product_object'
+        carrier:
+          type: string
+          description: Carrier. *(Only if order has been shipped)*
+          example: UPS Parcel
+        carrier_service:
+          type: string
+          description: Carrier service. *(Only if order has been shipped)*
+          example: Next Day Air
+        tracking_number:
+          type: string
+          description: Tracking number. *(Only if order has been shipped)*
+          example: 1ZY1111111
+        parcel_status:
+          type: string
+          description: 'Status of the parcel. *(Only if order has been shipped)* Value can be:
+
+
+
+            | Value|
+
+            |---|
+
+            |pending|
+
+            |info_received|
+
+            |in_transit|
+
+            |failed_attempt|
+
+            |exception|
+
+            |delayed|
+
+            |pickup|
+
+            |delivered|
+
+            |return|
+
+            |expired|
+
+            '
+          example: in_transit
+        ship_date:
+          type: string
+          description: 'Date on which the order was shipped (format: YYYY-MM-DD).'
+          example: '2024-03-15'
+        is_replacement:
+          type: boolean
+          description: Indicates whether this order is a replacement for a previous order.
+        original_customer_ref:
+          type: string
+          description: The customer reference of the original order this replacement was created for.
+          example: MOUVEMENTREFERENCE00000001
+    dropshipment_get_order_status_product_device_object:
+      type: object
+      properties:
+        serial_number:
+          type: string
+          description: Serial number of the device.
+          example: 00:24:e4:xx:xx:xx
+        mac_address:
+          type: string
+          description: Mac address of the device.
+          example: 00:24:e4:xx:xx:xx
+        hash_deviceid:
+          type: string
+          description: ID of the device. This ID is returned in other services to know which device tracked a data. Then device's model or type can be known using this information.
+          example: 892359876fd8805ac45bab078c4828692f0276b1
+        model:
+          type: string
+          description: 'Device model. Value can be:
+
+
+
+            | Value | Description|
+
+            |---|---|
+
+            |Withings WBS01 | Scale|
+
+            |WS30 | Scale|
+
+            |Kid Scale | Scale|
+
+            |Smart Body Analyzer | Scale|
+
+            |Body+ | Scale|
+
+            |Body Cardio | Scale|
+
+            |Body | Scale|
+
+            |Body Scan | Scale|
+
+            |Body Pro | Scale|
+
+            |WBS10 | Scale|
+
+            |WBS11 | Scale|
+
+            |Body Comp | Scale|
+
+            |Smart Baby Monitor | Babyphone|
+
+            |Withings Home | Babyphone|
+
+            |Withings Blood Pressure Monitor V1 | Blood Pressure Monitor|
+
+            |Withings Blood Pressure Monitor V2 | Blood Pressure Monitor|
+
+            |Withings Blood Pressure Monitor V3 | Blood Pressure Monitor|
+
+            |BPM Core | Blood Pressure Monitor|
+
+            |BPM Connect | Blood Pressure Monitor|
+
+            |BPM Connect Pro | Blood Pressure Monitor|
+
+            |BPM Pro 2 | Blood Pressure Monitor|
+
+            |BPM Vision | Blood Pressure Monitor|
+
+            |Pulse | Activity Tracker|
+
+            |Activite | Activity Tracker|
+
+            |Activite (Pop, Steel) | Activity Tracker|
+
+            |Withings Go | Activity Tracker|
+
+            |Activite Steel HR | Activity Tracker|
+
+            |Activite Steel HR Sport Edition | Activity Tracker|
+
+            |Pulse HR | Activity Tracker|
+
+            |Move | Activity Tracker|
+
+            |Move ECG | Activity Tracker|
+
+            |ScanWatch | Activity Tracker|
+
+            |ScanWatch 2 | Activity Tracker|
+
+            |ScanWatch Light | Activity Tracker|
+
+            |Aura Dock | Sleep Monitor|
+
+            |Aura Sensor | Sleep Monitor|
+
+            |Aura Sensor V2 | Sleep Monitor|
+
+            |Thermo | Smart Connected Thermometer|
+
+            |BeamO | Smart Connected Thermometer|
+
+            |WUP01 | Gateway|
+
+            |Iglucose glucometer | iGlucose|
+
+            |iOS step tracker | HealthKit Apple|
+
+            |HealthKit step iPhone tracker | HealthKit Apple|
+
+            |HealthKit step Apple Watch tracker | HealthKit Apple|
+
+            |HealthKit other step tracker | HealthKit Apple|
+
+            |Android step tracker | HealthKit Google|
+
+            |GoogleFit tracker | HealthKit Google|
+
+            |Samsung Health tracker | HealthKit Google|
+
+            |Google Health Connect | HealthKit Google|
+
+            |Huawei tracker | HealthKit Huawei|
+
+            |Lingo Sensor | Lingo|
+
+            '
+          example: Pulse
+        model_id:
+          type: integer
+          description: '
+
+
+            | Value | Description|
+
+            |---|---|
+
+            |1 | Withings WBS01|
+
+            |2 | WS30|
+
+            |3 | Kid Scale|
+
+            |4 | Smart Body Analyzer|
+
+            |5 | Body+|
+
+            |6 | Body Cardio|
+
+            |7 | Body|
+
+            |10 | Body Scan|
+
+            |9 | Body Pro|
+
+            |11 | WBS10|
+
+            |12 | WBS11|
+
+            |18 | Body Comp|
+
+            |21 | Smart Baby Monitor|
+
+            |22 | Withings Home|
+
+            |41 | Withings Blood Pressure Monitor V1|
+
+            |42 | Withings Blood Pressure Monitor V2|
+
+            |43 | Withings Blood Pressure Monitor V3|
+
+            |44 | BPM Core|
+
+            |45 | BPM Connect|
+
+            |46 | BPM Connect Pro|
+
+            |47 | BPM Pro 2|
+
+            |48 | BPM Vision|
+
+            |51 | Pulse|
+
+            |52 | Activite|
+
+            |53 | Activite (Pop, Steel)|
+
+            |54 | Withings Go|
+
+            |55 | Activite Steel HR|
+
+            |59 | Activite Steel HR Sport Edition|
+
+            |58 | Pulse HR|
+
+            |90 | Move|
+
+            |91 | Move ECG|
+
+            |92 | Move ECG|
+
+            |93 | ScanWatch|
+
+            |94 | ScanWatch 2|
+
+            |95 | ScanWatch Light|
+
+            |60 | Aura Dock|
+
+            |61 | Aura Sensor|
+
+            |63 | Aura Sensor V2|
+
+            |70 | Thermo|
+
+            |71 | BeamO|
+
+            |100 | WUP01|
+
+            |1061 | Iglucose glucometer|
+
+            |1051 | iOS step tracker|
+
+            |1052 | iOS step tracker|
+
+            |1057 | HealthKit step iPhone tracker|
+
+            |1058 | HealthKit step Apple Watch tracker|
+
+            |1059 | HealthKit other step tracker|
+
+            |1053 | Android step tracker|
+
+            |1054 | Android step tracker|
+
+            |1055 | GoogleFit tracker|
+
+            |1056 | Samsung Health tracker|
+
+            |1060 | Google Health Connect|
+
+            |1062 | Huawei tracker|
+
+            |1063 | Lingo Sensor|
+
+            '
+          example: 51
+x-tagGroups:
+- name: Api Reference Content
+  tags:
+  - oauth2
+  - dropshipment
+  - order
+  - user
+  - measure
+  - heart
+  - stetho
+  - sleep
+  - notify
+  - survey
+  - answers
+  - signature
+  - rawdata
+  - device
+  - models
+  - response_status
+  - Glossary
+  - nudge
+  - nudgecampaign

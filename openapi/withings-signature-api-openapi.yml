@@ -1,0 +1,90 @@
+openapi: 3.0.3
+info:
+  version: '2.0'
+  title: Withings developer documentation answers signature API
+  description: These webservices allows you to get user's answers from surveys
+servers:
+- url: https://wbsapi.withings.net/
+tags:
+- name: signature
+  x-displayName: Signature
+  description: The following services are part of the Logistics APIs. Refer to [this section](/developer-guide/v3/integration-guide/dropship-only/logistics-api/overview-create-order) for more information.
+paths:
+  https://wbsapi.withings.net/v2/signature:
+    post:
+      tags:
+      - signature
+      description: "A ```nonce``` is a random token that is generated and stored in Withings server with **30 minutes of validity**.\n\nAs a partner, you will use this ```nonce``` token in the API services that require a ```signature``` so that Withings can check that the ```nonce``` token is still valid and was never used before. The usage of a ```nonce``` token prevents your service calls from replay attacks.\n\nBecause this service is an Device Management service, Withings checks your authorized access using your ```client_id``` and your ```secret``` based ```signature```.\n\nTo generate the ```signature``` please follow these steps:\n\n- Sort the following parameters alphabetically:\n\t- ```action```\n\t- ```client_id```\n\t- ```timestamp```\n- Generate a string by concatenating values separated by a comma. The string should look like: *value1,value2,value3*.\n- Apply a hmac hashing function on the string using the algorithm ```sha256``` and your partner ```client_secret```  (available in your [Withings partner dashboard](https://developer.withings.com/dashboard/)) as a secret key.\n- Add the hash string in the parameters under the key ```signature```"
+      summary: Signature v2  - Getnonce
+      operationId: signaturev2-getnonce
+      parameters:
+      - name: action
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Service action name. Must take the string value ```getnonce```.
+      - name: client_id
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Id of the client
+      - name: timestamp
+        in: query
+        required: true
+        schema:
+          type: integer
+        description: unix timestamp
+      - name: signature
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Cf. description above.
+      responses:
+        200:
+          description: ' (Click to unfold)'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    description: Response status. See <a href='#section/Response-status'>Status</a> section for details.
+                  body:
+                    type: object
+                    description: Response data.
+                    properties:
+                      nonce:
+                        type: string
+                        description: A random timestamp based token to be used once in requiring signature API services to avoid replay attack
+                        example: aaf4c61ddcc5e8a2dabede0f3b482cd9aea9434d
+      x-codeSamples:
+      - lang: PHP
+        source: "<?php\n\n$ch = curl_init();\n\ncurl_setopt($ch, CURLOPT_URL, \"https://wbsapi.withings.net/v2/signature\");\n\ncurl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);\n\ncurl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query([ \n\t'action' => 'getnonce',\n\t'client_id' => 'client_id',\n\t'timestamp' => 'timestamp',\n\t'signature' => 'signature'\n]));\n\n$rsp = curl_exec($ch);\ncurl_close($ch);\n\nvar_dump($rsp);\n\n?>"
+      - lang: CURL
+        source: curl --data "action=getnonce&client_id=client_id&timestamp=timestamp&signature=signature" 'https://wbsapi.withings.net/v2/signature'
+x-tagGroups:
+- name: Api Reference Content
+  tags:
+  - oauth2
+  - dropshipment
+  - order
+  - user
+  - measure
+  - heart
+  - stetho
+  - sleep
+  - notify
+  - survey
+  - answers
+  - signature
+  - rawdata
+  - device
+  - models
+  - response_status
+  - Glossary
+  - nudge
+  - nudgecampaign

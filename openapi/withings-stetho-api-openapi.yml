@@ -1,0 +1,282 @@
+openapi: 3.0.3
+info:
+  version: '2.0'
+  title: Withings developer documentation answers stetho API
+  description: These webservices allows you to get user's answers from surveys
+servers:
+- url: https://wbsapi.withings.net/
+tags:
+- name: stetho
+  x-displayName: Stetho
+  description: First the [Stetho - List](#operation/stethov2-list) API should be called to fetch the stetho signalIds which should be fetched individually using the [Stetho - Get](#operation/stethov2-get) API.
+paths:
+  https://wbsapi.withings.net/v2/stetho:
+    post:
+      tags:
+      - stetho
+      description: ''
+      summary: Stetho v2  - Get
+      operationId: stethov2-get
+      parameters:
+      - name: action
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Service action name. Must take the string value ```get```.
+      - name: signalid
+        in: query
+        required: true
+        schema:
+          type: id32m64
+        description: ID of a signal
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+        description: 'Used to pass your access token. Must take value: ```Bearer {your access_token}``` Replace {your access_token} with the access_token'
+      responses:
+        200:
+          description: ' (Click to unfold)'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    description: Response status. See <a href='#section/Response-status'>Status</a> section for details.
+                  body:
+                    type: object
+                    description: Response data.
+                    properties:
+                      signal:
+                        type: array
+                        description: A-law G 711 encoded signal (See [here](/developer-guide/v3/get-signal/decode-stetho-to-pcm) to understand how to decode it in PCM)
+                        example: '[1,2,3,4,5,6,7,8,9]'
+                        items:
+                          type: integer
+                      frequency:
+                        type: integer
+                        description: Frequency of the stetho signal, usually 4kHz
+                        example: 1
+                      duration:
+                        type: integer
+                        description: Duration of the signal
+                        example: 1
+                      format:
+                        type: integer
+                        example: 1
+                      size:
+                        type: integer
+                        example: 1
+                      resolution:
+                        type: integer
+                        example: 1
+                      channel:
+                        type: integer
+                        example: 1
+                      model:
+                        type: integer
+                        description: Device model returning this signal (71 for Beamo, 44 for BPM  Core)
+                        example: 1
+                      position:
+                        type: integer
+                        description: 'Where the measurement was taken
+
+
+
+                          | Value | Description|
+
+                          |---|---|
+
+                          |0 | Right Wrist|
+
+                          |1 | Left Wrist|
+
+                          |2 | Right Arm|
+
+                          |3 | Left Arm|
+
+                          |4 | Right Foot|
+
+                          |5 | Left Foot|
+
+                          |6 | Between Legs|
+
+                          |8 | Left part of the body|
+
+                          |9 | Right part of the body|
+
+                          |10 | Left leg|
+
+                          |11 | Right leg|
+
+                          |12 | Torso|
+
+                          |13 | Left hand|
+
+                          |14 | Right hand|
+
+                          |15 | Cardiovascular aortic area|
+
+                          |16 | Cardiovascular pulmonic area|
+
+                          |17 | Cardiovascular tricuspid area|
+
+                          |18 | Cardiovascular mitral area|
+
+                          |19 | Cardiovascular apex area|
+
+                          |20 | Pulmonary front upper right area|
+
+                          |21 | Pulmonary front upper left area|
+
+                          |22 | Pulmonary front bottom right area|
+
+                          |23 | Pulmonary front bottom left area|
+
+                          |24 | Pulmonary back upper left area|
+
+                          |25 | Pulmonary back upper right area|
+
+                          |26 | Pulmonary back bottom left area|
+
+                          |27 | Pulmonary back bottom right area|
+
+                          |28 | Wide mode area|
+
+                          |29 | Between arms|
+
+                          |30 | Hold Right|
+
+                          |31 | Hold Left|
+
+                          '
+                        example: 15
+                      vhd:
+                        type: integer
+                        example: 1
+      x-codeSamples:
+      - lang: PHP
+        source: "<?php\n\n$ch = curl_init();\n\ncurl_setopt($ch, CURLOPT_URL, \"https://wbsapi.withings.net/v2/stetho\");\n\ncurl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);\n\ncurl_setopt($ch, CURLOPT_HTTPHEADER, [\n\t'Authorization: Bearer YOUR_ACCESS_TOKEN'\n]);\n\ncurl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query([ \n\t'action' => 'get',\n\t'signalid' => 'signalid'\n]));\n\n$rsp = curl_exec($ch);\ncurl_close($ch);\n\nvar_dump($rsp);\n\n?>"
+      - lang: CURL
+        source: 'curl --header "Authorization: Bearer YOUR_ACCESS_TOKEN" --data "action=get&signalid=signalid" ''https://wbsapi.withings.net/v2/stetho'''
+  'https://wbsapi.withings.net/v2/stetho ':
+    post:
+      tags:
+      - stetho
+      description: ''
+      summary: Stetho v2  - List
+      operationId: stethov2-list
+      parameters:
+      - name: action
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Service action name. Must take the string value ```list```.
+      - name: startdate
+        in: query
+        required: false
+        schema:
+          type: integer
+        description: Data start date as a unix timestamp.
+        format: timestamp
+      - name: enddate
+        in: query
+        required: false
+        schema:
+          type: integer
+        description: Data end date as a unix timestamp.
+        format: timestamp
+      - name: offset
+        in: query
+        required: false
+        schema:
+          type: integer
+        description: When a first call returns ```more:true``` and ```offset:XX```, set value ```XX``` in this parameter to retrieve next available rows.
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+        description: 'Used to pass your access token. Must take value: ```Bearer {your access_token}``` Replace {your access_token} with the access_token'
+      responses:
+        200:
+          description: ' (Click to unfold)'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    description: Response status. See <a href='#section/Response-status'>Status</a> section for details.
+                  body:
+                    type: object
+                    description: Response data.
+                    properties:
+                      series:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/stetho_measurement_object'
+                      more:
+                        type: boolean
+                        description: To know if there is more data to fetch or not.
+                      offset:
+                        type: integer
+                        description: Offset to use to retrieve the next data.
+      x-codeSamples:
+      - lang: PHP
+        source: "<?php\n\n$ch = curl_init();\n\ncurl_setopt($ch, CURLOPT_URL, \"https://wbsapi.withings.net/v2/stetho \");\n\ncurl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);\n\ncurl_setopt($ch, CURLOPT_HTTPHEADER, [\n\t'Authorization: Bearer YOUR_ACCESS_TOKEN'\n]);\n\ncurl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query([ \n\t'action' => 'list',\n\t'startdate' => 'startdate',\n\t'enddate' => 'enddate',\n\t'offset' => 'offset'\n]));\n\n$rsp = curl_exec($ch);\ncurl_close($ch);\n\nvar_dump($rsp);\n\n?>"
+      - lang: CURL
+        source: 'curl --header "Authorization: Bearer YOUR_ACCESS_TOKEN" --data "action=list&startdate=startdate&enddate=enddate&offset=offset" ''https://wbsapi.withings.net/v2/stetho '''
+components:
+  schemas:
+    stetho_measurement_object:
+      type: object
+      properties:
+        hash_deviceid:
+          type: string
+          description: 'ID of device that tracked the data. To retrieve information about this device, refer to : <a href=''/api-reference/#operation/userv2-getdevice''>User v2 - Getdevice</a>.'
+          example: 892359876fd8805ac45bab078c4828692f0276b1
+        signalid:
+          type: integer
+          description: Id of the signal.
+          example: 1
+        vhd:
+          type: integer
+          example: 1
+        timestamp:
+          type: integer
+          description: Timestamp of the recording.
+          format: timestamp
+          example: 1594159644
+        timezone:
+          type: string
+          description: Timezone for the date.
+          example: Europe/Paris
+x-tagGroups:
+- name: Api Reference Content
+  tags:
+  - oauth2
+  - dropshipment
+  - order
+  - user
+  - measure
+  - heart
+  - stetho
+  - sleep
+  - notify
+  - survey
+  - answers
+  - signature
+  - rawdata
+  - device
+  - models
+  - response_status
+  - Glossary
+  - nudge
+  - nudgecampaign
