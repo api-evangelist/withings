@@ -8,7 +8,19 @@ description: Withings is a connected health device platform providing a REST API
   and developers can integrate Withings health data into their applications for remote
   patient monitoring, wellness platforms, and research applications.
 type: Index
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: freemium
+  onboarding: unknown
+  trial: false
+  try_now: false
+  public: false
+  label: Freemium
+  confidence: medium
+  source:
+  - plans
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/withings.png
 url: https://raw.githubusercontent.com/api-evangelist/withings/refs/heads/main/apis.yml
 created: '2026-06-13'
 modified: '2026-06-13'
@@ -25,33 +37,62 @@ tags:
 - OAuth2
 - Webhooks
 apis:
-- name: Withings Data API
-  description: The Withings Data API provides access to health metrics collected by
-    Withings connected devices including smart scales, blood pressure monitors, sleep
-    trackers, thermometers, and fitness watches. Data includes body composition, cardiovascular
-    health, sleep quality, activity levels, and clinical biomarkers. Access is secured
-    via OAuth2 and the API supports webhook notifications for real-time data updates.
+- name: Withings Mobile SDK
+  description: >-
+    The Withings Mobile SDK allows developers to integrate Withings health data directly into iOS and
+    Android mobile applications. The SDK handles device pairing, data synchronization, and health metric
+    collection with native implementations for both platforms.
   image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: >-
+    https://developer.withings.com/developer-guide/v3/integration-guide/sdk-integration-guides/
+  baseURL: https://developer.withings.com
+  tags:
+  - Mobile SDK
+  - iOS
+  - Android
+  - Health Data
+  properties:
+  - type: Documentation
+    url: >-
+      https://developer.withings.com/developer-guide/v3/integration-guide/sdk-integration-guides/
+  - type: iOSResources
+    url: https://developer.withings.com/sdk/v2/tree/sources/ios/
+  - type: AndroidResources
+    url: https://developer.withings.com/sdk/v2/tree/sources/android/
+- name: Withings Advanced Research API
+  description: >-
+    The Withings Advanced Research API provides access to detailed and granular health biomarker data
+    for academic and clinical research purposes, including full biomarker packs with extended data sets
+    beyond the standard API offering.
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://developer.withings.com/developer-guide/v3/withings-solutions/withings-api-plans/
+  baseURL: https://wbsapi.withings.net
+  tags:
+  - Research
+  - Biomarkers
+  - Clinical Data
+  - Health Analytics
+  properties:
+  - type: Documentation
+    url: https://developer.withings.com/developer-guide/v3/withings-solutions/withings-api-plans/
+- aid: withings:withings-answers-api
+  name: Withings answers API
+  description: These webservices allows you to get user's answers from surveys
   humanURL: https://developer.withings.com/
   baseURL: https://wbsapi.withings.net
   tags:
-  - Health Data
-  - Body Composition
-  - Sleep
-  - Activity
-  - Blood Pressure
-  - OAuth2
+  - answers
   properties:
+  - type: OpenAPI
+    url: openapi/withings-answers-api-openapi.yml
   - type: Documentation
     url: https://developer.withings.com/developer-guide/v3/data-api/all-available-health-data/
-  - type: OpenAPI
-    url: https://developer.withings.com/api-reference/
-  - type: OpenAPI
-    url: openapi/withings-data-api-openapi.yml
   - type: Authentication
-    url: https://developer.withings.com/developer-guide/v3/integration-guide/public-health-data-api/get-access/oauth-web-flow/
+    url: >-
+      https://developer.withings.com/developer-guide/v3/integration-guide/public-health-data-api/get-access/oauth-web-flow/
   - type: Webhooks
-    url: https://developer.withings.com/developer-guide/v3/data-api/notifications/notification-overview/
+    url: >-
+      https://developer.withings.com/developer-guide/v3/data-api/notifications/notification-overview/
   - type: JSONSchema
     url: json-schema/withings-activity-object.json
   - type: JSONSchema
@@ -76,43 +117,740 @@ apis:
     url: examples/withings-activity-example.json
   - type: Examples
     url: examples/withings-oauth2-token-example.json
-  - url: graphql/withings-graphql.md
-    type: GraphQL
-- name: Withings Mobile SDK
-  description: The Withings Mobile SDK allows developers to integrate Withings health
-    data directly into iOS and Android mobile applications. The SDK handles device
-    pairing, data synchronization, and health metric collection with native implementations
-    for both platforms.
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://developer.withings.com/developer-guide/v3/integration-guide/sdk-integration-guides/
-  baseURL: https://developer.withings.com
-  tags:
-  - Mobile SDK
-  - iOS
-  - Android
-  - Health Data
-  properties:
-  - type: Documentation
-    url: https://developer.withings.com/developer-guide/v3/integration-guide/sdk-integration-guides/
-  - type: iOSResources
-    url: https://developer.withings.com/sdk/v2/tree/sources/ios/
-  - type: AndroidResources
-    url: https://developer.withings.com/sdk/v2/tree/sources/android/
-- name: Withings Advanced Research API
-  description: The Withings Advanced Research API provides access to detailed and
-    granular health biomarker data for academic and clinical research purposes, including
-    full biomarker packs with extended data sets beyond the standard API offering.
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://developer.withings.com/developer-guide/v3/withings-solutions/withings-api-plans/
+  - type: GraphQL
+    url: graphql/withings-graphql.md
+- aid: withings:withings-device-api
+  name: Withings device API
+  description: The device API from Withings — 3 operation(s) for device.
+  humanURL: https://developer.withings.com/
   baseURL: https://wbsapi.withings.net
   tags:
-  - Research
-  - Biomarkers
-  - Clinical Data
-  - Health Analytics
+  - device
   properties:
+  - type: OpenAPI
+    url: openapi/withings-device-api-openapi.yml
   - type: Documentation
-    url: https://developer.withings.com/developer-guide/v3/withings-solutions/withings-api-plans/
+    url: https://developer.withings.com/developer-guide/v3/data-api/all-available-health-data/
+  - type: Authentication
+    url: >-
+      https://developer.withings.com/developer-guide/v3/integration-guide/public-health-data-api/get-access/oauth-web-flow/
+  - type: Webhooks
+    url: >-
+      https://developer.withings.com/developer-guide/v3/data-api/notifications/notification-overview/
+  - type: JSONSchema
+    url: json-schema/withings-activity-object.json
+  - type: JSONSchema
+    url: json-schema/withings-measuregrp-object.json
+  - type: JSONSchema
+    url: json-schema/withings-measure-object.json
+  - type: JSONSchema
+    url: json-schema/withings-sleep-summary-object.json
+  - type: JSONSchema
+    url: json-schema/withings-workout-object.json
+  - type: JSONSchema
+    url: json-schema/withings-notify-object.json
+  - type: JSONSchema
+    url: json-schema/withings-user-device-object.json
+  - type: JSONSchema
+    url: json-schema/withings-heart-measurement-object.json
+  - type: Examples
+    url: examples/withings-measure-example.json
+  - type: Examples
+    url: examples/withings-sleep-summary-example.json
+  - type: Examples
+    url: examples/withings-activity-example.json
+  - type: Examples
+    url: examples/withings-oauth2-token-example.json
+  - type: GraphQL
+    url: graphql/withings-graphql.md
+- aid: withings:withings-dropshipment-api
+  name: Withings dropshipment API
+  description: >-
+    The following services are part of the Logistics APIs. Refer to [this section](/developer-guide/v3/integration-guide/dropship-only/logistics-api/overview-create-order)
+    for more information.
+
+
+    The Logistics APIs allows partners to dropship devices directly to their program members.
+
+
+    **Important**: To receive automatic notification on order status, please fill a dropshipment notify
+    URI for your API application in your [Developer Dashboard](https://developer.withings.com/dashboard/).
+  humanURL: https://developer.withings.com/
+  baseURL: https://wbsapi.withings.net
+  tags:
+  - dropshipment
+  properties:
+  - type: OpenAPI
+    url: openapi/withings-dropshipment-api-openapi.yml
+  - type: Documentation
+    url: https://developer.withings.com/developer-guide/v3/data-api/all-available-health-data/
+  - type: Authentication
+    url: >-
+      https://developer.withings.com/developer-guide/v3/integration-guide/public-health-data-api/get-access/oauth-web-flow/
+  - type: Webhooks
+    url: >-
+      https://developer.withings.com/developer-guide/v3/data-api/notifications/notification-overview/
+  - type: JSONSchema
+    url: json-schema/withings-activity-object.json
+  - type: JSONSchema
+    url: json-schema/withings-measuregrp-object.json
+  - type: JSONSchema
+    url: json-schema/withings-measure-object.json
+  - type: JSONSchema
+    url: json-schema/withings-sleep-summary-object.json
+  - type: JSONSchema
+    url: json-schema/withings-workout-object.json
+  - type: JSONSchema
+    url: json-schema/withings-notify-object.json
+  - type: JSONSchema
+    url: json-schema/withings-user-device-object.json
+  - type: JSONSchema
+    url: json-schema/withings-heart-measurement-object.json
+  - type: Examples
+    url: examples/withings-measure-example.json
+  - type: Examples
+    url: examples/withings-sleep-summary-example.json
+  - type: Examples
+    url: examples/withings-activity-example.json
+  - type: Examples
+    url: examples/withings-oauth2-token-example.json
+  - type: GraphQL
+    url: graphql/withings-graphql.md
+- aid: withings:withings-heart-api
+  name: Withings heart API
+  description: >-
+    Returns ECG (EKG) signal points in micro-volt (μV).
+
+
+    You can use the [Heart - List](#operation/heartv2-list) service to get the list of ECG records and
+    their corresponding ```signalid``` and then use [Heart - Get](#operation/heartv2-get) to get the signal
+    details.
+
+
+    The data are only available once a synchronization occured between the device and Withings servers
+    (which might include synchronizing with Withings mobile application or via Withings Mobile SDK).
+  humanURL: https://developer.withings.com/
+  baseURL: https://wbsapi.withings.net
+  tags:
+  - heart
+  properties:
+  - type: OpenAPI
+    url: openapi/withings-heart-api-openapi.yml
+  - type: Documentation
+    url: https://developer.withings.com/developer-guide/v3/data-api/all-available-health-data/
+  - type: Authentication
+    url: >-
+      https://developer.withings.com/developer-guide/v3/integration-guide/public-health-data-api/get-access/oauth-web-flow/
+  - type: Webhooks
+    url: >-
+      https://developer.withings.com/developer-guide/v3/data-api/notifications/notification-overview/
+  - type: JSONSchema
+    url: json-schema/withings-activity-object.json
+  - type: JSONSchema
+    url: json-schema/withings-measuregrp-object.json
+  - type: JSONSchema
+    url: json-schema/withings-measure-object.json
+  - type: JSONSchema
+    url: json-schema/withings-sleep-summary-object.json
+  - type: JSONSchema
+    url: json-schema/withings-workout-object.json
+  - type: JSONSchema
+    url: json-schema/withings-notify-object.json
+  - type: JSONSchema
+    url: json-schema/withings-user-device-object.json
+  - type: JSONSchema
+    url: json-schema/withings-heart-measurement-object.json
+  - type: Examples
+    url: examples/withings-measure-example.json
+  - type: Examples
+    url: examples/withings-sleep-summary-example.json
+  - type: Examples
+    url: examples/withings-activity-example.json
+  - type: Examples
+    url: examples/withings-oauth2-token-example.json
+  - type: GraphQL
+    url: graphql/withings-graphql.md
+- aid: withings:withings-measure-api
+  name: Withings measure API
+  description: >-
+    The following services gives access to several types of Health Data collected by a user. The data
+    are only available once a synchronization occured between the device and Withings servers (which might
+    include synchronizing with Withings mobile application or via Withings Mobile SDK).
+  humanURL: https://developer.withings.com/
+  baseURL: https://wbsapi.withings.net
+  tags:
+  - measure
+  properties:
+  - type: OpenAPI
+    url: openapi/withings-measure-api-openapi.yml
+  - type: Documentation
+    url: https://developer.withings.com/developer-guide/v3/data-api/all-available-health-data/
+  - type: Authentication
+    url: >-
+      https://developer.withings.com/developer-guide/v3/integration-guide/public-health-data-api/get-access/oauth-web-flow/
+  - type: Webhooks
+    url: >-
+      https://developer.withings.com/developer-guide/v3/data-api/notifications/notification-overview/
+  - type: JSONSchema
+    url: json-schema/withings-activity-object.json
+  - type: JSONSchema
+    url: json-schema/withings-measuregrp-object.json
+  - type: JSONSchema
+    url: json-schema/withings-measure-object.json
+  - type: JSONSchema
+    url: json-schema/withings-sleep-summary-object.json
+  - type: JSONSchema
+    url: json-schema/withings-workout-object.json
+  - type: JSONSchema
+    url: json-schema/withings-notify-object.json
+  - type: JSONSchema
+    url: json-schema/withings-user-device-object.json
+  - type: JSONSchema
+    url: json-schema/withings-heart-measurement-object.json
+  - type: Examples
+    url: examples/withings-measure-example.json
+  - type: Examples
+    url: examples/withings-sleep-summary-example.json
+  - type: Examples
+    url: examples/withings-activity-example.json
+  - type: Examples
+    url: examples/withings-oauth2-token-example.json
+  - type: GraphQL
+    url: graphql/withings-graphql.md
+- aid: withings:withings-notify-api
+  name: Withings notify API
+  description: "These services will allow you to be notified when new data is collected by Withings devices,\
+    \ or when specific events happen.\n\t\tLearn more about our notification services in [the dedicated\
+    \ section](/developer-guide/v3/data-api/notifications/notification-overview/)"
+  humanURL: https://developer.withings.com/
+  baseURL: https://wbsapi.withings.net
+  tags:
+  - notify
+  properties:
+  - type: OpenAPI
+    url: openapi/withings-notify-api-openapi.yml
+  - type: Documentation
+    url: https://developer.withings.com/developer-guide/v3/data-api/all-available-health-data/
+  - type: Authentication
+    url: >-
+      https://developer.withings.com/developer-guide/v3/integration-guide/public-health-data-api/get-access/oauth-web-flow/
+  - type: Webhooks
+    url: >-
+      https://developer.withings.com/developer-guide/v3/data-api/notifications/notification-overview/
+  - type: JSONSchema
+    url: json-schema/withings-activity-object.json
+  - type: JSONSchema
+    url: json-schema/withings-measuregrp-object.json
+  - type: JSONSchema
+    url: json-schema/withings-measure-object.json
+  - type: JSONSchema
+    url: json-schema/withings-sleep-summary-object.json
+  - type: JSONSchema
+    url: json-schema/withings-workout-object.json
+  - type: JSONSchema
+    url: json-schema/withings-notify-object.json
+  - type: JSONSchema
+    url: json-schema/withings-user-device-object.json
+  - type: JSONSchema
+    url: json-schema/withings-heart-measurement-object.json
+  - type: Examples
+    url: examples/withings-measure-example.json
+  - type: Examples
+    url: examples/withings-sleep-summary-example.json
+  - type: Examples
+    url: examples/withings-activity-example.json
+  - type: Examples
+    url: examples/withings-oauth2-token-example.json
+  - type: GraphQL
+    url: graphql/withings-graphql.md
+- aid: withings:withings-nudge-api
+  name: Withings nudge API
+  description: >-
+    These webservices allows you to to manage Health Nudges. Read the [Health Nudges Integration Guide](/developer-guide/v3/integration-guide/health-nudges/health-nudge-overview)
+    for more information.
+  humanURL: https://developer.withings.com/
+  baseURL: https://wbsapi.withings.net
+  tags:
+  - nudge
+  properties:
+  - type: OpenAPI
+    url: openapi/withings-nudge-api-openapi.yml
+  - type: Documentation
+    url: https://developer.withings.com/developer-guide/v3/data-api/all-available-health-data/
+  - type: Authentication
+    url: >-
+      https://developer.withings.com/developer-guide/v3/integration-guide/public-health-data-api/get-access/oauth-web-flow/
+  - type: Webhooks
+    url: >-
+      https://developer.withings.com/developer-guide/v3/data-api/notifications/notification-overview/
+  - type: JSONSchema
+    url: json-schema/withings-activity-object.json
+  - type: JSONSchema
+    url: json-schema/withings-measuregrp-object.json
+  - type: JSONSchema
+    url: json-schema/withings-measure-object.json
+  - type: JSONSchema
+    url: json-schema/withings-sleep-summary-object.json
+  - type: JSONSchema
+    url: json-schema/withings-workout-object.json
+  - type: JSONSchema
+    url: json-schema/withings-notify-object.json
+  - type: JSONSchema
+    url: json-schema/withings-user-device-object.json
+  - type: JSONSchema
+    url: json-schema/withings-heart-measurement-object.json
+  - type: Examples
+    url: examples/withings-measure-example.json
+  - type: Examples
+    url: examples/withings-sleep-summary-example.json
+  - type: Examples
+    url: examples/withings-activity-example.json
+  - type: Examples
+    url: examples/withings-oauth2-token-example.json
+  - type: GraphQL
+    url: graphql/withings-graphql.md
+- aid: withings:withings-nudgecampaign-api
+  name: Withings nudgecampaign API
+  description: >-
+    These webservices allows you to to manage Health Nudges Campaign. Read the [Health Nudges Integration
+    Guide](/developer-guide/v3/integration-guide/health-nudges/health-nudge-overview) for more information.
+  humanURL: https://developer.withings.com/
+  baseURL: https://wbsapi.withings.net
+  tags:
+  - nudgecampaign
+  properties:
+  - type: OpenAPI
+    url: openapi/withings-nudgecampaign-api-openapi.yml
+  - type: Documentation
+    url: https://developer.withings.com/developer-guide/v3/data-api/all-available-health-data/
+  - type: Authentication
+    url: >-
+      https://developer.withings.com/developer-guide/v3/integration-guide/public-health-data-api/get-access/oauth-web-flow/
+  - type: Webhooks
+    url: >-
+      https://developer.withings.com/developer-guide/v3/data-api/notifications/notification-overview/
+  - type: JSONSchema
+    url: json-schema/withings-activity-object.json
+  - type: JSONSchema
+    url: json-schema/withings-measuregrp-object.json
+  - type: JSONSchema
+    url: json-schema/withings-measure-object.json
+  - type: JSONSchema
+    url: json-schema/withings-sleep-summary-object.json
+  - type: JSONSchema
+    url: json-schema/withings-workout-object.json
+  - type: JSONSchema
+    url: json-schema/withings-notify-object.json
+  - type: JSONSchema
+    url: json-schema/withings-user-device-object.json
+  - type: JSONSchema
+    url: json-schema/withings-heart-measurement-object.json
+  - type: Examples
+    url: examples/withings-measure-example.json
+  - type: Examples
+    url: examples/withings-sleep-summary-example.json
+  - type: Examples
+    url: examples/withings-activity-example.json
+  - type: Examples
+    url: examples/withings-oauth2-token-example.json
+  - type: GraphQL
+    url: graphql/withings-graphql.md
+- aid: withings:withings-oauth2-api
+  name: Withings oauth2 API
+  description: >-
+    <br>The Withings API uses OAuth 2.0, an industry-standard protocol for authorization.<br> OAuth 2.0
+    enables your application to access user-specific data with a secure and seamless way without requiring
+    users to share their Withings credentials with your app.<br>
+                      <br>
+                      The Withings API supports the Authorization Code Flow, which is suitable for server-side
+    applications. In this flow, your application will obtain an authorization code from the user, which
+    can then be exchanged for an access token and refresh token.
+                      <br><br>
+                      There are two ways to obtain the authorization code:<br>
+                      <br>
+                      1. **Web Authorization Flow**: Redirect the user to the Withings authorization endpoint,
+    where they can grant permission for your app to access their Withings data.<br>
+                      2. **Account Creation Flow (contract partners only)**: Obtain the authorization
+    code after account creation (Cellular Devices/SDK only) .<br>
+                      <br>
+                      To use OAuth 2.0 with the Withings API, follow these general steps:<br>
+                      <br>
+                      1. **Request user authorization/Create an account**: Use one of the two methods
+    mentioned above to obtain an authorization code from the user.<br>
+                      2. **Obtain an access token**: Exchange the authorization code for an access token
+    and refresh token.<br>
+                      3. **Access the API**: Include the access token in your API requests to access user-specific
+    data from the Withings API.<br>
+                      4. **Refresh tokens**: Use the refresh token to obtain new access tokens when the
+    current ones expire.<br>
+                      <br>
+                      Please refer to the appropriate [Integration Guide](https://developer.withings.com/developer-guide/v3/withings-solutions/integration-guides)
+    to know which method you should use.
+  humanURL: https://developer.withings.com/
+  baseURL: https://wbsapi.withings.net
+  tags:
+  - oauth2
+  properties:
+  - type: OpenAPI
+    url: openapi/withings-oauth2-api-openapi.yml
+  - type: Documentation
+    url: https://developer.withings.com/developer-guide/v3/data-api/all-available-health-data/
+  - type: Authentication
+    url: >-
+      https://developer.withings.com/developer-guide/v3/integration-guide/public-health-data-api/get-access/oauth-web-flow/
+  - type: Webhooks
+    url: >-
+      https://developer.withings.com/developer-guide/v3/data-api/notifications/notification-overview/
+  - type: JSONSchema
+    url: json-schema/withings-activity-object.json
+  - type: JSONSchema
+    url: json-schema/withings-measuregrp-object.json
+  - type: JSONSchema
+    url: json-schema/withings-measure-object.json
+  - type: JSONSchema
+    url: json-schema/withings-sleep-summary-object.json
+  - type: JSONSchema
+    url: json-schema/withings-workout-object.json
+  - type: JSONSchema
+    url: json-schema/withings-notify-object.json
+  - type: JSONSchema
+    url: json-schema/withings-user-device-object.json
+  - type: JSONSchema
+    url: json-schema/withings-heart-measurement-object.json
+  - type: Examples
+    url: examples/withings-measure-example.json
+  - type: Examples
+    url: examples/withings-sleep-summary-example.json
+  - type: Examples
+    url: examples/withings-activity-example.json
+  - type: Examples
+    url: examples/withings-oauth2-token-example.json
+  - type: GraphQL
+    url: graphql/withings-graphql.md
+- aid: withings:withings-order-api
+  name: Withings order API
+  description: >-
+    The following services are part of the Logistics APIs. Refer to [this section](/developer-guide/v3/integration-guide/dropship-only/logistics-api/overview-create-order)
+    for more information.
+  humanURL: https://developer.withings.com/
+  baseURL: https://wbsapi.withings.net
+  tags:
+  - order
+  properties:
+  - type: OpenAPI
+    url: openapi/withings-order-api-openapi.yml
+  - type: Documentation
+    url: https://developer.withings.com/developer-guide/v3/data-api/all-available-health-data/
+  - type: Authentication
+    url: >-
+      https://developer.withings.com/developer-guide/v3/integration-guide/public-health-data-api/get-access/oauth-web-flow/
+  - type: Webhooks
+    url: >-
+      https://developer.withings.com/developer-guide/v3/data-api/notifications/notification-overview/
+  - type: JSONSchema
+    url: json-schema/withings-activity-object.json
+  - type: JSONSchema
+    url: json-schema/withings-measuregrp-object.json
+  - type: JSONSchema
+    url: json-schema/withings-measure-object.json
+  - type: JSONSchema
+    url: json-schema/withings-sleep-summary-object.json
+  - type: JSONSchema
+    url: json-schema/withings-workout-object.json
+  - type: JSONSchema
+    url: json-schema/withings-notify-object.json
+  - type: JSONSchema
+    url: json-schema/withings-user-device-object.json
+  - type: JSONSchema
+    url: json-schema/withings-heart-measurement-object.json
+  - type: Examples
+    url: examples/withings-measure-example.json
+  - type: Examples
+    url: examples/withings-sleep-summary-example.json
+  - type: Examples
+    url: examples/withings-activity-example.json
+  - type: Examples
+    url: examples/withings-oauth2-token-example.json
+  - type: GraphQL
+    url: graphql/withings-graphql.md
+- aid: withings:withings-rawdata-api
+  name: Withings rawdata API
+  description: >-
+    Raw Data webservices are part of the Advanced research API that allows to collect high frequency PPG
+    and accelerometer data (around 25Hz). These APIs are compatible only with the Withings ScanWatch.
+    If you need more information about how to use these APIs and how to parse the data, please have a
+    look the [dedicated integration guide](/developer-guide/v3/integration-guide/public-health-data-api/data-api/raw-data).
+  humanURL: https://developer.withings.com/
+  baseURL: https://wbsapi.withings.net
+  tags:
+  - rawdata
+  properties:
+  - type: OpenAPI
+    url: openapi/withings-rawdata-api-openapi.yml
+  - type: Documentation
+    url: https://developer.withings.com/developer-guide/v3/data-api/all-available-health-data/
+  - type: Authentication
+    url: >-
+      https://developer.withings.com/developer-guide/v3/integration-guide/public-health-data-api/get-access/oauth-web-flow/
+  - type: Webhooks
+    url: >-
+      https://developer.withings.com/developer-guide/v3/data-api/notifications/notification-overview/
+  - type: JSONSchema
+    url: json-schema/withings-activity-object.json
+  - type: JSONSchema
+    url: json-schema/withings-measuregrp-object.json
+  - type: JSONSchema
+    url: json-schema/withings-measure-object.json
+  - type: JSONSchema
+    url: json-schema/withings-sleep-summary-object.json
+  - type: JSONSchema
+    url: json-schema/withings-workout-object.json
+  - type: JSONSchema
+    url: json-schema/withings-notify-object.json
+  - type: JSONSchema
+    url: json-schema/withings-user-device-object.json
+  - type: JSONSchema
+    url: json-schema/withings-heart-measurement-object.json
+  - type: Examples
+    url: examples/withings-measure-example.json
+  - type: Examples
+    url: examples/withings-sleep-summary-example.json
+  - type: Examples
+    url: examples/withings-activity-example.json
+  - type: Examples
+    url: examples/withings-oauth2-token-example.json
+  - type: GraphQL
+    url: graphql/withings-graphql.md
+- aid: withings:withings-signature-api
+  name: Withings signature API
+  description: >-
+    The following services are part of the Logistics APIs. Refer to [this section](/developer-guide/v3/integration-guide/dropship-only/logistics-api/overview-create-order)
+    for more information.
+  humanURL: https://developer.withings.com/
+  baseURL: https://wbsapi.withings.net
+  tags:
+  - signature
+  properties:
+  - type: OpenAPI
+    url: openapi/withings-signature-api-openapi.yml
+  - type: Documentation
+    url: https://developer.withings.com/developer-guide/v3/data-api/all-available-health-data/
+  - type: Authentication
+    url: >-
+      https://developer.withings.com/developer-guide/v3/integration-guide/public-health-data-api/get-access/oauth-web-flow/
+  - type: Webhooks
+    url: >-
+      https://developer.withings.com/developer-guide/v3/data-api/notifications/notification-overview/
+  - type: JSONSchema
+    url: json-schema/withings-activity-object.json
+  - type: JSONSchema
+    url: json-schema/withings-measuregrp-object.json
+  - type: JSONSchema
+    url: json-schema/withings-measure-object.json
+  - type: JSONSchema
+    url: json-schema/withings-sleep-summary-object.json
+  - type: JSONSchema
+    url: json-schema/withings-workout-object.json
+  - type: JSONSchema
+    url: json-schema/withings-notify-object.json
+  - type: JSONSchema
+    url: json-schema/withings-user-device-object.json
+  - type: JSONSchema
+    url: json-schema/withings-heart-measurement-object.json
+  - type: Examples
+    url: examples/withings-measure-example.json
+  - type: Examples
+    url: examples/withings-sleep-summary-example.json
+  - type: Examples
+    url: examples/withings-activity-example.json
+  - type: Examples
+    url: examples/withings-oauth2-token-example.json
+  - type: GraphQL
+    url: graphql/withings-graphql.md
+- aid: withings:withings-sleep-api
+  name: Withings sleep API
+  description: >-
+    Returns data related to user sleep activities, wether they are captured by an Activity Tracker or
+    a Sleep Monitor.
+
+
+    The data are only available once a synchronization occured between the device and Withings servers
+    (which might include synchronizing with Withings mobile application or via Withings Mobile SDK).
+  humanURL: https://developer.withings.com/
+  baseURL: https://wbsapi.withings.net
+  tags:
+  - sleep
+  properties:
+  - type: OpenAPI
+    url: openapi/withings-sleep-api-openapi.yml
+  - type: Documentation
+    url: https://developer.withings.com/developer-guide/v3/data-api/all-available-health-data/
+  - type: Authentication
+    url: >-
+      https://developer.withings.com/developer-guide/v3/integration-guide/public-health-data-api/get-access/oauth-web-flow/
+  - type: Webhooks
+    url: >-
+      https://developer.withings.com/developer-guide/v3/data-api/notifications/notification-overview/
+  - type: JSONSchema
+    url: json-schema/withings-activity-object.json
+  - type: JSONSchema
+    url: json-schema/withings-measuregrp-object.json
+  - type: JSONSchema
+    url: json-schema/withings-measure-object.json
+  - type: JSONSchema
+    url: json-schema/withings-sleep-summary-object.json
+  - type: JSONSchema
+    url: json-schema/withings-workout-object.json
+  - type: JSONSchema
+    url: json-schema/withings-notify-object.json
+  - type: JSONSchema
+    url: json-schema/withings-user-device-object.json
+  - type: JSONSchema
+    url: json-schema/withings-heart-measurement-object.json
+  - type: Examples
+    url: examples/withings-measure-example.json
+  - type: Examples
+    url: examples/withings-sleep-summary-example.json
+  - type: Examples
+    url: examples/withings-activity-example.json
+  - type: Examples
+    url: examples/withings-oauth2-token-example.json
+  - type: GraphQL
+    url: graphql/withings-graphql.md
+- aid: withings:withings-stetho-api
+  name: Withings stetho API
+  description: >-
+    First the [Stetho - List](#operation/stethov2-list) API should be called to fetch the stetho signalIds
+    which should be fetched individually using the [Stetho - Get](#operation/stethov2-get) API.
+  humanURL: https://developer.withings.com/
+  baseURL: https://wbsapi.withings.net
+  tags:
+  - stetho
+  properties:
+  - type: OpenAPI
+    url: openapi/withings-stetho-api-openapi.yml
+  - type: Documentation
+    url: https://developer.withings.com/developer-guide/v3/data-api/all-available-health-data/
+  - type: Authentication
+    url: >-
+      https://developer.withings.com/developer-guide/v3/integration-guide/public-health-data-api/get-access/oauth-web-flow/
+  - type: Webhooks
+    url: >-
+      https://developer.withings.com/developer-guide/v3/data-api/notifications/notification-overview/
+  - type: JSONSchema
+    url: json-schema/withings-activity-object.json
+  - type: JSONSchema
+    url: json-schema/withings-measuregrp-object.json
+  - type: JSONSchema
+    url: json-schema/withings-measure-object.json
+  - type: JSONSchema
+    url: json-schema/withings-sleep-summary-object.json
+  - type: JSONSchema
+    url: json-schema/withings-workout-object.json
+  - type: JSONSchema
+    url: json-schema/withings-notify-object.json
+  - type: JSONSchema
+    url: json-schema/withings-user-device-object.json
+  - type: JSONSchema
+    url: json-schema/withings-heart-measurement-object.json
+  - type: Examples
+    url: examples/withings-measure-example.json
+  - type: Examples
+    url: examples/withings-sleep-summary-example.json
+  - type: Examples
+    url: examples/withings-activity-example.json
+  - type: Examples
+    url: examples/withings-oauth2-token-example.json
+  - type: GraphQL
+    url: graphql/withings-graphql.md
+- aid: withings:withings-survey-api
+  name: Withings survey API
+  description: These webservices allows you to to manage user's surveys
+  humanURL: https://developer.withings.com/
+  baseURL: https://wbsapi.withings.net
+  tags:
+  - survey
+  properties:
+  - type: OpenAPI
+    url: openapi/withings-survey-api-openapi.yml
+  - type: Documentation
+    url: https://developer.withings.com/developer-guide/v3/data-api/all-available-health-data/
+  - type: Authentication
+    url: >-
+      https://developer.withings.com/developer-guide/v3/integration-guide/public-health-data-api/get-access/oauth-web-flow/
+  - type: Webhooks
+    url: >-
+      https://developer.withings.com/developer-guide/v3/data-api/notifications/notification-overview/
+  - type: JSONSchema
+    url: json-schema/withings-activity-object.json
+  - type: JSONSchema
+    url: json-schema/withings-measuregrp-object.json
+  - type: JSONSchema
+    url: json-schema/withings-measure-object.json
+  - type: JSONSchema
+    url: json-schema/withings-sleep-summary-object.json
+  - type: JSONSchema
+    url: json-schema/withings-workout-object.json
+  - type: JSONSchema
+    url: json-schema/withings-notify-object.json
+  - type: JSONSchema
+    url: json-schema/withings-user-device-object.json
+  - type: JSONSchema
+    url: json-schema/withings-heart-measurement-object.json
+  - type: Examples
+    url: examples/withings-measure-example.json
+  - type: Examples
+    url: examples/withings-sleep-summary-example.json
+  - type: Examples
+    url: examples/withings-activity-example.json
+  - type: Examples
+    url: examples/withings-oauth2-token-example.json
+  - type: GraphQL
+    url: graphql/withings-graphql.md
+- aid: withings:withings-user-api
+  name: Withings user API
+  description: The user API from Withings — 7 operation(s) for user.
+  humanURL: https://developer.withings.com/
+  baseURL: https://wbsapi.withings.net
+  tags:
+  - user
+  properties:
+  - type: OpenAPI
+    url: openapi/withings-user-api-openapi.yml
+  - type: Documentation
+    url: https://developer.withings.com/developer-guide/v3/data-api/all-available-health-data/
+  - type: Authentication
+    url: >-
+      https://developer.withings.com/developer-guide/v3/integration-guide/public-health-data-api/get-access/oauth-web-flow/
+  - type: Webhooks
+    url: >-
+      https://developer.withings.com/developer-guide/v3/data-api/notifications/notification-overview/
+  - type: JSONSchema
+    url: json-schema/withings-activity-object.json
+  - type: JSONSchema
+    url: json-schema/withings-measuregrp-object.json
+  - type: JSONSchema
+    url: json-schema/withings-measure-object.json
+  - type: JSONSchema
+    url: json-schema/withings-sleep-summary-object.json
+  - type: JSONSchema
+    url: json-schema/withings-workout-object.json
+  - type: JSONSchema
+    url: json-schema/withings-notify-object.json
+  - type: JSONSchema
+    url: json-schema/withings-user-device-object.json
+  - type: JSONSchema
+    url: json-schema/withings-heart-measurement-object.json
+  - type: Examples
+    url: examples/withings-measure-example.json
+  - type: Examples
+    url: examples/withings-sleep-summary-example.json
+  - type: Examples
+    url: examples/withings-activity-example.json
+  - type: Examples
+    url: examples/withings-oauth2-token-example.json
+  - type: GraphQL
+    url: graphql/withings-graphql.md
 common:
 - type: AgenticAccess
   url: agentic-access/withings-agentic-access.yml
