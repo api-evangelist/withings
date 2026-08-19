@@ -1,0 +1,304 @@
+{
+  "item": [
+    {
+      "id": "be06afd8-36b9-415f-9185-c5e9cc243abc",
+      "name": "sleep",
+      "description": {
+        "content": "Returns data related to user sleep activities, wether they are captured by an Activity Tracker or a Sleep Monitor.\n\nThe data are only available once a synchronization occured between the device and Withings servers (which might include synchronizing with Withings mobile application or via Withings Mobile SDK).",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "8a44e3cc-dd28-4406-a6b5-59091884b9ed",
+          "name": "Sleep v2  - Get",
+          "request": {
+            "name": "Sleep v2  - Get",
+            "description": {
+              "content": "\nReturns sleep data captured at high frequency, including sleep stages.<br/><br/>\n**Notes**\nIf your input ```startdate``` and ```enddate``` are separated by more than 24h, only the first 24h after ```startdate``` will be returned.<br/><br/>\n**IMPORTANT**: Please refer to this [page](https://developer.withings.com/developer-guide/v3/data-api/all-available-health-data/#sleep) to check the availability of metrics based on the sleep tracking device used. Some data types are regulated in the EU and US and may not be available in your region.",
+              "type": "text/plain"
+            },
+            "url": {
+              "protocol": "{{baseUrl}}/https",
+              "path": [
+                "v2",
+                "sleep"
+              ],
+              "host": [
+                "wbsapi",
+                "withings",
+                "net"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "action",
+                  "value": "<string>",
+                  "description": "(Required) Service action name. Must take the string value ```get```."
+                },
+                {
+                  "disabled": false,
+                  "key": "startdate",
+                  "value": "<integer>",
+                  "description": "(Required) Data start date as a unix timestamp."
+                },
+                {
+                  "disabled": false,
+                  "key": "enddate",
+                  "value": "<integer>",
+                  "description": "(Required) Data end date as a unix timestamp."
+                },
+                {
+                  "disabled": false,
+                  "key": "data_fields",
+                  "value": "<string>",
+                  "description": "List of requested data fields, separated by a comma.<br>Available data fields are listed below.<br><u>Ex</u>: data_fields=hr,rr,snoring<br><br>hr<br>> Heart Rate (beats per minute). <br><br>rr<br>> Respiration Rate (breaths per minute). <br><br>snoring<br>> Total snoring time (seconds).<br><br>sdnn_1<br>> Heart rate variability - Standard deviation of the NN over 1 minute (in miliseconds).<br><br>rmssd<br>> Heart rate variability - Root mean square of the successive differences over \"a few seconds\" (in miliseconds).<br><br>hrv_quality<br>> Heart rate variability - quality score.<br><br>mvt_score<br>> Track the intensity of movement in bed on a minute-by-minute basis. The score ranges from 0 to 255, representing the intensity of movement. This metric is only available for Sleep Analyzer devices in the EU and prescription-based devices in the US (Sleep Rx).<br><br>chest_movement_rate<br>> Chest movement rate (events per minute). <br><br>withings_index<br>> Withings Sleep Rx (FDA Cleared) allows to estimate gaps in breathing sounds and to generate an index. This index corresponds to the number of breathing events per hour.\n\n\n<table><thead><tr><td>Value</td><td>Description</td></tr></thead><tbody><tr><td>0-15 (events per hour on average)</td><td>No/Mild</td></tr><tr><td>15-30 (events per hour on average)</td><td>Moderate</td></tr><tr><td>> 30 (events per hour on average)</td><td>Severe</td></tr></tbody></table>\n\n\nNote: 5 hours of sleep are required in order to calculate the Withings Index.<br><br>breathing_sounds<br>> Total time when breathing sounds were tracked. (seconds) <br><br>"
+                },
+                {
+                  "disabled": false,
+                  "key": "meastypes",
+                  "value": "<list of integers>",
+                  "description": "List of requested measure types (separated by a comma).<br>Ex: meastypes=1,4,12"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8e306521-7372-4287-876c-31ab1d41f946",
+              "name": " (Click to unfold)",
+              "originalRequest": {
+                "url": {
+                  "protocol": "{{baseUrl}}/https",
+                  "path": [
+                    "v2",
+                    "sleep"
+                  ],
+                  "host": [
+                    "wbsapi",
+                    "withings",
+                    "net"
+                  ],
+                  "query": [
+                    {
+                      "key": "action",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "startdate",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "enddate",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "data_fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "meastypes",
+                      "value": "<list of integers>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Used to pass your access token. Must take value: ```Bearer {your access_token}``` Replace {your access_token} with the access_token",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 6777,\n  \"body\": {\n    \"model\": 32,\n    \"series\": {\n      \"startdate\": 1594159200,\n      \"enddate\": 1594202400,\n      \"state\": 1,\n      \"model\": \"Aura Sensor V2\",\n      \"model_id\": 63,\n      \"hr\": {\n        \"$timestamp\": 6223\n      },\n      \"rr\": {\n        \"$timestamp\": 1378\n      },\n      \"snoring\": {\n        \"$timestamp\": 2670\n      },\n      \"sdnn_1\": {\n        \"$timestamp\": 5004\n      },\n      \"rmssd\": {\n        \"$timestamp\": 8237\n      },\n      \"hrv_quality\": {\n        \"$timestamp\": 7782\n      },\n      \"mvt_score\": {\n        \"$timestamp\": 8859\n      },\n      \"chest_movement_rate\": {\n        \"$timestamp\": 2121\n      },\n      \"withings_index\": {\n        \"$timestamp\": 5976\n      },\n      \"breathing_sounds\": {\n        \"$timestamp\": 7490\n      }\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "90aa82f3-6a8e-4e8e-9414-16796af28264",
+          "name": "Sleep v2  - Getsummary",
+          "request": {
+            "name": "Sleep v2  - Getsummary",
+            "description": {
+              "content": "Returns sleep activity summaries, which are an aggregation of all the data captured at high frequency during the sleep activity.</br></br>\nUse the [Sleep v2 - Get](#operation/sleepv2-get) service to get the high frequency data used to build these summaries.</br></br>\n**IMPORTANT**: Please refer to this [page](https://developer.withings.com/developer-guide/v3/data-api/all-available-health-data/#sleep) to check the availability of metrics based on the sleep tracking device used. Some data types are regulated in the EU and US and may not be available in your region.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "protocol": "{{baseUrl}}/https",
+              "path": [
+                "v2",
+                "sleep "
+              ],
+              "host": [
+                "wbsapi",
+                "withings",
+                "net"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "action",
+                  "value": "<string>",
+                  "description": "(Required) Service action name. Must take the string value ```getsummary```."
+                },
+                {
+                  "disabled": false,
+                  "key": "startdateymd",
+                  "value": "<string>",
+                  "description": "(Required) DO NOT USE WITH FOLLOWING PARAMS: [lastupdate]<br>Start date. Required if no lastupdate."
+                },
+                {
+                  "disabled": false,
+                  "key": "enddateymd",
+                  "value": "<string>",
+                  "description": "(Required) DO NOT USE WITH FOLLOWING PARAMS: [lastupdate]<br>End date. Required if startdateymd is provided."
+                },
+                {
+                  "disabled": false,
+                  "key": "lastupdate",
+                  "value": "<integer>",
+                  "description": "(Required) DO NOT USE WITH FOLLOWING PARAMS: [startdateymd, enddateymd]<br>Timestamp for requesting data that were updated or created after this date.<br>Useful for data synchronization between systems.<br>Use this instead of startdateymd + enddateymd."
+                },
+                {
+                  "disabled": false,
+                  "key": "data_fields",
+                  "value": "<string>",
+                  "description": "List of requested data fields, separated by a comma.<br>Available data fields are listed below.<br><u>Ex</u>: data_fields=total_timeinbed,total_sleep_time,asleepduration<br><br><b><i>Standard sleep medicine metrics</i></b><br><br>total_timeinbed<br>> Total time spent in bed (seconds). <br><br>total_sleep_time<br>> Total time spent asleep. Sum of light, deep and rem durations (seconds). <br><br>asleepduration<br>> Duration of sleep when night comes from external source (seconds).<br>Light, Deep and Rem sleep durations are null in this case. <br><br>lightsleepduration<br>> Duration in state light sleep (seconds). <br><br>remsleepduration<br>> Duration in state REM sleep (seconds). <br><br>deepsleepduration<br>> Duration in state deep sleep (seconds). <br><br>sleep_efficiency<br>> Ratio of the total sleep time over the time spent in bed. <br><br>sleep_latency<br>> Time spent in bed before falling asleep (seconds). <br><br>wakeup_latency<br>> Time spent in bed after waking up (seconds). <br><br>wakeupduration<br>> Time spent awake (seconds). <br><br>wakeupcount<br>> Number of times the user woke up while in bed. Does not include the number of times the user got out of bed. <br><br>waso<br>> Time spent awake in bed after falling asleep for the 1st time during the night (seconds). <br><br>nb_rem_episodes<br>> Count of the REM sleep phases. <br><br><br><b><i>Sleep apnea and breathing disturbances</i></b><br><br>breathing_disturbances_intensity<br>> Intensity of <a href='/api-reference/#section/Glossary'>breathing disturbances</a>.<br>Available for all Sleep and Sleep Analyzer devices (wellness metric). <br><br>apnea_hypopnea_index<br>> Medical grade AHI. Average number of hypopnea and apnea episodes per hour, that occured during sleep time.<br>Only available for devices purchased in Europe and Australia, with the sleep apnea detection feature activated. <br><br>withings_index<br>> Withings Sleep Rx (FDA Cleared) allows to estimate gaps in breathing sounds and to generate an index. This index corresponds to the number of breathing events per hour.\n\n\n<table><thead><tr><td>Value</td><td>Description</td></tr></thead><tbody><tr><td>0-15 (events per hour on average)</td><td>No/Mild</td></tr><tr><td>15-30 (events per hour on average)</td><td>Moderate</td></tr><tr><td>> 30 (events per hour on average)</td><td>Severe</td></tr></tbody></table>\n\n\nNote: 5 hours of sleep are required in order to calculate the Withings Index.<br><br><br><b><i>Other sleep datapoints and vitals</i></b><br><br>durationtosleep<br>> Time to sleep (seconds). (deprecated) <br><br>durationtowakeup<br>> Time to wake up (seconds). (deprecated) <br><br>out_of_bed_count<br>> Number of times the user got out of bed during the night. <br><br>hr_average<br>> Average heart rate. (beats per minute).<br><br>hr_min<br>> Minimal heart rate (beats per minute). <br><br>hr_max<br>> Maximal heart rate (beats per minute).. <br><br>rr_average<br>> Average respiration rate (breaths per minute).  <br><br>rr_min<br>> Minimal respiration rate (breaths per minute). <br><br>rr_max<br>> Maximal respiration rate (breaths per minute). <br><br>breathing_quality_assessment<br>> Intensity of <a href='/api-reference/#section/Glossary'>breathing disturbances</a>.<br>Available for all Sleep and Sleep Analyzer devices (wellness metric). <br><br>snoring<br>> Total snoring time (seconds).<br><br>snoringepisodecount<br>> Numbers of snoring episodes of at least one minute.<br><br>sleep_score<br>> Sleep score<br><br>night_events<br>> Summary of sleep events that happened during the sleep activity.\n\nIt is structured as a dictionary, where keys are the type of event, and the value is an array of timestamps relative to the activity startdate.\n\nTypes of events can be one of the following : \n\n<table><thead><tr><td>Value</td><td>Description</td></tr></thead><tbody><tr><td>1</td><td>got in bed</td></tr><tr><td>2</td><td>fell asleep</td></tr><tr><td>3</td><td>woke up</td></tr><tr><td>4</td><td>got out of bed</td></tr><tr><td>5</td><td>start of asleep period that was manually input</td></tr><tr><td>6</td><td>start of awake period that was manually input</td></tr></tbody></table>\n\n<br><br>mvt_score_avg<br>> Track the average movement score in bed throughout the night. The score ranges from 0 to 255, representing the intensity of movement. This metric is only available for Sleep Analyzer devices in the EU and prescription-based devices in the US (Sleep Rx).<br><br>mvt_active_duration<br>> Track the duration (in seconds) of movement in bed. Only available for Sleep Analyzer devices (EU) and devices under prescriptions in the US (Sleep Rx)<br><br>rmssd_start_avg<br>> Heart rate variability - Start average<br><br>rmssd_end_avg<br>> Heart rate variability - End average<br><br>chest_movement_rate_wellness_average<br>> Average respiration rate (breaths per minute).  <br><br>chest_movement_rate_wellness_min<br>> Minimal respiration rate (breaths per minute). <br><br>chest_movement_rate_wellness_max<br>> Maximal respiration rate (breaths per minute). <br><br>breathing_sounds<br>> Total time when breathing sounds were tracked. (seconds) <br><br>breathing_sounds_episode_count<br>> Numbers of breathing sounds episodes of at least one minute. <br><br>chest_movement_rate_average<br>> Average chest movement rate (events per minute). <br><br>chest_movement_rate_min<br>> Minimal chest movement rate (events per minute). <br><br>chest_movement_rate_max<br>> Maximal chest movement rate (events per minute). <br><br>core_body_temperature_min<br>> Minimal core body temperature (in celsius degrees). <br><br>core_body_temperature_max<br>> Maximal core body temperature (in celsius degrees). <br><br>core_body_temperature_avg<br>> Avenage core body temperature (in celsius degrees). <br><br>core_body_temperature_status<br>> Status of the temperature. *(Use 'data_fields' to request this data)* Value can be: 'unknown', 'usual' or 'elevated'.\n <br><br>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f2613ad4-889a-49ec-b916-f108f7bafb4f",
+              "name": " (Click to unfold)",
+              "originalRequest": {
+                "url": {
+                  "protocol": "{{baseUrl}}/https",
+                  "path": [
+                    "v2",
+                    "sleep "
+                  ],
+                  "host": [
+                    "wbsapi",
+                    "withings",
+                    "net"
+                  ],
+                  "query": [
+                    {
+                      "key": "action",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "startdateymd",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "enddateymd",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "lastupdate",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "data_fields",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Used to pass your access token. Must take value: ```Bearer {your access_token}``` Replace {your access_token} with the access_token",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 6718,\n  \"body\": {\n    \"series\": [\n      {\n        \"id\": 12345,\n        \"timezone\": \"Europe/Paris\",\n        \"model\": 16,\n        \"model_id\": 51,\n        \"startdate\": 1594245600,\n        \"enddate\": 1594257200,\n        \"date\": \"2020-07-09\",\n        \"created\": 1594257200,\n        \"modified\": 1594257200,\n        \"hash_deviceid\": \"892359876fd8805ac45bab078c4828692f0276b1\",\n        \"completed\": true,\n        \"data\": {\n          \"total_timeinbed\": 3323,\n          \"total_sleep_time\": 1108,\n          \"asleepduration\": 5413,\n          \"lightsleepduration\": 9090,\n          \"remsleepduration\": 8147,\n          \"deepsleepduration\": 5409,\n          \"sleep_efficiency\": 1424.1283402529948,\n          \"sleep_latency\": 672,\n          \"wakeup_latency\": 1851,\n          \"wakeupduration\": 7975,\n          \"wakeupcount\": 2154,\n          \"waso\": 2967,\n          \"nb_rem_episodes\": 1765,\n          \"durationtosleep\": 7976,\n          \"durationtowakeup\": 2447,\n          \"out_of_bed_count\": 6808,\n          \"hr_average\": 5941,\n          \"hr_min\": 8690,\n          \"hr_max\": 7654,\n          \"rr_average\": 7710,\n          \"rr_min\": 2062,\n          \"rr_max\": 9744,\n          \"breathing_quality_assessment\": 2994,\n          \"breathing_disturbances_intensity\": 6470,\n          \"snoring\": 3412,\n          \"snoringepisodecount\": 6591,\n          \"sleep_score\": 9880,\n          \"apnea_hypopnea_index\": 5857,\n          \"mvt_score_avg\": 3848,\n          \"mvt_active_duration\": 6106,\n          \"rmssd_start_avg\": 6899.099478759968,\n          \"rmssd_end_avg\": 3499.522900556116,\n          \"chest_movement_rate_wellness_average\": 5040,\n          \"chest_movement_rate_wellness_min\": 5998,\n          \"chest_movement_rate_wellness_max\": 3383,\n          \"withings_index\": 5122,\n          \"breathing_sounds\": 9522,\n          \"breathing_sounds_episode_count\": 5946,\n          \"chest_movement_rate_average\": 8693,\n          \"chest_movement_rate_min\": 6076,\n          \"chest_movement_rate_max\": 5440,\n          \"core_body_temperature_min\": 4409.1035935483005,\n          \"core_body_temperature_max\": 3510.7871064339733,\n          \"core_body_temperature_avg\": 4109.340384308364,\n          \"core_body_temperature_status\": \"string\"\n        }\n      },\n      {\n        \"id\": 12345,\n        \"timezone\": \"Europe/Paris\",\n        \"model\": 16,\n        \"model_id\": 51,\n        \"startdate\": 1594245600,\n        \"enddate\": 1594257200,\n        \"date\": \"2020-07-09\",\n        \"created\": 1594257200,\n        \"modified\": 1594257200,\n        \"hash_deviceid\": \"892359876fd8805ac45bab078c4828692f0276b1\",\n        \"completed\": true,\n        \"data\": {\n          \"total_timeinbed\": 6042,\n          \"total_sleep_time\": 5663,\n          \"asleepduration\": 6283,\n          \"lightsleepduration\": 8501,\n          \"remsleepduration\": 5269,\n          \"deepsleepduration\": 2696,\n          \"sleep_efficiency\": 4364.810584960384,\n          \"sleep_latency\": 8359,\n          \"wakeup_latency\": 3220,\n          \"wakeupduration\": 6472,\n          \"wakeupcount\": 3913,\n          \"waso\": 4610,\n          \"nb_rem_episodes\": 9564,\n          \"durationtosleep\": 2191,\n          \"durationtowakeup\": 3140,\n          \"out_of_bed_count\": 7803,\n          \"hr_average\": 133,\n          \"hr_min\": 5387,\n          \"hr_max\": 4536,\n          \"rr_average\": 3907,\n          \"rr_min\": 7697,\n          \"rr_max\": 3322,\n          \"breathing_quality_assessment\": 269,\n          \"breathing_disturbances_intensity\": 9962,\n          \"snoring\": 8407,\n          \"snoringepisodecount\": 9449,\n          \"sleep_score\": 9349,\n          \"apnea_hypopnea_index\": 6000,\n          \"mvt_score_avg\": 6710,\n          \"mvt_active_duration\": 5287,\n          \"rmssd_start_avg\": 339.9609551041438,\n          \"rmssd_end_avg\": 3801.3817095518043,\n          \"chest_movement_rate_wellness_average\": 8068,\n          \"chest_movement_rate_wellness_min\": 5359,\n          \"chest_movement_rate_wellness_max\": 770,\n          \"withings_index\": 1668,\n          \"breathing_sounds\": 1921,\n          \"breathing_sounds_episode_count\": 9787,\n          \"chest_movement_rate_average\": 2796,\n          \"chest_movement_rate_min\": 7810,\n          \"chest_movement_rate_max\": 7638,\n          \"core_body_temperature_min\": 3937.1795835398925,\n          \"core_body_temperature_max\": 836.0784549447908,\n          \"core_body_temperature_avg\": 1095.3639486345812,\n          \"core_body_temperature_status\": \"string\"\n        }\n      }\n    ],\n    \"more\": false,\n    \"offset\": 9164\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://wbsapi.withings.net/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "0ad1c1fc-1a26-4307-b1fb-e0acd02254fb",
+    "name": "Withings developer documentation answers sleep API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "These webservices allows you to get user's answers from surveys",
+      "type": "text/plain"
+    }
+  }
+}

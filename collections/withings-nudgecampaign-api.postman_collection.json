@@ -1,0 +1,1172 @@
+{
+  "item": [
+    {
+      "id": "5b73fd22-073b-42b5-94f6-c9de4023543e",
+      "name": "nudgecampaign",
+      "description": {
+        "content": "These webservices allows you to to manage Health Nudges Campaign. Read the [Health Nudges Integration Guide](/developer-guide/v3/integration-guide/health-nudges/health-nudge-overview) for more information.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "db4c3a5a-37fb-437b-9bff-19147214396d",
+          "name": "Nudgecampaign v2  - Addusers",
+          "request": {
+            "name": "Nudgecampaign v2  - Addusers",
+            "description": {
+              "content": "",
+              "type": "text/plain"
+            },
+            "url": {
+              "protocol": "{{baseUrl}}/https",
+              "path": [
+                "v2",
+                "nudgecampaign     "
+              ],
+              "host": [
+                "wbsapi",
+                "withings",
+                "net"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "action",
+                  "value": "<string>",
+                  "description": "(Required) Service action name. Must take the string value ```addusers```."
+                },
+                {
+                  "disabled": false,
+                  "key": "signature",
+                  "value": "<string>",
+                  "description": "(Required) Hash of params (Cf. [Signature hash protocol](/developer-guide/v3/get-access/sign-your-requests))."
+                },
+                {
+                  "disabled": false,
+                  "key": "client_id",
+                  "value": "<string>",
+                  "description": "(Required) Id of the client"
+                },
+                {
+                  "disabled": false,
+                  "key": "nonce",
+                  "value": "<string>",
+                  "description": "(Required) A random token used to prevent replay attacks (Cf. [Signature v2 - Getnonce](#operation/signaturev2-getnonce))"
+                },
+                {
+                  "disabled": false,
+                  "key": "nudgecampaignid",
+                  "value": "<id64>",
+                  "description": "(Required) id of the nudge campaign"
+                },
+                {
+                  "disabled": false,
+                  "key": "userids",
+                  "value": "<array of integers>",
+                  "description": "(Required) Array of user ids"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "eeeef1fa-4e71-447d-951d-645d7ed24742",
+              "name": " (Click to unfold)",
+              "originalRequest": {
+                "url": {
+                  "protocol": "{{baseUrl}}/https",
+                  "path": [
+                    "v2",
+                    "nudgecampaign     "
+                  ],
+                  "host": [
+                    "wbsapi",
+                    "withings",
+                    "net"
+                  ],
+                  "query": [
+                    {
+                      "key": "action",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "signature",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "client_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nonce",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nudgecampaignid",
+                      "value": "<id64>"
+                    },
+                    {
+                      "key": "userids",
+                      "value": "<array of integers>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 931,\n  \"body\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "cde2ffb5-2e79-4088-896d-7130f55d298b",
+          "name": "Nudgecampaign v2  - Create",
+          "request": {
+            "name": "Nudgecampaign v2  - Create",
+            "description": {
+              "content": "",
+              "type": "text/plain"
+            },
+            "url": {
+              "protocol": "{{baseUrl}}/https",
+              "path": [
+                "v2",
+                "nudgecampaign  "
+              ],
+              "host": [
+                "wbsapi",
+                "withings",
+                "net"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "action",
+                  "value": "<string>",
+                  "description": "(Required) Service action name. Must take the string value ```create```."
+                },
+                {
+                  "disabled": false,
+                  "key": "signature",
+                  "value": "<string>",
+                  "description": "(Required) Hash of params (Cf. [Signature hash protocol](/developer-guide/v3/get-access/sign-your-requests))."
+                },
+                {
+                  "disabled": false,
+                  "key": "client_id",
+                  "value": "<string>",
+                  "description": "(Required) Id of the client"
+                },
+                {
+                  "disabled": false,
+                  "key": "nonce",
+                  "value": "<string>",
+                  "description": "(Required) A random token used to prevent replay attacks (Cf. [Signature v2 - Getnonce](#operation/signaturev2-getnonce))"
+                },
+                {
+                  "disabled": false,
+                  "key": "nudgeid",
+                  "value": "<id64>",
+                  "description": "(Required) id of the nudge screen"
+                },
+                {
+                  "disabled": false,
+                  "key": "startdate",
+                  "value": "<integer>",
+                  "description": "(Required) Data start date as a unix timestamp."
+                },
+                {
+                  "disabled": false,
+                  "key": "enddate",
+                  "value": "<integer>",
+                  "description": "(Required) Data end date as a unix timestamp."
+                },
+                {
+                  "disabled": false,
+                  "key": "max_display_count",
+                  "value": "<id32>",
+                  "description": "(Required) The number of times the nudge should appear on the device screen"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "787024b4-9226-4dc5-9b9a-2a48fe64eb09",
+              "name": " (Click to unfold)",
+              "originalRequest": {
+                "url": {
+                  "protocol": "{{baseUrl}}/https",
+                  "path": [
+                    "v2",
+                    "nudgecampaign  "
+                  ],
+                  "host": [
+                    "wbsapi",
+                    "withings",
+                    "net"
+                  ],
+                  "query": [
+                    {
+                      "key": "action",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "signature",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "client_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nonce",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nudgeid",
+                      "value": "<id64>"
+                    },
+                    {
+                      "key": "startdate",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "enddate",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "max_display_count",
+                      "value": "<id32>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 3620,\n  \"body\": {\n    \"campaignid\": 9\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "295c3000-7325-4842-9814-696e3896da05",
+          "name": "Nudgecampaign v2  - Delete",
+          "request": {
+            "name": "Nudgecampaign v2  - Delete",
+            "description": {
+              "content": "",
+              "type": "text/plain"
+            },
+            "url": {
+              "protocol": "{{baseUrl}}/https",
+              "path": [
+                "v2",
+                "nudgecampaign    "
+              ],
+              "host": [
+                "wbsapi",
+                "withings",
+                "net"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "action",
+                  "value": "<string>",
+                  "description": "(Required) Service action name. Must take the string value ```delete```."
+                },
+                {
+                  "disabled": false,
+                  "key": "signature",
+                  "value": "<string>",
+                  "description": "(Required) Hash of params (Cf. [Signature hash protocol](/developer-guide/v3/get-access/sign-your-requests))."
+                },
+                {
+                  "disabled": false,
+                  "key": "client_id",
+                  "value": "<string>",
+                  "description": "(Required) Id of the client"
+                },
+                {
+                  "disabled": false,
+                  "key": "nonce",
+                  "value": "<string>",
+                  "description": "(Required) A random token used to prevent replay attacks (Cf. [Signature v2 - Getnonce](#operation/signaturev2-getnonce))"
+                },
+                {
+                  "disabled": false,
+                  "key": "nudgecampaignid",
+                  "value": "<id64>",
+                  "description": "(Required) id of the nudge campaign"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "59d72a84-41bb-4336-84f2-4136564efaff",
+              "name": " (Click to unfold)",
+              "originalRequest": {
+                "url": {
+                  "protocol": "{{baseUrl}}/https",
+                  "path": [
+                    "v2",
+                    "nudgecampaign    "
+                  ],
+                  "host": [
+                    "wbsapi",
+                    "withings",
+                    "net"
+                  ],
+                  "query": [
+                    {
+                      "key": "action",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "signature",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "client_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nonce",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nudgecampaignid",
+                      "value": "<id64>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 931,\n  \"body\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "09392339-5f6e-4eca-b30d-fc087797357f",
+          "name": "Nudgecampaign v2  - Get",
+          "request": {
+            "name": "Nudgecampaign v2  - Get",
+            "description": {
+              "content": "",
+              "type": "text/plain"
+            },
+            "url": {
+              "protocol": "{{baseUrl}}/https",
+              "path": [
+                "v2",
+                "nudgecampaign "
+              ],
+              "host": [
+                "wbsapi",
+                "withings",
+                "net"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "action",
+                  "value": "<string>",
+                  "description": "(Required) Service action name. Must take the string value ```get```."
+                },
+                {
+                  "disabled": false,
+                  "key": "signature",
+                  "value": "<string>",
+                  "description": "(Required) Hash of params (Cf. [Signature hash protocol](/developer-guide/v3/get-access/sign-your-requests))."
+                },
+                {
+                  "disabled": false,
+                  "key": "client_id",
+                  "value": "<string>",
+                  "description": "(Required) Id of the client"
+                },
+                {
+                  "disabled": false,
+                  "key": "nonce",
+                  "value": "<string>",
+                  "description": "(Required) A random token used to prevent replay attacks (Cf. [Signature v2 - Getnonce](#operation/signaturev2-getnonce))"
+                },
+                {
+                  "disabled": false,
+                  "key": "nudgecampaignid",
+                  "value": "<id64>",
+                  "description": "(Required) id of the nudge campaign"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a9505aca-9b92-4bb7-bbd1-7be69dc1e48a",
+              "name": " (Click to unfold)",
+              "originalRequest": {
+                "url": {
+                  "protocol": "{{baseUrl}}/https",
+                  "path": [
+                    "v2",
+                    "nudgecampaign "
+                  ],
+                  "host": [
+                    "wbsapi",
+                    "withings",
+                    "net"
+                  ],
+                  "query": [
+                    {
+                      "key": "action",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "signature",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "client_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nonce",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nudgecampaignid",
+                      "value": "<id64>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 7852,\n  \"body\": {\n    \"campaign\": {\n      \"id\": 3,\n      \"nudgeid\": 4,\n      \"max_display_count\": 5,\n      \"startdate\": 1712106335,\n      \"enddate\": 1735689600,\n      \"user_count\": 2,\n      \"created\": 1712016369,\n      \"modified\": 1712016369\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "748b5c78-767b-4066-9405-edbc6decda46",
+          "name": "Nudgecampaign v2  - List",
+          "request": {
+            "name": "Nudgecampaign v2  - List",
+            "description": {
+              "content": "",
+              "type": "text/plain"
+            },
+            "url": {
+              "protocol": "{{baseUrl}}/https",
+              "path": [
+                "v2",
+                "nudgecampaign"
+              ],
+              "host": [
+                "wbsapi",
+                "withings",
+                "net"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "action",
+                  "value": "<string>",
+                  "description": "(Required) Service action name. Must take the string value ```list```."
+                },
+                {
+                  "disabled": false,
+                  "key": "signature",
+                  "value": "<string>",
+                  "description": "(Required) Hash of params (Cf. [Signature hash protocol](/developer-guide/v3/get-access/sign-your-requests))."
+                },
+                {
+                  "disabled": false,
+                  "key": "client_id",
+                  "value": "<string>",
+                  "description": "(Required) Id of the client"
+                },
+                {
+                  "disabled": false,
+                  "key": "nonce",
+                  "value": "<string>",
+                  "description": "(Required) A random token used to prevent replay attacks (Cf. [Signature v2 - Getnonce](#operation/signaturev2-getnonce))"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "When a first call returns ```more:true``` and ```offset:XX```, set value ```XX``` in this parameter to retrieve next available rows."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b8506810-a946-44da-bc9f-776f0aa7bd27",
+              "name": " (Click to unfold)",
+              "originalRequest": {
+                "url": {
+                  "protocol": "{{baseUrl}}/https",
+                  "path": [
+                    "v2",
+                    "nudgecampaign"
+                  ],
+                  "host": [
+                    "wbsapi",
+                    "withings",
+                    "net"
+                  ],
+                  "query": [
+                    {
+                      "key": "action",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "signature",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "client_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nonce",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 1839,\n  \"body\": {\n    \"campaigns\": [\n      {\n        \"id\": 3,\n        \"nudgeid\": 4,\n        \"max_display_count\": 5,\n        \"startdate\": 1712106335,\n        \"enddate\": 1735689600,\n        \"user_count\": 2,\n        \"created\": 1712016369,\n        \"modified\": 1712016369\n      },\n      {\n        \"id\": 3,\n        \"nudgeid\": 4,\n        \"max_display_count\": 5,\n        \"startdate\": 1712106335,\n        \"enddate\": 1735689600,\n        \"user_count\": 2,\n        \"created\": 1712016369,\n        \"modified\": 1712016369\n      }\n    ],\n    \"more\": false,\n    \"offset\": 9640\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1f5faebd-665a-4dd0-86c3-c3a98dd0e54a",
+          "name": "Nudgecampaign v2  - Listusers",
+          "request": {
+            "name": "Nudgecampaign v2  - Listusers",
+            "description": {
+              "content": "",
+              "type": "text/plain"
+            },
+            "url": {
+              "protocol": "{{baseUrl}}/https",
+              "path": [
+                "v2",
+                "nudgecampaign       "
+              ],
+              "host": [
+                "wbsapi",
+                "withings",
+                "net"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "action",
+                  "value": "<string>",
+                  "description": "(Required) Service action name. Must take the string value ```listusers```."
+                },
+                {
+                  "disabled": false,
+                  "key": "signature",
+                  "value": "<string>",
+                  "description": "(Required) Hash of params (Cf. [Signature hash protocol](/developer-guide/v3/get-access/sign-your-requests))."
+                },
+                {
+                  "disabled": false,
+                  "key": "client_id",
+                  "value": "<string>",
+                  "description": "(Required) Id of the client"
+                },
+                {
+                  "disabled": false,
+                  "key": "nonce",
+                  "value": "<string>",
+                  "description": "(Required) A random token used to prevent replay attacks (Cf. [Signature v2 - Getnonce](#operation/signaturev2-getnonce))"
+                },
+                {
+                  "disabled": false,
+                  "key": "nudgecampaignid",
+                  "value": "<id64>",
+                  "description": "(Required) id of the nudge campaign"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "When a first call returns ```more:true``` and ```offset:XX```, set value ```XX``` in this parameter to retrieve next available rows."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c4a5b337-02dd-45b8-b587-68e59df37ec0",
+              "name": " (Click to unfold)",
+              "originalRequest": {
+                "url": {
+                  "protocol": "{{baseUrl}}/https",
+                  "path": [
+                    "v2",
+                    "nudgecampaign       "
+                  ],
+                  "host": [
+                    "wbsapi",
+                    "withings",
+                    "net"
+                  ],
+                  "query": [
+                    {
+                      "key": "action",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "signature",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "client_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nonce",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nudgecampaignid",
+                      "value": "<id64>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 6821,\n  \"body\": {\n    \"users\": [\n      {\n        \"userid\": 102,\n        \"campaignid\": 9,\n        \"completion_date\": 1712008821,\n        \"display_count\": 15,\n        \"deliver_count\": 10,\n        \"created\": 1712008389,\n        \"modified\": 1712286130\n      },\n      {\n        \"userid\": 102,\n        \"campaignid\": 9,\n        \"completion_date\": 1712008821,\n        \"display_count\": 15,\n        \"deliver_count\": 10,\n        \"created\": 1712008389,\n        \"modified\": 1712286130\n      }\n    ],\n    \"more\": false,\n    \"offset\": 2516\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "681cb6db-6f1b-4f70-9d59-1843074b3cce",
+          "name": "Nudgecampaign v2  - Removeusers",
+          "request": {
+            "name": "Nudgecampaign v2  - Removeusers",
+            "description": {
+              "content": "",
+              "type": "text/plain"
+            },
+            "url": {
+              "protocol": "{{baseUrl}}/https",
+              "path": [
+                "v2",
+                "nudgecampaign      "
+              ],
+              "host": [
+                "wbsapi",
+                "withings",
+                "net"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "action",
+                  "value": "<string>",
+                  "description": "(Required) Service action name. Must take the string value ```removeusers```."
+                },
+                {
+                  "disabled": false,
+                  "key": "signature",
+                  "value": "<string>",
+                  "description": "(Required) Hash of params (Cf. [Signature hash protocol](/developer-guide/v3/get-access/sign-your-requests))."
+                },
+                {
+                  "disabled": false,
+                  "key": "client_id",
+                  "value": "<string>",
+                  "description": "(Required) Id of the client"
+                },
+                {
+                  "disabled": false,
+                  "key": "nonce",
+                  "value": "<string>",
+                  "description": "(Required) A random token used to prevent replay attacks (Cf. [Signature v2 - Getnonce](#operation/signaturev2-getnonce))"
+                },
+                {
+                  "disabled": false,
+                  "key": "nudgecampaignid",
+                  "value": "<id64>",
+                  "description": "(Required) id of the nudge campaign"
+                },
+                {
+                  "disabled": false,
+                  "key": "userids",
+                  "value": "<array of integers>",
+                  "description": "(Required) Array of user ids"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "af3492b5-5af6-4c78-9243-1a8f37732e0b",
+              "name": " (Click to unfold)",
+              "originalRequest": {
+                "url": {
+                  "protocol": "{{baseUrl}}/https",
+                  "path": [
+                    "v2",
+                    "nudgecampaign      "
+                  ],
+                  "host": [
+                    "wbsapi",
+                    "withings",
+                    "net"
+                  ],
+                  "query": [
+                    {
+                      "key": "action",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "signature",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "client_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nonce",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nudgecampaignid",
+                      "value": "<id64>"
+                    },
+                    {
+                      "key": "userids",
+                      "value": "<array of integers>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 931,\n  \"body\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "120679c1-b3f7-4d7a-8568-1231604be10c",
+          "name": "Nudgecampaign v2  - Update",
+          "request": {
+            "name": "Nudgecampaign v2  - Update",
+            "description": {
+              "content": "",
+              "type": "text/plain"
+            },
+            "url": {
+              "protocol": "{{baseUrl}}/https",
+              "path": [
+                "v2",
+                "nudgecampaign   "
+              ],
+              "host": [
+                "wbsapi",
+                "withings",
+                "net"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "action",
+                  "value": "<string>",
+                  "description": "(Required) Service action name. Must take the string value ```update```."
+                },
+                {
+                  "disabled": false,
+                  "key": "signature",
+                  "value": "<string>",
+                  "description": "(Required) Hash of params (Cf. [Signature hash protocol](/developer-guide/v3/get-access/sign-your-requests))."
+                },
+                {
+                  "disabled": false,
+                  "key": "client_id",
+                  "value": "<string>",
+                  "description": "(Required) Id of the client"
+                },
+                {
+                  "disabled": false,
+                  "key": "nonce",
+                  "value": "<string>",
+                  "description": "(Required) A random token used to prevent replay attacks (Cf. [Signature v2 - Getnonce](#operation/signaturev2-getnonce))"
+                },
+                {
+                  "disabled": false,
+                  "key": "nudgecampaignid",
+                  "value": "<id64>",
+                  "description": "(Required) id of the nudge campaign"
+                },
+                {
+                  "disabled": false,
+                  "key": "nudgeid",
+                  "value": "<id64>",
+                  "description": "id of the nudge screen"
+                },
+                {
+                  "disabled": false,
+                  "key": "startdate",
+                  "value": "<integer>",
+                  "description": "Data start date as a unix timestamp."
+                },
+                {
+                  "disabled": false,
+                  "key": "enddate",
+                  "value": "<integer>",
+                  "description": "Data end date as a unix timestamp."
+                },
+                {
+                  "disabled": false,
+                  "key": "max_display_count",
+                  "value": "<id32>",
+                  "description": "The number of times the nudge should appear on the device screen"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1941ef35-89ed-4c1c-80dd-200dfb1190bc",
+              "name": " (Click to unfold)",
+              "originalRequest": {
+                "url": {
+                  "protocol": "{{baseUrl}}/https",
+                  "path": [
+                    "v2",
+                    "nudgecampaign   "
+                  ],
+                  "host": [
+                    "wbsapi",
+                    "withings",
+                    "net"
+                  ],
+                  "query": [
+                    {
+                      "key": "action",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "signature",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "client_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nonce",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nudgecampaignid",
+                      "value": "<id64>"
+                    },
+                    {
+                      "key": "nudgeid",
+                      "value": "<id64>"
+                    },
+                    {
+                      "key": "startdate",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "enddate",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "max_display_count",
+                      "value": "<id32>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 931,\n  \"body\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://wbsapi.withings.net/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "0c0ce72e-8941-4aed-ac65-16dd22e68b8a",
+    "name": "Withings developer documentation answers nudgecampaign API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "These webservices allows you to get user's answers from surveys",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,239 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Withings developer documentation answers notify API",
+    "version": "2.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "notify",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Notify  - Get",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://wbsapi.withings.nethttps://wbsapi.withings.net/notify ",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "action",
+                "value": "",
+                "type": "query",
+                "description": "Service action name. Must take the string value ```get```."
+              },
+              {
+                "name": "callbackurl",
+                "value": "",
+                "type": "query",
+                "description": "Your ```Callback URL```."
+              },
+              {
+                "name": "appli",
+                "value": "",
+                "type": "query",
+                "description": "Refer to the [Notifications section](/developer-guide/v3/data-api/notifications/notification-overview/) to know which value you should use."
+              }
+            ]
+          },
+          "docs": "Returns the last notification service that was subscribed for a user and for a given appli. If no appli is specified, appli=1 will be considered."
+        },
+        {
+          "info": {
+            "name": "Notify  - List",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://wbsapi.withings.nethttps://wbsapi.withings.net/notify  ",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "action",
+                "value": "",
+                "type": "query",
+                "description": "Service action name. Must take the string value ```list```."
+              },
+              {
+                "name": "appli",
+                "value": "",
+                "type": "query",
+                "description": "Refer to the [Notifications section](/developer-guide/v3/data-api/notifications/notification-overview/) to know which value you should use."
+              }
+            ]
+          },
+          "docs": "Lists notification configuration for this user."
+        },
+        {
+          "info": {
+            "name": "Notify  - Revoke",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://wbsapi.withings.nethttps://wbsapi.withings.net/notify    ",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "action",
+                "value": "",
+                "type": "query",
+                "description": "Service action name. Must take the string value ```revoke```."
+              },
+              {
+                "name": "callbackurl",
+                "value": "",
+                "type": "query",
+                "description": "Your ```Callback URL```."
+              },
+              {
+                "name": "appli",
+                "value": "",
+                "type": "query",
+                "description": "Refer to the [Notifications section](/developer-guide/v3/data-api/notifications/notification-overview/) to know which value you should use."
+              }
+            ]
+          },
+          "docs": "Disables all notifications for a given user."
+        },
+        {
+          "info": {
+            "name": "Notify  - Subscribe",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://wbsapi.withings.nethttps://wbsapi.withings.net/notify",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "action",
+                "value": "",
+                "type": "query",
+                "description": "Service action name. Must take the string value ```subscribe```."
+              },
+              {
+                "name": "callbackurl",
+                "value": "",
+                "type": "query",
+                "description": "Your ```Callback URL```."
+              },
+              {
+                "name": "appli",
+                "value": "",
+                "type": "query",
+                "description": "Refer to the [Notifications section](/developer-guide/v3/data-api/notifications/notification-overview/) to know which value you should use."
+              },
+              {
+                "name": "signature",
+                "value": "",
+                "type": "query",
+                "description": "DO NOT USE WITH FOLLOWING PARAMS: [access_token]<br>Hash of params (Cf. [Signature hash protocol](/developer-guide/v3/get-access/sign-your-requests))."
+              },
+              {
+                "name": "nonce",
+                "value": "",
+                "type": "query",
+                "description": "DO NOT USE WITH FOLLOWING PARAMS: [access_token]<br>A random token used to prevent replay attacks (Cf. [Signature v2 - Getnonce](#operation/signaturev2-getnonce))"
+              },
+              {
+                "name": "client_id",
+                "value": "",
+                "type": "query",
+                "description": "DO NOT USE WITH FOLLOWING PARAMS: [access_token]<br>Id of the client"
+              },
+              {
+                "name": "comment",
+                "value": "",
+                "type": "query",
+                "description": "Comment."
+              }
+            ]
+          },
+          "docs": "This service allows to receive notifications from Withings:\n\n- for the Health Data APIs : your application can subscribe to a variety or events, including user data  creation and updates. Notifications will be sent to your servers when the subscribed events occur. ([more information](/developer-guide/v3/data-api/notifications/notification-overview)). Please note that you need to subscribe for each individual user.\n- for the Logistics APIs: a notification will be sent when there is an order updat"
+        },
+        {
+          "info": {
+            "name": "Notify  - Update",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://wbsapi.withings.nethttps://wbsapi.withings.net/notify   ",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "action",
+                "value": "",
+                "type": "query",
+                "description": "Service action name. Must take the string value ```update```."
+              },
+              {
+                "name": "callbackurl",
+                "value": "",
+                "type": "query",
+                "description": "Your ```Callback URL```."
+              },
+              {
+                "name": "appli",
+                "value": "",
+                "type": "query",
+                "description": "Refer to the [Notifications section](/developer-guide/v3/data-api/notifications/notification-overview/) to know which value you should use."
+              },
+              {
+                "name": "new_callbackurl",
+                "value": "",
+                "type": "query",
+                "description": "DO NOT USE WITH FOLLOWING PARAMS: [new_appli, comment]<br>The new callback url."
+              },
+              {
+                "name": "new_appli",
+                "value": "",
+                "type": "query",
+                "description": "DO NOT USE WITH FOLLOWING PARAMS: [new_callbackurl, comment]<br>The new application type."
+              },
+              {
+                "name": "comment",
+                "value": "",
+                "type": "query",
+                "description": "DO NOT USE WITH FOLLOWING PARAMS: [new_callbackurl, new_appli]<br>Comment."
+              }
+            ]
+          },
+          "docs": "Updates the ```callbackurl``` and/or ```appli``` of a created notification subscription. If multiple subscriptions were made for a given user, ```callbackurl``` and ```appli```, only one of the subscriptions will be updated."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

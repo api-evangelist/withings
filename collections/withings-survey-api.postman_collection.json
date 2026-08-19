@@ -1,0 +1,712 @@
+{
+  "item": [
+    {
+      "id": "94883496-39d0-47ac-94fb-768e88de15ba",
+      "name": "survey",
+      "description": {
+        "content": "These webservices allows you to to manage user's surveys",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "764ef04f-f329-4de4-a003-44f89fc9bfe5",
+          "name": "Survey v2  - Activate",
+          "request": {
+            "name": "Survey v2  - Activate",
+            "description": {
+              "content": "",
+              "type": "text/plain"
+            },
+            "url": {
+              "protocol": "{{baseUrl}}/https",
+              "path": [
+                "v2",
+                "survey "
+              ],
+              "host": [
+                "wbsapi",
+                "withings",
+                "net"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "action",
+                  "value": "<string>",
+                  "description": "(Required) Service action name. Must take the string value ```activate```."
+                },
+                {
+                  "disabled": false,
+                  "key": "signature",
+                  "value": "<string>",
+                  "description": "(Required) Hash of params (Cf. [Signature hash protocol](/developer-guide/v3/get-access/sign-your-requests))."
+                },
+                {
+                  "disabled": false,
+                  "key": "client_id",
+                  "value": "<string>",
+                  "description": "(Required) Id of the client"
+                },
+                {
+                  "disabled": false,
+                  "key": "nonce",
+                  "value": "<string>",
+                  "description": "(Required) A random token used to prevent replay attacks (Cf. [Signature v2 - Getnonce](#operation/signaturev2-getnonce))"
+                },
+                {
+                  "disabled": false,
+                  "key": "surveyid",
+                  "value": "<string>",
+                  "description": "(Required) ID of a survey"
+                },
+                {
+                  "disabled": false,
+                  "key": "userids",
+                  "value": "<array of integers>",
+                  "description": "(Required) Array of user ids"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e970e08e-b29d-4a24-9a58-0433b8899157",
+              "name": " (Click to unfold)",
+              "originalRequest": {
+                "url": {
+                  "protocol": "{{baseUrl}}/https",
+                  "path": [
+                    "v2",
+                    "survey "
+                  ],
+                  "host": [
+                    "wbsapi",
+                    "withings",
+                    "net"
+                  ],
+                  "query": [
+                    {
+                      "key": "action",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "signature",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "client_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nonce",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "surveyid",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "userids",
+                      "value": "<array of integers>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 776,\n  \"body\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "95f48e87-3a2f-441d-ab1b-1c32418d004b",
+          "name": "Survey v2  - Deactivate",
+          "request": {
+            "name": "Survey v2  - Deactivate",
+            "description": {
+              "content": "",
+              "type": "text/plain"
+            },
+            "url": {
+              "protocol": "{{baseUrl}}/https",
+              "path": [
+                "v2",
+                "survey  "
+              ],
+              "host": [
+                "wbsapi",
+                "withings",
+                "net"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "action",
+                  "value": "<string>",
+                  "description": "(Required) Service action name. Must take the string value ```deactivate```."
+                },
+                {
+                  "disabled": false,
+                  "key": "signature",
+                  "value": "<string>",
+                  "description": "(Required) Hash of params (Cf. [Signature hash protocol](/developer-guide/v3/get-access/sign-your-requests))."
+                },
+                {
+                  "disabled": false,
+                  "key": "client_id",
+                  "value": "<string>",
+                  "description": "(Required) Id of the client"
+                },
+                {
+                  "disabled": false,
+                  "key": "nonce",
+                  "value": "<string>",
+                  "description": "(Required) A random token used to prevent replay attacks (Cf. [Signature v2 - Getnonce](#operation/signaturev2-getnonce))"
+                },
+                {
+                  "disabled": false,
+                  "key": "surveyid",
+                  "value": "<string>",
+                  "description": "(Required) ID of a survey"
+                },
+                {
+                  "disabled": false,
+                  "key": "userids",
+                  "value": "<array of integers>",
+                  "description": "(Required) Array of user ids"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ea4cf071-8cb5-4d61-b0a7-0e919a33ffdb",
+              "name": " (Click to unfold)",
+              "originalRequest": {
+                "url": {
+                  "protocol": "{{baseUrl}}/https",
+                  "path": [
+                    "v2",
+                    "survey  "
+                  ],
+                  "host": [
+                    "wbsapi",
+                    "withings",
+                    "net"
+                  ],
+                  "query": [
+                    {
+                      "key": "action",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "signature",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "client_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nonce",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "surveyid",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "userids",
+                      "value": "<array of integers>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 776,\n  \"body\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "42620e06-dda4-4595-baf1-5c5ff2c1c39c",
+          "name": "Survey v2  - Get",
+          "request": {
+            "name": "Survey v2  - Get",
+            "description": {
+              "content": "",
+              "type": "text/plain"
+            },
+            "url": {
+              "protocol": "{{baseUrl}}/https",
+              "path": [
+                "v2",
+                "survey"
+              ],
+              "host": [
+                "wbsapi",
+                "withings",
+                "net"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "action",
+                  "value": "<string>",
+                  "description": "(Required) Service action name. Must take the string value ```get```."
+                },
+                {
+                  "disabled": false,
+                  "key": "signature",
+                  "value": "<string>",
+                  "description": "(Required) Hash of params (Cf. [Signature hash protocol](/developer-guide/v3/get-access/sign-your-requests))."
+                },
+                {
+                  "disabled": false,
+                  "key": "client_id",
+                  "value": "<string>",
+                  "description": "(Required) Id of the client"
+                },
+                {
+                  "disabled": false,
+                  "key": "nonce",
+                  "value": "<string>",
+                  "description": "(Required) A random token used to prevent replay attacks (Cf. [Signature v2 - Getnonce](#operation/signaturev2-getnonce))"
+                },
+                {
+                  "disabled": false,
+                  "key": "surveyid",
+                  "value": "<string>",
+                  "description": "(Required) ID of a survey"
+                },
+                {
+                  "disabled": false,
+                  "key": "lang",
+                  "value": "<string>",
+                  "description": "Lang in which data are translated (default: en)"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b584b622-6677-4248-b1d6-460fb8cad82c",
+              "name": " (Click to unfold)",
+              "originalRequest": {
+                "url": {
+                  "protocol": "{{baseUrl}}/https",
+                  "path": [
+                    "v2",
+                    "survey"
+                  ],
+                  "host": [
+                    "wbsapi",
+                    "withings",
+                    "net"
+                  ],
+                  "query": [
+                    {
+                      "key": "action",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "signature",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "client_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nonce",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "surveyid",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "lang",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 9966,\n  \"body\": {\n    \"survey\": {\n      \"id\": 3,\n      \"name\": \"Name\",\n      \"description\": \"Description\",\n      \"trigger_type\": 3,\n      \"answer_type\": 3,\n      \"category\": 3\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4584cac4-0617-45e9-a61c-18954ca1785a",
+          "name": "Survey v2  - List",
+          "request": {
+            "name": "Survey v2  - List",
+            "description": {
+              "content": "",
+              "type": "text/plain"
+            },
+            "url": {
+              "protocol": "{{baseUrl}}/https",
+              "path": [
+                "v2",
+                "survey   "
+              ],
+              "host": [
+                "wbsapi",
+                "withings",
+                "net"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "action",
+                  "value": "<string>",
+                  "description": "(Required) Service action name. Must take the string value ```list```."
+                },
+                {
+                  "disabled": false,
+                  "key": "signature",
+                  "value": "<string>",
+                  "description": "(Required) Hash of params (Cf. [Signature hash protocol](/developer-guide/v3/get-access/sign-your-requests))."
+                },
+                {
+                  "disabled": false,
+                  "key": "client_id",
+                  "value": "<string>",
+                  "description": "(Required) Id of the client"
+                },
+                {
+                  "disabled": false,
+                  "key": "nonce",
+                  "value": "<string>",
+                  "description": "(Required) A random token used to prevent replay attacks (Cf. [Signature v2 - Getnonce](#operation/signaturev2-getnonce))"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "When a first call returns ```more:true``` and ```offset:XX```, set value ```XX``` in this parameter to retrieve next available rows."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "959655aa-1b07-41d2-8b73-72a5ef672137",
+              "name": " (Click to unfold)",
+              "originalRequest": {
+                "url": {
+                  "protocol": "{{baseUrl}}/https",
+                  "path": [
+                    "v2",
+                    "survey   "
+                  ],
+                  "host": [
+                    "wbsapi",
+                    "withings",
+                    "net"
+                  ],
+                  "query": [
+                    {
+                      "key": "action",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "signature",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "client_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nonce",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 3983,\n  \"body\": {\n    \"surveys\": [\n      {\n        \"id\": 3,\n        \"name\": \"Survey name\",\n        \"description\": \"Survey description\",\n        \"trigger_type\": 1,\n        \"category\": 1,\n        \"answers_type\": 1\n      },\n      {\n        \"id\": 3,\n        \"name\": \"Survey name\",\n        \"description\": \"Survey description\",\n        \"trigger_type\": 1,\n        \"category\": 1,\n        \"answers_type\": 1\n      }\n    ],\n    \"more\": false,\n    \"offset\": 2158\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "bbb6f696-d01a-43fe-83ac-42f6a77c1509",
+          "name": "Survey v2  - Listusers",
+          "request": {
+            "name": "Survey v2  - Listusers",
+            "description": {
+              "content": "",
+              "type": "text/plain"
+            },
+            "url": {
+              "protocol": "{{baseUrl}}/https",
+              "path": [
+                "v2",
+                "survey    "
+              ],
+              "host": [
+                "wbsapi",
+                "withings",
+                "net"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "action",
+                  "value": "<string>",
+                  "description": "(Required) Service action name. Must take the string value ```listusers```."
+                },
+                {
+                  "disabled": false,
+                  "key": "signature",
+                  "value": "<string>",
+                  "description": "(Required) Hash of params (Cf. [Signature hash protocol](/developer-guide/v3/get-access/sign-your-requests))."
+                },
+                {
+                  "disabled": false,
+                  "key": "client_id",
+                  "value": "<string>",
+                  "description": "(Required) Id of the client"
+                },
+                {
+                  "disabled": false,
+                  "key": "nonce",
+                  "value": "<string>",
+                  "description": "(Required) A random token used to prevent replay attacks (Cf. [Signature v2 - Getnonce](#operation/signaturev2-getnonce))"
+                },
+                {
+                  "disabled": false,
+                  "key": "surveyid",
+                  "value": "<string>",
+                  "description": "(Required) ID of a survey"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "acb80eff-835c-4841-8e9c-b988a4352a24",
+              "name": " (Click to unfold)",
+              "originalRequest": {
+                "url": {
+                  "protocol": "{{baseUrl}}/https",
+                  "path": [
+                    "v2",
+                    "survey    "
+                  ],
+                  "host": [
+                    "wbsapi",
+                    "withings",
+                    "net"
+                  ],
+                  "query": [
+                    {
+                      "key": "action",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "signature",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "client_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nonce",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "surveyid",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 8879,\n  \"body\": {\n    \"users\": [\n      {\n        \"userid\": 102,\n        \"activation_date\": 1712008389\n      },\n      {\n        \"userid\": 102,\n        \"activation_date\": 1712008389\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://wbsapi.withings.net/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "63a717bf-a92a-4660-9b91-76d7d0df1d81",
+    "name": "Withings developer documentation answers survey API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "These webservices allows you to get user's answers from surveys",
+      "type": "text/plain"
+    }
+  }
+}

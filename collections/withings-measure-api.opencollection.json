@@ -1,0 +1,275 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Withings developer documentation answers measure API",
+    "version": "2.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "measure",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Measure  - Getmeas",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://wbsapi.withings.nethttps://wbsapi.withings.net/measure",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "action",
+                "value": "",
+                "type": "query",
+                "description": "Service action name. Must take the string value ```getmeas```."
+              },
+              {
+                "name": "meastype",
+                "value": "",
+                "type": "query",
+                "description": "Requested measure type :\n\n\n|Value | Description|\n|---|---|\n|1 | Weight (kg)|\n|4 | Height (meter)|\n|5 | Fat Free Mass (kg)|\n|6 | Fat Ratio (%)|\n|8 | Fat Mass Weight (kg)|\n|9 | Diastolic Blood Pressure (mmHg)|\n|10 | Systolic Blood Pressure (mmHg)|\n|11 | Heart Pulse (bpm) - only for BPM and scale devices|\n|12 | Temperature (celsius)|\n|54 | SP02 (%)|\n|71 | Body Temperature (celsius)|\n|73 | Skin Temperature (celsius)|\n|76 | Muscle Mass (kg)|\n|77 | Hydration (kg)|\n|88 | Bone Mass (kg)|\n|91 | Pulse Wave Velocity (m/s)|\n|123 | VO2 max is a numerical measurement of your body’s ability to consume oxygen (ml/min/kg).|\n|130 | Atrial fibrillation result|\n|135 | QRS interval duration based on ECG signal|\n|136 | PR interval duration based on ECG signal|\n|137 | QT interval duration based on ECG signal|\n|138 | Corrected QT interval duration based on ECG signal|\n|139 | Atrial fibrillation result from PPG|\n|155 | Vascular age|\n|167 | Nerve Health Score Conductance 2 electrodes Feet|\n|168 | Extracellular Water in kg|\n|169 | Intracellular Water in kg|\n|170 | Visceral Fat (without unity)|\n|173 | Fat Free Mass for segments|\n|174 | Fat Mass for segments in mass unit|\n|175 | Muscle Mass for segments|\n|196 | Electrodermal activity feet|\n|226 | Basal Metabolic Rate (BMR)|\n|227 | Metabolic Age|\n|229 | Electrochemical Skin Conductance (ESC)|\n"
+              },
+              {
+                "name": "meastypes",
+                "value": "",
+                "type": "query",
+                "description": "List of requested measure types (separated by a comma).<br>Ex: meastypes=1,4,12"
+              },
+              {
+                "name": "category",
+                "value": "",
+                "type": "query",
+                "description": "```1``` for real measures, ```2``` for user objectives."
+              },
+              {
+                "name": "startdate",
+                "value": "",
+                "type": "query",
+                "description": "Data start date as a unix timestamp."
+              },
+              {
+                "name": "enddate",
+                "value": "",
+                "type": "query",
+                "description": "Data end date as a unix timestamp."
+              },
+              {
+                "name": "lastupdate",
+                "value": "",
+                "type": "query",
+                "description": "Timestamp for requesting data that were updated or created after this date.<br>Useful for data synchronization between systems.<br>Use this instead of startdate + enddate."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "When a first call returns ```more:1``` and ```offset:XX```, set value ```XX``` in this parameter to retrieve next available rows."
+              }
+            ]
+          },
+          "docs": "Provides measures stored at a specific date among the types below. Please refer to the following responses for details."
+        },
+        {
+          "info": {
+            "name": "Measure v2  - Confirmuser",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://wbsapi.withings.nethttps://wbsapi.withings.net/v2/measure   ",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "action",
+                "value": "",
+                "type": "query",
+                "description": "Service action name. Must take the string value ```confirmuser```."
+              },
+              {
+                "name": "grpid",
+                "value": "",
+                "type": "query",
+                "description": "Group ID"
+              },
+              {
+                "name": "is_confirmed",
+                "value": "",
+                "type": "query",
+                "description": "Indicates if the measure was confirmed by the user."
+              }
+            ]
+          },
+          "docs": "Measure v2  - Confirmuser"
+        },
+        {
+          "info": {
+            "name": "Measure v2  - Getactivity",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://wbsapi.withings.nethttps://wbsapi.withings.net/v2/measure",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "action",
+                "value": "",
+                "type": "query",
+                "description": "Service action name. Must take the string value ```getactivity```."
+              },
+              {
+                "name": "startdateymd",
+                "value": "",
+                "type": "query",
+                "description": "DO NOT USE WITH FOLLOWING PARAMS: [lastupdate]<br>Start date."
+              },
+              {
+                "name": "enddateymd",
+                "value": "",
+                "type": "query",
+                "description": "DO NOT USE WITH FOLLOWING PARAMS: [lastupdate]<br>End date."
+              },
+              {
+                "name": "lastupdate",
+                "value": "",
+                "type": "query",
+                "description": "DO NOT USE WITH FOLLOWING PARAMS: [startdateymd, enddateymd]<br>Timestamp for requesting data that were updated or created after this date.<br>Useful for data synchronization between systems.<br>Use this instead of startdateymd + enddateymd."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "When a first call returns ```more:true``` and ```offset:XX```, set value ```XX``` in this parameter to retrieve next available rows."
+              },
+              {
+                "name": "data_fields",
+                "value": "",
+                "type": "query",
+                "description": "List of requested data fields, separated by a comma.<br>Available data fields are listed below.<br><u>Ex</u>: data_fields=steps,distance,elevation<br><br>steps<br>> Number of steps. <br><br>distance<br>> Distance travelled (in meters). <br><br>elevation<br>> Number of floors climbed. <br><br>soft<br>> Duration of soft activities (in seconds). <br><br>moderate<br>> Duration of moderate activities (in seconds). <br><br>intense<br>> Duration of intense activities (in seconds). <br><br>active<br>> Sum of intense and moderate activity durations (in seconds). <br><br>calories<br>> Active calories burned (in Kcal). Calculated by mixing fine granularity calories estimation, workouts estimated calories and calories manually set by the user. <br><br>totalcalories<br>> Total calories burned (in Kcal). Obtained by adding active calories (see ```calories```) and passive calories.<br><br>hr_average<br>> Average heart rate. (beats per minute).<br><br>hr_min<br>> Minimal heart rate (beats per minute). <br><br>hr_max<br>> Maximal heart rate (beats per minute).. <br><br>hr_zone_0<br>> Duration in seconds when heart rate was in a light zone (cf. <a href='/api-reference/#section/Glossary'>Glossary</a>). <br><br>hr_zone_1<br>> Duration in seconds when heart rate was in a moderate zone (cf. <a href='/api-reference/#section/Glossary'>Glossary</a>). <br><br>hr_zone_2<br>> Duration in seconds when heart rate was in an intense zone (cf. <a href='/api-reference/#section/Glossary'>Glossary</a>). <br><br>hr_zone_3<br>> Duration in seconds when heart rate was in maximal zone (cf. <a href='/api-reference/#section/Glossary'>Glossary</a>). <br><br>"
+              }
+            ]
+          },
+          "docs": "Provides daily aggregated activity data of a user."
+        },
+        {
+          "info": {
+            "name": "Measure v2  - Getintradayactivity",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://wbsapi.withings.nethttps://wbsapi.withings.net/v2/measure  ",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "action",
+                "value": "",
+                "type": "query",
+                "description": "Service action name. Must take the string value ```getintradayactivity```."
+              },
+              {
+                "name": "startdate",
+                "value": "",
+                "type": "query",
+                "description": "Data start date as a unix timestamp."
+              },
+              {
+                "name": "enddate",
+                "value": "",
+                "type": "query",
+                "description": "Data end date as a unix timestamp."
+              },
+              {
+                "name": "data_fields",
+                "value": "",
+                "type": "query",
+                "description": "List of requested data fields, separated by a comma.<br>Available data fields are listed below.<br><u>Ex</u>: data_fields=steps,elevation,calories<br><br>steps<br>> Number of steps. <br><br>elevation<br>> Number of floors climbed. <br><br>calories<br>> Estimation of active calories burned (in Kcal). <br><br>distance<br>> Distance travelled (in meters). <br><br>stroke<br>> Number of strokes performed. <br><br>pool_lap<br>> Number of pool_lap performed. <br><br>duration<br>> Duration of the activity (in seconds). <br><br>heart_rate<br>> Measured heart rate. <br><br>spo2_auto<br>> SpO2 measurement automatically tracked by a device tracker<br><br>rmssd<br>> Heart rate variability - Root mean square of the successive differences over \"a few seconds\" (in miliseconds).<br><br>sdnn1<br>> Heart rate variability - Standard deviation of the NN over 1 minute (in miliseconds).<br><br>hrv_quality<br>> Heart rate variability - quality score.<br><br>core_body_temperature<br>> The core body temperature<br><br>rr<br>> Respiration Rate (breaths per minute). <br><br>chest_movement_rate<br>> Chest movement rate (events per minute). <br><br>"
+              }
+            ]
+          },
+          "docs": "Returns user activity data captured at high frequency.\n\n**Notes:**\n\n - If your input ```startdate``` and ```enddate``` are separated by more than 24h, only the first 24h after ```startdate``` will be returned.\n - If no ```startdate``` and ```enddate``` are passed as parameters, the most recent activity data will be returned."
+        },
+        {
+          "info": {
+            "name": "Measure v2  - Getworkouts",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://wbsapi.withings.nethttps://wbsapi.withings.net/v2/measure ",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "action",
+                "value": "",
+                "type": "query",
+                "description": "Service action name. Must take the string value ```getworkouts```."
+              },
+              {
+                "name": "startdateymd",
+                "value": "",
+                "type": "query",
+                "description": "DO NOT USE WITH FOLLOWING PARAMS: [lastupdate]<br>Start date."
+              },
+              {
+                "name": "enddateymd",
+                "value": "",
+                "type": "query",
+                "description": "DO NOT USE WITH FOLLOWING PARAMS: [lastupdate]<br>End date. Required if startdateymd is provided."
+              },
+              {
+                "name": "lastupdate",
+                "value": "",
+                "type": "query",
+                "description": "DO NOT USE WITH FOLLOWING PARAMS: [startdateymd, enddateymd]<br>Timestamp for requesting data that were updated or created after this date.<br>Useful for data synchronization between systems.<br>Use this instead of startdateymd + enddateymd."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "When a first call returns ```more:true``` and ```offset:XX```, set value ```XX``` in this parameter to retrieve next available rows."
+              },
+              {
+                "name": "data_fields",
+                "value": "",
+                "type": "query",
+                "description": "List of requested data fields, separated by a comma.<br>Available data fields are listed below.<br><u>Ex</u>: data_fields=calories,intensity,manual_intensity<br><br>calories<br>> Active calories burned (in Kcal). <br><br>intensity<br>> Intensity of the workout, from 0 to 100, as inputed by the user. If the user didn't manually give the intensity of his workout, the value will be 0.<br><br>manual_intensity<br>> Intensity of the workout, from 0 to 100, entered by the user. If the user didn't manually give the intensity of his workout, the value will be 0.<br><br>manual_distance<br>> Distance travelled manually entered by user (in meters). <br><br>manual_calories<br>> Active calories burned manually entered by user (in Kcal). <br><br>hr_average<br>> Average heart rate. (beats per minute).<br><br>hr_min<br>> Minimal heart rate (beats per minute). <br><br>hr_max<br>> Maximal heart rate (beats per minute).. <br><br>hr_zone_0<br>> Duration in seconds when heart rate was in a light zone (cf. <a href='/api-reference/#section/Glossary'>Glossary</a>). <br><br>hr_zone_1<br>> Duration in seconds when heart rate was in a moderate zone (cf. <a href='/api-reference/#section/Glossary'>Glossary</a>). <br><br>hr_zone_2<br>> Duration in seconds when heart rate was in an intense zone (cf. <a href='/api-reference/#section/Glossary'>Glossary</a>). <br><br>hr_zone_3<br>> Duration in seconds when heart rate was in maximal zone (cf. <a href='/api-reference/#section/Glossary'>Glossary</a>). <br><br>pause_duration<br>> Total pause time in second filled by user<br><br>algo_pause_duration<br>> Total pause time in seconds detected by Withings device (swim only)<br><br>spo2_average<br>> Average percent of SpO2 percent value during a workout<br><br>core_body_temperature_avg<br>> Avenage core body temperature (in celsius degrees). <br><br>core_body_temperature_min<br>> Minimal core body temperature (in celsius degrees). <br><br>core_body_temperature_max<br>> Maximal core body temperature (in celsius degrees). <br><br>core_body_temperature_status<br>> Status of the temperature. *(Use 'data_fields' to request this data)* Value can be: 'unknown', 'usual' or 'elevated'.\n <br><br>steps<br>> Number of steps. <br><br>distance<br>> Distance travelled (in meters). <br><br>elevation<br>> Number of floors climbed. <br><br>pool_laps<br>> Number of pool laps. <br><br>strokes<br>> Number of strokes. <br><br>pool_length<br>> Length of the pool. <br><br>"
+              }
+            ]
+          },
+          "docs": "Returns workout summaries, which are an aggregation all data that was captured during that workout.\n\nUse the [Measure v2 - Getintradayactivity](#operation/measurev2-getintradayactivity) service to get the high frequency data used to build this summary."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

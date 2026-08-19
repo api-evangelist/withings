@@ -1,0 +1,192 @@
+{
+  "item": [
+    {
+      "id": "07e6b421-ac0a-4f07-abd8-257b8e25bcea",
+      "name": "answers",
+      "description": {
+        "content": "These webservices allows you to get user's answers from surveys",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "c99f8951-d28f-4b91-9969-be378ebf627a",
+          "name": "Answers v2  - Get",
+          "request": {
+            "name": "Answers v2  - Get",
+            "description": {
+              "content": "",
+              "type": "text/plain"
+            },
+            "url": {
+              "protocol": "{{baseUrl}}/https",
+              "path": [
+                "v2",
+                "answers"
+              ],
+              "host": [
+                "wbsapi",
+                "withings",
+                "net"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "action",
+                  "value": "<string>",
+                  "description": "(Required) Service action name. Must take the string value ```get```."
+                },
+                {
+                  "disabled": false,
+                  "key": "signature",
+                  "value": "<string>",
+                  "description": "(Required) Hash of params (Cf. [Signature hash protocol](/developer-guide/v3/get-access/sign-your-requests))."
+                },
+                {
+                  "disabled": false,
+                  "key": "client_id",
+                  "value": "<string>",
+                  "description": "(Required) Id of the client"
+                },
+                {
+                  "disabled": false,
+                  "key": "nonce",
+                  "value": "<string>",
+                  "description": "(Required) A random token used to prevent replay attacks (Cf. [Signature v2 - Getnonce](#operation/signaturev2-getnonce))"
+                },
+                {
+                  "disabled": false,
+                  "key": "userid",
+                  "value": "<rawint32>",
+                  "description": "(Required) User's identifier."
+                },
+                {
+                  "disabled": false,
+                  "key": "startdate",
+                  "value": "<integer>",
+                  "description": "(Required) Data start date as a unix timestamp."
+                },
+                {
+                  "disabled": false,
+                  "key": "enddate",
+                  "value": "<integer>",
+                  "description": "Data end date as a unix timestamp."
+                },
+                {
+                  "disabled": false,
+                  "key": "surveyid",
+                  "value": "<string>",
+                  "description": "ID of a survey"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7d419416-05c9-4e5a-8eef-b0d1446c9df8",
+              "name": " (Click to unfold)",
+              "originalRequest": {
+                "url": {
+                  "protocol": "{{baseUrl}}/https",
+                  "path": [
+                    "v2",
+                    "answers"
+                  ],
+                  "host": [
+                    "wbsapi",
+                    "withings",
+                    "net"
+                  ],
+                  "query": [
+                    {
+                      "key": "action",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "signature",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "client_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nonce",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "userid",
+                      "value": "<rawint32>"
+                    },
+                    {
+                      "key": "startdate",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "enddate",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "surveyid",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 1235,\n  \"body\": {\n    \"answers\": [\n      {\n        \"surveyid\": 102,\n        \"grpid\": 42,\n        \"timestamp\": 1712008389\n      },\n      {\n        \"surveyid\": 102,\n        \"grpid\": 42,\n        \"timestamp\": 1712008389\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://wbsapi.withings.net/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "90250ac2-2049-4259-8a00-565c93c06343",
+    "name": "Withings developer documentation answers API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "These webservices allows you to get user's answers from surveys",
+      "type": "text/plain"
+    }
+  }
+}

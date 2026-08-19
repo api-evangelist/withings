@@ -1,0 +1,317 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Withings developer documentation answers oauth2 API",
+    "version": "2.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "oauth2",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Authorization URL",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://wbsapi.withings.nethttps://account.withings.com/oauth2_user/authorize2",
+            "params": [
+              {
+                "name": "response_type",
+                "value": "",
+                "type": "query",
+                "description": "Must take the constant string value ```code```."
+              },
+              {
+                "name": "client_id",
+                "value": "",
+                "type": "query",
+                "description": "Your ```Client ID```."
+              },
+              {
+                "name": "state",
+                "value": "",
+                "type": "query",
+                "description": "A value you define. This can be used to make sure that the redirect back to your site or app wasn’t spoofed."
+              },
+              {
+                "name": "scope",
+                "value": "",
+                "type": "query",
+                "description": "A comma-separated list of permission scopes to request from the user. See the [available scopes](/developer-guide/v3/integration-guide/public-health-data-api/get-access/oauth-authorization-url/#scopes) for the full list and the actions they allow."
+              },
+              {
+                "name": "redirect_uri",
+                "value": "",
+                "type": "query",
+                "description": "The URI we should redirect the user to after choosing to authorize or not your app. This URI must be set as ```Callback Url``` in your partner application. It is possible to use multiple URLs by separating them with a comma.<br />Examples:<br />\n\t\t\t\t\t\t\t\t\t<ul>\n\t\t\t\t\t\t\t\t\t\t<li>Callbacks: https://mydomain.com/</li>\n\t\t\t\t\t\t\t\t\t\t<li>Callback: https://mydomain.com/,https://mydomain2.com/</li>\n\t\t\t\t\t\t\t\t\t\t<li>Valid URL: https://mydomain.com/relative_path?args=value</li>\n\t\t\t\t\t\t\t\t\t</ul>"
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Only set to use the demo user. For demo user must take the constant string value ```demo```."
+              }
+            ]
+          },
+          "docs": "To use the Web Authorization Flow, you'll need to construct an authorization URL with the appropriate query parameters. Here's an example of an authorization URL:<br><br>\n```\nhttps://account.withings.com/oauth2_user/authorize2?response_type=code&client_id=YOUR_CLIENT_ID&scope=user.info,user.metrics,user.activity&redirect_uri=YOUR_REDIRECT_URI&state=YOUR_STATE\n```\nReplace ```YOUR_CLIENT_ID```, ```YOUR_REDIRECT_URI```, and ```YOUR_STATE``` with your actual values.<br><br>\nWhen someone navigates to"
+        },
+        {
+          "info": {
+            "name": "OAuth 2.0 - Request Access and Refresh Tokens",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://wbsapi.withings.nethttps://wbsapi.withings.net/v2/oauth2"
+          },
+          "docs": "Use this endpoint to request an ```access token``` and ```refresh token``` from an ```authorization code``` or refresh an existing ```access token```.<br><br> <span class='oauth2-request-token-notes'> **Important:** Don't forget to save the userid included in the response in your database.<br><br> **Note:** You can use this webservice either by signing the call or using the secret. Toggle the request body schema to see the parameters for the 2 options.<br><br> **Note:** Toggle the ```grant_type`"
+        },
+        {
+          "info": {
+            "name": "OAuth 2.0 - Retrieve a new authorization code",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://wbsapi.withings.net  https://wbsapi.withings.net/v2/oauth2",
+            "params": [
+              {
+                "name": "action",
+                "value": "",
+                "type": "query",
+                "description": "Must take the string value ```recoverauthorizationcode```."
+              },
+              {
+                "name": "client_id",
+                "value": "",
+                "type": "query",
+                "description": "Your ```Client ID```."
+              },
+              {
+                "name": "nonce",
+                "value": "",
+                "type": "query",
+                "description": "A random token used to prevent replay attacks (Cf. [Signature v2 - Getnonce](#operation/signaturev2-getnonce))."
+              },
+              {
+                "name": "signature",
+                "value": "",
+                "type": "query",
+                "description": "Hash of params (Cf. [Signature hash protocol](/developer-guide/v3/get-access/sign-your-requests))."
+              },
+              {
+                "name": "userid",
+                "value": "",
+                "type": "query",
+                "description": "User's identifier"
+              }
+            ]
+          },
+          "docs": "**This service will only work for partners having signed a contract with Withings (Withings Mobile SDK or Withings Cellular).** To generate a new authorization code for standard end-user accounts, your user will have to authorize your application to the Web Authorization Flow again.<br/><br/>This service allows you to retrieve a new authorization code in the event that the refresh token is invalid for a user belonging to your namespace.\n"
+        },
+        {
+          "info": {
+            "name": "OAuth 2.0 - Get user list",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://wbsapi.withings.net   https://wbsapi.withings.net/v2/oauth2",
+            "params": [
+              {
+                "name": "action",
+                "value": "",
+                "type": "query",
+                "description": "Must take the string value ```listusers```."
+              },
+              {
+                "name": "client_id",
+                "value": "",
+                "type": "query",
+                "description": "Your ```Client ID```."
+              },
+              {
+                "name": "nonce",
+                "value": "",
+                "type": "query",
+                "description": "A random token used to prevent replay attacks (Cf. [Signature v2 - Getnonce](#operation/signaturev2-getnonce))."
+              },
+              {
+                "name": "signature",
+                "value": "",
+                "type": "query",
+                "description": "Hash of params (Cf. [Signature hash protocol](/developer-guide/v3/get-access/sign-your-requests))."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "When a first call returns ```more:true``` and ```offset:XX```, set value ```XX``` in this parameter to retrieve next available rows."
+              }
+            ]
+          },
+          "docs": "This service allows you to get a list of all users that have authorized your application to fetch their data.\n\n**This service is limited to partners who are integrating with Withings Pro solutions. This service will only work for partners having signed a contract with Withings.**"
+        },
+        {
+          "info": {
+            "name": "OAuth 2.0 - Revoke user access",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://wbsapi.withings.net    https://wbsapi.withings.net/v2/oauth2",
+            "params": [
+              {
+                "name": "action",
+                "value": "",
+                "type": "query",
+                "description": "Must take the string value ```revoke```."
+              },
+              {
+                "name": "client_id",
+                "value": "",
+                "type": "query",
+                "description": "Your ```Client ID```."
+              },
+              {
+                "name": "nonce",
+                "value": "",
+                "type": "query",
+                "description": "A random token used to prevent replay attacks (Cf. [Signature v2 - Getnonce](#operation/signaturev2-getnonce))."
+              },
+              {
+                "name": "signature",
+                "value": "",
+                "type": "query",
+                "description": "Hash of params (Cf. [Signature hash protocol](/developer-guide/v3/get-access/sign-your-requests))."
+              },
+              {
+                "name": "userid",
+                "value": "",
+                "type": "query",
+                "description": "User's identifier."
+              }
+            ]
+          },
+          "docs": "This service allows to revoke the access your application have been granted to a user's data. After calling this webservice, your access and refresh tokens for this user will become invalid, and the data update notifications for this user will be automatically unsubscribed."
+        },
+        {
+          "info": {
+            "name": "OAuth 2.0 - Get access to demo account",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://wbsapi.withings.net     https://wbsapi.withings.net/v2/oauth2",
+            "params": [
+              {
+                "name": "action",
+                "value": "",
+                "type": "query",
+                "description": "Must take the string value ```getdemoaccess```."
+              },
+              {
+                "name": "client_id",
+                "value": "",
+                "type": "query",
+                "description": "Your ```Client ID```."
+              },
+              {
+                "name": "nonce",
+                "value": "",
+                "type": "query",
+                "description": "A random token used to prevent replay attacks (Cf. [Signature v2 - Getnonce](#operation/signaturev2-getnonce))."
+              },
+              {
+                "name": "signature",
+                "value": "",
+                "type": "query",
+                "description": "Hash of params (Cf. [Signature hash protocol](/developer-guide/v3/get-access/sign-your-requests))."
+              },
+              {
+                "name": "scope_oauth2",
+                "value": "",
+                "type": "query",
+                "description": "A comma-separated list of permission scopes to request from the user. See the [available scopes](/developer-guide/v3/integration-guide/public-health-data-api/get-access/oauth-authorization-url/#scopes) for the full list and the actions they allow."
+              }
+            ]
+          },
+          "docs": "This webservice gives your clientID access to a demo account containing dummy data"
+        },
+        {
+          "info": {
+            "name": "OAuth 2.0 - Create OAuth2.0 application",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://wbsapi.withings.net      https://wbsapi.withings.net/v2/oauth2",
+            "params": [
+              {
+                "name": "action",
+                "value": "",
+                "type": "query",
+                "description": "Must take the string value ```createclient```."
+              },
+              {
+                "name": "client_id",
+                "value": "",
+                "type": "query",
+                "description": "Your ```Client ID```."
+              },
+              {
+                "name": "nonce",
+                "value": "",
+                "type": "query",
+                "description": "A random token used to prevent replay attacks (Cf. [Signature v2 - Getnonce](#operation/signaturev2-getnonce))."
+              },
+              {
+                "name": "signature",
+                "value": "",
+                "type": "query",
+                "description": "Hash of params (Cf. [Signature hash protocol](/developer-guide/v3/get-access/sign-your-requests))."
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "Specifies the OAuth2.0 application's name"
+              },
+              {
+                "name": "description",
+                "value": "",
+                "type": "query",
+                "description": "Brief summary of the application"
+              },
+              {
+                "name": "intended_environment",
+                "value": "",
+                "type": "query",
+                "description": "Indicates intended operation environment. Allowed values are: ```dev```, ```stage``` and ```prod```"
+              },
+              {
+                "name": "intended_integrations",
+                "value": "",
+                "type": "query",
+                "description": "Specifies Withings Solutions to be used. Allowed values are: ```app_to_app```, ```sdk```, ```cellular``` and ```logistics```"
+              },
+              {
+                "name": "redirect_uris",
+                "value": "",
+                "type": "query",
+                "description": "List of redirect uris"
+              }
+            ]
+          },
+          "docs": "This service allows creation of a new OAuth 2.0 application.\n\n**This service is part of Withings Pro Solutions. You won't be able to use it if you did not sign a contract with Withings.\nUncontracted partners should use the developer dashboard to create their applications.**"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,55 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Withings developer documentation answers signature API",
+    "version": "2.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "signature",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Signature v2  - Getnonce",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://wbsapi.withings.nethttps://wbsapi.withings.net/v2/signature",
+            "params": [
+              {
+                "name": "action",
+                "value": "",
+                "type": "query",
+                "description": "Service action name. Must take the string value ```getnonce```."
+              },
+              {
+                "name": "client_id",
+                "value": "",
+                "type": "query",
+                "description": "Id of the client"
+              },
+              {
+                "name": "timestamp",
+                "value": "",
+                "type": "query",
+                "description": "unix timestamp"
+              },
+              {
+                "name": "signature",
+                "value": "",
+                "type": "query",
+                "description": "Cf. description above."
+              }
+            ]
+          },
+          "docs": "A ```nonce``` is a random token that is generated and stored in Withings server with **30 minutes of validity**.\n\nAs a partner, you will use this ```nonce``` token in the API services that require a ```signature``` so that Withings can check that the ```nonce``` token is still valid and was never used before. The usage of a ```nonce``` token prevents your service calls from replay attacks.\n\nBecause this service is an Device Management service, Withings checks your authorized access using your ``"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

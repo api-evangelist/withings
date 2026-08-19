@@ -1,0 +1,422 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Withings developer documentation answers nudgecampaign API",
+    "version": "2.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "nudgecampaign",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Nudgecampaign v2  - Addusers",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://wbsapi.withings.nethttps://wbsapi.withings.net/v2/nudgecampaign     ",
+            "params": [
+              {
+                "name": "action",
+                "value": "",
+                "type": "query",
+                "description": "Service action name. Must take the string value ```addusers```."
+              },
+              {
+                "name": "signature",
+                "value": "",
+                "type": "query",
+                "description": "Hash of params (Cf. [Signature hash protocol](/developer-guide/v3/get-access/sign-your-requests))."
+              },
+              {
+                "name": "client_id",
+                "value": "",
+                "type": "query",
+                "description": "Id of the client"
+              },
+              {
+                "name": "nonce",
+                "value": "",
+                "type": "query",
+                "description": "A random token used to prevent replay attacks (Cf. [Signature v2 - Getnonce](#operation/signaturev2-getnonce))"
+              },
+              {
+                "name": "nudgecampaignid",
+                "value": "",
+                "type": "query",
+                "description": "id of the nudge campaign"
+              },
+              {
+                "name": "userids",
+                "value": "",
+                "type": "query",
+                "description": "Array of user ids"
+              }
+            ]
+          },
+          "docs": "Nudgecampaign v2  - Addusers"
+        },
+        {
+          "info": {
+            "name": "Nudgecampaign v2  - Create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://wbsapi.withings.nethttps://wbsapi.withings.net/v2/nudgecampaign  ",
+            "params": [
+              {
+                "name": "action",
+                "value": "",
+                "type": "query",
+                "description": "Service action name. Must take the string value ```create```."
+              },
+              {
+                "name": "signature",
+                "value": "",
+                "type": "query",
+                "description": "Hash of params (Cf. [Signature hash protocol](/developer-guide/v3/get-access/sign-your-requests))."
+              },
+              {
+                "name": "client_id",
+                "value": "",
+                "type": "query",
+                "description": "Id of the client"
+              },
+              {
+                "name": "nonce",
+                "value": "",
+                "type": "query",
+                "description": "A random token used to prevent replay attacks (Cf. [Signature v2 - Getnonce](#operation/signaturev2-getnonce))"
+              },
+              {
+                "name": "nudgeid",
+                "value": "",
+                "type": "query",
+                "description": "id of the nudge screen"
+              },
+              {
+                "name": "startdate",
+                "value": "",
+                "type": "query",
+                "description": "Data start date as a unix timestamp."
+              },
+              {
+                "name": "enddate",
+                "value": "",
+                "type": "query",
+                "description": "Data end date as a unix timestamp."
+              },
+              {
+                "name": "max_display_count",
+                "value": "",
+                "type": "query",
+                "description": "The number of times the nudge should appear on the device screen"
+              }
+            ]
+          },
+          "docs": "Nudgecampaign v2  - Create"
+        },
+        {
+          "info": {
+            "name": "Nudgecampaign v2  - Delete",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://wbsapi.withings.nethttps://wbsapi.withings.net/v2/nudgecampaign    ",
+            "params": [
+              {
+                "name": "action",
+                "value": "",
+                "type": "query",
+                "description": "Service action name. Must take the string value ```delete```."
+              },
+              {
+                "name": "signature",
+                "value": "",
+                "type": "query",
+                "description": "Hash of params (Cf. [Signature hash protocol](/developer-guide/v3/get-access/sign-your-requests))."
+              },
+              {
+                "name": "client_id",
+                "value": "",
+                "type": "query",
+                "description": "Id of the client"
+              },
+              {
+                "name": "nonce",
+                "value": "",
+                "type": "query",
+                "description": "A random token used to prevent replay attacks (Cf. [Signature v2 - Getnonce](#operation/signaturev2-getnonce))"
+              },
+              {
+                "name": "nudgecampaignid",
+                "value": "",
+                "type": "query",
+                "description": "id of the nudge campaign"
+              }
+            ]
+          },
+          "docs": "Nudgecampaign v2  - Delete"
+        },
+        {
+          "info": {
+            "name": "Nudgecampaign v2  - Get",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://wbsapi.withings.nethttps://wbsapi.withings.net/v2/nudgecampaign ",
+            "params": [
+              {
+                "name": "action",
+                "value": "",
+                "type": "query",
+                "description": "Service action name. Must take the string value ```get```."
+              },
+              {
+                "name": "signature",
+                "value": "",
+                "type": "query",
+                "description": "Hash of params (Cf. [Signature hash protocol](/developer-guide/v3/get-access/sign-your-requests))."
+              },
+              {
+                "name": "client_id",
+                "value": "",
+                "type": "query",
+                "description": "Id of the client"
+              },
+              {
+                "name": "nonce",
+                "value": "",
+                "type": "query",
+                "description": "A random token used to prevent replay attacks (Cf. [Signature v2 - Getnonce](#operation/signaturev2-getnonce))"
+              },
+              {
+                "name": "nudgecampaignid",
+                "value": "",
+                "type": "query",
+                "description": "id of the nudge campaign"
+              }
+            ]
+          },
+          "docs": "Nudgecampaign v2  - Get"
+        },
+        {
+          "info": {
+            "name": "Nudgecampaign v2  - List",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://wbsapi.withings.nethttps://wbsapi.withings.net/v2/nudgecampaign",
+            "params": [
+              {
+                "name": "action",
+                "value": "",
+                "type": "query",
+                "description": "Service action name. Must take the string value ```list```."
+              },
+              {
+                "name": "signature",
+                "value": "",
+                "type": "query",
+                "description": "Hash of params (Cf. [Signature hash protocol](/developer-guide/v3/get-access/sign-your-requests))."
+              },
+              {
+                "name": "client_id",
+                "value": "",
+                "type": "query",
+                "description": "Id of the client"
+              },
+              {
+                "name": "nonce",
+                "value": "",
+                "type": "query",
+                "description": "A random token used to prevent replay attacks (Cf. [Signature v2 - Getnonce](#operation/signaturev2-getnonce))"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "When a first call returns ```more:true``` and ```offset:XX```, set value ```XX``` in this parameter to retrieve next available rows."
+              }
+            ]
+          },
+          "docs": "Nudgecampaign v2  - List"
+        },
+        {
+          "info": {
+            "name": "Nudgecampaign v2  - Listusers",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://wbsapi.withings.nethttps://wbsapi.withings.net/v2/nudgecampaign       ",
+            "params": [
+              {
+                "name": "action",
+                "value": "",
+                "type": "query",
+                "description": "Service action name. Must take the string value ```listusers```."
+              },
+              {
+                "name": "signature",
+                "value": "",
+                "type": "query",
+                "description": "Hash of params (Cf. [Signature hash protocol](/developer-guide/v3/get-access/sign-your-requests))."
+              },
+              {
+                "name": "client_id",
+                "value": "",
+                "type": "query",
+                "description": "Id of the client"
+              },
+              {
+                "name": "nonce",
+                "value": "",
+                "type": "query",
+                "description": "A random token used to prevent replay attacks (Cf. [Signature v2 - Getnonce](#operation/signaturev2-getnonce))"
+              },
+              {
+                "name": "nudgecampaignid",
+                "value": "",
+                "type": "query",
+                "description": "id of the nudge campaign"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "When a first call returns ```more:true``` and ```offset:XX```, set value ```XX``` in this parameter to retrieve next available rows."
+              }
+            ]
+          },
+          "docs": "Nudgecampaign v2  - Listusers"
+        },
+        {
+          "info": {
+            "name": "Nudgecampaign v2  - Removeusers",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://wbsapi.withings.nethttps://wbsapi.withings.net/v2/nudgecampaign      ",
+            "params": [
+              {
+                "name": "action",
+                "value": "",
+                "type": "query",
+                "description": "Service action name. Must take the string value ```removeusers```."
+              },
+              {
+                "name": "signature",
+                "value": "",
+                "type": "query",
+                "description": "Hash of params (Cf. [Signature hash protocol](/developer-guide/v3/get-access/sign-your-requests))."
+              },
+              {
+                "name": "client_id",
+                "value": "",
+                "type": "query",
+                "description": "Id of the client"
+              },
+              {
+                "name": "nonce",
+                "value": "",
+                "type": "query",
+                "description": "A random token used to prevent replay attacks (Cf. [Signature v2 - Getnonce](#operation/signaturev2-getnonce))"
+              },
+              {
+                "name": "nudgecampaignid",
+                "value": "",
+                "type": "query",
+                "description": "id of the nudge campaign"
+              },
+              {
+                "name": "userids",
+                "value": "",
+                "type": "query",
+                "description": "Array of user ids"
+              }
+            ]
+          },
+          "docs": "Nudgecampaign v2  - Removeusers"
+        },
+        {
+          "info": {
+            "name": "Nudgecampaign v2  - Update",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://wbsapi.withings.nethttps://wbsapi.withings.net/v2/nudgecampaign   ",
+            "params": [
+              {
+                "name": "action",
+                "value": "",
+                "type": "query",
+                "description": "Service action name. Must take the string value ```update```."
+              },
+              {
+                "name": "signature",
+                "value": "",
+                "type": "query",
+                "description": "Hash of params (Cf. [Signature hash protocol](/developer-guide/v3/get-access/sign-your-requests))."
+              },
+              {
+                "name": "client_id",
+                "value": "",
+                "type": "query",
+                "description": "Id of the client"
+              },
+              {
+                "name": "nonce",
+                "value": "",
+                "type": "query",
+                "description": "A random token used to prevent replay attacks (Cf. [Signature v2 - Getnonce](#operation/signaturev2-getnonce))"
+              },
+              {
+                "name": "nudgecampaignid",
+                "value": "",
+                "type": "query",
+                "description": "id of the nudge campaign"
+              },
+              {
+                "name": "nudgeid",
+                "value": "",
+                "type": "query",
+                "description": "id of the nudge screen"
+              },
+              {
+                "name": "startdate",
+                "value": "",
+                "type": "query",
+                "description": "Data start date as a unix timestamp."
+              },
+              {
+                "name": "enddate",
+                "value": "",
+                "type": "query",
+                "description": "Data end date as a unix timestamp."
+              },
+              {
+                "name": "max_display_count",
+                "value": "",
+                "type": "query",
+                "description": "The number of times the nudge should appear on the device screen"
+              }
+            ]
+          },
+          "docs": "Nudgecampaign v2  - Update"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

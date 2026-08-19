@@ -1,0 +1,275 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Withings developer documentation answers nudge API",
+    "version": "2.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "nudge",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Nudge v2  - Create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://wbsapi.withings.nethttps://wbsapi.withings.net/v2/nudge  ",
+            "params": [
+              {
+                "name": "action",
+                "value": "",
+                "type": "query",
+                "description": "Service action name. Must take the string value ```create```."
+              },
+              {
+                "name": "signature",
+                "value": "",
+                "type": "query",
+                "description": "Hash of params (Cf. [Signature hash protocol](/developer-guide/v3/get-access/sign-your-requests))."
+              },
+              {
+                "name": "client_id",
+                "value": "",
+                "type": "query",
+                "description": "Id of the client"
+              },
+              {
+                "name": "nonce",
+                "value": "",
+                "type": "query",
+                "description": "A random token used to prevent replay attacks (Cf. [Signature v2 - Getnonce](#operation/signaturev2-getnonce))"
+              },
+              {
+                "name": "iconids",
+                "value": "",
+                "type": "query",
+                "description": "Ids of the Nudge Icon"
+              },
+              {
+                "name": "content",
+                "value": "",
+                "type": "query",
+                "description": "Array with 2 lines of text representing the Nudge text content"
+              },
+              {
+                "name": "model",
+                "value": "",
+                "type": "query",
+                "description": "Model integer value of a device or a consumable"
+              },
+              {
+                "name": "position",
+                "value": "",
+                "type": "query",
+                "description": "Nudge position in the dynamic screen list. Allowed values are ```first``` and ```last```."
+              }
+            ]
+          },
+          "docs": "Nudge v2  - Create"
+        },
+        {
+          "info": {
+            "name": "Nudge v2  - Delete",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://wbsapi.withings.nethttps://wbsapi.withings.net/v2/nudge    ",
+            "params": [
+              {
+                "name": "action",
+                "value": "",
+                "type": "query",
+                "description": "Service action name. Must take the string value ```delete```."
+              },
+              {
+                "name": "signature",
+                "value": "",
+                "type": "query",
+                "description": "Hash of params (Cf. [Signature hash protocol](/developer-guide/v3/get-access/sign-your-requests))."
+              },
+              {
+                "name": "client_id",
+                "value": "",
+                "type": "query",
+                "description": "Id of the client"
+              },
+              {
+                "name": "nonce",
+                "value": "",
+                "type": "query",
+                "description": "A random token used to prevent replay attacks (Cf. [Signature v2 - Getnonce](#operation/signaturev2-getnonce))"
+              },
+              {
+                "name": "nudgeid",
+                "value": "",
+                "type": "query",
+                "description": "id of the nudge screen"
+              }
+            ]
+          },
+          "docs": "Nudge v2  - Delete"
+        },
+        {
+          "info": {
+            "name": "Nudge v2  - Get",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://wbsapi.withings.nethttps://wbsapi.withings.net/v2/nudge ",
+            "params": [
+              {
+                "name": "action",
+                "value": "",
+                "type": "query",
+                "description": "Service action name. Must take the string value ```get```."
+              },
+              {
+                "name": "signature",
+                "value": "",
+                "type": "query",
+                "description": "Hash of params (Cf. [Signature hash protocol](/developer-guide/v3/get-access/sign-your-requests))."
+              },
+              {
+                "name": "client_id",
+                "value": "",
+                "type": "query",
+                "description": "Id of the client"
+              },
+              {
+                "name": "nonce",
+                "value": "",
+                "type": "query",
+                "description": "A random token used to prevent replay attacks (Cf. [Signature v2 - Getnonce](#operation/signaturev2-getnonce))"
+              },
+              {
+                "name": "nudgeid",
+                "value": "",
+                "type": "query",
+                "description": "id of the nudge screen"
+              }
+            ]
+          },
+          "docs": "Nudge v2  - Get"
+        },
+        {
+          "info": {
+            "name": "Nudge v2  - List",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://wbsapi.withings.nethttps://wbsapi.withings.net/v2/nudge",
+            "params": [
+              {
+                "name": "action",
+                "value": "",
+                "type": "query",
+                "description": "Service action name. Must take the string value ```list```."
+              },
+              {
+                "name": "signature",
+                "value": "",
+                "type": "query",
+                "description": "Hash of params (Cf. [Signature hash protocol](/developer-guide/v3/get-access/sign-your-requests))."
+              },
+              {
+                "name": "client_id",
+                "value": "",
+                "type": "query",
+                "description": "Id of the client"
+              },
+              {
+                "name": "nonce",
+                "value": "",
+                "type": "query",
+                "description": "A random token used to prevent replay attacks (Cf. [Signature v2 - Getnonce](#operation/signaturev2-getnonce))"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "When a first call returns ```more:true``` and ```offset:XX```, set value ```XX``` in this parameter to retrieve next available rows."
+              }
+            ]
+          },
+          "docs": "Nudge v2  - List"
+        },
+        {
+          "info": {
+            "name": "Nudge v2  - Update",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://wbsapi.withings.nethttps://wbsapi.withings.net/v2/nudge   ",
+            "params": [
+              {
+                "name": "action",
+                "value": "",
+                "type": "query",
+                "description": "Service action name. Must take the string value ```update```."
+              },
+              {
+                "name": "signature",
+                "value": "",
+                "type": "query",
+                "description": "Hash of params (Cf. [Signature hash protocol](/developer-guide/v3/get-access/sign-your-requests))."
+              },
+              {
+                "name": "client_id",
+                "value": "",
+                "type": "query",
+                "description": "Id of the client"
+              },
+              {
+                "name": "nonce",
+                "value": "",
+                "type": "query",
+                "description": "A random token used to prevent replay attacks (Cf. [Signature v2 - Getnonce](#operation/signaturev2-getnonce))"
+              },
+              {
+                "name": "nudgeid",
+                "value": "",
+                "type": "query",
+                "description": "id of the nudge screen"
+              },
+              {
+                "name": "iconids",
+                "value": "",
+                "type": "query",
+                "description": "Ids of the Nudge Icon"
+              },
+              {
+                "name": "content",
+                "value": "",
+                "type": "query",
+                "description": "Array with 2 lines of text representing the Nudge text content"
+              },
+              {
+                "name": "model",
+                "value": "",
+                "type": "query",
+                "description": "Model integer value of a device or a consumable"
+              },
+              {
+                "name": "position",
+                "value": "",
+                "type": "query",
+                "description": "Nudge position in the dynamic screen list. Allowed values are ```first``` and ```last```."
+              }
+            ]
+          },
+          "docs": "Nudge v2  - Update"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

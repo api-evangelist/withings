@@ -1,0 +1,153 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Withings developer documentation answers rawdata API",
+    "version": "2.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "rawdata",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Rawdata v2  - Activate",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://wbsapi.withings.nethttps://wbsapi.withings.net/v2/rawdata ",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "action",
+                "value": "",
+                "type": "query",
+                "description": "Service action name. Must take the string value ```activate```."
+              },
+              {
+                "name": "hash_deviceid",
+                "value": "",
+                "type": "query",
+                "description": "Public device id. For any device installed on a user account, can be found by calling the User v2 - Get webservice."
+              },
+              {
+                "name": "rawdata_type",
+                "value": "",
+                "type": "query",
+                "description": "The type of raw data you want to act upon. Set to 1 for accelerometer, set to 2 for optical sensor."
+              },
+              {
+                "name": "enddate",
+                "value": "",
+                "type": "query",
+                "description": "Data end date as a unix timestamp."
+              }
+            ]
+          },
+          "docs": "This service allows to activate Raw Data collection on a given device that is already set up, and set the date at which the raw data collection will stop (enddate). The raw data capture will be activated as soon as the watch is able to sync with the Withings app following the API call. The capture will stop automatically at the enddate provided in the API call."
+        },
+        {
+          "info": {
+            "name": "Rawdata v2  - Deactivate",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://wbsapi.withings.nethttps://wbsapi.withings.net/v2/rawdata  ",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "action",
+                "value": "",
+                "type": "query",
+                "description": "Service action name. Must take the string value ```deactivate```."
+              },
+              {
+                "name": "hash_deviceid",
+                "value": "",
+                "type": "query",
+                "description": "Public device id. For any device installed on a user account, can be found by calling the User v2 - Get webservice."
+              },
+              {
+                "name": "rawdata_type",
+                "value": "",
+                "type": "query",
+                "description": "The type of raw data you want to act upon. Set to 1 for accelerometer, set to 2 for optical sensor."
+              }
+            ]
+          },
+          "docs": "This service allows the de-activation of raw data collection. Raw Data de-activation will occur as soon as the Withings device is able to sync with the Withings app."
+        },
+        {
+          "info": {
+            "name": "Rawdata v2  - Get",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://wbsapi.withings.nethttps://wbsapi.withings.net/v2/rawdata",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "action",
+                "value": "",
+                "type": "query",
+                "description": "Service action name. Must take the string value ```get```."
+              },
+              {
+                "name": "hash_deviceid",
+                "value": "",
+                "type": "query",
+                "description": "Public device id. For any device installed on a user account, can be found by calling the User v2 - Get webservice."
+              },
+              {
+                "name": "rawdata_type",
+                "value": "",
+                "type": "query",
+                "description": "The type of raw data you want to act upon. Set to 1 for accelerometer, set to 2 for optical sensor."
+              },
+              {
+                "name": "startdate",
+                "value": "",
+                "type": "query",
+                "description": "Data start date as a unix timestamp."
+              },
+              {
+                "name": "enddate",
+                "value": "",
+                "type": "query",
+                "description": "Data end date as a unix timestamp."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "When a first call returns ```more:true``` and ```offset:XX```, set value ```XX``` in this parameter to retrieve next available rows."
+              }
+            ]
+          },
+          "docs": "This service allows to fetch raw data of a specific type that were captured and synchronized by a Withings device. Detailled information about the data structure can be found in the [Raw Data structure section](/developer-guide/v3/integration-guide/public-health-data-api/data-api/raw-data)."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

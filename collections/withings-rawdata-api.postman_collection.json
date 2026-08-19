@@ -1,0 +1,420 @@
+{
+  "item": [
+    {
+      "id": "7e2e28f9-3106-4d5b-bdfd-86ec5226c311",
+      "name": "rawdata",
+      "description": {
+        "content": "Raw Data webservices are part of the Advanced research API that allows to collect high frequency PPG and accelerometer data (around 25Hz). These APIs are compatible only with the Withings ScanWatch. If you need more information about how to use these APIs and how to parse the data, please have a look the [dedicated integration guide](/developer-guide/v3/integration-guide/public-health-data-api/data-api/raw-data).",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "0b48e3d3-c7b0-40b9-af32-e0e8bb391d01",
+          "name": "Rawdata v2  - Activate",
+          "request": {
+            "name": "Rawdata v2  - Activate",
+            "description": {
+              "content": "This service allows to activate Raw Data collection on a given device that is already set up, and set the date at which the raw data collection will stop (enddate). The raw data capture will be activated as soon as the watch is able to sync with the Withings app following the API call. The capture will stop automatically at the enddate provided in the API call.",
+              "type": "text/plain"
+            },
+            "url": {
+              "protocol": "{{baseUrl}}/https",
+              "path": [
+                "v2",
+                "rawdata "
+              ],
+              "host": [
+                "wbsapi",
+                "withings",
+                "net"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "action",
+                  "value": "<string>",
+                  "description": "(Required) Service action name. Must take the string value ```activate```."
+                },
+                {
+                  "disabled": false,
+                  "key": "hash_deviceid",
+                  "value": "<string>",
+                  "description": "(Required) Public device id. For any device installed on a user account, can be found by calling the User v2 - Get webservice."
+                },
+                {
+                  "disabled": false,
+                  "key": "rawdata_type",
+                  "value": "<integer>",
+                  "description": "(Required) The type of raw data you want to act upon. Set to 1 for accelerometer, set to 2 for optical sensor."
+                },
+                {
+                  "disabled": false,
+                  "key": "enddate",
+                  "value": "<integer>",
+                  "description": "Data end date as a unix timestamp."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a794a4d2-cf95-43d8-9a18-25f071f07044",
+              "name": " (Click to unfold)",
+              "originalRequest": {
+                "url": {
+                  "protocol": "{{baseUrl}}/https",
+                  "path": [
+                    "v2",
+                    "rawdata "
+                  ],
+                  "host": [
+                    "wbsapi",
+                    "withings",
+                    "net"
+                  ],
+                  "query": [
+                    {
+                      "key": "action",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "hash_deviceid",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "rawdata_type",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "enddate",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Used to pass your access token. Must take value: ```Bearer {your access_token}``` Replace {your access_token} with the access_token",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 6170,\n  \"body\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f71481f0-99e8-4159-8d0b-a13bf12dc307",
+          "name": "Rawdata v2  - Deactivate",
+          "request": {
+            "name": "Rawdata v2  - Deactivate",
+            "description": {
+              "content": "This service allows the de-activation of raw data collection. Raw Data de-activation will occur as soon as the Withings device is able to sync with the Withings app.",
+              "type": "text/plain"
+            },
+            "url": {
+              "protocol": "{{baseUrl}}/https",
+              "path": [
+                "v2",
+                "rawdata  "
+              ],
+              "host": [
+                "wbsapi",
+                "withings",
+                "net"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "action",
+                  "value": "<string>",
+                  "description": "(Required) Service action name. Must take the string value ```deactivate```."
+                },
+                {
+                  "disabled": false,
+                  "key": "hash_deviceid",
+                  "value": "<string>",
+                  "description": "(Required) Public device id. For any device installed on a user account, can be found by calling the User v2 - Get webservice."
+                },
+                {
+                  "disabled": false,
+                  "key": "rawdata_type",
+                  "value": "<integer>",
+                  "description": "The type of raw data you want to act upon. Set to 1 for accelerometer, set to 2 for optical sensor."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "96b1486e-4469-47da-8d85-df48e0f121e0",
+              "name": " (Click to unfold)",
+              "originalRequest": {
+                "url": {
+                  "protocol": "{{baseUrl}}/https",
+                  "path": [
+                    "v2",
+                    "rawdata  "
+                  ],
+                  "host": [
+                    "wbsapi",
+                    "withings",
+                    "net"
+                  ],
+                  "query": [
+                    {
+                      "key": "action",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "hash_deviceid",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "rawdata_type",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Used to pass your access token. Must take value: ```Bearer {your access_token}``` Replace {your access_token} with the access_token",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 6170,\n  \"body\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6bb3bdb4-1ab0-44b4-a244-8447bc10923c",
+          "name": "Rawdata v2  - Get",
+          "request": {
+            "name": "Rawdata v2  - Get",
+            "description": {
+              "content": "This service allows to fetch raw data of a specific type that were captured and synchronized by a Withings device. Detailled information about the data structure can be found in the [Raw Data structure section](/developer-guide/v3/integration-guide/public-health-data-api/data-api/raw-data).",
+              "type": "text/plain"
+            },
+            "url": {
+              "protocol": "{{baseUrl}}/https",
+              "path": [
+                "v2",
+                "rawdata"
+              ],
+              "host": [
+                "wbsapi",
+                "withings",
+                "net"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "action",
+                  "value": "<string>",
+                  "description": "(Required) Service action name. Must take the string value ```get```."
+                },
+                {
+                  "disabled": false,
+                  "key": "hash_deviceid",
+                  "value": "<string>",
+                  "description": "(Required) Public device id. For any device installed on a user account, can be found by calling the User v2 - Get webservice."
+                },
+                {
+                  "disabled": false,
+                  "key": "rawdata_type",
+                  "value": "<integer>",
+                  "description": "(Required) The type of raw data you want to act upon. Set to 1 for accelerometer, set to 2 for optical sensor."
+                },
+                {
+                  "disabled": false,
+                  "key": "startdate",
+                  "value": "<integer>",
+                  "description": "(Required) Data start date as a unix timestamp."
+                },
+                {
+                  "disabled": false,
+                  "key": "enddate",
+                  "value": "<integer>",
+                  "description": "(Required) Data end date as a unix timestamp."
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "When a first call returns ```more:true``` and ```offset:XX```, set value ```XX``` in this parameter to retrieve next available rows."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a2d941a6-e35a-4a05-9f84-669e10333454",
+              "name": " (Click to unfold)",
+              "originalRequest": {
+                "url": {
+                  "protocol": "{{baseUrl}}/https",
+                  "path": [
+                    "v2",
+                    "rawdata"
+                  ],
+                  "host": [
+                    "wbsapi",
+                    "withings",
+                    "net"
+                  ],
+                  "query": [
+                    {
+                      "key": "action",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "hash_deviceid",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "rawdata_type",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "startdate",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "enddate",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Used to pass your access token. Must take value: ```Bearer {your access_token}``` Replace {your access_token} with the access_token",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 0,\n  \"body\": {\n    \"rawdata\": [\n      {\n        \"data\": \"\",\n        \"hash_deviceid\": \"00d27f2d3b8d778ac56a831663ebec528085faa0\",\n        \"type\": 2,\n        \"format_version\": 1,\n        \"firmware_version\": 2561,\n        \"sensor_name\": \"MAX86142_RAW\",\n        \"startdate\": 1656518088,\n        \"enddate\": 1656518088\n      }\n    ],\n    \"more\": true,\n    \"offset\": 1\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://wbsapi.withings.net/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "74cef774-8aab-4e22-827d-b70543fb6a9c",
+    "name": "Withings developer documentation answers rawdata API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "These webservices allows you to get user's answers from surveys",
+      "type": "text/plain"
+    }
+  }
+}

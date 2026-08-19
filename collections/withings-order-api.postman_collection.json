@@ -1,0 +1,182 @@
+{
+  "item": [
+    {
+      "id": "1fc9a946-5903-49a6-93f3-46a0342dc245",
+      "name": "order",
+      "description": {
+        "content": "The following services are part of the Logistics APIs. Refer to [this section](/developer-guide/v3/integration-guide/dropship-only/logistics-api/overview-create-order) for more information.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "ed3e5f26-01c7-42bc-bbe5-97bdb82b1ccd",
+          "name": "Order v2  - Getdetail",
+          "request": {
+            "name": "Order v2  - Getdetail",
+            "description": {
+              "content": "Returns detailed information about bulkshipment or dropshipment orders.\n\n*This service is part of Withings Pro Solutions. You won't be able to use it if you did not sign a contract with Withings.*",
+              "type": "text/plain"
+            },
+            "url": {
+              "protocol": "{{baseUrl}}/https",
+              "path": [
+                "v2",
+                "order"
+              ],
+              "host": [
+                "wbsapi",
+                "withings",
+                "net"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "action",
+                  "value": "<string>",
+                  "description": "(Required) Service action name. Must take the string value ```getdetail```."
+                },
+                {
+                  "disabled": false,
+                  "key": "client_id",
+                  "value": "<string>",
+                  "description": "(Required) Id of the client"
+                },
+                {
+                  "disabled": false,
+                  "key": "nonce",
+                  "value": "<string>",
+                  "description": "(Required) A random token used to prevent replay attacks (Cf. [Signature v2 - Getnonce](#operation/signaturev2-getnonce))"
+                },
+                {
+                  "disabled": false,
+                  "key": "signature",
+                  "value": "<string>",
+                  "description": "(Required) Hash of params (Cf. [Signature hash protocol](/developer-guide/v3/get-access/sign-your-requests))."
+                },
+                {
+                  "disabled": false,
+                  "key": "order_ids",
+                  "value": "<json>",
+                  "description": "(Required) DO NOT USE WITH FOLLOWING PARAMS: [customer_ref_ids]<br>List of order_id"
+                },
+                {
+                  "disabled": false,
+                  "key": "customer_ref_ids",
+                  "value": "<json>",
+                  "description": "(Required) DO NOT USE WITH FOLLOWING PARAMS: [order_ids]<br>Movement reference number of dropshipment orderlines"
+                },
+                {
+                  "disabled": false,
+                  "key": "customerid",
+                  "value": "<string>",
+                  "description": "Your dropshipment billing ID. If you don't know it, ignore this parameter."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "04df2f65-a848-435a-86e2-f4c7deecf04d",
+              "name": " (Click to unfold)",
+              "originalRequest": {
+                "url": {
+                  "protocol": "{{baseUrl}}/https",
+                  "path": [
+                    "v2",
+                    "order"
+                  ],
+                  "host": [
+                    "wbsapi",
+                    "withings",
+                    "net"
+                  ],
+                  "query": [
+                    {
+                      "key": "action",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "client_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nonce",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "signature",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "order_ids",
+                      "value": "<json>"
+                    },
+                    {
+                      "key": "customer_ref_ids",
+                      "value": "<json>"
+                    },
+                    {
+                      "key": "customerid",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 2738,\n  \"body\": {\n    \"orders\": [\n      {\n        \"order_id\": \"D12345678\",\n        \"customer_ref_id\": \"MOUVEMENTREFERENCE12345678\",\n        \"status\": \"SHIPPED\",\n        \"products\": [\n          {\n            \"ean\": \"3700546702518\",\n            \"partner_ref\": \"REF-12345\",\n            \"devices\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"quantity\": 3,\n            \"mac_addresses\": [\n              \"00:24:e4:xx:xx:xx\",\n              \"00:24:e4:xx:xx:xx\",\n              \"00:24:e4:xx:xx:xx\"\n            ],\n            \"hash_deviceids\": [\n              \"892359876fd8805ac45bab078c4828692f0276b1\",\n              \"a1b2c3d4e5f6\"\n            ],\n            \"serial_numbers\": [\n              \"SN-001122334455\",\n              \"SN-001122334456\"\n            ]\n          },\n          {\n            \"ean\": \"3700546702518\",\n            \"partner_ref\": \"REF-12345\",\n            \"devices\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"quantity\": 3,\n            \"mac_addresses\": [\n              \"00:24:e4:xx:xx:xx\",\n              \"00:24:e4:xx:xx:xx\",\n              \"00:24:e4:xx:xx:xx\"\n            ],\n            \"hash_deviceids\": [\n              \"892359876fd8805ac45bab078c4828692f0276b1\",\n              \"a1b2c3d4e5f6\"\n            ],\n            \"serial_numbers\": [\n              \"SN-001122334455\",\n              \"SN-001122334456\"\n            ]\n          }\n        ],\n        \"carrier\": \"UPS Parcel\",\n        \"carrier_service\": \"Next Day Air\",\n        \"tracking_number\": \"1ZY1111111\",\n        \"parcel_status\": \"in_transit\",\n        \"ship_date\": \"2024-03-15\",\n        \"is_replacement\": true,\n        \"original_customer_ref\": \"MOUVEMENTREFERENCE00000001\"\n      },\n      {\n        \"order_id\": \"D12345678\",\n        \"customer_ref_id\": \"MOUVEMENTREFERENCE12345678\",\n        \"status\": \"SHIPPED\",\n        \"products\": [\n          {\n            \"ean\": \"3700546702518\",\n            \"partner_ref\": \"REF-12345\",\n            \"devices\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"quantity\": 3,\n            \"mac_addresses\": [\n              \"00:24:e4:xx:xx:xx\",\n              \"00:24:e4:xx:xx:xx\",\n              \"00:24:e4:xx:xx:xx\"\n            ],\n            \"hash_deviceids\": [\n              \"892359876fd8805ac45bab078c4828692f0276b1\",\n              \"a1b2c3d4e5f6\"\n            ],\n            \"serial_numbers\": [\n              \"SN-001122334455\",\n              \"SN-001122334456\"\n            ]\n          },\n          {\n            \"ean\": \"3700546702518\",\n            \"partner_ref\": \"REF-12345\",\n            \"devices\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"quantity\": 3,\n            \"mac_addresses\": [\n              \"00:24:e4:xx:xx:xx\",\n              \"00:24:e4:xx:xx:xx\",\n              \"00:24:e4:xx:xx:xx\"\n            ],\n            \"hash_deviceids\": [\n              \"892359876fd8805ac45bab078c4828692f0276b1\",\n              \"a1b2c3d4e5f6\"\n            ],\n            \"serial_numbers\": [\n              \"SN-001122334455\",\n              \"SN-001122334456\"\n            ]\n          }\n        ],\n        \"carrier\": \"UPS Parcel\",\n        \"carrier_service\": \"Next Day Air\",\n        \"tracking_number\": \"1ZY1111111\",\n        \"parcel_status\": \"in_transit\",\n        \"ship_date\": \"2024-03-15\",\n        \"is_replacement\": false,\n        \"original_customer_ref\": \"MOUVEMENTREFERENCE00000001\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://wbsapi.withings.net/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "21a53c2c-3a50-4129-aa7b-b809554e0afc",
+    "name": "Withings developer documentation answers order API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "These webservices allows you to get user's answers from surveys",
+      "type": "text/plain"
+    }
+  }
+}

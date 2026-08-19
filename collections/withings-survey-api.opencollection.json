@@ -1,0 +1,251 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Withings developer documentation answers survey API",
+    "version": "2.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "survey",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Survey v2  - Activate",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://wbsapi.withings.nethttps://wbsapi.withings.net/v2/survey ",
+            "params": [
+              {
+                "name": "action",
+                "value": "",
+                "type": "query",
+                "description": "Service action name. Must take the string value ```activate```."
+              },
+              {
+                "name": "signature",
+                "value": "",
+                "type": "query",
+                "description": "Hash of params (Cf. [Signature hash protocol](/developer-guide/v3/get-access/sign-your-requests))."
+              },
+              {
+                "name": "client_id",
+                "value": "",
+                "type": "query",
+                "description": "Id of the client"
+              },
+              {
+                "name": "nonce",
+                "value": "",
+                "type": "query",
+                "description": "A random token used to prevent replay attacks (Cf. [Signature v2 - Getnonce](#operation/signaturev2-getnonce))"
+              },
+              {
+                "name": "surveyid",
+                "value": "",
+                "type": "query",
+                "description": "ID of a survey"
+              },
+              {
+                "name": "userids",
+                "value": "",
+                "type": "query",
+                "description": "Array of user ids"
+              }
+            ]
+          },
+          "docs": "Survey v2  - Activate"
+        },
+        {
+          "info": {
+            "name": "Survey v2  - Deactivate",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://wbsapi.withings.nethttps://wbsapi.withings.net/v2/survey  ",
+            "params": [
+              {
+                "name": "action",
+                "value": "",
+                "type": "query",
+                "description": "Service action name. Must take the string value ```deactivate```."
+              },
+              {
+                "name": "signature",
+                "value": "",
+                "type": "query",
+                "description": "Hash of params (Cf. [Signature hash protocol](/developer-guide/v3/get-access/sign-your-requests))."
+              },
+              {
+                "name": "client_id",
+                "value": "",
+                "type": "query",
+                "description": "Id of the client"
+              },
+              {
+                "name": "nonce",
+                "value": "",
+                "type": "query",
+                "description": "A random token used to prevent replay attacks (Cf. [Signature v2 - Getnonce](#operation/signaturev2-getnonce))"
+              },
+              {
+                "name": "surveyid",
+                "value": "",
+                "type": "query",
+                "description": "ID of a survey"
+              },
+              {
+                "name": "userids",
+                "value": "",
+                "type": "query",
+                "description": "Array of user ids"
+              }
+            ]
+          },
+          "docs": "Survey v2  - Deactivate"
+        },
+        {
+          "info": {
+            "name": "Survey v2  - Get",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://wbsapi.withings.nethttps://wbsapi.withings.net/v2/survey",
+            "params": [
+              {
+                "name": "action",
+                "value": "",
+                "type": "query",
+                "description": "Service action name. Must take the string value ```get```."
+              },
+              {
+                "name": "signature",
+                "value": "",
+                "type": "query",
+                "description": "Hash of params (Cf. [Signature hash protocol](/developer-guide/v3/get-access/sign-your-requests))."
+              },
+              {
+                "name": "client_id",
+                "value": "",
+                "type": "query",
+                "description": "Id of the client"
+              },
+              {
+                "name": "nonce",
+                "value": "",
+                "type": "query",
+                "description": "A random token used to prevent replay attacks (Cf. [Signature v2 - Getnonce](#operation/signaturev2-getnonce))"
+              },
+              {
+                "name": "surveyid",
+                "value": "",
+                "type": "query",
+                "description": "ID of a survey"
+              },
+              {
+                "name": "lang",
+                "value": "",
+                "type": "query",
+                "description": "Lang in which data are translated (default: en)"
+              }
+            ]
+          },
+          "docs": "Survey v2  - Get"
+        },
+        {
+          "info": {
+            "name": "Survey v2  - List",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://wbsapi.withings.nethttps://wbsapi.withings.net/v2/survey   ",
+            "params": [
+              {
+                "name": "action",
+                "value": "",
+                "type": "query",
+                "description": "Service action name. Must take the string value ```list```."
+              },
+              {
+                "name": "signature",
+                "value": "",
+                "type": "query",
+                "description": "Hash of params (Cf. [Signature hash protocol](/developer-guide/v3/get-access/sign-your-requests))."
+              },
+              {
+                "name": "client_id",
+                "value": "",
+                "type": "query",
+                "description": "Id of the client"
+              },
+              {
+                "name": "nonce",
+                "value": "",
+                "type": "query",
+                "description": "A random token used to prevent replay attacks (Cf. [Signature v2 - Getnonce](#operation/signaturev2-getnonce))"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "When a first call returns ```more:true``` and ```offset:XX```, set value ```XX``` in this parameter to retrieve next available rows."
+              }
+            ]
+          },
+          "docs": "Survey v2  - List"
+        },
+        {
+          "info": {
+            "name": "Survey v2  - Listusers",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://wbsapi.withings.nethttps://wbsapi.withings.net/v2/survey    ",
+            "params": [
+              {
+                "name": "action",
+                "value": "",
+                "type": "query",
+                "description": "Service action name. Must take the string value ```listusers```."
+              },
+              {
+                "name": "signature",
+                "value": "",
+                "type": "query",
+                "description": "Hash of params (Cf. [Signature hash protocol](/developer-guide/v3/get-access/sign-your-requests))."
+              },
+              {
+                "name": "client_id",
+                "value": "",
+                "type": "query",
+                "description": "Id of the client"
+              },
+              {
+                "name": "nonce",
+                "value": "",
+                "type": "query",
+                "description": "A random token used to prevent replay attacks (Cf. [Signature v2 - Getnonce](#operation/signaturev2-getnonce))"
+              },
+              {
+                "name": "surveyid",
+                "value": "",
+                "type": "query",
+                "description": "ID of a survey"
+              }
+            ]
+          },
+          "docs": "Survey v2  - Listusers"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

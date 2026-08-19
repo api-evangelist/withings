@@ -1,0 +1,324 @@
+{
+  "item": [
+    {
+      "id": "39632509-ea81-4c7c-94e0-dada63c9fd2f",
+      "name": "heart",
+      "description": {
+        "content": "Returns ECG (EKG) signal points in micro-volt (μV).\n\nYou can use the [Heart - List](#operation/heartv2-list) service to get the list of ECG records and their corresponding ```signalid``` and then use [Heart - Get](#operation/heartv2-get) to get the signal details.\n\nThe data are only available once a synchronization occured between the device and Withings servers (which might include synchronizing with Withings mobile application or via Withings Mobile SDK).",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "658473c0-7f0a-4c3a-a24d-577dbb27b16e",
+          "name": "Heart v2  - Get",
+          "request": {
+            "name": "Heart v2  - Get",
+            "description": {
+              "content": "Provides the high frequency data of an ECG recording in micro-volt (μV).\n\n**Duration:**\n\n - BPM Core: 20 seconds.\n - Move ECG: 30 seconds.\n - ScanWatch: 30 seconds.\n\n**Sampling frequency:**\n\n - BPM Core: 500 Hz.\n - Move ECG: 300 Hz.\n - ScanWatch: 300 Hz.",
+              "type": "text/plain"
+            },
+            "url": {
+              "protocol": "{{baseUrl}}/https",
+              "path": [
+                "v2",
+                "heart "
+              ],
+              "host": [
+                "wbsapi",
+                "withings",
+                "net"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "action",
+                  "value": "<string>",
+                  "description": "(Required) Service action name. Must take the string value ```get```."
+                },
+                {
+                  "disabled": false,
+                  "key": "signalid",
+                  "value": "<id32m64>",
+                  "description": "(Required) DO NOT USE WITH FOLLOWING PARAMS: [client_id, signature, nonce, signal_token]<br>ID of a signal"
+                },
+                {
+                  "disabled": false,
+                  "key": "client_id",
+                  "value": "<string>",
+                  "description": "(Required) DO NOT USE WITH FOLLOWING PARAMS: [access_token, signalid]<br>Id of the client"
+                },
+                {
+                  "disabled": false,
+                  "key": "signature",
+                  "value": "<string>",
+                  "description": "(Required) DO NOT USE WITH FOLLOWING PARAMS: [access_token, signalid]<br>Hash of params (Cf. [Signature hash protocol](/developer-guide/v3/get-access/sign-your-requests))."
+                },
+                {
+                  "disabled": false,
+                  "key": "nonce",
+                  "value": "<string>",
+                  "description": "(Required) DO NOT USE WITH FOLLOWING PARAMS: [access_token, signalid]<br>A random token used to prevent replay attacks (Cf. [Signature v2 - Getnonce](#operation/signaturev2-getnonce))"
+                },
+                {
+                  "disabled": false,
+                  "key": "signal_token",
+                  "value": "<string>",
+                  "description": "(Required) DO NOT USE WITH FOLLOWING PARAMS: [access_token, signalid]<br>Signal identifier"
+                },
+                {
+                  "disabled": false,
+                  "key": "with_filtered",
+                  "value": "<boolean>",
+                  "description": "Request filtered version of the signal"
+                },
+                {
+                  "disabled": false,
+                  "key": "with_intervals",
+                  "value": "<boolean>",
+                  "description": "Request features with inactive ones"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "88381350-9dde-48d5-a9e4-43c528b89971",
+              "name": " (Click to unfold)",
+              "originalRequest": {
+                "url": {
+                  "protocol": "{{baseUrl}}/https",
+                  "path": [
+                    "v2",
+                    "heart "
+                  ],
+                  "host": [
+                    "wbsapi",
+                    "withings",
+                    "net"
+                  ],
+                  "query": [
+                    {
+                      "key": "action",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "signalid",
+                      "value": "<id32m64>"
+                    },
+                    {
+                      "key": "client_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "signature",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nonce",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "signal_token",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "with_filtered",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "with_intervals",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Used to pass your access token. Must take value: ```Bearer {your access_token}``` Replace {your access_token} with the access_token",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 7120,\n  \"body\": {\n    \"signal\": [\n      7239,\n      8369\n    ],\n    \"sampling_frequency\": 500,\n    \"wearposition\": 1,\n    \"model\": 44,\n    \"heart_rate\": 82\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "167b6f0d-5e08-4884-bb9c-6925e148e3cd",
+          "name": "Heart v2  - List",
+          "request": {
+            "name": "Heart v2  - List",
+            "description": {
+              "content": "Returns a list of ECG records and Afib classification for a given period of time.\nTo get the full ECG signal, use the [Heart v2 - Get](#operation/heartv2-get) service.\n\nIf the ECG recordings have been taken with BPM Core, systole and diastole measurements will also be returned.",
+              "type": "text/plain"
+            },
+            "url": {
+              "protocol": "{{baseUrl}}/https",
+              "path": [
+                "v2",
+                "heart"
+              ],
+              "host": [
+                "wbsapi",
+                "withings",
+                "net"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "action",
+                  "value": "<string>",
+                  "description": "(Required) Service action name. Must take the string value ```list```."
+                },
+                {
+                  "disabled": false,
+                  "key": "startdate",
+                  "value": "<integer>",
+                  "description": "Data start date as a unix timestamp."
+                },
+                {
+                  "disabled": false,
+                  "key": "enddate",
+                  "value": "<integer>",
+                  "description": "Data end date as a unix timestamp."
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "When a first call returns ```more:true``` and ```offset:XX```, set value ```XX``` in this parameter to retrieve next available rows."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5931711c-4cce-4968-98c7-cd48fc6cdc22",
+              "name": " (Click to unfold)",
+              "originalRequest": {
+                "url": {
+                  "protocol": "{{baseUrl}}/https",
+                  "path": [
+                    "v2",
+                    "heart"
+                  ],
+                  "host": [
+                    "wbsapi",
+                    "withings",
+                    "net"
+                  ],
+                  "query": [
+                    {
+                      "key": "action",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "startdate",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "enddate",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Used to pass your access token. Must take value: ```Bearer {your access_token}``` Replace {your access_token} with the access_token",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 6444,\n  \"body\": {\n    \"series\": [\n      {\n        \"deviceid\": \"892359876fd8805ac45bab078c4828692f0276b1\",\n        \"model\": 44,\n        \"ecg\": {\n          \"signalid\": 48,\n          \"afib\": 1\n        },\n        \"bloodpressure\": {\n          \"diastole\": 100,\n          \"systole\": 101\n        },\n        \"stetho\": {\n          \"signalid\": 48,\n          \"vhd\": 6657\n        },\n        \"heart_rate\": 82,\n        \"modified\": 1594159644,\n        \"timestamp\": 1594159644\n      },\n      {\n        \"deviceid\": \"892359876fd8805ac45bab078c4828692f0276b1\",\n        \"model\": 44,\n        \"ecg\": {\n          \"signalid\": 48,\n          \"afib\": 1\n        },\n        \"bloodpressure\": {\n          \"diastole\": 100,\n          \"systole\": 101\n        },\n        \"stetho\": {\n          \"signalid\": 48,\n          \"vhd\": 1491\n        },\n        \"heart_rate\": 82,\n        \"modified\": 1594159644,\n        \"timestamp\": 1594159644\n      }\n    ],\n    \"more\": true,\n    \"offset\": 3912\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://wbsapi.withings.net/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "70ed5995-95ec-4c29-930a-f213ea4f0089",
+    "name": "Withings developer documentation answers heart API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "These webservices allows you to get user's answers from surveys",
+      "type": "text/plain"
+    }
+  }
+}

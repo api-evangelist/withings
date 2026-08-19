@@ -1,0 +1,73 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Withings developer documentation answers order API",
+    "version": "2.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "order",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Order v2  - Getdetail",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://wbsapi.withings.nethttps://wbsapi.withings.net/v2/order",
+            "params": [
+              {
+                "name": "action",
+                "value": "",
+                "type": "query",
+                "description": "Service action name. Must take the string value ```getdetail```."
+              },
+              {
+                "name": "client_id",
+                "value": "",
+                "type": "query",
+                "description": "Id of the client"
+              },
+              {
+                "name": "nonce",
+                "value": "",
+                "type": "query",
+                "description": "A random token used to prevent replay attacks (Cf. [Signature v2 - Getnonce](#operation/signaturev2-getnonce))"
+              },
+              {
+                "name": "signature",
+                "value": "",
+                "type": "query",
+                "description": "Hash of params (Cf. [Signature hash protocol](/developer-guide/v3/get-access/sign-your-requests))."
+              },
+              {
+                "name": "order_ids",
+                "value": "",
+                "type": "query",
+                "description": "DO NOT USE WITH FOLLOWING PARAMS: [customer_ref_ids]<br>List of order_id"
+              },
+              {
+                "name": "customer_ref_ids",
+                "value": "",
+                "type": "query",
+                "description": "DO NOT USE WITH FOLLOWING PARAMS: [order_ids]<br>Movement reference number of dropshipment orderlines"
+              },
+              {
+                "name": "customerid",
+                "value": "",
+                "type": "query",
+                "description": "Your dropshipment billing ID. If you don't know it, ignore this parameter."
+              }
+            ]
+          },
+          "docs": "Returns detailed information about bulkshipment or dropshipment orders.\n\n*This service is part of Withings Pro Solutions. You won't be able to use it if you did not sign a contract with Withings.*"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

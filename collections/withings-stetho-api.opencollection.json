@@ -1,0 +1,92 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Withings developer documentation answers stetho API",
+    "version": "2.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "stetho",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Stetho v2  - Get",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://wbsapi.withings.nethttps://wbsapi.withings.net/v2/stetho",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "action",
+                "value": "",
+                "type": "query",
+                "description": "Service action name. Must take the string value ```get```."
+              },
+              {
+                "name": "signalid",
+                "value": "",
+                "type": "query",
+                "description": "ID of a signal"
+              }
+            ]
+          },
+          "docs": "Stetho v2  - Get"
+        },
+        {
+          "info": {
+            "name": "Stetho v2  - List",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://wbsapi.withings.nethttps://wbsapi.withings.net/v2/stetho ",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "action",
+                "value": "",
+                "type": "query",
+                "description": "Service action name. Must take the string value ```list```."
+              },
+              {
+                "name": "startdate",
+                "value": "",
+                "type": "query",
+                "description": "Data start date as a unix timestamp."
+              },
+              {
+                "name": "enddate",
+                "value": "",
+                "type": "query",
+                "description": "Data end date as a unix timestamp."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "When a first call returns ```more:true``` and ```offset:XX```, set value ```XX``` in this parameter to retrieve next available rows."
+              }
+            ]
+          },
+          "docs": "Stetho v2  - List"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

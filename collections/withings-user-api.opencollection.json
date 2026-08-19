@@ -1,0 +1,397 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Withings developer documentation answers user API",
+    "version": "2.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "user",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "User v2  - Activate",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://wbsapi.withings.nethttps://wbsapi.withings.net/v2/user ",
+            "params": [
+              {
+                "name": "action",
+                "value": "",
+                "type": "query",
+                "description": "Service action name. Must take the string value ```activate```."
+              },
+              {
+                "name": "client_id",
+                "value": "",
+                "type": "query",
+                "description": "Id of the client"
+              },
+              {
+                "name": "nonce",
+                "value": "",
+                "type": "query",
+                "description": "A random token used to prevent replay attacks (Cf. [Signature v2 - Getnonce](#operation/signaturev2-getnonce))"
+              },
+              {
+                "name": "signature",
+                "value": "",
+                "type": "query",
+                "description": "Hash of params (Cf. [Signature hash protocol](/developer-guide/v3/get-access/sign-your-requests))."
+              },
+              {
+                "name": "mailingpref",
+                "value": "",
+                "type": "query",
+                "description": "Specifies if customer accepted Withings commercial contacts."
+              },
+              {
+                "name": "birthdate",
+                "value": "",
+                "type": "query",
+                "description": "Unix timestamp of user's birthdate"
+              },
+              {
+                "name": "measures",
+                "value": "",
+                "type": "query",
+                "description": "User measures (Cf. [Measures](#tag/models/Measures) model)."
+              },
+              {
+                "name": "gender",
+                "value": "",
+                "type": "query",
+                "description": "0: man, 1: woman"
+              },
+              {
+                "name": "preflang",
+                "value": "",
+                "type": "query",
+                "description": "User language preference. Examples: en_EN / en_US / de_DE / es_ES / fr_FR / it_IT / ja_JA / ko_KR / nl_NL / pt_PT / ru_RU / zh_CN"
+              },
+              {
+                "name": "unit_pref",
+                "value": "",
+                "type": "query",
+                "description": "Unit pref (cf. [Unit preferences](#tag/models/Unit-preferences) model)."
+              },
+              {
+                "name": "email",
+                "value": "",
+                "type": "query",
+                "description": "User's email address"
+              },
+              {
+                "name": "timezone",
+                "value": "",
+                "type": "query",
+                "description": "User's timezone. Examples: \"Europe/Paris\" / \"America/New_York\". A complete list of all possible timezones can be found on the \"TZ database name\" column of this page : https://en.wikipedia.org/wiki/List_of_tz_database_time_zones"
+              },
+              {
+                "name": "shortname",
+                "value": "",
+                "type": "query",
+                "description": "3 characters representing the end user (ex: for a user named Robert, you could set the shortname param to ROB). These characters will be displayed on device screens when used.<br>Shortname must respect the following regex: /^[a-zA-Z0-9]{3}$/ (either letters or numbers, special characters and spaces are not allowed)."
+              },
+              {
+                "name": "external_id",
+                "value": "",
+                "type": "query",
+                "description": "Unique identifier used by the partner to identify the end-user."
+              },
+              {
+                "name": "mac_addresses",
+                "value": "",
+                "type": "query",
+                "description": "List of Withings device MAC addresses that will be linked to the created user. Example: [\"00:24:e4:xx:xx:xx\",\"00:24:e4:xx:xx:xx\"]"
+              },
+              {
+                "name": "firstname",
+                "value": "",
+                "type": "query",
+                "description": "User's firstname (if not set, will take the same value as shortname)"
+              },
+              {
+                "name": "lastname",
+                "value": "",
+                "type": "query",
+                "description": "User's lastname (if not set, will take the same value as shortname)"
+              },
+              {
+                "name": "phonenumber",
+                "value": "",
+                "type": "query",
+                "description": "Phone number in E.164 format. End user will receive a verification code on this phone number for 2 factor authentication if they wish to securely access the data of their program in the withings app in the future (recommended)"
+              },
+              {
+                "name": "recovery_code",
+                "value": "",
+                "type": "query",
+                "description": "Recovery code can be used by end user as a 2nd authentication factor in the withings app if they wish to securely access the data of their program in the future.  You will be responsible of securely providing this recovery code to your user if he asks for it."
+              },
+              {
+                "name": "goals",
+                "value": "",
+                "type": "query",
+                "description": "Goals (cf. [Goals](#tag/models/Goals) model)."
+              },
+              {
+                "name": "redirect_uri",
+                "value": "",
+                "type": "query",
+                "description": "\nThe URI we should redirect the user to after choosing to authorize or not your app. This URI must be set as ```Callback Url``` in your partner application. It is possible to use multiple URLs by separating them with a comma.\n\nExamples:\n\n- Callbacks: https://mydomain.com/\n- Callback: https://mydomain.com/,https://mydomain2.com/\n- Valid URL: https://mydomain.com/relative_path?args=value"
+              }
+            ]
+          },
+          "docs": "Creates a Withings user, links the devices related to the provided ```mac_addresses``` and activates the cellular devices service and invoicing.\n\nPlease refer to the [Access and refresh tokens section](/developer-guide/v3/integration-guide/bulkship-cellular/get-access/access-and-refresh-tokens) to learn how to use the authorization code you'll get in return of this service in order to fetch user data. The authorization code is only valid for *10 minutes*.\n\n**Important**:\n\n- Please note that to a"
+        },
+        {
+          "info": {
+            "name": "User v2  - Addtorpm",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://wbsapi.withings.nethttps://wbsapi.withings.net/v2/user      ",
+            "params": [
+              {
+                "name": "action",
+                "value": "",
+                "type": "query",
+                "description": "Service action name. Must take the string value ```addtorpm```."
+              },
+              {
+                "name": "signature",
+                "value": "",
+                "type": "query",
+                "description": "Hash of params (Cf. [Signature hash protocol](/developer-guide/v3/get-access/sign-your-requests))."
+              },
+              {
+                "name": "client_id",
+                "value": "",
+                "type": "query",
+                "description": "Id of the client"
+              },
+              {
+                "name": "nonce",
+                "value": "",
+                "type": "query",
+                "description": "A random token used to prevent replay attacks (Cf. [Signature v2 - Getnonce](#operation/signaturev2-getnonce))"
+              },
+              {
+                "name": "userid",
+                "value": "",
+                "type": "query",
+                "description": "User's identifier."
+              },
+              {
+                "name": "programid",
+                "value": "",
+                "type": "query",
+                "description": "The Care team you would like your patient to be created in. You can find the programid in the URL of your withings dashboard when connected to a specific care team /team/{programid}"
+              },
+              {
+                "name": "sms_onboarding",
+                "value": "",
+                "type": "query",
+                "description": "A sequence of SMS text message will be sent to the patient to help them follow shipment and give instructions on the device setup"
+              },
+              {
+                "name": "assistance_onboarding",
+                "value": "",
+                "type": "query",
+                "description": "Withings team will automatically contact patients with issues during their setup after a few days to help them finalize the installation."
+              },
+              {
+                "name": "icdcodeids",
+                "value": "",
+                "type": "query",
+                "description": "Should be a json encoded array. Each item should correspond to an id create for your program. Exemple: [66, 307, 4]"
+              },
+              {
+                "name": "external_ids",
+                "value": "",
+                "type": "query",
+                "description": "IDs from your software or EHR (MRN or other external id useful to uniquely identify your patient in the Withings RPM platform). Exemple: [{\"type\": \"MRN\", \"identifier\": \"BB8C3P0R2D2\"}]"
+              },
+              {
+                "name": "category",
+                "value": "",
+                "type": "query",
+                "description": "The section in which your patient will appear in the Withings RPM platform. Accepted value are: 0 (patient is in the program and doesn't have alert) or -6 (patient need manual validation)"
+              }
+            ]
+          },
+          "docs": "This API allows you to add an existing user to the Withings Remote Patient Monitoring platform as a patient. Note: A Withings Remote Patient Monitoring contract is required to use this API."
+        },
+        {
+          "info": {
+            "name": "User v2  - Get",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://wbsapi.withings.nethttps://wbsapi.withings.net/v2/user",
+            "params": [
+              {
+                "name": "action",
+                "value": "",
+                "type": "query",
+                "description": "Service action name. Must take the string value ```get```."
+              },
+              {
+                "name": "client_id",
+                "value": "",
+                "type": "query",
+                "description": "Id of the client"
+              },
+              {
+                "name": "nonce",
+                "value": "",
+                "type": "query",
+                "description": "A random token used to prevent replay attacks (Cf. [Signature v2 - Getnonce](#operation/signaturev2-getnonce))"
+              },
+              {
+                "name": "signature",
+                "value": "",
+                "type": "query",
+                "description": "Hash of params (Cf. [Signature hash protocol](/developer-guide/v3/get-access/sign-your-requests))."
+              },
+              {
+                "name": "email",
+                "value": "",
+                "type": "query",
+                "description": "User's email address"
+              },
+              {
+                "name": "userid",
+                "value": "",
+                "type": "query",
+                "description": "User's identifier."
+              }
+            ]
+          },
+          "docs": "Returns user information.\n\n**For data privacy reasons, this webservice is only available for integration solutions for which the provider is responsible for the account creation (ie Withings Cellular Solutions and Withings Mobile SDK integrations).**\n**This webservice will return an error the above condition is not met.**"
+        },
+        {
+          "info": {
+            "name": "User v2  - Getdevice",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://wbsapi.withings.nethttps://wbsapi.withings.net/v2/user   ",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "action",
+                "value": "",
+                "type": "query",
+                "description": "Service action name. Must take the string value ```getdevice```."
+              }
+            ]
+          },
+          "docs": "Returns the list of user linked devices."
+        },
+        {
+          "info": {
+            "name": "User v2  - Getgoals",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://wbsapi.withings.nethttps://wbsapi.withings.net/v2/user     ",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "action",
+                "value": "",
+                "type": "query",
+                "description": "Service action name. Must take the string value ```getgoals```."
+              }
+            ]
+          },
+          "docs": "Returns the goals of a user."
+        },
+        {
+          "info": {
+            "name": "User v2  - Link",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://wbsapi.withings.nethttps://wbsapi.withings.net/v2/user  ",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "action",
+                "value": "",
+                "type": "query",
+                "description": "Service action name. Must take the string value ```link```."
+              },
+              {
+                "name": "mac_addresses",
+                "value": "",
+                "type": "query",
+                "description": "List of Withings device MAC addresses that will be linked to the created user. Example: [\"00:24:e4:xx:xx:xx\",\"00:24:e4:xx:xx:xx\"]"
+              }
+            ]
+          },
+          "docs": "Links the devices related to the provided ```mac_addresses``` and the user related to the provided ```access_token```. If a cellular device is listed in the ```mac_address``` field, it will activate this device's cellular service and invoicing.\n\n**Important**:\n\n- Please note that the devices need to be authorized to be linked by API by the Partner. Please [contact Withings](mailto:partner-api@withings.com) for more information on device authorization."
+        },
+        {
+          "info": {
+            "name": "User v2  - Unlink",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://wbsapi.withings.nethttps://wbsapi.withings.net/v2/user    ",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "action",
+                "value": "",
+                "type": "query",
+                "description": "Service action name. Must take the string value ```unlink```."
+              },
+              {
+                "name": "mac_address",
+                "value": "",
+                "type": "query",
+                "description": "The mac address of the target device."
+              }
+            ]
+          },
+          "docs": "Unlinks the device related to the provided ```mac_address``` and the user related to the provided ```access_token```."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

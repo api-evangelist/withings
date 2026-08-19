@@ -1,0 +1,152 @@
+{
+  "item": [
+    {
+      "id": "e549fb74-55e8-4d63-9447-ea17704142c1",
+      "name": "signature",
+      "description": {
+        "content": "The following services are part of the Logistics APIs. Refer to [this section](/developer-guide/v3/integration-guide/dropship-only/logistics-api/overview-create-order) for more information.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "406f252d-aede-438e-ae3c-377a4ccff150",
+          "name": "Signature v2  - Getnonce",
+          "request": {
+            "name": "Signature v2  - Getnonce",
+            "description": {
+              "content": "A ```nonce``` is a random token that is generated and stored in Withings server with **30 minutes of validity**.\n\nAs a partner, you will use this ```nonce``` token in the API services that require a ```signature``` so that Withings can check that the ```nonce``` token is still valid and was never used before. The usage of a ```nonce``` token prevents your service calls from replay attacks.\n\nBecause this service is an Device Management service, Withings checks your authorized access using your ```client_id``` and your ```secret``` based ```signature```.\n\nTo generate the ```signature``` please follow these steps:\n\n- Sort the following parameters alphabetically:\n\t- ```action```\n\t- ```client_id```\n\t- ```timestamp```\n- Generate a string by concatenating values separated by a comma. The string should look like: *value1,value2,value3*.\n- Apply a hmac hashing function on the string using the algorithm ```sha256``` and your partner ```client_secret```  (available in your [Withings partner dashboard](https://developer.withings.com/dashboard/)) as a secret key.\n- Add the hash string in the parameters under the key ```signature```",
+              "type": "text/plain"
+            },
+            "url": {
+              "protocol": "{{baseUrl}}/https",
+              "path": [
+                "v2",
+                "signature"
+              ],
+              "host": [
+                "wbsapi",
+                "withings",
+                "net"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "action",
+                  "value": "<string>",
+                  "description": "(Required) Service action name. Must take the string value ```getnonce```."
+                },
+                {
+                  "disabled": false,
+                  "key": "client_id",
+                  "value": "<string>",
+                  "description": "(Required) Id of the client"
+                },
+                {
+                  "disabled": false,
+                  "key": "timestamp",
+                  "value": "<integer>",
+                  "description": "(Required) unix timestamp"
+                },
+                {
+                  "disabled": false,
+                  "key": "signature",
+                  "value": "<string>",
+                  "description": "(Required) Cf. description above."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9e637994-62dc-4e9d-b1c6-648f0390c5ad",
+              "name": " (Click to unfold)",
+              "originalRequest": {
+                "url": {
+                  "protocol": "{{baseUrl}}/https",
+                  "path": [
+                    "v2",
+                    "signature"
+                  ],
+                  "host": [
+                    "wbsapi",
+                    "withings",
+                    "net"
+                  ],
+                  "query": [
+                    {
+                      "key": "action",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "client_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "timestamp",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "signature",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 7867,\n  \"body\": {\n    \"nonce\": \"aaf4c61ddcc5e8a2dabede0f3b482cd9aea9434d\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://wbsapi.withings.net/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "79bad7ff-4d25-484a-a604-b1617ee53de6",
+    "name": "Withings developer documentation answers signature API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "These webservices allows you to get user's answers from surveys",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,1056 @@
+{
+  "item": [
+    {
+      "id": "b2d1ad2e-290f-46ae-af99-097a54d8ecee",
+      "name": "user",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "669f00e3-bf6a-4bf3-b1cd-d60c00709dfe",
+          "name": "User v2  - Activate",
+          "request": {
+            "name": "User v2  - Activate",
+            "description": {
+              "content": "Creates a Withings user, links the devices related to the provided ```mac_addresses``` and activates the cellular devices service and invoicing.\n\nPlease refer to the [Access and refresh tokens section](/developer-guide/v3/integration-guide/bulkship-cellular/get-access/access-and-refresh-tokens) to learn how to use the authorization code you'll get in return of this service in order to fetch user data. The authorization code is only valid for *10 minutes*.\n\n**Important**:\n\n- Please note that to activate the Withings HUB cellular service, the ```mac_address``` of the Withings HUB needs to be passed included in the input mac_addresses along with the other Withings devices.\n- Please note that the devices need to be authorized to be linked by API by the Partner. Please [contact Withings](mailto:partner-api@withings.com) for more information on device authorization.\n\n*This service is part of Withings Pro Solutions. You won't be able to use it if you did not sign a contract with Withings.*\n*Use this service only if you're integrating Withings Cellular Solutions with bulkshipment.*",
+              "type": "text/plain"
+            },
+            "url": {
+              "protocol": "{{baseUrl}}/https",
+              "path": [
+                "v2",
+                "user "
+              ],
+              "host": [
+                "wbsapi",
+                "withings",
+                "net"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "action",
+                  "value": "<string>",
+                  "description": "(Required) Service action name. Must take the string value ```activate```."
+                },
+                {
+                  "disabled": false,
+                  "key": "client_id",
+                  "value": "<string>",
+                  "description": "(Required) Id of the client"
+                },
+                {
+                  "disabled": false,
+                  "key": "nonce",
+                  "value": "<string>",
+                  "description": "(Required) A random token used to prevent replay attacks (Cf. [Signature v2 - Getnonce](#operation/signaturev2-getnonce))"
+                },
+                {
+                  "disabled": false,
+                  "key": "signature",
+                  "value": "<string>",
+                  "description": "(Required) Hash of params (Cf. [Signature hash protocol](/developer-guide/v3/get-access/sign-your-requests))."
+                },
+                {
+                  "disabled": false,
+                  "key": "mailingpref",
+                  "value": "<boolean>",
+                  "description": "(Required) Specifies if customer accepted Withings commercial contacts."
+                },
+                {
+                  "disabled": false,
+                  "key": "birthdate",
+                  "value": "<integer>",
+                  "description": "(Required) Unix timestamp of user's birthdate"
+                },
+                {
+                  "disabled": false,
+                  "key": "measures",
+                  "value": "<json_string>",
+                  "description": "(Required) User measures (Cf. [Measures](#tag/models/Measures) model)."
+                },
+                {
+                  "disabled": false,
+                  "key": "gender",
+                  "value": "<integer>",
+                  "description": "(Required) 0: man, 1: woman"
+                },
+                {
+                  "disabled": false,
+                  "key": "preflang",
+                  "value": "<string>",
+                  "description": "(Required) User language preference. Examples: en_EN / en_US / de_DE / es_ES / fr_FR / it_IT / ja_JA / ko_KR / nl_NL / pt_PT / ru_RU / zh_CN"
+                },
+                {
+                  "disabled": false,
+                  "key": "unit_pref",
+                  "value": "<json>",
+                  "description": "(Required) Unit pref (cf. [Unit preferences](#tag/models/Unit-preferences) model)."
+                },
+                {
+                  "disabled": false,
+                  "key": "email",
+                  "value": "<email>",
+                  "description": "(Required) User's email address"
+                },
+                {
+                  "disabled": false,
+                  "key": "timezone",
+                  "value": "<timezone>",
+                  "description": "(Required) User's timezone. Examples: \"Europe/Paris\" / \"America/New_York\". A complete list of all possible timezones can be found on the \"TZ database name\" column of this page : https://en.wikipedia.org/wiki/List_of_tz_database_time_zones"
+                },
+                {
+                  "disabled": false,
+                  "key": "shortname",
+                  "value": "<string>",
+                  "description": "(Required) 3 characters representing the end user (ex: for a user named Robert, you could set the shortname param to ROB). These characters will be displayed on device screens when used.<br>Shortname must respect the following regex: /^[a-zA-Z0-9]{3}$/ (either letters or numbers, special characters and spaces are not allowed)."
+                },
+                {
+                  "disabled": false,
+                  "key": "external_id",
+                  "value": "<string>",
+                  "description": "(Required) Unique identifier used by the partner to identify the end-user."
+                },
+                {
+                  "disabled": false,
+                  "key": "mac_addresses",
+                  "value": "<macaddress>",
+                  "description": "(Required) List of Withings device MAC addresses that will be linked to the created user. Example: [\"00:24:e4:xx:xx:xx\",\"00:24:e4:xx:xx:xx\"]"
+                },
+                {
+                  "disabled": false,
+                  "key": "firstname",
+                  "value": "<string>",
+                  "description": "User's firstname (if not set, will take the same value as shortname)"
+                },
+                {
+                  "disabled": false,
+                  "key": "lastname",
+                  "value": "<string>",
+                  "description": "User's lastname (if not set, will take the same value as shortname)"
+                },
+                {
+                  "disabled": false,
+                  "key": "phonenumber",
+                  "value": "<string>",
+                  "description": "Phone number in E.164 format. End user will receive a verification code on this phone number for 2 factor authentication if they wish to securely access the data of their program in the withings app in the future (recommended)"
+                },
+                {
+                  "disabled": false,
+                  "key": "recovery_code",
+                  "value": "<string>",
+                  "description": "Recovery code can be used by end user as a 2nd authentication factor in the withings app if they wish to securely access the data of their program in the future.  You will be responsible of securely providing this recovery code to your user if he asks for it."
+                },
+                {
+                  "disabled": false,
+                  "key": "goals",
+                  "value": "<json>",
+                  "description": "Goals (cf. [Goals](#tag/models/Goals) model)."
+                },
+                {
+                  "disabled": false,
+                  "key": "redirect_uri",
+                  "value": "<partner_redirect_uri>",
+                  "description": "\nThe URI we should redirect the user to after choosing to authorize or not your app. This URI must be set as ```Callback Url``` in your partner application. It is possible to use multiple URLs by separating them with a comma.\n\nExamples:\n\n- Callbacks: https://mydomain.com/\n- Callback: https://mydomain.com/,https://mydomain2.com/\n- Valid URL: https://mydomain.com/relative_path?args=value"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c64c3cad-a5fb-453b-ad6b-539ee532bc37",
+              "name": " (Click to unfold)",
+              "originalRequest": {
+                "url": {
+                  "protocol": "{{baseUrl}}/https",
+                  "path": [
+                    "v2",
+                    "user "
+                  ],
+                  "host": [
+                    "wbsapi",
+                    "withings",
+                    "net"
+                  ],
+                  "query": [
+                    {
+                      "key": "action",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "client_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nonce",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "signature",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "mailingpref",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "birthdate",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "measures",
+                      "value": "<json_string>"
+                    },
+                    {
+                      "key": "gender",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "preflang",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "unit_pref",
+                      "value": "<json>"
+                    },
+                    {
+                      "key": "email",
+                      "value": "<email>"
+                    },
+                    {
+                      "key": "timezone",
+                      "value": "<timezone>"
+                    },
+                    {
+                      "key": "shortname",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "external_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "mac_addresses",
+                      "value": "<macaddress>"
+                    },
+                    {
+                      "key": "firstname",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "lastname",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "phonenumber",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "recovery_code",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "goals",
+                      "value": "<json>"
+                    },
+                    {
+                      "key": "redirect_uri",
+                      "value": "<partner_redirect_uri>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 3099,\n  \"body\": {\n    \"user\": {\n      \"code\": \"490ed603fe9bd2ce10027bdba0c932069cd27085\",\n      \"external_id\": \"3b7a6db0-ec7e-479b-9675-2a3d8d6a7e51\"\n    },\n    \"devices\": [\n      {\n        \"mac_address\": \"00:24:e4:69:b2:30\",\n        \"type\": \"Scale\",\n        \"model\": \"Body Cardio\",\n        \"model_id\": 6,\n        \"battery\": \"medium\",\n        \"deviceid\": \"892359876fd8805ac45bab078c4828692f0276b1\",\n        \"timezone\": \"Europe/Paris\",\n        \"last_session_date\": 1594159644,\n        \"serial_number\": \"SN-001122334455\"\n      },\n      {\n        \"mac_address\": \"00:24:e4:69:b2:30\",\n        \"type\": \"Scale\",\n        \"model\": \"Body Cardio\",\n        \"model_id\": 6,\n        \"battery\": \"medium\",\n        \"deviceid\": \"892359876fd8805ac45bab078c4828692f0276b1\",\n        \"timezone\": \"Europe/Paris\",\n        \"last_session_date\": 1594159644,\n        \"serial_number\": \"SN-001122334455\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ee7ff33c-ad7c-4d15-953b-f71a6c8c383e",
+          "name": "User v2  - Addtorpm",
+          "request": {
+            "name": "User v2  - Addtorpm",
+            "description": {
+              "content": "This API allows you to add an existing user to the Withings Remote Patient Monitoring platform as a patient. Note: A Withings Remote Patient Monitoring contract is required to use this API.",
+              "type": "text/plain"
+            },
+            "url": {
+              "protocol": "{{baseUrl}}/https",
+              "path": [
+                "v2",
+                "user      "
+              ],
+              "host": [
+                "wbsapi",
+                "withings",
+                "net"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "action",
+                  "value": "<string>",
+                  "description": "(Required) Service action name. Must take the string value ```addtorpm```."
+                },
+                {
+                  "disabled": false,
+                  "key": "signature",
+                  "value": "<string>",
+                  "description": "(Required) Hash of params (Cf. [Signature hash protocol](/developer-guide/v3/get-access/sign-your-requests))."
+                },
+                {
+                  "disabled": false,
+                  "key": "client_id",
+                  "value": "<string>",
+                  "description": "(Required) Id of the client"
+                },
+                {
+                  "disabled": false,
+                  "key": "nonce",
+                  "value": "<string>",
+                  "description": "(Required) A random token used to prevent replay attacks (Cf. [Signature v2 - Getnonce](#operation/signaturev2-getnonce))"
+                },
+                {
+                  "disabled": false,
+                  "key": "userid",
+                  "value": "<rawint32>",
+                  "description": "(Required) User's identifier."
+                },
+                {
+                  "disabled": false,
+                  "key": "programid",
+                  "value": "<integer>",
+                  "description": "(Required) The Care team you would like your patient to be created in. You can find the programid in the URL of your withings dashboard when connected to a specific care team /team/{programid}"
+                },
+                {
+                  "disabled": false,
+                  "key": "sms_onboarding",
+                  "value": "<boolean>",
+                  "description": "A sequence of SMS text message will be sent to the patient to help them follow shipment and give instructions on the device setup"
+                },
+                {
+                  "disabled": false,
+                  "key": "assistance_onboarding",
+                  "value": "<boolean>",
+                  "description": "Withings team will automatically contact patients with issues during their setup after a few days to help them finalize the installation."
+                },
+                {
+                  "disabled": false,
+                  "key": "icdcodeids",
+                  "value": "<array of integer>",
+                  "description": "Should be a json encoded array. Each item should correspond to an id create for your program. Exemple: [66, 307, 4]"
+                },
+                {
+                  "disabled": false,
+                  "key": "external_ids",
+                  "value": "<array of object>",
+                  "description": "IDs from your software or EHR (MRN or other external id useful to uniquely identify your patient in the Withings RPM platform). Exemple: [{\"type\": \"MRN\", \"identifier\": \"BB8C3P0R2D2\"}]"
+                },
+                {
+                  "disabled": false,
+                  "key": "category",
+                  "value": "<integer>",
+                  "description": "The section in which your patient will appear in the Withings RPM platform. Accepted value are: 0 (patient is in the program and doesn't have alert) or -6 (patient need manual validation)"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "60a2d911-6380-4343-b9ad-8c32b246cb28",
+              "name": " (Click to unfold)",
+              "originalRequest": {
+                "url": {
+                  "protocol": "{{baseUrl}}/https",
+                  "path": [
+                    "v2",
+                    "user      "
+                  ],
+                  "host": [
+                    "wbsapi",
+                    "withings",
+                    "net"
+                  ],
+                  "query": [
+                    {
+                      "key": "action",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "signature",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "client_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nonce",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "userid",
+                      "value": "<rawint32>"
+                    },
+                    {
+                      "key": "programid",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "sms_onboarding",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "assistance_onboarding",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "icdcodeids",
+                      "value": "<array of integer>"
+                    },
+                    {
+                      "key": "external_ids",
+                      "value": "<array of object>"
+                    },
+                    {
+                      "key": "category",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 1637,\n  \"body\": {\n    \"user\": {\n      \"preflang\": \"fr_FR\",\n      \"height\": {\n        \"value_measure\": 180,\n        \"unit_measure\": -2,\n        \"type_measure\": 4\n      },\n      \"sms_reminder\": true,\n      \"sms_onboarding\": true,\n      \"assistance_onboarding\": true,\n      \"category\": -6,\n      \"device_types\": [\n        6375,\n        2179\n      ],\n      \"device_models\": [\n        9401,\n        4100\n      ],\n      \"external_ids\": [\n        {\n          \"type\": \"string\",\n          \"identifier\": \"string\"\n        },\n        {\n          \"type\": \"string\",\n          \"identifier\": \"string\"\n        }\n      ],\n      \"sms_notification\": true,\n      \"icd_codes\": [\n        4453,\n        2417\n      ],\n      \"userid\": 363\n    },\n    \"program\": {\n      \"id\": 50,\n      \"cohortid\": 18035,\n      \"name\": \"Glucose Care Team\",\n      \"timezone\": \"Europe/Paris\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "77178e5b-d552-4d50-b73f-eebcd24f0433",
+          "name": "User v2  - Get",
+          "request": {
+            "name": "User v2  - Get",
+            "description": {
+              "content": "Returns user information.\n\n**For data privacy reasons, this webservice is only available for integration solutions for which the provider is responsible for the account creation (ie Withings Cellular Solutions and Withings Mobile SDK integrations).**\n**This webservice will return an error the above condition is not met.**",
+              "type": "text/plain"
+            },
+            "url": {
+              "protocol": "{{baseUrl}}/https",
+              "path": [
+                "v2",
+                "user"
+              ],
+              "host": [
+                "wbsapi",
+                "withings",
+                "net"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "action",
+                  "value": "<string>",
+                  "description": "(Required) Service action name. Must take the string value ```get```."
+                },
+                {
+                  "disabled": false,
+                  "key": "client_id",
+                  "value": "<string>",
+                  "description": "(Required) Id of the client"
+                },
+                {
+                  "disabled": false,
+                  "key": "nonce",
+                  "value": "<string>",
+                  "description": "(Required) A random token used to prevent replay attacks (Cf. [Signature v2 - Getnonce](#operation/signaturev2-getnonce))"
+                },
+                {
+                  "disabled": false,
+                  "key": "signature",
+                  "value": "<string>",
+                  "description": "(Required) Hash of params (Cf. [Signature hash protocol](/developer-guide/v3/get-access/sign-your-requests))."
+                },
+                {
+                  "disabled": false,
+                  "key": "email",
+                  "value": "<email>",
+                  "description": "User's email address"
+                },
+                {
+                  "disabled": false,
+                  "key": "userid",
+                  "value": "<rawint32>",
+                  "description": "User's identifier."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c18cfc85-b914-43af-9201-a07e9c0701cc",
+              "name": " (Click to unfold)",
+              "originalRequest": {
+                "url": {
+                  "protocol": "{{baseUrl}}/https",
+                  "path": [
+                    "v2",
+                    "user"
+                  ],
+                  "host": [
+                    "wbsapi",
+                    "withings",
+                    "net"
+                  ],
+                  "query": [
+                    {
+                      "key": "action",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "client_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nonce",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "signature",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "email",
+                      "value": "<email>"
+                    },
+                    {
+                      "key": "userid",
+                      "value": "<rawint32>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 1160,\n  \"body\": {\n    \"user\": {\n      \"email\": \"john.doe@my.email\",\n      \"firstname\": \"John\",\n      \"lastname\": \"Doe\",\n      \"shortname\": \"JDO\",\n      \"gender\": 5634,\n      \"birthdate\": 1577829600,\n      \"preflang\": \"fr_FR\",\n      \"timezone\": \"Europe/Paris\",\n      \"mailingpref\": true,\n      \"unit_pref\": {\n        \"weight\": 1,\n        \"height\": 6,\n        \"temperature\": 11,\n        \"distance\": 6\n      },\n      \"phonenumber\": \"+33612345678\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ebfaf5fa-44f8-4b9c-adc9-227983fcbc4a",
+          "name": "User v2  - Getdevice",
+          "request": {
+            "name": "User v2  - Getdevice",
+            "description": {
+              "content": "Returns the list of user linked devices.",
+              "type": "text/plain"
+            },
+            "url": {
+              "protocol": "{{baseUrl}}/https",
+              "path": [
+                "v2",
+                "user   "
+              ],
+              "host": [
+                "wbsapi",
+                "withings",
+                "net"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "action",
+                  "value": "<string>",
+                  "description": "(Required) Service action name. Must take the string value ```getdevice```."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8fb79b50-af57-431f-a05f-4ff6955cefe2",
+              "name": " (Click to unfold)",
+              "originalRequest": {
+                "url": {
+                  "protocol": "{{baseUrl}}/https",
+                  "path": [
+                    "v2",
+                    "user   "
+                  ],
+                  "host": [
+                    "wbsapi",
+                    "withings",
+                    "net"
+                  ],
+                  "query": [
+                    {
+                      "key": "action",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Used to pass your access token. Must take value: ```Bearer {your access_token}``` Replace {your access_token} with the access_token",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 1287,\n  \"body\": {\n    \"devices\": [\n      {\n        \"type\": \"Scale\",\n        \"model\": \"Body Cardio\",\n        \"model_id\": 6,\n        \"battery\": \"medium\",\n        \"deviceid\": \"892359876fd8805ac45bab078c4828692f0276b1\",\n        \"mac_address\": \"00:24:e4:69:b2:30\",\n        \"fw\": \"1124\",\n        \"network\": \"1\",\n        \"last_used_network\": \"1\",\n        \"hash_deviceid\": \"892359876fd8805ac45bab078c4828692f0276b1\",\n        \"timezone\": \"Europe/Paris\",\n        \"first_session_date\": 1594159644,\n        \"last_session_date\": 1594159644,\n        \"sim_status\": \"STANDBY\"\n      },\n      {\n        \"type\": \"Scale\",\n        \"model\": \"Body Cardio\",\n        \"model_id\": 6,\n        \"battery\": \"medium\",\n        \"deviceid\": \"892359876fd8805ac45bab078c4828692f0276b1\",\n        \"mac_address\": \"00:24:e4:69:b2:30\",\n        \"fw\": \"1124\",\n        \"network\": \"1\",\n        \"last_used_network\": \"1\",\n        \"hash_deviceid\": \"892359876fd8805ac45bab078c4828692f0276b1\",\n        \"timezone\": \"Europe/Paris\",\n        \"first_session_date\": 1594159644,\n        \"last_session_date\": 1594159644,\n        \"sim_status\": \"STANDBY\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7420849f-3967-4ea5-ac50-ed25aa3b3856",
+          "name": "User v2  - Getgoals",
+          "request": {
+            "name": "User v2  - Getgoals",
+            "description": {
+              "content": "Returns the goals of a user.",
+              "type": "text/plain"
+            },
+            "url": {
+              "protocol": "{{baseUrl}}/https",
+              "path": [
+                "v2",
+                "user     "
+              ],
+              "host": [
+                "wbsapi",
+                "withings",
+                "net"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "action",
+                  "value": "<string>",
+                  "description": "(Required) Service action name. Must take the string value ```getgoals```."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "386ef173-3991-4020-94e5-bdf6922aef97",
+              "name": " (Click to unfold)",
+              "originalRequest": {
+                "url": {
+                  "protocol": "{{baseUrl}}/https",
+                  "path": [
+                    "v2",
+                    "user     "
+                  ],
+                  "host": [
+                    "wbsapi",
+                    "withings",
+                    "net"
+                  ],
+                  "query": [
+                    {
+                      "key": "action",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Used to pass your access token. Must take value: ```Bearer {your access_token}``` Replace {your access_token} with the access_token",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 2730,\n  \"body\": {\n    \"goals\": {\n      \"steps\": 10000,\n      \"sleep\": 28800,\n      \"weight\": {\n        \"value\": 70500,\n        \"unit\": -3\n      }\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1b99c462-6c8f-4b92-8b23-307c4ddd0057",
+          "name": "User v2  - Link",
+          "request": {
+            "name": "User v2  - Link",
+            "description": {
+              "content": "Links the devices related to the provided ```mac_addresses``` and the user related to the provided ```access_token```. If a cellular device is listed in the ```mac_address``` field, it will activate this device's cellular service and invoicing.\n\n**Important**:\n\n- Please note that the devices need to be authorized to be linked by API by the Partner. Please [contact Withings](mailto:partner-api@withings.com) for more information on device authorization.",
+              "type": "text/plain"
+            },
+            "url": {
+              "protocol": "{{baseUrl}}/https",
+              "path": [
+                "v2",
+                "user  "
+              ],
+              "host": [
+                "wbsapi",
+                "withings",
+                "net"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "action",
+                  "value": "<string>",
+                  "description": "(Required) Service action name. Must take the string value ```link```."
+                },
+                {
+                  "disabled": false,
+                  "key": "mac_addresses",
+                  "value": "<macaddress>",
+                  "description": "(Required) List of Withings device MAC addresses that will be linked to the created user. Example: [\"00:24:e4:xx:xx:xx\",\"00:24:e4:xx:xx:xx\"]"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "382beea7-810e-49f1-a2bd-a937d736d6ec",
+              "name": " (Click to unfold)",
+              "originalRequest": {
+                "url": {
+                  "protocol": "{{baseUrl}}/https",
+                  "path": [
+                    "v2",
+                    "user  "
+                  ],
+                  "host": [
+                    "wbsapi",
+                    "withings",
+                    "net"
+                  ],
+                  "query": [
+                    {
+                      "key": "action",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "mac_addresses",
+                      "value": "<macaddress>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Used to pass your access token. Must take value: ```Bearer {your access_token}``` Replace {your access_token} with the access_token",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 6756,\n  \"body\": {\n    \"devices\": [\n      {\n        \"mac_address\": \"00:24:e4:69:b2:30\",\n        \"type\": \"Scale\",\n        \"model\": \"Body Cardio\",\n        \"model_id\": 6,\n        \"battery\": \"medium\",\n        \"deviceid\": \"892359876fd8805ac45bab078c4828692f0276b1\",\n        \"timezone\": \"Europe/Paris\",\n        \"last_session_date\": 1594159644,\n        \"serial_number\": \"SN-001122334455\"\n      },\n      {\n        \"mac_address\": \"00:24:e4:69:b2:30\",\n        \"type\": \"Scale\",\n        \"model\": \"Body Cardio\",\n        \"model_id\": 6,\n        \"battery\": \"medium\",\n        \"deviceid\": \"892359876fd8805ac45bab078c4828692f0276b1\",\n        \"timezone\": \"Europe/Paris\",\n        \"last_session_date\": 1594159644,\n        \"serial_number\": \"SN-001122334455\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "80521095-4acb-42a7-b4f1-83f5a3194a43",
+          "name": "User v2  - Unlink",
+          "request": {
+            "name": "User v2  - Unlink",
+            "description": {
+              "content": "Unlinks the device related to the provided ```mac_address``` and the user related to the provided ```access_token```.",
+              "type": "text/plain"
+            },
+            "url": {
+              "protocol": "{{baseUrl}}/https",
+              "path": [
+                "v2",
+                "user    "
+              ],
+              "host": [
+                "wbsapi",
+                "withings",
+                "net"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "action",
+                  "value": "<string>",
+                  "description": "(Required) Service action name. Must take the string value ```unlink```."
+                },
+                {
+                  "disabled": false,
+                  "key": "mac_address",
+                  "value": "<macaddress>",
+                  "description": "(Required) The mac address of the target device."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "801c4b81-e006-436c-869a-840df5daf36e",
+              "name": " (Click to unfold)",
+              "originalRequest": {
+                "url": {
+                  "protocol": "{{baseUrl}}/https",
+                  "path": [
+                    "v2",
+                    "user    "
+                  ],
+                  "host": [
+                    "wbsapi",
+                    "withings",
+                    "net"
+                  ],
+                  "query": [
+                    {
+                      "key": "action",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "mac_address",
+                      "value": "<macaddress>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Used to pass your access token. Must take value: ```Bearer {your access_token}``` Replace {your access_token} with the access_token",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 690,\n  \"body\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://wbsapi.withings.net/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "c10ee4b5-a256-45dd-99da-0a980dab3e4a",
+    "name": "Withings developer documentation answers user API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "These webservices allows you to get user's answers from surveys",
+      "type": "text/plain"
+    }
+  }
+}

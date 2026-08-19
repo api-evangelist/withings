@@ -1,0 +1,116 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Withings developer documentation answers sleep API",
+    "version": "2.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "sleep",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Sleep v2  - Get",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://wbsapi.withings.nethttps://wbsapi.withings.net/v2/sleep",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "action",
+                "value": "",
+                "type": "query",
+                "description": "Service action name. Must take the string value ```get```."
+              },
+              {
+                "name": "startdate",
+                "value": "",
+                "type": "query",
+                "description": "Data start date as a unix timestamp."
+              },
+              {
+                "name": "enddate",
+                "value": "",
+                "type": "query",
+                "description": "Data end date as a unix timestamp."
+              },
+              {
+                "name": "data_fields",
+                "value": "",
+                "type": "query",
+                "description": "List of requested data fields, separated by a comma.<br>Available data fields are listed below.<br><u>Ex</u>: data_fields=hr,rr,snoring<br><br>hr<br>> Heart Rate (beats per minute). <br><br>rr<br>> Respiration Rate (breaths per minute). <br><br>snoring<br>> Total snoring time (seconds).<br><br>sdnn_1<br>> Heart rate variability - Standard deviation of the NN over 1 minute (in miliseconds).<br><br>rmssd<br>> Heart rate variability - Root mean square of the successive differences over \"a few seconds\" (in miliseconds).<br><br>hrv_quality<br>> Heart rate variability - quality score.<br><br>mvt_score<br>> Track the intensity of movement in bed on a minute-by-minute basis. The score ranges from 0 to 255, representing the intensity of movement. This metric is only available for Sleep Analyzer devices in the EU and prescription-based devices in the US (Sleep Rx).<br><br>chest_movement_rate<br>> Chest movement rate (events per minute). <br><br>withings_index<br>> Withings Sleep Rx (FDA Cleared) allows to estimate gaps in breathing sounds and to generate an index. This index corresponds to the number of breathing events per hour.\n\n\n<table><thead><tr><td>Value</td><td>Description</td></tr></thead><tbody><tr><td>0-15 (events per hour on average)</td><td>No/Mild</td></tr><tr><td>15-30 (events per hour on average)</td><td>Moderate</td></tr><tr><td>> 30 (events per hour on average)</td><td>Severe</td></tr></tbody></table>\n\n\nNote: 5 hours of sleep are required in order to calculate the Withings Index.<br><br>breathing_sounds<br>> Total time when breathing sounds were tracked. (seconds) <br><br>"
+              },
+              {
+                "name": "meastypes",
+                "value": "",
+                "type": "query",
+                "description": "List of requested measure types (separated by a comma).<br>Ex: meastypes=1,4,12"
+              }
+            ]
+          },
+          "docs": "\nReturns sleep data captured at high frequency, including sleep stages.<br/><br/>\n**Notes**\nIf your input ```startdate``` and ```enddate``` are separated by more than 24h, only the first 24h after ```startdate``` will be returned.<br/><br/>\n**IMPORTANT**: Please refer to this [page](https://developer.withings.com/developer-guide/v3/data-api/all-available-health-data/#sleep) to check the availability of metrics based on the sleep tracking device used. Some data types are regulated in the EU and U"
+        },
+        {
+          "info": {
+            "name": "Sleep v2  - Getsummary",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://wbsapi.withings.nethttps://wbsapi.withings.net/v2/sleep ",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "action",
+                "value": "",
+                "type": "query",
+                "description": "Service action name. Must take the string value ```getsummary```."
+              },
+              {
+                "name": "startdateymd",
+                "value": "",
+                "type": "query",
+                "description": "DO NOT USE WITH FOLLOWING PARAMS: [lastupdate]<br>Start date. Required if no lastupdate."
+              },
+              {
+                "name": "enddateymd",
+                "value": "",
+                "type": "query",
+                "description": "DO NOT USE WITH FOLLOWING PARAMS: [lastupdate]<br>End date. Required if startdateymd is provided."
+              },
+              {
+                "name": "lastupdate",
+                "value": "",
+                "type": "query",
+                "description": "DO NOT USE WITH FOLLOWING PARAMS: [startdateymd, enddateymd]<br>Timestamp for requesting data that were updated or created after this date.<br>Useful for data synchronization between systems.<br>Use this instead of startdateymd + enddateymd."
+              },
+              {
+                "name": "data_fields",
+                "value": "",
+                "type": "query",
+                "description": "List of requested data fields, separated by a comma.<br>Available data fields are listed below.<br><u>Ex</u>: data_fields=total_timeinbed,total_sleep_time,asleepduration<br><br><b><i>Standard sleep medicine metrics</i></b><br><br>total_timeinbed<br>> Total time spent in bed (seconds). <br><br>total_sleep_time<br>> Total time spent asleep. Sum of light, deep and rem durations (seconds). <br><br>asleepduration<br>> Duration of sleep when night comes from external source (seconds).<br>Light, Deep and Rem sleep durations are null in this case. <br><br>lightsleepduration<br>> Duration in state light sleep (seconds). <br><br>remsleepduration<br>> Duration in state REM sleep (seconds). <br><br>deepsleepduration<br>> Duration in state deep sleep (seconds). <br><br>sleep_efficiency<br>> Ratio of the total sleep time over the time spent in bed. <br><br>sleep_latency<br>> Time spent in bed before falling asleep (seconds). <br><br>wakeup_latency<br>> Time spent in bed after waking up (seconds). <br><br>wakeupduration<br>> Time spent awake (seconds). <br><br>wakeupcount<br>> Number of times the user woke up while in bed. Does not include the number of times the user got out of bed. <br><br>waso<br>> Time spent awake in bed after falling asleep for the 1st time during the night (seconds). <br><br>nb_rem_episodes<br>> Count of the REM sleep phases. <br><br><br><b><i>Sleep apnea and breathing disturbances</i></b><br><br>breathing_disturbances_intensity<br>> Intensity of <a href='/api-reference/#section/Glossary'>breathing disturbances</a>.<br>Available for all Sleep and Sleep Analyzer devices (wellness metric). <br><br>apnea_hypopnea_index<br>> Medical grade AHI. Average number of hypopnea and apnea episodes per hour, that occured during sleep time.<br>Only available for devices purchased in Europe and Australia, with the sleep apnea detection feature activated. <br><br>withings_index<br>> Withings Sleep Rx (FDA Cleared) allows to estimate gaps in breathing sounds and to generate an index. This index corresponds to the number of breathing events per hour.\n\n\n<table><thead><tr><td>Value</td><td>Description</td></tr></thead><tbody><tr><td>0-15 (events per hour on average)</td><td>No/Mild</td></tr><tr><td>15-30 (events per hour on average)</td><td>Moderate</td></tr><tr><td>> 30 (events per hour on average)</td><td>Severe</td></tr></tbody></table>\n\n\nNote: 5 hours of sleep are required in order to calculate the Withings Index.<br><br><br><b><i>Other sleep datapoints and vitals</i></b><br><br>durationtosleep<br>> Time to sleep (seconds). (deprecated) <br><br>durationtowakeup<br>> Time to wake up (seconds). (deprecated) <br><br>out_of_bed_count<br>> Number of times the user got out of bed during the night. <br><br>hr_average<br>> Average heart rate. (beats per minute).<br><br>hr_min<br>> Minimal heart rate (beats per minute). <br><br>hr_max<br>> Maximal heart rate (beats per minute).. <br><br>rr_average<br>> Average respiration rate (breaths per minute).  <br><br>rr_min<br>> Minimal respiration rate (breaths per minute). <br><br>rr_max<br>> Maximal respiration rate (breaths per minute). <br><br>breathing_quality_assessment<br>> Intensity of <a href='/api-reference/#section/Glossary'>breathing disturbances</a>.<br>Available for all Sleep and Sleep Analyzer devices (wellness metric). <br><br>snoring<br>> Total snoring time (seconds).<br><br>snoringepisodecount<br>> Numbers of snoring episodes of at least one minute.<br><br>sleep_score<br>> Sleep score<br><br>night_events<br>> Summary of sleep events that happened during the sleep activity.\n\nIt is structured as a dictionary, where keys are the type of event, and the value is an array of timestamps relative to the activity startdate.\n\nTypes of events can be one of the following : \n\n<table><thead><tr><td>Value</td><td>Description</td></tr></thead><tbody><tr><td>1</td><td>got in bed</td></tr><tr><td>2</td><td>fell asleep</td></tr><tr><td>3</td><td>woke up</td></tr><tr><td>4</td><td>got out of bed</td></tr><tr><td>5</td><td>start of asleep period that was manually input</td></tr><tr><td>6</td><td>start of awake period that was manually input</td></tr></tbody></table>\n\n<br><br>mvt_score_avg<br>> Track the average movement score in bed throughout the night. The score ranges from 0 to 255, representing the intensity of movement. This metric is only available for Sleep Analyzer devices in the EU and prescription-based devices in the US (Sleep Rx).<br><br>mvt_active_duration<br>> Track the duration (in seconds) of movement in bed. Only available for Sleep Analyzer devices (EU) and devices under prescriptions in the US (Sleep Rx)<br><br>rmssd_start_avg<br>> Heart rate variability - Start average<br><br>rmssd_end_avg<br>> Heart rate variability - End average<br><br>chest_movement_rate_wellness_average<br>> Average respiration rate (breaths per minute).  <br><br>chest_movement_rate_wellness_min<br>> Minimal respiration rate (breaths per minute). <br><br>chest_movement_rate_wellness_max<br>> Maximal respiration rate (breaths per minute). <br><br>breathing_sounds<br>> Total time when breathing sounds were tracked. (seconds) <br><br>breathing_sounds_episode_count<br>> Numbers of breathing sounds episodes of at least one minute. <br><br>chest_movement_rate_average<br>> Average chest movement rate (events per minute). <br><br>chest_movement_rate_min<br>> Minimal chest movement rate (events per minute). <br><br>chest_movement_rate_max<br>> Maximal chest movement rate (events per minute). <br><br>core_body_temperature_min<br>> Minimal core body temperature (in celsius degrees). <br><br>core_body_temperature_max<br>> Maximal core body temperature (in celsius degrees). <br><br>core_body_temperature_avg<br>> Avenage core body temperature (in celsius degrees). <br><br>core_body_temperature_status<br>> Status of the temperature. *(Use 'data_fields' to request this data)* Value can be: 'unknown', 'usual' or 'elevated'.\n <br><br>"
+              }
+            ]
+          },
+          "docs": "Returns sleep activity summaries, which are an aggregation of all the data captured at high frequency during the sleep activity.</br></br>\nUse the [Sleep v2 - Get](#operation/sleepv2-get) service to get the high frequency data used to build these summaries.</br></br>\n**IMPORTANT**: Please refer to this [page](https://developer.withings.com/developer-guide/v3/data-api/all-available-health-data/#sleep) to check the availability of metrics based on the sleep tracking device used. Some data types ar"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

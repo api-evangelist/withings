@@ -1,0 +1,730 @@
+{
+  "item": [
+    {
+      "id": "92e93973-391d-4741-a73f-7368d8895c87",
+      "name": "measure",
+      "description": {
+        "content": "The following services gives access to several types of Health Data collected by a user. The data are only available once a synchronization occured between the device and Withings servers (which might include synchronizing with Withings mobile application or via Withings Mobile SDK).",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "dc2164f9-2d7c-4a77-8686-d8cdc156be3d",
+          "name": "Measure  - Getmeas",
+          "request": {
+            "name": "Measure  - Getmeas",
+            "description": {
+              "content": "Provides measures stored at a specific date among the types below. Please refer to the following responses for details.",
+              "type": "text/plain"
+            },
+            "url": {
+              "protocol": "{{baseUrl}}/https",
+              "path": [
+                "measure"
+              ],
+              "host": [
+                "wbsapi",
+                "withings",
+                "net"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "action",
+                  "value": "<string>",
+                  "description": "(Required) Service action name. Must take the string value ```getmeas```."
+                },
+                {
+                  "disabled": false,
+                  "key": "meastype",
+                  "value": "<integer>",
+                  "description": "Requested measure type :\n\n\n|Value | Description|\n|---|---|\n|1 | Weight (kg)|\n|4 | Height (meter)|\n|5 | Fat Free Mass (kg)|\n|6 | Fat Ratio (%)|\n|8 | Fat Mass Weight (kg)|\n|9 | Diastolic Blood Pressure (mmHg)|\n|10 | Systolic Blood Pressure (mmHg)|\n|11 | Heart Pulse (bpm) - only for BPM and scale devices|\n|12 | Temperature (celsius)|\n|54 | SP02 (%)|\n|71 | Body Temperature (celsius)|\n|73 | Skin Temperature (celsius)|\n|76 | Muscle Mass (kg)|\n|77 | Hydration (kg)|\n|88 | Bone Mass (kg)|\n|91 | Pulse Wave Velocity (m/s)|\n|123 | VO2 max is a numerical measurement of your body’s ability to consume oxygen (ml/min/kg).|\n|130 | Atrial fibrillation result|\n|135 | QRS interval duration based on ECG signal|\n|136 | PR interval duration based on ECG signal|\n|137 | QT interval duration based on ECG signal|\n|138 | Corrected QT interval duration based on ECG signal|\n|139 | Atrial fibrillation result from PPG|\n|155 | Vascular age|\n|167 | Nerve Health Score Conductance 2 electrodes Feet|\n|168 | Extracellular Water in kg|\n|169 | Intracellular Water in kg|\n|170 | Visceral Fat (without unity)|\n|173 | Fat Free Mass for segments|\n|174 | Fat Mass for segments in mass unit|\n|175 | Muscle Mass for segments|\n|196 | Electrodermal activity feet|\n|226 | Basal Metabolic Rate (BMR)|\n|227 | Metabolic Age|\n|229 | Electrochemical Skin Conductance (ESC)|\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "meastypes",
+                  "value": "<list of integers>",
+                  "description": "List of requested measure types (separated by a comma).<br>Ex: meastypes=1,4,12"
+                },
+                {
+                  "disabled": false,
+                  "key": "category",
+                  "value": "<integer>",
+                  "description": "```1``` for real measures, ```2``` for user objectives."
+                },
+                {
+                  "disabled": false,
+                  "key": "startdate",
+                  "value": "<integer>",
+                  "description": "Data start date as a unix timestamp."
+                },
+                {
+                  "disabled": false,
+                  "key": "enddate",
+                  "value": "<integer>",
+                  "description": "Data end date as a unix timestamp."
+                },
+                {
+                  "disabled": false,
+                  "key": "lastupdate",
+                  "value": "<integer>",
+                  "description": "Timestamp for requesting data that were updated or created after this date.<br>Useful for data synchronization between systems.<br>Use this instead of startdate + enddate."
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "When a first call returns ```more:1``` and ```offset:XX```, set value ```XX``` in this parameter to retrieve next available rows."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "dc91b985-15f7-44ec-bd0a-8ba4a4277ede",
+              "name": " (Click to unfold)",
+              "originalRequest": {
+                "url": {
+                  "protocol": "{{baseUrl}}/https",
+                  "path": [
+                    "measure"
+                  ],
+                  "host": [
+                    "wbsapi",
+                    "withings",
+                    "net"
+                  ],
+                  "query": [
+                    {
+                      "key": "action",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "meastype",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "meastypes",
+                      "value": "<list of integers>"
+                    },
+                    {
+                      "key": "category",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "startdate",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "enddate",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "lastupdate",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Used to pass your access token. Must take value: ```Bearer {your access_token}``` Replace {your access_token} with the access_token",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 913,\n  \"body\": {\n    \"updatetime\": \"string\",\n    \"timezone\": \"string\",\n    \"measuregrps\": [\n      {\n        \"grpid\": 12,\n        \"attrib\": 1,\n        \"date\": 1594245600,\n        \"created\": 1594246600,\n        \"modified\": 1594257200,\n        \"category\": 1594257200,\n        \"deviceid\": \"892359876fd8805ac45bab078c4828692f0276b1\",\n        \"hash_deviceid\": \"892359876fd8805ac45bab078c4828692f0276b1\",\n        \"measures\": [\n          {\n            \"value\": 65750,\n            \"type\": 1,\n            \"unit\": -3,\n            \"algo\": 3425,\n            \"fm\": 649,\n            \"position\": 1\n          },\n          {\n            \"value\": 65750,\n            \"type\": 1,\n            \"unit\": -3,\n            \"algo\": 3425,\n            \"fm\": 1826,\n            \"position\": 1\n          }\n        ],\n        \"model\": \"Body Cardio\",\n        \"model_id\": 6,\n        \"comment\": \"A measurement comment\"\n      },\n      {\n        \"grpid\": 12,\n        \"attrib\": 1,\n        \"date\": 1594245600,\n        \"created\": 1594246600,\n        \"modified\": 1594257200,\n        \"category\": 1594257200,\n        \"deviceid\": \"892359876fd8805ac45bab078c4828692f0276b1\",\n        \"hash_deviceid\": \"892359876fd8805ac45bab078c4828692f0276b1\",\n        \"measures\": [\n          {\n            \"value\": 65750,\n            \"type\": 1,\n            \"unit\": -3,\n            \"algo\": 3425,\n            \"fm\": 2895,\n            \"position\": 1\n          },\n          {\n            \"value\": 65750,\n            \"type\": 1,\n            \"unit\": -3,\n            \"algo\": 3425,\n            \"fm\": 1243,\n            \"position\": 1\n          }\n        ],\n        \"model\": \"Body Cardio\",\n        \"model_id\": 6,\n        \"comment\": \"A measurement comment\"\n      }\n    ],\n    \"more\": 6088,\n    \"offset\": 8349\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1578f3d5-290d-40a4-a15d-5424e747f05d",
+          "name": "Measure v2  - Confirmuser",
+          "request": {
+            "name": "Measure v2  - Confirmuser",
+            "description": {
+              "content": "",
+              "type": "text/plain"
+            },
+            "url": {
+              "protocol": "{{baseUrl}}/https",
+              "path": [
+                "v2",
+                "measure   "
+              ],
+              "host": [
+                "wbsapi",
+                "withings",
+                "net"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "action",
+                  "value": "<string>",
+                  "description": "(Required) Service action name. Must take the string value ```confirmuser```."
+                },
+                {
+                  "disabled": false,
+                  "key": "grpid",
+                  "value": "<id64n>",
+                  "description": "(Required) Group ID"
+                },
+                {
+                  "disabled": false,
+                  "key": "is_confirmed",
+                  "value": "<boolean>",
+                  "description": "(Required) Indicates if the measure was confirmed by the user."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "37acb4c7-a1c4-4b2e-b240-262171f9e8c5",
+              "name": " (Click to unfold)",
+              "originalRequest": {
+                "url": {
+                  "protocol": "{{baseUrl}}/https",
+                  "path": [
+                    "v2",
+                    "measure   "
+                  ],
+                  "host": [
+                    "wbsapi",
+                    "withings",
+                    "net"
+                  ],
+                  "query": [
+                    {
+                      "key": "action",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "grpid",
+                      "value": "<id64n>"
+                    },
+                    {
+                      "key": "is_confirmed",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Used to pass your access token. Must take value: ```Bearer {your access_token}``` Replace {your access_token} with the access_token",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 8245,\n  \"body\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "00e3c1de-f332-42cc-8d2a-6e7af075cb60",
+          "name": "Measure v2  - Getactivity",
+          "request": {
+            "name": "Measure v2  - Getactivity",
+            "description": {
+              "content": "Provides daily aggregated activity data of a user.",
+              "type": "text/plain"
+            },
+            "url": {
+              "protocol": "{{baseUrl}}/https",
+              "path": [
+                "v2",
+                "measure"
+              ],
+              "host": [
+                "wbsapi",
+                "withings",
+                "net"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "action",
+                  "value": "<string>",
+                  "description": "(Required) Service action name. Must take the string value ```getactivity```."
+                },
+                {
+                  "disabled": false,
+                  "key": "startdateymd",
+                  "value": "<string>",
+                  "description": "(Required) DO NOT USE WITH FOLLOWING PARAMS: [lastupdate]<br>Start date."
+                },
+                {
+                  "disabled": false,
+                  "key": "enddateymd",
+                  "value": "<string>",
+                  "description": "(Required) DO NOT USE WITH FOLLOWING PARAMS: [lastupdate]<br>End date."
+                },
+                {
+                  "disabled": false,
+                  "key": "lastupdate",
+                  "value": "<integer>",
+                  "description": "(Required) DO NOT USE WITH FOLLOWING PARAMS: [startdateymd, enddateymd]<br>Timestamp for requesting data that were updated or created after this date.<br>Useful for data synchronization between systems.<br>Use this instead of startdateymd + enddateymd."
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "When a first call returns ```more:true``` and ```offset:XX```, set value ```XX``` in this parameter to retrieve next available rows."
+                },
+                {
+                  "disabled": false,
+                  "key": "data_fields",
+                  "value": "<string>",
+                  "description": "List of requested data fields, separated by a comma.<br>Available data fields are listed below.<br><u>Ex</u>: data_fields=steps,distance,elevation<br><br>steps<br>> Number of steps. <br><br>distance<br>> Distance travelled (in meters). <br><br>elevation<br>> Number of floors climbed. <br><br>soft<br>> Duration of soft activities (in seconds). <br><br>moderate<br>> Duration of moderate activities (in seconds). <br><br>intense<br>> Duration of intense activities (in seconds). <br><br>active<br>> Sum of intense and moderate activity durations (in seconds). <br><br>calories<br>> Active calories burned (in Kcal). Calculated by mixing fine granularity calories estimation, workouts estimated calories and calories manually set by the user. <br><br>totalcalories<br>> Total calories burned (in Kcal). Obtained by adding active calories (see ```calories```) and passive calories.<br><br>hr_average<br>> Average heart rate. (beats per minute).<br><br>hr_min<br>> Minimal heart rate (beats per minute). <br><br>hr_max<br>> Maximal heart rate (beats per minute).. <br><br>hr_zone_0<br>> Duration in seconds when heart rate was in a light zone (cf. <a href='/api-reference/#section/Glossary'>Glossary</a>). <br><br>hr_zone_1<br>> Duration in seconds when heart rate was in a moderate zone (cf. <a href='/api-reference/#section/Glossary'>Glossary</a>). <br><br>hr_zone_2<br>> Duration in seconds when heart rate was in an intense zone (cf. <a href='/api-reference/#section/Glossary'>Glossary</a>). <br><br>hr_zone_3<br>> Duration in seconds when heart rate was in maximal zone (cf. <a href='/api-reference/#section/Glossary'>Glossary</a>). <br><br>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "34b36b8f-21f8-475b-a6fc-5c7c34fa0749",
+              "name": " (Click to unfold)",
+              "originalRequest": {
+                "url": {
+                  "protocol": "{{baseUrl}}/https",
+                  "path": [
+                    "v2",
+                    "measure"
+                  ],
+                  "host": [
+                    "wbsapi",
+                    "withings",
+                    "net"
+                  ],
+                  "query": [
+                    {
+                      "key": "action",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "startdateymd",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "enddateymd",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "lastupdate",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "data_fields",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Used to pass your access token. Must take value: ```Bearer {your access_token}``` Replace {your access_token} with the access_token",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 8492,\n  \"body\": {\n    \"activities\": [\n      {\n        \"date\": \"2020-06-24\",\n        \"timezone\": \"Europe/Paris\",\n        \"deviceid\": \"892359876fd8805ac45bab078c4828692f0276b1\",\n        \"hash_deviceid\": \"892359876fd8805ac45bab078c4828692f0276b1\",\n        \"brand\": 18,\n        \"is_tracker\": true,\n        \"modified\": 1594257200,\n        \"model\": \"Pulse HR\",\n        \"modelid\": 59,\n        \"steps\": 6200,\n        \"distance\": 3000,\n        \"elevation\": 100,\n        \"soft\": 800,\n        \"moderate\": 1000,\n        \"intense\": 700,\n        \"active\": 2300,\n        \"calories\": 1200,\n        \"totalcalories\": 3500,\n        \"hr_average\": 80,\n        \"hr_min\": 70,\n        \"hr_max\": 80,\n        \"hr_zone_0\": 100,\n        \"hr_zone_1\": 200,\n        \"hr_zone_2\": 300,\n        \"hr_zone_3\": 400\n      },\n      {\n        \"date\": \"2020-06-24\",\n        \"timezone\": \"Europe/Paris\",\n        \"deviceid\": \"892359876fd8805ac45bab078c4828692f0276b1\",\n        \"hash_deviceid\": \"892359876fd8805ac45bab078c4828692f0276b1\",\n        \"brand\": 18,\n        \"is_tracker\": true,\n        \"modified\": 1594257200,\n        \"model\": \"Pulse HR\",\n        \"modelid\": 59,\n        \"steps\": 6200,\n        \"distance\": 3000,\n        \"elevation\": 100,\n        \"soft\": 800,\n        \"moderate\": 1000,\n        \"intense\": 700,\n        \"active\": 2300,\n        \"calories\": 1200,\n        \"totalcalories\": 3500,\n        \"hr_average\": 80,\n        \"hr_min\": 70,\n        \"hr_max\": 80,\n        \"hr_zone_0\": 100,\n        \"hr_zone_1\": 200,\n        \"hr_zone_2\": 300,\n        \"hr_zone_3\": 400\n      }\n    ],\n    \"more\": true,\n    \"offset\": 9719\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7a9c1f85-2000-42c5-add5-d3f491baefb8",
+          "name": "Measure v2  - Getintradayactivity",
+          "request": {
+            "name": "Measure v2  - Getintradayactivity",
+            "description": {
+              "content": "Returns user activity data captured at high frequency.\n\n**Notes:**\n\n - If your input ```startdate``` and ```enddate``` are separated by more than 24h, only the first 24h after ```startdate``` will be returned.\n - If no ```startdate``` and ```enddate``` are passed as parameters, the most recent activity data will be returned.",
+              "type": "text/plain"
+            },
+            "url": {
+              "protocol": "{{baseUrl}}/https",
+              "path": [
+                "v2",
+                "measure  "
+              ],
+              "host": [
+                "wbsapi",
+                "withings",
+                "net"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "action",
+                  "value": "<string>",
+                  "description": "(Required) Service action name. Must take the string value ```getintradayactivity```."
+                },
+                {
+                  "disabled": false,
+                  "key": "startdate",
+                  "value": "<integer>",
+                  "description": "Data start date as a unix timestamp."
+                },
+                {
+                  "disabled": false,
+                  "key": "enddate",
+                  "value": "<integer>",
+                  "description": "Data end date as a unix timestamp."
+                },
+                {
+                  "disabled": false,
+                  "key": "data_fields",
+                  "value": "<string>",
+                  "description": "List of requested data fields, separated by a comma.<br>Available data fields are listed below.<br><u>Ex</u>: data_fields=steps,elevation,calories<br><br>steps<br>> Number of steps. <br><br>elevation<br>> Number of floors climbed. <br><br>calories<br>> Estimation of active calories burned (in Kcal). <br><br>distance<br>> Distance travelled (in meters). <br><br>stroke<br>> Number of strokes performed. <br><br>pool_lap<br>> Number of pool_lap performed. <br><br>duration<br>> Duration of the activity (in seconds). <br><br>heart_rate<br>> Measured heart rate. <br><br>spo2_auto<br>> SpO2 measurement automatically tracked by a device tracker<br><br>rmssd<br>> Heart rate variability - Root mean square of the successive differences over \"a few seconds\" (in miliseconds).<br><br>sdnn1<br>> Heart rate variability - Standard deviation of the NN over 1 minute (in miliseconds).<br><br>hrv_quality<br>> Heart rate variability - quality score.<br><br>core_body_temperature<br>> The core body temperature<br><br>rr<br>> Respiration Rate (breaths per minute). <br><br>chest_movement_rate<br>> Chest movement rate (events per minute). <br><br>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6cb5261c-bbd1-46db-a146-43bc0d12e92b",
+              "name": " (Click to unfold)",
+              "originalRequest": {
+                "url": {
+                  "protocol": "{{baseUrl}}/https",
+                  "path": [
+                    "v2",
+                    "measure  "
+                  ],
+                  "host": [
+                    "wbsapi",
+                    "withings",
+                    "net"
+                  ],
+                  "query": [
+                    {
+                      "key": "action",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "startdate",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "enddate",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "data_fields",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Used to pass your access token. Must take value: ```Bearer {your access_token}``` Replace {your access_token} with the access_token",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 755,\n  \"body\": {\n    \"series\": {\n      \"$timestamp\": {\n        \"deviceid\": \"892359876fd8805ac45bab078c4828692f0276b1\",\n        \"model\": \"Pulse\",\n        \"model_id\": 51,\n        \"steps\": 3153,\n        \"elevation\": 1282.1540618010551,\n        \"calories\": 3220.421271775704,\n        \"distance\": 4060.533423408097,\n        \"stroke\": 8468,\n        \"pool_lap\": 5805,\n        \"duration\": 3123,\n        \"heart_rate\": 5034,\n        \"spo2_auto\": 6020.135871113618,\n        \"rmssd\": 5184.632130388228,\n        \"sdnn1\": 8807.40915880638,\n        \"hrv_quality\": 7150,\n        \"core_body_temperature\": 2153.465835657904,\n        \"rr\": 2485,\n        \"chest_movement_rate\": 2737\n      }\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "31594797-d6db-42f2-99fe-7d28cf2a6e3f",
+          "name": "Measure v2  - Getworkouts",
+          "request": {
+            "name": "Measure v2  - Getworkouts",
+            "description": {
+              "content": "Returns workout summaries, which are an aggregation all data that was captured during that workout.\n\nUse the [Measure v2 - Getintradayactivity](#operation/measurev2-getintradayactivity) service to get the high frequency data used to build this summary.",
+              "type": "text/plain"
+            },
+            "url": {
+              "protocol": "{{baseUrl}}/https",
+              "path": [
+                "v2",
+                "measure "
+              ],
+              "host": [
+                "wbsapi",
+                "withings",
+                "net"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "action",
+                  "value": "<string>",
+                  "description": "(Required) Service action name. Must take the string value ```getworkouts```."
+                },
+                {
+                  "disabled": false,
+                  "key": "startdateymd",
+                  "value": "<string>",
+                  "description": "(Required) DO NOT USE WITH FOLLOWING PARAMS: [lastupdate]<br>Start date."
+                },
+                {
+                  "disabled": false,
+                  "key": "enddateymd",
+                  "value": "<string>",
+                  "description": "(Required) DO NOT USE WITH FOLLOWING PARAMS: [lastupdate]<br>End date. Required if startdateymd is provided."
+                },
+                {
+                  "disabled": false,
+                  "key": "lastupdate",
+                  "value": "<integer>",
+                  "description": "(Required) DO NOT USE WITH FOLLOWING PARAMS: [startdateymd, enddateymd]<br>Timestamp for requesting data that were updated or created after this date.<br>Useful for data synchronization between systems.<br>Use this instead of startdateymd + enddateymd."
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "When a first call returns ```more:true``` and ```offset:XX```, set value ```XX``` in this parameter to retrieve next available rows."
+                },
+                {
+                  "disabled": false,
+                  "key": "data_fields",
+                  "value": "<string>",
+                  "description": "List of requested data fields, separated by a comma.<br>Available data fields are listed below.<br><u>Ex</u>: data_fields=calories,intensity,manual_intensity<br><br>calories<br>> Active calories burned (in Kcal). <br><br>intensity<br>> Intensity of the workout, from 0 to 100, as inputed by the user. If the user didn't manually give the intensity of his workout, the value will be 0.<br><br>manual_intensity<br>> Intensity of the workout, from 0 to 100, entered by the user. If the user didn't manually give the intensity of his workout, the value will be 0.<br><br>manual_distance<br>> Distance travelled manually entered by user (in meters). <br><br>manual_calories<br>> Active calories burned manually entered by user (in Kcal). <br><br>hr_average<br>> Average heart rate. (beats per minute).<br><br>hr_min<br>> Minimal heart rate (beats per minute). <br><br>hr_max<br>> Maximal heart rate (beats per minute).. <br><br>hr_zone_0<br>> Duration in seconds when heart rate was in a light zone (cf. <a href='/api-reference/#section/Glossary'>Glossary</a>). <br><br>hr_zone_1<br>> Duration in seconds when heart rate was in a moderate zone (cf. <a href='/api-reference/#section/Glossary'>Glossary</a>). <br><br>hr_zone_2<br>> Duration in seconds when heart rate was in an intense zone (cf. <a href='/api-reference/#section/Glossary'>Glossary</a>). <br><br>hr_zone_3<br>> Duration in seconds when heart rate was in maximal zone (cf. <a href='/api-reference/#section/Glossary'>Glossary</a>). <br><br>pause_duration<br>> Total pause time in second filled by user<br><br>algo_pause_duration<br>> Total pause time in seconds detected by Withings device (swim only)<br><br>spo2_average<br>> Average percent of SpO2 percent value during a workout<br><br>core_body_temperature_avg<br>> Avenage core body temperature (in celsius degrees). <br><br>core_body_temperature_min<br>> Minimal core body temperature (in celsius degrees). <br><br>core_body_temperature_max<br>> Maximal core body temperature (in celsius degrees). <br><br>core_body_temperature_status<br>> Status of the temperature. *(Use 'data_fields' to request this data)* Value can be: 'unknown', 'usual' or 'elevated'.\n <br><br>steps<br>> Number of steps. <br><br>distance<br>> Distance travelled (in meters). <br><br>elevation<br>> Number of floors climbed. <br><br>pool_laps<br>> Number of pool laps. <br><br>strokes<br>> Number of strokes. <br><br>pool_length<br>> Length of the pool. <br><br>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4a256364-afcc-4901-88a6-9771511f02c2",
+              "name": " (Click to unfold)",
+              "originalRequest": {
+                "url": {
+                  "protocol": "{{baseUrl}}/https",
+                  "path": [
+                    "v2",
+                    "measure "
+                  ],
+                  "host": [
+                    "wbsapi",
+                    "withings",
+                    "net"
+                  ],
+                  "query": [
+                    {
+                      "key": "action",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "startdateymd",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "enddateymd",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "lastupdate",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "data_fields",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Used to pass your access token. Must take value: ```Bearer {your access_token}``` Replace {your access_token} with the access_token",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 1506,\n  \"body\": {\n    \"series\": [\n      {\n        \"id\": 12345,\n        \"category\": 36,\n        \"timezone\": \"Europe/Paris\",\n        \"model\": 59,\n        \"attrib\": 1628,\n        \"startdate\": 1594245600,\n        \"enddate\": 1594257200,\n        \"date\": \"2020-07-09\",\n        \"modified\": 1594257200,\n        \"deviceid\": \"892359876fd8805ac45bab078c4828692f0276b1\",\n        \"data\": {\n          \"algo_pause_duration\": 370,\n          \"calories\": 1545,\n          \"core_body_temperature_avg\": 3704,\n          \"core_body_temperature_max\": 1757,\n          \"core_body_temperature_min\": 4656,\n          \"core_body_temperature_status\": 1194,\n          \"distance\": 2503,\n          \"elevation\": 4575,\n          \"hr_average\": 8908,\n          \"hr_max\": 9879,\n          \"hr_min\": 8569,\n          \"hr_zone_0\": 7523,\n          \"hr_zone_1\": 4362,\n          \"hr_zone_2\": 8517,\n          \"hr_zone_3\": 3647,\n          \"intensity\": 6957,\n          \"manual_calories\": 5002,\n          \"manual_distance\": 1259,\n          \"manual_intensity\": 8172,\n          \"pause_duration\": 3757,\n          \"pool_laps\": 3085,\n          \"pool_length\": 7883,\n          \"spo2_average\": 5067,\n          \"steps\": 9192,\n          \"strokes\": 1021\n        }\n      },\n      {\n        \"id\": 12345,\n        \"category\": 36,\n        \"timezone\": \"Europe/Paris\",\n        \"model\": 59,\n        \"attrib\": 8825,\n        \"startdate\": 1594245600,\n        \"enddate\": 1594257200,\n        \"date\": \"2020-07-09\",\n        \"modified\": 1594257200,\n        \"deviceid\": \"892359876fd8805ac45bab078c4828692f0276b1\",\n        \"data\": {\n          \"algo_pause_duration\": 6362,\n          \"calories\": 7935,\n          \"core_body_temperature_avg\": 2613,\n          \"core_body_temperature_max\": 3531,\n          \"core_body_temperature_min\": 307,\n          \"core_body_temperature_status\": 9286,\n          \"distance\": 9215,\n          \"elevation\": 4582,\n          \"hr_average\": 1583,\n          \"hr_max\": 3056,\n          \"hr_min\": 5526,\n          \"hr_zone_0\": 5330,\n          \"hr_zone_1\": 192,\n          \"hr_zone_2\": 9746,\n          \"hr_zone_3\": 8407,\n          \"intensity\": 8883,\n          \"manual_calories\": 2494,\n          \"manual_distance\": 358,\n          \"manual_intensity\": 7202,\n          \"pause_duration\": 595,\n          \"pool_laps\": 5010,\n          \"pool_length\": 232,\n          \"spo2_average\": 9160,\n          \"steps\": 5382,\n          \"strokes\": 8296\n        }\n      }\n    ],\n    \"more\": true,\n    \"offset\": 3272\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://wbsapi.withings.net/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "99e80053-662d-41e6-b8df-be6df5da8a29",
+    "name": "Withings developer documentation answers measure API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "These webservices allows you to get user's answers from surveys",
+      "type": "text/plain"
+    }
+  }
+}

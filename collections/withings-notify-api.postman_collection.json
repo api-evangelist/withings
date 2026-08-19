@@ -1,0 +1,662 @@
+{
+  "item": [
+    {
+      "id": "30d334e3-1b78-4239-b3fc-8174ed023272",
+      "name": "notify",
+      "description": {
+        "content": "These services will allow you to be notified when new data is collected by Withings devices, or when specific events happen.\n\t\tLearn more about our notification services in [the dedicated section](/developer-guide/v3/data-api/notifications/notification-overview/)",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "21d67db9-7985-4125-a8ae-2315f2dee422",
+          "name": "Notify  - Get",
+          "request": {
+            "name": "Notify  - Get",
+            "description": {
+              "content": "Returns the last notification service that was subscribed for a user and for a given appli. If no appli is specified, appli=1 will be considered.",
+              "type": "text/plain"
+            },
+            "url": {
+              "protocol": "{{baseUrl}}/https",
+              "path": [
+                "notify "
+              ],
+              "host": [
+                "wbsapi",
+                "withings",
+                "net"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "action",
+                  "value": "<string>",
+                  "description": "(Required) Service action name. Must take the string value ```get```."
+                },
+                {
+                  "disabled": false,
+                  "key": "callbackurl",
+                  "value": "<string>",
+                  "description": "(Required) Your ```Callback URL```."
+                },
+                {
+                  "disabled": false,
+                  "key": "appli",
+                  "value": "<integer>",
+                  "description": "Refer to the [Notifications section](/developer-guide/v3/data-api/notifications/notification-overview/) to know which value you should use."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ee94475a-86bc-4411-8a03-f5653760d699",
+              "name": " (Click to unfold)",
+              "originalRequest": {
+                "url": {
+                  "protocol": "{{baseUrl}}/https",
+                  "path": [
+                    "notify "
+                  ],
+                  "host": [
+                    "wbsapi",
+                    "withings",
+                    "net"
+                  ],
+                  "query": [
+                    {
+                      "key": "action",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "callbackurl",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "appli",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Used to pass your access token. Must take value: ```Bearer {your access_token}``` Replace {your access_token} with the access_token",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 1647,\n  \"body\": {\n    \"appli\": 4,\n    \"callbackurl\": \"https://www.withings.com\",\n    \"comment\": \"My notification subcription comment\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "fa735be8-a00e-4a51-8efa-403d48946bcb",
+          "name": "Notify  - List",
+          "request": {
+            "name": "Notify  - List",
+            "description": {
+              "content": "Lists notification configuration for this user.",
+              "type": "text/plain"
+            },
+            "url": {
+              "protocol": "{{baseUrl}}/https",
+              "path": [
+                "notify  "
+              ],
+              "host": [
+                "wbsapi",
+                "withings",
+                "net"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "action",
+                  "value": "<string>",
+                  "description": "(Required) Service action name. Must take the string value ```list```."
+                },
+                {
+                  "disabled": false,
+                  "key": "appli",
+                  "value": "<integer>",
+                  "description": "Refer to the [Notifications section](/developer-guide/v3/data-api/notifications/notification-overview/) to know which value you should use."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "43738d3e-0673-4f09-87b9-fd1201c35ad4",
+              "name": " (Click to unfold)",
+              "originalRequest": {
+                "url": {
+                  "protocol": "{{baseUrl}}/https",
+                  "path": [
+                    "notify  "
+                  ],
+                  "host": [
+                    "wbsapi",
+                    "withings",
+                    "net"
+                  ],
+                  "query": [
+                    {
+                      "key": "action",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "appli",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Used to pass your access token. Must take value: ```Bearer {your access_token}``` Replace {your access_token} with the access_token",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 3400,\n  \"body\": {\n    \"profiles\": [\n      {\n        \"appli\": 1,\n        \"callbackurl\": \"https://www.withings.com\",\n        \"comment\": \"My notification subscription\"\n      },\n      {\n        \"appli\": 1,\n        \"callbackurl\": \"https://www.withings.com\",\n        \"comment\": \"My notification subscription\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ced00a82-a761-4acf-9a5d-131372b9dc9a",
+          "name": "Notify  - Revoke",
+          "request": {
+            "name": "Notify  - Revoke",
+            "description": {
+              "content": "Disables all notifications for a given user.",
+              "type": "text/plain"
+            },
+            "url": {
+              "protocol": "{{baseUrl}}/https",
+              "path": [
+                "notify    "
+              ],
+              "host": [
+                "wbsapi",
+                "withings",
+                "net"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "action",
+                  "value": "<string>",
+                  "description": "(Required) Service action name. Must take the string value ```revoke```."
+                },
+                {
+                  "disabled": false,
+                  "key": "callbackurl",
+                  "value": "<string>",
+                  "description": "(Required) Your ```Callback URL```."
+                },
+                {
+                  "disabled": false,
+                  "key": "appli",
+                  "value": "<integer>",
+                  "description": "Refer to the [Notifications section](/developer-guide/v3/data-api/notifications/notification-overview/) to know which value you should use."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1d2ebb70-575f-4810-b2ba-f1c6c50706b1",
+              "name": " (Click to unfold)",
+              "originalRequest": {
+                "url": {
+                  "protocol": "{{baseUrl}}/https",
+                  "path": [
+                    "notify    "
+                  ],
+                  "host": [
+                    "wbsapi",
+                    "withings",
+                    "net"
+                  ],
+                  "query": [
+                    {
+                      "key": "action",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "callbackurl",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "appli",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Used to pass your access token. Must take value: ```Bearer {your access_token}``` Replace {your access_token} with the access_token",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 2572,\n  \"body\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8bbe4294-2cda-442c-be47-09f493e8e83a",
+          "name": "Notify  - Subscribe",
+          "request": {
+            "name": "Notify  - Subscribe",
+            "description": {
+              "content": "This service allows to receive notifications from Withings:\n\n- for the Health Data APIs : your application can subscribe to a variety or events, including user data  creation and updates. Notifications will be sent to your servers when the subscribed events occur. ([more information](/developer-guide/v3/data-api/notifications/notification-overview)). Please note that you need to subscribe for each individual user.\n- for the Logistics APIs: a notification will be sent when there is an order update ([more information](developer-guide/v3/integration-guide/dropship-only/logistics-api/observe-order-updates))\n- for partners integrating Withings Cellular Solutions or Withings Mobile SDK: you can use the ```NO_ACCOUNT_ASSOCIATED``` event to track unassociated devices . Please note you need to subscribe only once per application.\n\n**Note**: depending on your use case, the request parameters may change:\n\n- for the Health Data APIs: use a valid ```access_token``` in the header but don't use ```signature``` and ```nonce``` in the query parameters.\n- for the Logistics APIs: the subscription is done automatically an order is placed (please refer to the [dedicated documentation section](developer-guide/v3/integration-guide/dropship-only/logistics-api/observe-order-updates#how-to-receive-order-update-notifications))\n- for partners integrating Withings Cellular Solutions or Withings Mobile SDK, to subscribe to the ```NO_ACCOUNT_ASSOCIATED``` event (appli = 53): use ```signature``` and ```nonce``` parameters but don't include an ```access_token``` in the header.",
+              "type": "text/plain"
+            },
+            "url": {
+              "protocol": "{{baseUrl}}/https",
+              "path": [
+                "notify"
+              ],
+              "host": [
+                "wbsapi",
+                "withings",
+                "net"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "action",
+                  "value": "<string>",
+                  "description": "(Required) Service action name. Must take the string value ```subscribe```."
+                },
+                {
+                  "disabled": false,
+                  "key": "callbackurl",
+                  "value": "<string>",
+                  "description": "(Required) Your ```Callback URL```."
+                },
+                {
+                  "disabled": false,
+                  "key": "appli",
+                  "value": "<integer>",
+                  "description": "(Required) Refer to the [Notifications section](/developer-guide/v3/data-api/notifications/notification-overview/) to know which value you should use."
+                },
+                {
+                  "disabled": false,
+                  "key": "signature",
+                  "value": "<string>",
+                  "description": "(Required) DO NOT USE WITH FOLLOWING PARAMS: [access_token]<br>Hash of params (Cf. [Signature hash protocol](/developer-guide/v3/get-access/sign-your-requests))."
+                },
+                {
+                  "disabled": false,
+                  "key": "nonce",
+                  "value": "<string>",
+                  "description": "(Required) DO NOT USE WITH FOLLOWING PARAMS: [access_token]<br>A random token used to prevent replay attacks (Cf. [Signature v2 - Getnonce](#operation/signaturev2-getnonce))"
+                },
+                {
+                  "disabled": false,
+                  "key": "client_id",
+                  "value": "<string>",
+                  "description": "(Required) DO NOT USE WITH FOLLOWING PARAMS: [access_token]<br>Id of the client"
+                },
+                {
+                  "disabled": false,
+                  "key": "comment",
+                  "value": "<string>",
+                  "description": "Comment."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1a6fbdbc-37c3-4f25-a426-849cde9d8648",
+              "name": " (Click to unfold)",
+              "originalRequest": {
+                "url": {
+                  "protocol": "{{baseUrl}}/https",
+                  "path": [
+                    "notify"
+                  ],
+                  "host": [
+                    "wbsapi",
+                    "withings",
+                    "net"
+                  ],
+                  "query": [
+                    {
+                      "key": "action",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "callbackurl",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "appli",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "signature",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nonce",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "client_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "comment",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Used to pass your access token. Must take value: ```Bearer {your access_token}``` Replace {your access_token} with the access_token",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 2572,\n  \"body\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "22a561d4-f5be-4b70-a000-eab3cb1edaaf",
+          "name": "Notify  - Update",
+          "request": {
+            "name": "Notify  - Update",
+            "description": {
+              "content": "Updates the ```callbackurl``` and/or ```appli``` of a created notification subscription. If multiple subscriptions were made for a given user, ```callbackurl``` and ```appli```, only one of the subscriptions will be updated.",
+              "type": "text/plain"
+            },
+            "url": {
+              "protocol": "{{baseUrl}}/https",
+              "path": [
+                "notify   "
+              ],
+              "host": [
+                "wbsapi",
+                "withings",
+                "net"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "action",
+                  "value": "<string>",
+                  "description": "(Required) Service action name. Must take the string value ```update```."
+                },
+                {
+                  "disabled": false,
+                  "key": "callbackurl",
+                  "value": "<string>",
+                  "description": "(Required) Your ```Callback URL```."
+                },
+                {
+                  "disabled": false,
+                  "key": "appli",
+                  "value": "<integer>",
+                  "description": "(Required) Refer to the [Notifications section](/developer-guide/v3/data-api/notifications/notification-overview/) to know which value you should use."
+                },
+                {
+                  "disabled": false,
+                  "key": "new_callbackurl",
+                  "value": "<string>",
+                  "description": "(Required) DO NOT USE WITH FOLLOWING PARAMS: [new_appli, comment]<br>The new callback url."
+                },
+                {
+                  "disabled": false,
+                  "key": "new_appli",
+                  "value": "<integer>",
+                  "description": "(Required) DO NOT USE WITH FOLLOWING PARAMS: [new_callbackurl, comment]<br>The new application type."
+                },
+                {
+                  "disabled": false,
+                  "key": "comment",
+                  "value": "<string>",
+                  "description": "(Required) DO NOT USE WITH FOLLOWING PARAMS: [new_callbackurl, new_appli]<br>Comment."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5dfc8d1d-033a-4da8-8ec0-dffb4d0d4c7b",
+              "name": " (Click to unfold)",
+              "originalRequest": {
+                "url": {
+                  "protocol": "{{baseUrl}}/https",
+                  "path": [
+                    "notify   "
+                  ],
+                  "host": [
+                    "wbsapi",
+                    "withings",
+                    "net"
+                  ],
+                  "query": [
+                    {
+                      "key": "action",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "callbackurl",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "appli",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "new_callbackurl",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "new_appli",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "comment",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Used to pass your access token. Must take value: ```Bearer {your access_token}``` Replace {your access_token} with the access_token",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 2572,\n  \"body\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://wbsapi.withings.net/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "c6695b64-e203-4b0d-9639-0885c1c2eef9",
+    "name": "Withings developer documentation answers notify API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "These webservices allows you to get user's answers from surveys",
+      "type": "text/plain"
+    }
+  }
+}
