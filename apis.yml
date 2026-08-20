@@ -34,6 +34,17 @@ tags:
 - Blood Pressure
 - Activity Tracking
 - Remote Patient Monitoring
+- Authentication
+- Webhook
+tags_raw:
+- Health
+- Wearables
+- Connected Devices
+- Body Composition
+- Sleep Tracking
+- Blood Pressure
+- Activity Tracking
+- Remote Patient Monitoring
 - OAuth2
 - Webhooks
 apis:
@@ -81,6 +92,8 @@ apis:
   humanURL: https://developer.withings.com/
   baseURL: https://wbsapi.withings.net
   tags:
+  - Answers
+  tags_raw:
   - answers
   properties:
   - type: OpenAPI
@@ -125,6 +138,8 @@ apis:
   humanURL: https://developer.withings.com/
   baseURL: https://wbsapi.withings.net
   tags:
+  - Device
+  tags_raw:
   - device
   properties:
   - type: OpenAPI
@@ -279,6 +294,8 @@ apis:
   humanURL: https://developer.withings.com/
   baseURL: https://wbsapi.withings.net
   tags:
+  - Measure
+  tags_raw:
   - measure
   properties:
   - type: OpenAPI
@@ -325,6 +342,8 @@ apis:
   humanURL: https://developer.withings.com/
   baseURL: https://wbsapi.withings.net
   tags:
+  - Notify
+  tags_raw:
   - notify
   properties:
   - type: OpenAPI
@@ -489,6 +508,8 @@ apis:
   humanURL: https://developer.withings.com/
   baseURL: https://wbsapi.withings.net
   tags:
+  - Authentication
+  tags_raw:
   - oauth2
   properties:
   - type: OpenAPI
@@ -535,6 +556,8 @@ apis:
   humanURL: https://developer.withings.com/
   baseURL: https://wbsapi.withings.net
   tags:
+  - Order
+  tags_raw:
   - order
   properties:
   - type: OpenAPI
@@ -583,6 +606,8 @@ apis:
   humanURL: https://developer.withings.com/
   baseURL: https://wbsapi.withings.net
   tags:
+  - Raw Data
+  tags_raw:
   - rawdata
   properties:
   - type: OpenAPI
@@ -629,6 +654,8 @@ apis:
   humanURL: https://developer.withings.com/
   baseURL: https://wbsapi.withings.net
   tags:
+  - Signature
+  tags_raw:
   - signature
   properties:
   - type: OpenAPI
@@ -679,6 +706,8 @@ apis:
   humanURL: https://developer.withings.com/
   baseURL: https://wbsapi.withings.net
   tags:
+  - Sleep
+  tags_raw:
   - sleep
   properties:
   - type: OpenAPI
@@ -769,6 +798,8 @@ apis:
   humanURL: https://developer.withings.com/
   baseURL: https://wbsapi.withings.net
   tags:
+  - Survey
+  tags_raw:
   - survey
   properties:
   - type: OpenAPI
@@ -813,6 +844,8 @@ apis:
   humanURL: https://developer.withings.com/
   baseURL: https://wbsapi.withings.net
   tags:
+  - User
+  tags_raw:
   - user
   properties:
   - type: OpenAPI
