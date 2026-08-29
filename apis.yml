@@ -8,6 +8,18 @@ description: Withings is a connected health device platform providing a REST API
   and developers can integrate Withings health data into their applications for remote
   patient monitoring, wellness platforms, and research applications.
 type: Index
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: freemium
   onboarding: unknown
