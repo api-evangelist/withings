@@ -897,6 +897,9 @@ apis:
   - type: GraphQL
     url: graphql/withings-graphql.md
 common:
+- type: CapabilityMap
+  url: capabilities/withings-capability-edges.yml
+  name: Withings Business Capability Map
 - type: AgenticAccess
   url: agentic-access/withings-agentic-access.yml
 - type: DomainSecurity
