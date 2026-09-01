@@ -150,7 +150,7 @@ apis:
   humanURL: https://developer.withings.com/
   baseURL: https://wbsapi.withings.net
   tags:
-  - device
+  - Device
   tags_raw:
   - device
   properties:
@@ -306,7 +306,7 @@ apis:
   humanURL: https://developer.withings.com/
   baseURL: https://wbsapi.withings.net
   tags:
-  - measure
+  - Measure
   tags_raw:
   - measure
   properties:
@@ -354,7 +354,7 @@ apis:
   humanURL: https://developer.withings.com/
   baseURL: https://wbsapi.withings.net
   tags:
-  - notify
+  - Notify
   tags_raw:
   - notify
   properties:
@@ -568,7 +568,7 @@ apis:
   humanURL: https://developer.withings.com/
   baseURL: https://wbsapi.withings.net
   tags:
-  - order
+  - Order
   tags_raw:
   - order
   properties:
@@ -618,7 +618,7 @@ apis:
   humanURL: https://developer.withings.com/
   baseURL: https://wbsapi.withings.net
   tags:
-  - rawdata
+  - Raw Data
   tags_raw:
   - rawdata
   properties:
@@ -666,7 +666,7 @@ apis:
   humanURL: https://developer.withings.com/
   baseURL: https://wbsapi.withings.net
   tags:
-  - signature
+  - Signature
   tags_raw:
   - signature
   properties:
@@ -718,7 +718,7 @@ apis:
   humanURL: https://developer.withings.com/
   baseURL: https://wbsapi.withings.net
   tags:
-  - sleep
+  - Sleep
   tags_raw:
   - sleep
   properties:
@@ -810,7 +810,7 @@ apis:
   humanURL: https://developer.withings.com/
   baseURL: https://wbsapi.withings.net
   tags:
-  - survey
+  - Survey
   tags_raw:
   - survey
   properties:
