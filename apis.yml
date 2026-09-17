@@ -772,17 +772,45 @@ apis:
     url: examples/withings-oauth2-token-example.json
   - type: GraphQL
     url: graphql/withings-graphql.md
-- aid: withings:withings-o-auth2-api
-  name: Withings O Auth2 API
-  description: The Withings API uses OAuth 2.0, an industry-standard protocol for authorization.
+- aid: withings:withings-oauth2-api
+  name: Withings Oauth2 API
+  description: >-
+    <br>The Withings API uses OAuth 2.0, an industry-standard protocol for authorization.<br> OAuth 2.0
+    enables your application to access user-specific data with a secure and seamless way without requiring
+    users to share their Withings credentials with your app.<br>
+                      <br>
+                      The Withings API supports the Authorization Code Flow, which is suitable for server-side
+    applications. In this flow, your application will obtain an authorization code from the user, which
+    can then be exchanged for an access token and refresh token.
+                      <br><br>
+                      There are two ways to obtain the authorization code:<br>
+                      <br>
+                      1. **Web Authorization Flow**: Redirect the user to the Withings authorization endpoint,
+    where they can grant permission for your app to access their Withings data.<br>
+                      2. **Account Creation Flow (contract partners only)**: Obtain the authorization
+    code after account creation (Cellular Devices/SDK only) .<br>
+                      <br>
+                      To use OAuth 2.0 with the Withings API, follow these general steps:<br>
+                      <br>
+                      1. **Request user authorization/Create an account**: Use one of the two methods
+    mentioned above to obtain an authorization code from the user.<br>
+                      2. **Obtain an access token**: Exchange the authorization code for an access token
+    and refresh token.<br>
+                      3. **Access the API**: Include the access token in your API requests to access user-specific
+    data from the Withings API.<br>
+                      4. **Refresh tokens**: Use the refresh token to obtain new access tokens when the
+    current ones expire.<br>
+                      <br>
+                      Please refer to the appropriate [Integration Guide](https://developer.withings.com/developer-guide/v3/withings-solutions/integration-guides)
+    to know which method you should use.
   humanURL: >-
     https://developer.withings.com/developer-guide/v3/integration-guide/sdk-integration-guides/
   baseURL: https://developer.withings.com
   tags:
-  - O Auth2
+  - oauth2
   properties:
   - type: OpenAPI
-    url: openapi/withings-o-auth2-api-openapi.yml
+    url: openapi/withings-oauth2-api-openapi.yml
   - type: Documentation
     url: https://developer.withings.com/developer-guide/v3/data-api/all-available-health-data/
   - type: Authentication
