@@ -686,7 +686,7 @@ apis:
   humanURL: https://developer.withings.com/
   baseURL: https://wbsapi.withings.net
   tags:
-  - Survey
+  - Surveys
   tags_raw:
   - survey
   properties:
@@ -807,6 +807,8 @@ apis:
     https://developer.withings.com/developer-guide/v3/integration-guide/sdk-integration-guides/
   baseURL: https://developer.withings.com
   tags:
+  - Authentication
+  tags_raw:
   - oauth2
   properties:
   - type: OpenAPI
