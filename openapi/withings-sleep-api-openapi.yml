@@ -1,12 +1,15 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   version: '2.0'
-  title: Withings developer documentation answers sleep API
-  description: These webservices allows you to get user's answers from surveys
+  title: Withings developer documentation Sleep API
+  description: 'Returns data related to user sleep activities, wether they are captured by an Activity Tracker or a Sleep Monitor.
+
+
+    The data are only available once a synchronization occured between the device and Withings servers (which might include synchronizing with Withings mobile application or via Withings Mobile SDK).'
 servers:
 - url: https://wbsapi.withings.net/
 tags:
-- name: sleep
+- name: Sleep
   x-displayName: Sleep
   description: 'Returns data related to user sleep activities, wether they are captured by an Activity Tracker or a Sleep Monitor.
 
@@ -16,17 +19,17 @@ paths:
   https://wbsapi.withings.net/v2/sleep:
     post:
       tags:
-      - sleep
-      description: '
+      - Sleep
+      description: 'Returns sleep data captured at high frequency, including sleep stages.
 
-        Returns sleep data captured at high frequency, including sleep stages.<br/><br/>
 
         **Notes**
 
-        If your input ```startdate``` and ```enddate``` are separated by more than 24h, only the first 24h after ```startdate``` will be returned.<br/><br/>
+        If your input ```startdate``` and ```enddate``` are separated by more than 24h, only the first 24h after ```startdate``` will be returned.
 
-        **IMPORTANT**: Please refer to this [page](https://developer.withings.com/developer-guide/v3/data-api/all-available-health-data/#sleep) to check the availability of metrics based on the sleep tracking device used. Some data types are regulated in the EU and US and may not be available in your region.'
-      summary: Sleep v2  - Get
+
+        **IMPORTANT**: Please refer to this page to check the availability of metrics based on the sleep tracking device used. Some data types are regulated in the EU and US and may not be available in your region.'
+      summary: Sleep v2 - Get
       operationId: sleepv2-get
       parameters:
       - name: action
@@ -296,15 +299,15 @@ paths:
   'https://wbsapi.withings.net/v2/sleep ':
     post:
       tags:
-      - sleep
-      description: 'Returns sleep activity summaries, which are an aggregation of all the data captured at high frequency during the sleep activity.</br></br>
+      - Sleep
+      description: 'Returns sleep activity summaries, which are an aggregation of all the data captured at high frequency during the sleep activity.
 
-        Use the [Sleep v2 - Get](#operation/sleepv2-get) service to get the high frequency data used to build these summaries.</br></br>
 
-        **IMPORTANT**: Please refer to this [page](https://developer.withings.com/developer-guide/v3/data-api/all-available-health-data/#sleep) to check the availability of metrics based on the sleep tracking device used. Some data types are regulated in the EU and US and may not be available in your region.
+        Use the Sleep v2 - Get service to get the high frequency data used to build these summaries.
 
-        '
-      summary: Sleep v2  - Getsummary
+
+        **IMPORTANT**: Please refer to this page to check the availability of metrics based on the sleep tracking device used. Some data types are regulated in the EU and US and may not be available in your region.'
+      summary: Sleep v2 - Getsummary
       operationId: sleepv2-getsummary
       parameters:
       - name: action

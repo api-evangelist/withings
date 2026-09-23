@@ -1,23 +1,23 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   version: '2.0'
-  title: Withings developer documentation answers user API
-  description: These webservices allows you to get user's answers from surveys
+  title: Withings developer documentation User API
+  description: ''
 servers:
 - url: https://wbsapi.withings.net/
 tags:
-- name: user
+- name: User
   x-displayName: User
   description: ''
 paths:
   'https://wbsapi.withings.net/v2/user ':
     post:
       tags:
-      - user
+      - User
       description: 'Creates a Withings user, links the devices related to the provided ```mac_addresses``` and activates the cellular devices service and invoicing.
 
 
-        Please refer to the [Access and refresh tokens section](/developer-guide/v3/integration-guide/bulkship-cellular/get-access/access-and-refresh-tokens) to learn how to use the authorization code you''ll get in return of this service in order to fetch user data. The authorization code is only valid for *10 minutes*.
+        Please refer to the Access and refresh tokens section to learn how to use the authorization code you''ll get in return of this service in order to fetch user data. The authorization code is only valid for *10 minutes*.
 
 
         **Important**:
@@ -25,13 +25,13 @@ paths:
 
         - Please note that to activate the Withings HUB cellular service, the ```mac_address``` of the Withings HUB needs to be passed included in the input mac_addresses along with the other Withings devices.
 
-        - Please note that the devices need to be authorized to be linked by API by the Partner. Please [contact Withings](mailto:partner-api@withings.com) for more information on device authorization.
+        - Please note that the devices need to be authorized to be linked by API by the Partner. Please contact Withings for more information on device authorization.
 
 
         *This service is part of Withings Pro Solutions. You won''t be able to use it if you did not sign a contract with Withings.*
 
         *Use this service only if you''re integrating Withings Cellular Solutions with bulkshipment.*'
-      summary: User v2  - Activate
+      summary: User v2 - Activate
       operationId: userv2-activate
       parameters:
       - name: action
@@ -210,9 +210,9 @@ paths:
   'https://wbsapi.withings.net/v2/user      ':
     post:
       tags:
-      - user
+      - User
       description: 'This API allows you to add an existing user to the Withings Remote Patient Monitoring platform as a patient. Note: A Withings Remote Patient Monitoring contract is required to use this API.'
-      summary: User v2  - Addtorpm
+      summary: User v2 - Addtorpm
       operationId: userv2-addtorpm
       parameters:
       - name: action
@@ -377,14 +377,14 @@ paths:
   https://wbsapi.withings.net/v2/user:
     post:
       tags:
-      - user
+      - User
       description: 'Returns user information.
 
 
         **For data privacy reasons, this webservice is only available for integration solutions for which the provider is responsible for the account creation (ie Withings Cellular Solutions and Withings Mobile SDK integrations).**
 
         **This webservice will return an error the above condition is not met.**'
-      summary: User v2  - Get
+      summary: User v2 - Get
       operationId: userv2-get
       parameters:
       - name: action
@@ -504,9 +504,9 @@ paths:
   'https://wbsapi.withings.net/v2/user   ':
     post:
       tags:
-      - user
+      - User
       description: Returns the list of user linked devices.
-      summary: User v2  - Getdevice
+      summary: User v2 - Getdevice
       operationId: userv2-getdevice
       parameters:
       - name: action
@@ -548,9 +548,9 @@ paths:
   'https://wbsapi.withings.net/v2/user     ':
     post:
       tags:
-      - user
+      - User
       description: Returns the goals of a user.
-      summary: User v2  - Getgoals
+      summary: User v2 - Getgoals
       operationId: userv2-getgoals
       parameters:
       - name: action
@@ -647,15 +647,15 @@ paths:
   'https://wbsapi.withings.net/v2/user  ':
     post:
       tags:
-      - user
+      - User
       description: 'Links the devices related to the provided ```mac_addresses``` and the user related to the provided ```access_token```. If a cellular device is listed in the ```mac_address``` field, it will activate this device''s cellular service and invoicing.
 
 
         **Important**:
 
 
-        - Please note that the devices need to be authorized to be linked by API by the Partner. Please [contact Withings](mailto:partner-api@withings.com) for more information on device authorization.'
-      summary: User v2  - Link
+        - Please note that the devices need to be authorized to be linked by API by the Partner. Please contact Withings for more information on device authorization.'
+      summary: User v2 - Link
       operationId: userv2-link
       parameters:
       - name: action
@@ -703,9 +703,9 @@ paths:
   'https://wbsapi.withings.net/v2/user    ':
     post:
       tags:
-      - user
+      - User
       description: Unlinks the device related to the provided ```mac_address``` and the user related to the provided ```access_token```.
-      summary: User v2  - Unlink
+      summary: User v2 - Unlink
       operationId: userv2-unlink
       parameters:
       - name: action

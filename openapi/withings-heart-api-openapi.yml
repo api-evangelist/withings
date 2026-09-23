@@ -1,8 +1,14 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   version: '2.0'
-  title: Withings developer documentation answers heart API
-  description: These webservices allows you to get user's answers from surveys
+  title: Withings developer documentation Heart API
+  description: 'Returns ECG (EKG) signal points in micro-volt (μV).
+
+
+    You can use the Heart - List service to get the list of ECG records and their corresponding ```signalid``` and then use Heart - Get to get the signal details.
+
+
+    The data are only available once a synchronization occured between the device and Withings servers (which might include synchronizing with Withings mobile application or via Withings Mobile SDK).'
 servers:
 - url: https://wbsapi.withings.net/
 tags:
@@ -11,7 +17,7 @@ tags:
   description: 'Returns ECG (EKG) signal points in micro-volt (μV).
 
 
-    You can use the [Heart - List](#operation/heartv2-list) service to get the list of ECG records and their corresponding ```signalid``` and then use [Heart - Get](#operation/heartv2-get) to get the signal details.
+    You can use the Heart - List service to get the list of ECG records and their corresponding ```signalid``` and then use Heart - Get to get the signal details.
 
 
     The data are only available once a synchronization occured between the device and Withings servers (which might include synchronizing with Withings mobile application or via Withings Mobile SDK).'
@@ -20,8 +26,28 @@ paths:
     post:
       tags:
       - heart
-      description: "Provides the high frequency data of an ECG recording in micro-volt (μV).\n\n**Duration:**\n\n - BPM Core: 20 seconds.\n - Move ECG: 30 seconds.\n - ScanWatch: 30 seconds.\n\n**Sampling frequency:**\n\n - BPM Core: 500 Hz.\n - Move ECG: 300 Hz.\n - ScanWatch: 300 Hz."
-      summary: Heart v2  - Get
+      description: 'Provides the high frequency data of an ECG recording in micro-volt (μV).
+
+
+        **Duration:**
+
+
+        - BPM Core: 20 seconds.
+
+        - Move ECG: 30 seconds.
+
+        - ScanWatch: 30 seconds.
+
+
+        **Sampling frequency:**
+
+
+        - BPM Core: 500 Hz.
+
+        - Move ECG: 300 Hz.
+
+        - ScanWatch: 300 Hz.'
+      summary: Heart v2 - Get
       operationId: heartv2-get
       parameters:
       - name: action
@@ -208,11 +234,11 @@ paths:
       - heart
       description: 'Returns a list of ECG records and Afib classification for a given period of time.
 
-        To get the full ECG signal, use the [Heart v2 - Get](#operation/heartv2-get) service.
+        To get the full ECG signal, use the Heart v2 - Get service.
 
 
         If the ECG recordings have been taken with BPM Core, systole and diastole measurements will also be returned.'
-      summary: Heart v2  - List
+      summary: Heart v2 - List
       operationId: heartv2-list
       parameters:
       - name: action

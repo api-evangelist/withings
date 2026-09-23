@@ -1,21 +1,21 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   version: '2.0'
-  title: Withings developer documentation answers nudgecampaign API
-  description: These webservices allows you to get user's answers from surveys
+  title: Withings developer documentation Nudgecampaign API
+  description: These webservices allows you to to manage Health Nudges Campaign. Read the Health Nudges Integration Guide for more information.
 servers:
 - url: https://wbsapi.withings.net/
 tags:
 - name: nudgecampaign
   x-displayName: Nudge Campaign
-  description: These webservices allows you to to manage Health Nudges Campaign. Read the [Health Nudges Integration Guide](/developer-guide/v3/integration-guide/health-nudges/health-nudge-overview) for more information.
+  description: These webservices allows you to to manage Health Nudges Campaign. Read the Health Nudges Integration Guide for more information.
 paths:
   'https://wbsapi.withings.net/v2/nudgecampaign     ':
     post:
       tags:
       - nudgecampaign
       description: ''
-      summary: Nudgecampaign v2  - Addusers
+      summary: Nudgecampaign v2 - Addusers
       operationId: nudgecampaignv2-addusers
       parameters:
       - name: action
@@ -79,7 +79,7 @@ paths:
       tags:
       - nudgecampaign
       description: ''
-      summary: Nudgecampaign v2  - Create
+      summary: Nudgecampaign v2 - Create
       operationId: nudgecampaignv2-create
       parameters:
       - name: action
@@ -160,7 +160,7 @@ paths:
       tags:
       - nudgecampaign
       description: ''
-      summary: Nudgecampaign v2  - Delete
+      summary: Nudgecampaign v2 - Delete
       operationId: nudgecampaignv2-delete
       parameters:
       - name: action
@@ -218,7 +218,7 @@ paths:
       tags:
       - nudgecampaign
       description: ''
-      summary: Nudgecampaign v2  - Get
+      summary: Nudgecampaign v2 - Get
       operationId: nudgecampaignv2-get
       parameters:
       - name: action
@@ -310,7 +310,7 @@ paths:
       tags:
       - nudgecampaign
       description: ''
-      summary: Nudgecampaign v2  - List
+      summary: Nudgecampaign v2 - List
       operationId: nudgecampaignv2-list
       parameters:
       - name: action
@@ -378,7 +378,7 @@ paths:
       tags:
       - nudgecampaign
       description: ''
-      summary: Nudgecampaign v2  - Listusers
+      summary: Nudgecampaign v2 - Listusers
       operationId: nudgecampaignv2-listusers
       parameters:
       - name: action
@@ -452,7 +452,7 @@ paths:
       tags:
       - nudgecampaign
       description: ''
-      summary: Nudgecampaign v2  - Removeusers
+      summary: Nudgecampaign v2 - Removeusers
       operationId: nudgecampaignv2-removeusers
       parameters:
       - name: action
@@ -516,7 +516,7 @@ paths:
       tags:
       - nudgecampaign
       description: ''
-      summary: Nudgecampaign v2  - Update
+      summary: Nudgecampaign v2 - Update
       operationId: nudgecampaignv2-update
       parameters:
       - name: action

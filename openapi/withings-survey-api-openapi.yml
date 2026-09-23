@@ -1,21 +1,21 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   version: '2.0'
-  title: Withings developer documentation answers survey API
-  description: These webservices allows you to get user's answers from surveys
+  title: Withings developer documentation Survey API
+  description: These webservices allows you to to manage user's surveys
 servers:
 - url: https://wbsapi.withings.net/
 tags:
-- name: survey
+- name: Survey
   x-displayName: Survey
   description: These webservices allows you to to manage user's surveys
 paths:
   'https://wbsapi.withings.net/v2/survey ':
     post:
       tags:
-      - survey
+      - Survey
       description: ''
-      summary: Survey v2  - Activate
+      summary: Survey v2 - Activate
       operationId: surveyv2-activate
       parameters:
       - name: action
@@ -77,9 +77,9 @@ paths:
   'https://wbsapi.withings.net/v2/survey  ':
     post:
       tags:
-      - survey
+      - Survey
       description: ''
-      summary: Survey v2  - Deactivate
+      summary: Survey v2 - Deactivate
       operationId: surveyv2-deactivate
       parameters:
       - name: action
@@ -141,9 +141,9 @@ paths:
   https://wbsapi.withings.net/v2/survey:
     post:
       tags:
-      - survey
+      - Survey
       description: ''
-      summary: Survey v2  - Get
+      summary: Survey v2 - Get
       operationId: surveyv2-get
       parameters:
       - name: action
@@ -230,9 +230,9 @@ paths:
   'https://wbsapi.withings.net/v2/survey   ':
     post:
       tags:
-      - survey
+      - Survey
       description: ''
-      summary: Survey v2  - List
+      summary: Survey v2 - List
       operationId: surveyv2-list
       parameters:
       - name: action
@@ -298,9 +298,9 @@ paths:
   'https://wbsapi.withings.net/v2/survey    ':
     post:
       tags:
-      - survey
+      - Survey
       description: ''
-      summary: Survey v2  - Listusers
+      summary: Survey v2 - Listusers
       operationId: surveyv2-listusers
       parameters:
       - name: action
