@@ -48,6 +48,7 @@ tags:
 - Remote Patient Monitoring
 - Authentication
 - Webhook
+- Wellness
 tags_raw:
 - Health
 - Wearables
@@ -99,7 +100,7 @@ apis:
   - type: Documentation
     url: https://developer.withings.com/developer-guide/v3/withings-solutions/withings-api-plans/
 - aid: withings:withings-answers-api
-  name: Withings answers API
+  name: Withings Answers API
   description: These webservices allows you to get user's answers from surveys
   humanURL: https://developer.withings.com/
   baseURL: https://wbsapi.withings.net
@@ -142,10 +143,8 @@ apis:
     url: examples/withings-activity-example.json
   - type: Examples
     url: examples/withings-oauth2-token-example.json
-  - type: GraphQL
-    url: graphql/withings-graphql.md
 - aid: withings:withings-device-api
-  name: Withings device API
+  name: Withings Device API
   description: The device API from Withings — 3 operation(s) for device.
   humanURL: https://developer.withings.com/
   baseURL: https://wbsapi.withings.net
@@ -188,10 +187,8 @@ apis:
     url: examples/withings-activity-example.json
   - type: Examples
     url: examples/withings-oauth2-token-example.json
-  - type: GraphQL
-    url: graphql/withings-graphql.md
 - aid: withings:withings-dropshipment-api
-  name: Withings dropshipment API
+  name: Withings Dropshipment API
   description: >-
     The following services are part of the Logistics APIs. Refer to [this section](/developer-guide/v3/integration-guide/dropship-only/logistics-api/overview-create-order)
     for more information.
@@ -241,10 +238,8 @@ apis:
     url: examples/withings-activity-example.json
   - type: Examples
     url: examples/withings-oauth2-token-example.json
-  - type: GraphQL
-    url: graphql/withings-graphql.md
 - aid: withings:withings-heart-api
-  name: Withings heart API
+  name: Withings Heart API
   description: >-
     Returns ECG (EKG) signal points in micro-volt (μV).
 
@@ -295,10 +290,8 @@ apis:
     url: examples/withings-activity-example.json
   - type: Examples
     url: examples/withings-oauth2-token-example.json
-  - type: GraphQL
-    url: graphql/withings-graphql.md
 - aid: withings:withings-measure-api
-  name: Withings measure API
+  name: Withings Measure API
   description: >-
     The following services gives access to several types of Health Data collected by a user. The data
     are only available once a synchronization occured between the device and Withings servers (which might
@@ -344,10 +337,8 @@ apis:
     url: examples/withings-activity-example.json
   - type: Examples
     url: examples/withings-oauth2-token-example.json
-  - type: GraphQL
-    url: graphql/withings-graphql.md
 - aid: withings:withings-notify-api
-  name: Withings notify API
+  name: Withings Notify API
   description: "These services will allow you to be notified when new data is collected by Withings devices,\
     \ or when specific events happen.\n\t\tLearn more about our notification services in [the dedicated\
     \ section](/developer-guide/v3/data-api/notifications/notification-overview/)"
@@ -392,10 +383,8 @@ apis:
     url: examples/withings-activity-example.json
   - type: Examples
     url: examples/withings-oauth2-token-example.json
-  - type: GraphQL
-    url: graphql/withings-graphql.md
 - aid: withings:withings-nudge-api
-  name: Withings nudge API
+  name: Withings Nudge API
   description: >-
     These webservices allows you to to manage Health Nudges. Read the [Health Nudges Integration Guide](/developer-guide/v3/integration-guide/health-nudges/health-nudge-overview)
     for more information.
@@ -438,10 +427,8 @@ apis:
     url: examples/withings-activity-example.json
   - type: Examples
     url: examples/withings-oauth2-token-example.json
-  - type: GraphQL
-    url: graphql/withings-graphql.md
 - aid: withings:withings-nudgecampaign-api
-  name: Withings nudgecampaign API
+  name: Withings Nudgecampaign API
   description: >-
     These webservices allows you to to manage Health Nudges Campaign. Read the [Health Nudges Integration
     Guide](/developer-guide/v3/integration-guide/health-nudges/health-nudge-overview) for more information.
@@ -484,10 +471,8 @@ apis:
     url: examples/withings-activity-example.json
   - type: Examples
     url: examples/withings-oauth2-token-example.json
-  - type: GraphQL
-    url: graphql/withings-graphql.md
 - aid: withings:withings-order-api
-  name: Withings order API
+  name: Withings Order API
   description: >-
     The following services are part of the Logistics APIs. Refer to [this section](/developer-guide/v3/integration-guide/dropship-only/logistics-api/overview-create-order)
     for more information.
@@ -532,10 +517,8 @@ apis:
     url: examples/withings-activity-example.json
   - type: Examples
     url: examples/withings-oauth2-token-example.json
-  - type: GraphQL
-    url: graphql/withings-graphql.md
 - aid: withings:withings-signature-api
-  name: Withings signature API
+  name: Withings Signature API
   description: >-
     The following services are part of the Logistics APIs. Refer to [this section](/developer-guide/v3/integration-guide/dropship-only/logistics-api/overview-create-order)
     for more information.
@@ -580,10 +563,8 @@ apis:
     url: examples/withings-activity-example.json
   - type: Examples
     url: examples/withings-oauth2-token-example.json
-  - type: GraphQL
-    url: graphql/withings-graphql.md
 - aid: withings:withings-sleep-api
-  name: Withings sleep API
+  name: Withings Sleep API
   description: >-
     Returns data related to user sleep activities, wether they are captured by an Activity Tracker or
     a Sleep Monitor.
@@ -632,10 +613,8 @@ apis:
     url: examples/withings-activity-example.json
   - type: Examples
     url: examples/withings-oauth2-token-example.json
-  - type: GraphQL
-    url: graphql/withings-graphql.md
 - aid: withings:withings-stetho-api
-  name: Withings stetho API
+  name: Withings Stetho API
   description: >-
     First the [Stetho - List](#operation/stethov2-list) API should be called to fetch the stetho signalIds
     which should be fetched individually using the [Stetho - Get](#operation/stethov2-get) API.
@@ -678,10 +657,8 @@ apis:
     url: examples/withings-activity-example.json
   - type: Examples
     url: examples/withings-oauth2-token-example.json
-  - type: GraphQL
-    url: graphql/withings-graphql.md
 - aid: withings:withings-survey-api
-  name: Withings survey API
+  name: Withings Survey API
   description: These webservices allows you to to manage user's surveys
   humanURL: https://developer.withings.com/
   baseURL: https://wbsapi.withings.net
@@ -724,10 +701,8 @@ apis:
     url: examples/withings-activity-example.json
   - type: Examples
     url: examples/withings-oauth2-token-example.json
-  - type: GraphQL
-    url: graphql/withings-graphql.md
 - aid: withings:withings-user-api
-  name: Withings user API
+  name: Withings User API
   description: The user API from Withings — 7 operation(s) for user.
   humanURL: https://developer.withings.com/
   baseURL: https://wbsapi.withings.net
@@ -770,8 +745,6 @@ apis:
     url: examples/withings-activity-example.json
   - type: Examples
     url: examples/withings-oauth2-token-example.json
-  - type: GraphQL
-    url: graphql/withings-graphql.md
 - aid: withings:withings-oauth2-api
   name: Withings Oauth2 API
   description: >-
@@ -845,8 +818,6 @@ apis:
     url: examples/withings-activity-example.json
   - type: Examples
     url: examples/withings-oauth2-token-example.json
-  - type: GraphQL
-    url: graphql/withings-graphql.md
 - aid: withings:withings-raw-data-api
   name: Withings Raw Data API
   description: >-
@@ -894,8 +865,6 @@ apis:
     url: examples/withings-activity-example.json
   - type: Examples
     url: examples/withings-oauth2-token-example.json
-  - type: GraphQL
-    url: graphql/withings-graphql.md
 common:
 - type: CapabilityMap
   url: capabilities/withings-capability-edges.yml
