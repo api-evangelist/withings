@@ -22,15 +22,15 @@
     "withings-user-api-openapi.yml"
   ],
   "archived": [
-    "deleted 2 superseded output(s) from the previous generation"
+    "deleted 1 superseded output(s) from the previous generation"
   ],
   "errors": [],
   "warnings": [],
   "notes": [
     "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
     "withings-data-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
-    "superseded outputs removed: withings-o-auth2-api-openapi.yml, withings-raw-data-api-openapi.yml",
-    "apis.yml register: written (+2 apis, 18 total)"
+    "superseded outputs removed: withings-raw-data-api-openapi.yml",
+    "apis.yml register: written (+1 apis, 18 total)"
   ],
   "skipped": [
     "withings-answers-api-openapi.yml: previously refined output, superseded by openapi/_original/",
@@ -41,7 +41,7 @@
     "withings-notify-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "withings-nudge-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "withings-nudgecampaign-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "withings-o-auth2-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "withings-oauth2-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "withings-order-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "withings-raw-data-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "withings-signature-api-openapi.yml: previously refined output, superseded by openapi/_original/",

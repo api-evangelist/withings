@@ -1065,6 +1065,14 @@ components:
         sim_status:
           type: string
           example: STANDBY
+    user_add_to_rpm_external_ids:
+      type: object
+      properties:
+        type:
+          type: string
+          description: Type of the measure. See ```meastype``` input parameter.
+        identifier:
+          type: string
     user_device_mac_object:
       type: object
       properties:
@@ -1362,14 +1370,6 @@ components:
           type: string
           description: Serial number of the device.
           example: SN-001122334455
-    user_add_to_rpm_external_ids:
-      type: object
-      properties:
-        type:
-          type: string
-          description: Type of the measure. See ```meastype``` input parameter.
-        identifier:
-          type: string
 x-tagGroups:
 - name: Api Reference Content
   tags:

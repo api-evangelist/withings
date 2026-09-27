@@ -60,6 +60,7 @@ tags_raw:
 - Remote Patient Monitoring
 - OAuth2
 - Webhooks
+- Wellness
 apis:
 - name: Withings Mobile SDK
   description: >-
