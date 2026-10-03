@@ -929,43 +929,6 @@ components:
 
             '
           example: 51
-    dropshipment_get_order_status_product_object:
-      type: object
-      properties:
-        ean:
-          type: string
-          description: EAN of the product.
-          example: '3700546702518'
-        partner_ref:
-          type: string
-          example: REF-12345
-        devices:
-          type: array
-          items:
-            $ref: '#/components/schemas/dropshipment_get_order_status_product_device_object'
-        quantity:
-          type: integer
-          description: Quantity of products.
-          example: 3
-        mac_addresses:
-          type: array
-          description: List of device MAC addresses. *(Only if order has been shipped)*
-          example:
-          - 00:24:e4:xx:xx:xx
-          - 00:24:e4:xx:xx:xx
-          - 00:24:e4:xx:xx:xx
-          items:
-            type: macaddress
-        hash_deviceids:
-          type: array
-          example:
-          - 892359876fd8805ac45bab078c4828692f0276b1
-          - a1b2c3d4e5f6
-        serial_numbers:
-          type: array
-          example:
-          - SN-001122334455
-          - SN-001122334456
     dropshipment_create_order_object:
       type: object
       properties:
@@ -1017,6 +980,43 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/dropshipment_create_order_product_object'
+    dropshipment_get_order_status_product_object:
+      type: object
+      properties:
+        ean:
+          type: string
+          description: EAN of the product.
+          example: '3700546702518'
+        partner_ref:
+          type: string
+          example: REF-12345
+        devices:
+          type: array
+          items:
+            $ref: '#/components/schemas/dropshipment_get_order_status_product_device_object'
+        quantity:
+          type: integer
+          description: Quantity of products.
+          example: 3
+        mac_addresses:
+          type: array
+          description: List of device MAC addresses. *(Only if order has been shipped)*
+          example:
+          - 00:24:e4:xx:xx:xx
+          - 00:24:e4:xx:xx:xx
+          - 00:24:e4:xx:xx:xx
+          items:
+            type: macaddress
+        hash_deviceids:
+          type: array
+          example:
+          - 892359876fd8805ac45bab078c4828692f0276b1
+          - a1b2c3d4e5f6
+        serial_numbers:
+          type: array
+          example:
+          - SN-001122334455
+          - SN-001122334456
     dropshipment_create_order_product_object:
       type: object
       properties:
