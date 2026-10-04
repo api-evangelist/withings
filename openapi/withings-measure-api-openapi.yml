@@ -767,6 +767,311 @@ paths:
         source: 'curl --header "Authorization: Bearer YOUR_ACCESS_TOKEN" --data "action=getworkouts&startdateymd=2020-07-01&enddateymd=2020-07-02" ''https://wbsapi.withings.net/v2/measure '''
 components:
   schemas:
+    measuregrp_object:
+      type: object
+      properties:
+        grpid:
+          type: integer
+          description: Unique identifier of the measure group.
+          format: int64
+          example: 12
+        attrib:
+          type: integer
+          description: 'The way the measure was attributed to the user:
+
+
+
+            | Value | Description|
+
+            |---|---|
+
+            |0 | The measuregroup has been captured by a device and is known to belong to this user (and is not ambiguous)|
+
+            |1 | The measuregroup has been captured by a device but may belong to other users as well as this one (it is ambiguous)|
+
+            |2 | The measuregroup has been entered manually for this particular user|
+
+            |4 | The measuregroup has been entered manually during user creation (and may not be accurate)|
+
+            |5 | Measure auto, it''s only for the Blood Pressure Monitor. This device can make many measures and computed the best value|
+
+            |7 | Measure confirmed. You can get this value if the user confirmed a detected activity|
+
+            |8 | Same as attrib 0|
+
+            |15 | The measure has been performed in specific guided conditions. Apply to Nerve Health Score|
+
+            '
+          example: 1
+        date:
+          type: integer
+          description: UNIX timestamp when measures were taken.
+          format: timestamp
+          example: 1594245600
+        created:
+          type: integer
+          description: UNIX timestamp when measures were stored.
+          format: timestamp
+          example: 1594246600
+        modified:
+          type: integer
+          description: UNIX timestamp when measures were last updated.
+          format: timestamp
+          example: 1594257200
+        category:
+          type: integer
+          description: Category for the measures in the group (see category input parameter).
+          example: 1594257200
+        deviceid:
+          type: string
+          description: 'ID of device that tracked the data. To retrieve information about this device, refer to : <a href=''/api-reference/#operation/userv2-getdevice''>User v2 - Getdevice</a>.'
+          example: 892359876fd8805ac45bab078c4828692f0276b1
+        hash_deviceid:
+          type: string
+          description: 'ID of device that tracked the data. To retrieve information about this device, refer to : <a href=''/api-reference/#operation/userv2-getdevice''>User v2 - Getdevice</a>.'
+          example: 892359876fd8805ac45bab078c4828692f0276b1
+        measures:
+          type: array
+          description: List of measures in the group.
+          items:
+            $ref: '#/components/schemas/measure_object'
+        model:
+          type: string
+          description: 'Device model. Value can be:
+
+
+
+            | Value | Description|
+
+            |---|---|
+
+            |Withings WBS01 | Scale|
+
+            |WS30 | Scale|
+
+            |Kid Scale | Scale|
+
+            |Smart Body Analyzer | Scale|
+
+            |Body+ | Scale|
+
+            |Body Cardio | Scale|
+
+            |Body | Scale|
+
+            |Body Scan | Scale|
+
+            |Body Pro | Scale|
+
+            |WBS10 | Scale|
+
+            |WBS11 | Scale|
+
+            |Body Comp | Scale|
+
+            |Smart Baby Monitor | Babyphone|
+
+            |Withings Home | Babyphone|
+
+            |Withings Blood Pressure Monitor V1 | Blood Pressure Monitor|
+
+            |Withings Blood Pressure Monitor V2 | Blood Pressure Monitor|
+
+            |Withings Blood Pressure Monitor V3 | Blood Pressure Monitor|
+
+            |BPM Core | Blood Pressure Monitor|
+
+            |BPM Connect | Blood Pressure Monitor|
+
+            |BPM Connect Pro | Blood Pressure Monitor|
+
+            |BPM Pro 2 | Blood Pressure Monitor|
+
+            |BPM Vision | Blood Pressure Monitor|
+
+            |Pulse | Activity Tracker|
+
+            |Activite | Activity Tracker|
+
+            |Activite (Pop, Steel) | Activity Tracker|
+
+            |Withings Go | Activity Tracker|
+
+            |Activite Steel HR | Activity Tracker|
+
+            |Activite Steel HR Sport Edition | Activity Tracker|
+
+            |Pulse HR | Activity Tracker|
+
+            |Move | Activity Tracker|
+
+            |Move ECG | Activity Tracker|
+
+            |ScanWatch | Activity Tracker|
+
+            |ScanWatch 2 | Activity Tracker|
+
+            |ScanWatch Light | Activity Tracker|
+
+            |Aura Dock | Sleep Monitor|
+
+            |Aura Sensor | Sleep Monitor|
+
+            |Aura Sensor V2 | Sleep Monitor|
+
+            |Thermo | Smart Connected Thermometer|
+
+            |BeamO | Smart Connected Thermometer|
+
+            |WUP01 | Gateway|
+
+            |Iglucose glucometer | iGlucose|
+
+            |iOS step tracker | HealthKit Apple|
+
+            |HealthKit step iPhone tracker | HealthKit Apple|
+
+            |HealthKit step Apple Watch tracker | HealthKit Apple|
+
+            |HealthKit other step tracker | HealthKit Apple|
+
+            |Android step tracker | HealthKit Google|
+
+            |GoogleFit tracker | HealthKit Google|
+
+            |Samsung Health tracker | HealthKit Google|
+
+            |Google Health Connect | HealthKit Google|
+
+            |Huawei tracker | HealthKit Huawei|
+
+            |Lingo Sensor | Lingo|
+
+            '
+          example: Body Cardio
+        model_id:
+          type: integer
+          description: '
+
+
+            | Value | Description|
+
+            |---|---|
+
+            |1 | Withings WBS01|
+
+            |2 | WS30|
+
+            |3 | Kid Scale|
+
+            |4 | Smart Body Analyzer|
+
+            |5 | Body+|
+
+            |6 | Body Cardio|
+
+            |7 | Body|
+
+            |10 | Body Scan|
+
+            |9 | Body Pro|
+
+            |11 | WBS10|
+
+            |12 | WBS11|
+
+            |18 | Body Comp|
+
+            |21 | Smart Baby Monitor|
+
+            |22 | Withings Home|
+
+            |41 | Withings Blood Pressure Monitor V1|
+
+            |42 | Withings Blood Pressure Monitor V2|
+
+            |43 | Withings Blood Pressure Monitor V3|
+
+            |44 | BPM Core|
+
+            |45 | BPM Connect|
+
+            |46 | BPM Connect Pro|
+
+            |47 | BPM Pro 2|
+
+            |48 | BPM Vision|
+
+            |51 | Pulse|
+
+            |52 | Activite|
+
+            |53 | Activite (Pop, Steel)|
+
+            |54 | Withings Go|
+
+            |55 | Activite Steel HR|
+
+            |59 | Activite Steel HR Sport Edition|
+
+            |58 | Pulse HR|
+
+            |90 | Move|
+
+            |91 | Move ECG|
+
+            |92 | Move ECG|
+
+            |93 | ScanWatch|
+
+            |94 | ScanWatch 2|
+
+            |95 | ScanWatch Light|
+
+            |60 | Aura Dock|
+
+            |61 | Aura Sensor|
+
+            |63 | Aura Sensor V2|
+
+            |70 | Thermo|
+
+            |71 | BeamO|
+
+            |100 | WUP01|
+
+            |1061 | Iglucose glucometer|
+
+            |1051 | iOS step tracker|
+
+            |1052 | iOS step tracker|
+
+            |1057 | HealthKit step iPhone tracker|
+
+            |1058 | HealthKit step Apple Watch tracker|
+
+            |1059 | HealthKit other step tracker|
+
+            |1053 | Android step tracker|
+
+            |1054 | Android step tracker|
+
+            |1055 | GoogleFit tracker|
+
+            |1056 | Samsung Health tracker|
+
+            |1060 | Google Health Connect|
+
+            |1062 | Huawei tracker|
+
+            |1063 | Lingo Sensor|
+
+            '
+          example: 6
+        comment:
+          type: string
+          description: Deprecated. This property will always be empty.
+          example: A measurement comment
     activity_object:
       type: object
       properties:
@@ -1464,311 +1769,6 @@ components:
 
             '
           example: 1
-    measuregrp_object:
-      type: object
-      properties:
-        grpid:
-          type: integer
-          description: Unique identifier of the measure group.
-          format: int64
-          example: 12
-        attrib:
-          type: integer
-          description: 'The way the measure was attributed to the user:
-
-
-
-            | Value | Description|
-
-            |---|---|
-
-            |0 | The measuregroup has been captured by a device and is known to belong to this user (and is not ambiguous)|
-
-            |1 | The measuregroup has been captured by a device but may belong to other users as well as this one (it is ambiguous)|
-
-            |2 | The measuregroup has been entered manually for this particular user|
-
-            |4 | The measuregroup has been entered manually during user creation (and may not be accurate)|
-
-            |5 | Measure auto, it''s only for the Blood Pressure Monitor. This device can make many measures and computed the best value|
-
-            |7 | Measure confirmed. You can get this value if the user confirmed a detected activity|
-
-            |8 | Same as attrib 0|
-
-            |15 | The measure has been performed in specific guided conditions. Apply to Nerve Health Score|
-
-            '
-          example: 1
-        date:
-          type: integer
-          description: UNIX timestamp when measures were taken.
-          format: timestamp
-          example: 1594245600
-        created:
-          type: integer
-          description: UNIX timestamp when measures were stored.
-          format: timestamp
-          example: 1594246600
-        modified:
-          type: integer
-          description: UNIX timestamp when measures were last updated.
-          format: timestamp
-          example: 1594257200
-        category:
-          type: integer
-          description: Category for the measures in the group (see category input parameter).
-          example: 1594257200
-        deviceid:
-          type: string
-          description: 'ID of device that tracked the data. To retrieve information about this device, refer to : <a href=''/api-reference/#operation/userv2-getdevice''>User v2 - Getdevice</a>.'
-          example: 892359876fd8805ac45bab078c4828692f0276b1
-        hash_deviceid:
-          type: string
-          description: 'ID of device that tracked the data. To retrieve information about this device, refer to : <a href=''/api-reference/#operation/userv2-getdevice''>User v2 - Getdevice</a>.'
-          example: 892359876fd8805ac45bab078c4828692f0276b1
-        measures:
-          type: array
-          description: List of measures in the group.
-          items:
-            $ref: '#/components/schemas/measure_object'
-        model:
-          type: string
-          description: 'Device model. Value can be:
-
-
-
-            | Value | Description|
-
-            |---|---|
-
-            |Withings WBS01 | Scale|
-
-            |WS30 | Scale|
-
-            |Kid Scale | Scale|
-
-            |Smart Body Analyzer | Scale|
-
-            |Body+ | Scale|
-
-            |Body Cardio | Scale|
-
-            |Body | Scale|
-
-            |Body Scan | Scale|
-
-            |Body Pro | Scale|
-
-            |WBS10 | Scale|
-
-            |WBS11 | Scale|
-
-            |Body Comp | Scale|
-
-            |Smart Baby Monitor | Babyphone|
-
-            |Withings Home | Babyphone|
-
-            |Withings Blood Pressure Monitor V1 | Blood Pressure Monitor|
-
-            |Withings Blood Pressure Monitor V2 | Blood Pressure Monitor|
-
-            |Withings Blood Pressure Monitor V3 | Blood Pressure Monitor|
-
-            |BPM Core | Blood Pressure Monitor|
-
-            |BPM Connect | Blood Pressure Monitor|
-
-            |BPM Connect Pro | Blood Pressure Monitor|
-
-            |BPM Pro 2 | Blood Pressure Monitor|
-
-            |BPM Vision | Blood Pressure Monitor|
-
-            |Pulse | Activity Tracker|
-
-            |Activite | Activity Tracker|
-
-            |Activite (Pop, Steel) | Activity Tracker|
-
-            |Withings Go | Activity Tracker|
-
-            |Activite Steel HR | Activity Tracker|
-
-            |Activite Steel HR Sport Edition | Activity Tracker|
-
-            |Pulse HR | Activity Tracker|
-
-            |Move | Activity Tracker|
-
-            |Move ECG | Activity Tracker|
-
-            |ScanWatch | Activity Tracker|
-
-            |ScanWatch 2 | Activity Tracker|
-
-            |ScanWatch Light | Activity Tracker|
-
-            |Aura Dock | Sleep Monitor|
-
-            |Aura Sensor | Sleep Monitor|
-
-            |Aura Sensor V2 | Sleep Monitor|
-
-            |Thermo | Smart Connected Thermometer|
-
-            |BeamO | Smart Connected Thermometer|
-
-            |WUP01 | Gateway|
-
-            |Iglucose glucometer | iGlucose|
-
-            |iOS step tracker | HealthKit Apple|
-
-            |HealthKit step iPhone tracker | HealthKit Apple|
-
-            |HealthKit step Apple Watch tracker | HealthKit Apple|
-
-            |HealthKit other step tracker | HealthKit Apple|
-
-            |Android step tracker | HealthKit Google|
-
-            |GoogleFit tracker | HealthKit Google|
-
-            |Samsung Health tracker | HealthKit Google|
-
-            |Google Health Connect | HealthKit Google|
-
-            |Huawei tracker | HealthKit Huawei|
-
-            |Lingo Sensor | Lingo|
-
-            '
-          example: Body Cardio
-        model_id:
-          type: integer
-          description: '
-
-
-            | Value | Description|
-
-            |---|---|
-
-            |1 | Withings WBS01|
-
-            |2 | WS30|
-
-            |3 | Kid Scale|
-
-            |4 | Smart Body Analyzer|
-
-            |5 | Body+|
-
-            |6 | Body Cardio|
-
-            |7 | Body|
-
-            |10 | Body Scan|
-
-            |9 | Body Pro|
-
-            |11 | WBS10|
-
-            |12 | WBS11|
-
-            |18 | Body Comp|
-
-            |21 | Smart Baby Monitor|
-
-            |22 | Withings Home|
-
-            |41 | Withings Blood Pressure Monitor V1|
-
-            |42 | Withings Blood Pressure Monitor V2|
-
-            |43 | Withings Blood Pressure Monitor V3|
-
-            |44 | BPM Core|
-
-            |45 | BPM Connect|
-
-            |46 | BPM Connect Pro|
-
-            |47 | BPM Pro 2|
-
-            |48 | BPM Vision|
-
-            |51 | Pulse|
-
-            |52 | Activite|
-
-            |53 | Activite (Pop, Steel)|
-
-            |54 | Withings Go|
-
-            |55 | Activite Steel HR|
-
-            |59 | Activite Steel HR Sport Edition|
-
-            |58 | Pulse HR|
-
-            |90 | Move|
-
-            |91 | Move ECG|
-
-            |92 | Move ECG|
-
-            |93 | ScanWatch|
-
-            |94 | ScanWatch 2|
-
-            |95 | ScanWatch Light|
-
-            |60 | Aura Dock|
-
-            |61 | Aura Sensor|
-
-            |63 | Aura Sensor V2|
-
-            |70 | Thermo|
-
-            |71 | BeamO|
-
-            |100 | WUP01|
-
-            |1061 | Iglucose glucometer|
-
-            |1051 | iOS step tracker|
-
-            |1052 | iOS step tracker|
-
-            |1057 | HealthKit step iPhone tracker|
-
-            |1058 | HealthKit step Apple Watch tracker|
-
-            |1059 | HealthKit other step tracker|
-
-            |1053 | Android step tracker|
-
-            |1054 | Android step tracker|
-
-            |1055 | GoogleFit tracker|
-
-            |1056 | Samsung Health tracker|
-
-            |1060 | Google Health Connect|
-
-            |1062 | Huawei tracker|
-
-            |1063 | Lingo Sensor|
-
-            '
-          example: 6
-        comment:
-          type: string
-          description: Deprecated. This property will always be empty.
-          example: A measurement comment
 x-tagGroups:
 - name: Api Reference Content
   tags:

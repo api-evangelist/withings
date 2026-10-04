@@ -359,6 +359,18 @@ paths:
         source: curl --data "action=listusers&signature=signature&client_id=client_id&nonce=string&surveyid=string" 'https://wbsapi.withings.net/v2/survey    '
 components:
   schemas:
+    survey_list_users:
+      type: object
+      properties:
+        userid:
+          type: integer
+          description: The id of the user.
+          example: 102
+        activation_date:
+          type: integer
+          description: Timestamp when the survey has been activated for the user
+          format: timestamp
+          example: 1712008389
     survey_list:
       type: object
       properties:
@@ -382,18 +394,6 @@ components:
         answers_type:
           type: integer
           example: 1
-    survey_list_users:
-      type: object
-      properties:
-        userid:
-          type: integer
-          description: The id of the user.
-          example: 102
-        activation_date:
-          type: integer
-          description: Timestamp when the survey has been activated for the user
-          format: timestamp
-          example: 1712008389
 x-tagGroups:
 - name: Api Reference Content
   tags:

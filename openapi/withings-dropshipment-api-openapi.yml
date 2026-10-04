@@ -579,108 +579,6 @@ paths:
         source: curl --data "action=update&client_id=client_id&signature=signature&nonce=string&order_id=string&order=order" 'https://wbsapi.withings.net/v2/dropshipment    '
 components:
   schemas:
-    dropshipment_get_order_status_object:
-      type: object
-      properties:
-        order_id:
-          type: string
-          description: Withings generated identifier used to track your order.
-          example: D12345678
-        customer_ref_id:
-          type: string
-          description: Random identifier you must provide in input parameters. It is used to track your order and must be unique.
-          example: MOUVEMENTREFERENCE12345678
-        status:
-          type: string
-          description: 'Status of the order. Value can be:
-
-
-
-            | Value|
-
-            |---|
-
-            |CREATED|
-
-            |ADDRESS VERIFICATION|
-
-            |ADDRESS ERROR|
-
-            |VERIFIED|
-
-            |PROCESSING|
-
-            |FAILED|
-
-            |OPEN|
-
-            |SHIPPED|
-
-            |TRASHED|
-
-            |BACKHOLD|
-
-            '
-          example: SHIPPED
-        products:
-          type: array
-          items:
-            $ref: '#/components/schemas/dropshipment_get_order_status_product_object'
-        carrier:
-          type: string
-          description: Carrier. *(Only if order has been shipped)*
-          example: UPS Parcel
-        carrier_service:
-          type: string
-          description: Carrier service. *(Only if order has been shipped)*
-          example: Next Day Air
-        tracking_number:
-          type: string
-          description: Tracking number. *(Only if order has been shipped)*
-          example: 1ZY1111111
-        parcel_status:
-          type: string
-          description: 'Status of the parcel. *(Only if order has been shipped)* Value can be:
-
-
-
-            | Value|
-
-            |---|
-
-            |pending|
-
-            |info_received|
-
-            |in_transit|
-
-            |failed_attempt|
-
-            |exception|
-
-            |delayed|
-
-            |pickup|
-
-            |delivered|
-
-            |return|
-
-            |expired|
-
-            '
-          example: in_transit
-        ship_date:
-          type: string
-          description: 'Date on which the order was shipped (format: YYYY-MM-DD).'
-          example: '2024-03-15'
-        is_replacement:
-          type: boolean
-          description: Indicates whether this order is a replacement for a previous order.
-        original_customer_ref:
-          type: string
-          description: The customer reference of the original order this replacement was created for.
-          example: MOUVEMENTREFERENCE00000001
     dropshipment_get_order_status_product_device_object:
       type: object
       properties:
@@ -929,7 +827,7 @@ components:
 
             '
           example: 51
-    dropshipment_create_order_object:
+    dropshipment_get_order_status_object:
       type: object
       properties:
         order_id:
@@ -940,10 +838,6 @@ components:
           type: string
           description: Random identifier you must provide in input parameters. It is used to track your order and must be unique.
           example: MOUVEMENTREFERENCE12345678
-        dropshipmentorderid:
-          type: string
-          description: Unique identifier of the dropshipment order.
-          example: '32948634'
         status:
           type: string
           description: 'Status of the order. Value can be:
@@ -975,11 +869,66 @@ components:
             |BACKHOLD|
 
             '
-          example: ADDRESS VERIFICATION
+          example: SHIPPED
         products:
           type: array
           items:
-            $ref: '#/components/schemas/dropshipment_create_order_product_object'
+            $ref: '#/components/schemas/dropshipment_get_order_status_product_object'
+        carrier:
+          type: string
+          description: Carrier. *(Only if order has been shipped)*
+          example: UPS Parcel
+        carrier_service:
+          type: string
+          description: Carrier service. *(Only if order has been shipped)*
+          example: Next Day Air
+        tracking_number:
+          type: string
+          description: Tracking number. *(Only if order has been shipped)*
+          example: 1ZY1111111
+        parcel_status:
+          type: string
+          description: 'Status of the parcel. *(Only if order has been shipped)* Value can be:
+
+
+
+            | Value|
+
+            |---|
+
+            |pending|
+
+            |info_received|
+
+            |in_transit|
+
+            |failed_attempt|
+
+            |exception|
+
+            |delayed|
+
+            |pickup|
+
+            |delivered|
+
+            |return|
+
+            |expired|
+
+            '
+          example: in_transit
+        ship_date:
+          type: string
+          description: 'Date on which the order was shipped (format: YYYY-MM-DD).'
+          example: '2024-03-15'
+        is_replacement:
+          type: boolean
+          description: Indicates whether this order is a replacement for a previous order.
+        original_customer_ref:
+          type: string
+          description: The customer reference of the original order this replacement was created for.
+          example: MOUVEMENTREFERENCE00000001
     dropshipment_get_order_status_product_object:
       type: object
       properties:
@@ -1031,6 +980,57 @@ components:
           type: integer
           description: Quantity of products.
           example: 3
+    dropshipment_create_order_object:
+      type: object
+      properties:
+        order_id:
+          type: string
+          description: Withings generated identifier used to track your order.
+          example: D12345678
+        customer_ref_id:
+          type: string
+          description: Random identifier you must provide in input parameters. It is used to track your order and must be unique.
+          example: MOUVEMENTREFERENCE12345678
+        dropshipmentorderid:
+          type: string
+          description: Unique identifier of the dropshipment order.
+          example: '32948634'
+        status:
+          type: string
+          description: 'Status of the order. Value can be:
+
+
+
+            | Value|
+
+            |---|
+
+            |CREATED|
+
+            |ADDRESS VERIFICATION|
+
+            |ADDRESS ERROR|
+
+            |VERIFIED|
+
+            |PROCESSING|
+
+            |FAILED|
+
+            |OPEN|
+
+            |SHIPPED|
+
+            |TRASHED|
+
+            |BACKHOLD|
+
+            '
+          example: ADDRESS VERIFICATION
+        products:
+          type: array
+          items:
+            $ref: '#/components/schemas/dropshipment_create_order_product_object'
 x-tagGroups:
 - name: Api Reference Content
   tags:
