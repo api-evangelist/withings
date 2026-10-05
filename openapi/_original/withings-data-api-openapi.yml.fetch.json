@@ -1,0 +1,12 @@
+{
+ "url": "https://developer.withings.com/openapi.yaml",
+ "requested_url": "https://developer.withings.com/openapi.yaml",
+ "status": 200,
+ "content_type": "application/yaml",
+ "bytes": 387546,
+ "sha256": "aadc3c719f0773be45a5236a94dff36a7faa020519bbac4542e36662ee1554a7",
+ "fetched_at": "2026-10-04",
+ "fetched_by": "APIEvangelist-Harvest/1.0 (+https://apievangelist.com)",
+ "match": "equivalent",
+ "note": "Re-fetched from the provider by verify-openapi-sources.py; the provider's current document describes the same operations (Jaccard 0.984), but the bytes differ, so the archive is an earlier or reformatted copy."
+}
