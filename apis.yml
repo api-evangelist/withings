@@ -35,7 +35,7 @@ accessModel:
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/withings.png
 url: https://raw.githubusercontent.com/api-evangelist/withings/refs/heads/main/apis.yml
 created: '2026-06-13'
-modified: '2026-06-13'
+modified: '2026-10-06'
 specificationVersion: '0.23'
 tags:
 - Health
@@ -867,6 +867,10 @@ apis:
   - type: Examples
     url: examples/withings-oauth2-token-example.json
 common:
+- url: https://www.withings.com/en-us/blogs/withings-blog
+  type: Blog
+- url: https://www.withings.com/en-us/blogs/withings-blog.atom
+  type: BlogRSS
 - type: CapabilityMap
   url: capabilities/withings-capability-edges.yml
   name: Withings Business Capability Map
