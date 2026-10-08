@@ -59,3 +59,22 @@ plans:
       - RPM (Remote Patient Monitoring) solution support
       - HIPAA and HDS compliance support
       - Multiple callback URL registration
+x-canonical:
+  generated: '2026-10-08'
+  vocabulary: all/0-working/economics/plans-canonical.yml
+  models:
+  - free
+  units: []
+  plans:
+  - name: Public API
+    access: other
+    model: free
+    model_how: derived
+    units: []
+    periods: []
+  - name: Enterprise Plan
+    access: other
+    model: unstated
+    model_how: derived
+    units: []
+    periods: []
