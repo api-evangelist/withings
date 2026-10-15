@@ -34,3 +34,57 @@
   relationship: platform-app
   status: not-a-workflow
   arazzo: null
+- slug: withings-terra
+  label: Terra
+  partner: terra-api
+  partner_name: Terra
+  category: health data source
+  type: coverage
+  channel: partner-built
+  evidence: https://docs.tryterra.co/reference/health-and-fitness-api/supported-integrations
+  source: edge
+  relationship: system-coverage
+  contract_reference:
+    list: Terra supported integrations (docs.tryterra.co)
+    spec_file: null
+    listed_name: Withings
+    listed_id: WITHINGS
+    listed_names:
+    - Withings
+    matched_domain: withings.com
+    matched_by: domain
+    signal_note: delivery mode / access model / table section are context, never counted
+    detected_by: sweep-health-wellness.py
+    detected: '2026-10-15'
+    delivery_mode:
+    - Event-Driven
+    developer_access:
+    - Managed
+  status: not-a-workflow
+  arazzo: null
+- slug: withings-junction-vital
+  label: Junction (Vital)
+  partner: vital-io
+  partner_name: Junction (Vital)
+  category: health data source
+  type: coverage
+  channel: partner-built
+  evidence: https://docs.junction.com/wearables/providers/introduction
+  source: edge
+  relationship: system-coverage
+  contract_reference:
+    list: Junction (Vital) supported providers (docs.junction.com)
+    spec_file: null
+    listed_name: Withings
+    listed_id: withings
+    listed_names:
+    - Withings
+    matched_domain: withings.com
+    matched_by: domain
+    signal_note: delivery mode / access model / table section are context, never counted
+    detected_by: sweep-health-wellness.py
+    detected: '2026-10-15'
+    table_section:
+    - oauth
+  status: not-a-workflow
+  arazzo: null
