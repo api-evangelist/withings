@@ -2,6 +2,27 @@
   "repo": "withings",
   "feeds": [
     {
+      "source": "https://www.withings.com/en-us/blogs/withings-blog",
+      "feed_url": "https://www.withings.com/en-us/blogs/withings-blog.atom",
+      "title": "",
+      "saved": 1,
+      "method": "discovered"
+    },
+    {
+      "source": "https://www.withings.com/en-us/blogs/withings-blog.atom",
+      "feed_url": "https://www.withings.com/en-us/blogs/withings-blog.atom",
+      "title": "",
+      "saved": 0,
+      "method": "feed"
+    },
+    {
+      "source": "https://www.withings.com/blog/",
+      "feed_url": "https://www.withings.com/en-us/blogs/withings-blog.atom",
+      "title": "",
+      "saved": 0,
+      "method": "discovered"
+    },
+    {
       "source": "https://x.com/withings",
       "feed_url": "https://x.com/withings",
       "title": "",
@@ -9,7 +30,7 @@
       "method": "none"
     }
   ],
-  "post_count": 0,
-  "fetched": "2026-10-03T12:30:02Z",
+  "post_count": 1,
+  "fetched": "2026-10-10T13:15:00Z",
   "agent_pulled": "2026-07-04"
 }
