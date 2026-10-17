@@ -748,6 +748,311 @@ paths:
         source: 'curl --header "Authorization: Bearer YOUR_ACCESS_TOKEN" --data "action=unlink&mac_address=macaddress" ''https://wbsapi.withings.net/v2/user    '''
 components:
   schemas:
+    user_add_to_rpm_external_ids:
+      type: object
+      properties:
+        type:
+          type: string
+          description: Type of the measure. See ```meastype``` input parameter.
+        identifier:
+          type: string
+    user_device_mac_object:
+      type: object
+      properties:
+        mac_address:
+          type: string
+          description: Mac address of the device.
+          example: 00:24:e4:69:b2:30
+        type:
+          type: string
+          description: 'Type of the device. Value can be:
+
+
+
+            | Value|
+
+            |---|
+
+            |Scale|
+
+            |Babyphone|
+
+            |Blood Pressure Monitor|
+
+            |Activity Tracker|
+
+            |Sleep Monitor|
+
+            |Smart Connected Thermometer|
+
+            |Gateway|
+
+            |iGlucose|
+
+            |HealthKit Apple|
+
+            |HealthKit Google|
+
+            |HealthKit Huawei|
+
+            |Lingo|
+
+            '
+          example: Scale
+        model:
+          type: string
+          description: 'Device model. Value can be:
+
+
+
+            | Value | Description|
+
+            |---|---|
+
+            |Withings WBS01 | Scale|
+
+            |WS30 | Scale|
+
+            |Kid Scale | Scale|
+
+            |Smart Body Analyzer | Scale|
+
+            |Body+ | Scale|
+
+            |Body Cardio | Scale|
+
+            |Body | Scale|
+
+            |Body Scan | Scale|
+
+            |Body Pro | Scale|
+
+            |WBS10 | Scale|
+
+            |WBS11 | Scale|
+
+            |Body Comp | Scale|
+
+            |Smart Baby Monitor | Babyphone|
+
+            |Withings Home | Babyphone|
+
+            |Withings Blood Pressure Monitor V1 | Blood Pressure Monitor|
+
+            |Withings Blood Pressure Monitor V2 | Blood Pressure Monitor|
+
+            |Withings Blood Pressure Monitor V3 | Blood Pressure Monitor|
+
+            |BPM Core | Blood Pressure Monitor|
+
+            |BPM Connect | Blood Pressure Monitor|
+
+            |BPM Connect Pro | Blood Pressure Monitor|
+
+            |BPM Pro 2 | Blood Pressure Monitor|
+
+            |BPM Vision | Blood Pressure Monitor|
+
+            |Pulse | Activity Tracker|
+
+            |Activite | Activity Tracker|
+
+            |Activite (Pop, Steel) | Activity Tracker|
+
+            |Withings Go | Activity Tracker|
+
+            |Activite Steel HR | Activity Tracker|
+
+            |Activite Steel HR Sport Edition | Activity Tracker|
+
+            |Pulse HR | Activity Tracker|
+
+            |Move | Activity Tracker|
+
+            |Move ECG | Activity Tracker|
+
+            |ScanWatch | Activity Tracker|
+
+            |ScanWatch 2 | Activity Tracker|
+
+            |ScanWatch Light | Activity Tracker|
+
+            |Aura Dock | Sleep Monitor|
+
+            |Aura Sensor | Sleep Monitor|
+
+            |Aura Sensor V2 | Sleep Monitor|
+
+            |Thermo | Smart Connected Thermometer|
+
+            |BeamO | Smart Connected Thermometer|
+
+            |WUP01 | Gateway|
+
+            |Iglucose glucometer | iGlucose|
+
+            |iOS step tracker | HealthKit Apple|
+
+            |HealthKit step iPhone tracker | HealthKit Apple|
+
+            |HealthKit step Apple Watch tracker | HealthKit Apple|
+
+            |HealthKit other step tracker | HealthKit Apple|
+
+            |Android step tracker | HealthKit Google|
+
+            |GoogleFit tracker | HealthKit Google|
+
+            |Samsung Health tracker | HealthKit Google|
+
+            |Google Health Connect | HealthKit Google|
+
+            |Huawei tracker | HealthKit Huawei|
+
+            |Lingo Sensor | Lingo|
+
+            '
+          example: Body Cardio
+        model_id:
+          type: integer
+          description: '
+
+
+            | Value | Description|
+
+            |---|---|
+
+            |1 | Withings WBS01|
+
+            |2 | WS30|
+
+            |3 | Kid Scale|
+
+            |4 | Smart Body Analyzer|
+
+            |5 | Body+|
+
+            |6 | Body Cardio|
+
+            |7 | Body|
+
+            |10 | Body Scan|
+
+            |9 | Body Pro|
+
+            |11 | WBS10|
+
+            |12 | WBS11|
+
+            |18 | Body Comp|
+
+            |21 | Smart Baby Monitor|
+
+            |22 | Withings Home|
+
+            |41 | Withings Blood Pressure Monitor V1|
+
+            |42 | Withings Blood Pressure Monitor V2|
+
+            |43 | Withings Blood Pressure Monitor V3|
+
+            |44 | BPM Core|
+
+            |45 | BPM Connect|
+
+            |46 | BPM Connect Pro|
+
+            |47 | BPM Pro 2|
+
+            |48 | BPM Vision|
+
+            |51 | Pulse|
+
+            |52 | Activite|
+
+            |53 | Activite (Pop, Steel)|
+
+            |54 | Withings Go|
+
+            |55 | Activite Steel HR|
+
+            |59 | Activite Steel HR Sport Edition|
+
+            |58 | Pulse HR|
+
+            |90 | Move|
+
+            |91 | Move ECG|
+
+            |92 | Move ECG|
+
+            |93 | ScanWatch|
+
+            |94 | ScanWatch 2|
+
+            |95 | ScanWatch Light|
+
+            |60 | Aura Dock|
+
+            |61 | Aura Sensor|
+
+            |63 | Aura Sensor V2|
+
+            |70 | Thermo|
+
+            |71 | BeamO|
+
+            |100 | WUP01|
+
+            |1061 | Iglucose glucometer|
+
+            |1051 | iOS step tracker|
+
+            |1052 | iOS step tracker|
+
+            |1057 | HealthKit step iPhone tracker|
+
+            |1058 | HealthKit step Apple Watch tracker|
+
+            |1059 | HealthKit other step tracker|
+
+            |1053 | Android step tracker|
+
+            |1054 | Android step tracker|
+
+            |1055 | GoogleFit tracker|
+
+            |1056 | Samsung Health tracker|
+
+            |1060 | Google Health Connect|
+
+            |1062 | Huawei tracker|
+
+            |1063 | Lingo Sensor|
+
+            '
+          example: 6
+        battery:
+          type: string
+          description: 'Battery level: high (> 75%), medium (> 30%) or low'
+          example: medium
+        deviceid:
+          type: string
+          description: ID of the device. This ID is returned in other services to know which device tracked a data. Then device's model or type can be known using this information.
+          example: 892359876fd8805ac45bab078c4828692f0276b1
+        timezone:
+          type: string
+          description: Timezone of the device.
+          example: Europe/Paris
+        last_session_date:
+          type: integer
+          description: The timestamp of the last server connection of the device
+          format: timestamp
+          example: 1594159644
+        serial_number:
+          type: string
+          description: Serial number of the device.
+          example: SN-001122334455
     user_device_object:
       type: object
       properties:
@@ -1065,311 +1370,6 @@ components:
         sim_status:
           type: string
           example: STANDBY
-    user_device_mac_object:
-      type: object
-      properties:
-        mac_address:
-          type: string
-          description: Mac address of the device.
-          example: 00:24:e4:69:b2:30
-        type:
-          type: string
-          description: 'Type of the device. Value can be:
-
-
-
-            | Value|
-
-            |---|
-
-            |Scale|
-
-            |Babyphone|
-
-            |Blood Pressure Monitor|
-
-            |Activity Tracker|
-
-            |Sleep Monitor|
-
-            |Smart Connected Thermometer|
-
-            |Gateway|
-
-            |iGlucose|
-
-            |HealthKit Apple|
-
-            |HealthKit Google|
-
-            |HealthKit Huawei|
-
-            |Lingo|
-
-            '
-          example: Scale
-        model:
-          type: string
-          description: 'Device model. Value can be:
-
-
-
-            | Value | Description|
-
-            |---|---|
-
-            |Withings WBS01 | Scale|
-
-            |WS30 | Scale|
-
-            |Kid Scale | Scale|
-
-            |Smart Body Analyzer | Scale|
-
-            |Body+ | Scale|
-
-            |Body Cardio | Scale|
-
-            |Body | Scale|
-
-            |Body Scan | Scale|
-
-            |Body Pro | Scale|
-
-            |WBS10 | Scale|
-
-            |WBS11 | Scale|
-
-            |Body Comp | Scale|
-
-            |Smart Baby Monitor | Babyphone|
-
-            |Withings Home | Babyphone|
-
-            |Withings Blood Pressure Monitor V1 | Blood Pressure Monitor|
-
-            |Withings Blood Pressure Monitor V2 | Blood Pressure Monitor|
-
-            |Withings Blood Pressure Monitor V3 | Blood Pressure Monitor|
-
-            |BPM Core | Blood Pressure Monitor|
-
-            |BPM Connect | Blood Pressure Monitor|
-
-            |BPM Connect Pro | Blood Pressure Monitor|
-
-            |BPM Pro 2 | Blood Pressure Monitor|
-
-            |BPM Vision | Blood Pressure Monitor|
-
-            |Pulse | Activity Tracker|
-
-            |Activite | Activity Tracker|
-
-            |Activite (Pop, Steel) | Activity Tracker|
-
-            |Withings Go | Activity Tracker|
-
-            |Activite Steel HR | Activity Tracker|
-
-            |Activite Steel HR Sport Edition | Activity Tracker|
-
-            |Pulse HR | Activity Tracker|
-
-            |Move | Activity Tracker|
-
-            |Move ECG | Activity Tracker|
-
-            |ScanWatch | Activity Tracker|
-
-            |ScanWatch 2 | Activity Tracker|
-
-            |ScanWatch Light | Activity Tracker|
-
-            |Aura Dock | Sleep Monitor|
-
-            |Aura Sensor | Sleep Monitor|
-
-            |Aura Sensor V2 | Sleep Monitor|
-
-            |Thermo | Smart Connected Thermometer|
-
-            |BeamO | Smart Connected Thermometer|
-
-            |WUP01 | Gateway|
-
-            |Iglucose glucometer | iGlucose|
-
-            |iOS step tracker | HealthKit Apple|
-
-            |HealthKit step iPhone tracker | HealthKit Apple|
-
-            |HealthKit step Apple Watch tracker | HealthKit Apple|
-
-            |HealthKit other step tracker | HealthKit Apple|
-
-            |Android step tracker | HealthKit Google|
-
-            |GoogleFit tracker | HealthKit Google|
-
-            |Samsung Health tracker | HealthKit Google|
-
-            |Google Health Connect | HealthKit Google|
-
-            |Huawei tracker | HealthKit Huawei|
-
-            |Lingo Sensor | Lingo|
-
-            '
-          example: Body Cardio
-        model_id:
-          type: integer
-          description: '
-
-
-            | Value | Description|
-
-            |---|---|
-
-            |1 | Withings WBS01|
-
-            |2 | WS30|
-
-            |3 | Kid Scale|
-
-            |4 | Smart Body Analyzer|
-
-            |5 | Body+|
-
-            |6 | Body Cardio|
-
-            |7 | Body|
-
-            |10 | Body Scan|
-
-            |9 | Body Pro|
-
-            |11 | WBS10|
-
-            |12 | WBS11|
-
-            |18 | Body Comp|
-
-            |21 | Smart Baby Monitor|
-
-            |22 | Withings Home|
-
-            |41 | Withings Blood Pressure Monitor V1|
-
-            |42 | Withings Blood Pressure Monitor V2|
-
-            |43 | Withings Blood Pressure Monitor V3|
-
-            |44 | BPM Core|
-
-            |45 | BPM Connect|
-
-            |46 | BPM Connect Pro|
-
-            |47 | BPM Pro 2|
-
-            |48 | BPM Vision|
-
-            |51 | Pulse|
-
-            |52 | Activite|
-
-            |53 | Activite (Pop, Steel)|
-
-            |54 | Withings Go|
-
-            |55 | Activite Steel HR|
-
-            |59 | Activite Steel HR Sport Edition|
-
-            |58 | Pulse HR|
-
-            |90 | Move|
-
-            |91 | Move ECG|
-
-            |92 | Move ECG|
-
-            |93 | ScanWatch|
-
-            |94 | ScanWatch 2|
-
-            |95 | ScanWatch Light|
-
-            |60 | Aura Dock|
-
-            |61 | Aura Sensor|
-
-            |63 | Aura Sensor V2|
-
-            |70 | Thermo|
-
-            |71 | BeamO|
-
-            |100 | WUP01|
-
-            |1061 | Iglucose glucometer|
-
-            |1051 | iOS step tracker|
-
-            |1052 | iOS step tracker|
-
-            |1057 | HealthKit step iPhone tracker|
-
-            |1058 | HealthKit step Apple Watch tracker|
-
-            |1059 | HealthKit other step tracker|
-
-            |1053 | Android step tracker|
-
-            |1054 | Android step tracker|
-
-            |1055 | GoogleFit tracker|
-
-            |1056 | Samsung Health tracker|
-
-            |1060 | Google Health Connect|
-
-            |1062 | Huawei tracker|
-
-            |1063 | Lingo Sensor|
-
-            '
-          example: 6
-        battery:
-          type: string
-          description: 'Battery level: high (> 75%), medium (> 30%) or low'
-          example: medium
-        deviceid:
-          type: string
-          description: ID of the device. This ID is returned in other services to know which device tracked a data. Then device's model or type can be known using this information.
-          example: 892359876fd8805ac45bab078c4828692f0276b1
-        timezone:
-          type: string
-          description: Timezone of the device.
-          example: Europe/Paris
-        last_session_date:
-          type: integer
-          description: The timestamp of the last server connection of the device
-          format: timestamp
-          example: 1594159644
-        serial_number:
-          type: string
-          description: Serial number of the device.
-          example: SN-001122334455
-    user_add_to_rpm_external_ids:
-      type: object
-      properties:
-        type:
-          type: string
-          description: Type of the measure. See ```meastype``` input parameter.
-        identifier:
-          type: string
 x-tagGroups:
 - name: Api Reference Content
   tags:

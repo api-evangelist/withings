@@ -579,6 +579,94 @@ paths:
         source: curl --data "action=update&client_id=client_id&signature=signature&nonce=string&order_id=string&order=order" 'https://wbsapi.withings.net/v2/dropshipment    '
 components:
   schemas:
+    dropshipment_create_order_object:
+      type: object
+      properties:
+        order_id:
+          type: string
+          description: Withings generated identifier used to track your order.
+          example: D12345678
+        customer_ref_id:
+          type: string
+          description: Random identifier you must provide in input parameters. It is used to track your order and must be unique.
+          example: MOUVEMENTREFERENCE12345678
+        dropshipmentorderid:
+          type: string
+          description: Unique identifier of the dropshipment order.
+          example: '32948634'
+        status:
+          type: string
+          description: 'Status of the order. Value can be:
+
+
+
+            | Value|
+
+            |---|
+
+            |CREATED|
+
+            |ADDRESS VERIFICATION|
+
+            |ADDRESS ERROR|
+
+            |VERIFIED|
+
+            |PROCESSING|
+
+            |FAILED|
+
+            |OPEN|
+
+            |SHIPPED|
+
+            |TRASHED|
+
+            |BACKHOLD|
+
+            '
+          example: ADDRESS VERIFICATION
+        products:
+          type: array
+          items:
+            $ref: '#/components/schemas/dropshipment_create_order_product_object'
+    dropshipment_get_order_status_product_object:
+      type: object
+      properties:
+        ean:
+          type: string
+          description: EAN of the product.
+          example: '3700546702518'
+        partner_ref:
+          type: string
+          example: REF-12345
+        devices:
+          type: array
+          items:
+            $ref: '#/components/schemas/dropshipment_get_order_status_product_device_object'
+        quantity:
+          type: integer
+          description: Quantity of products.
+          example: 3
+        mac_addresses:
+          type: array
+          description: List of device MAC addresses. *(Only if order has been shipped)*
+          example:
+          - 00:24:e4:xx:xx:xx
+          - 00:24:e4:xx:xx:xx
+          - 00:24:e4:xx:xx:xx
+          items:
+            type: macaddress
+        hash_deviceids:
+          type: array
+          example:
+          - 892359876fd8805ac45bab078c4828692f0276b1
+          - a1b2c3d4e5f6
+        serial_numbers:
+          type: array
+          example:
+          - SN-001122334455
+          - SN-001122334456
     dropshipment_get_order_status_product_device_object:
       type: object
       properties:
@@ -827,6 +915,20 @@ components:
 
             '
           example: 51
+    dropshipment_create_order_product_object:
+      type: object
+      properties:
+        ean:
+          type: string
+          description: EAN of the product.
+          example: '3700546702518'
+        partner_ref:
+          type: string
+          example: REF-12345
+        quantity:
+          type: integer
+          description: Quantity of products.
+          example: 3
     dropshipment_get_order_status_object:
       type: object
       properties:
@@ -929,108 +1031,6 @@ components:
           type: string
           description: The customer reference of the original order this replacement was created for.
           example: MOUVEMENTREFERENCE00000001
-    dropshipment_get_order_status_product_object:
-      type: object
-      properties:
-        ean:
-          type: string
-          description: EAN of the product.
-          example: '3700546702518'
-        partner_ref:
-          type: string
-          example: REF-12345
-        devices:
-          type: array
-          items:
-            $ref: '#/components/schemas/dropshipment_get_order_status_product_device_object'
-        quantity:
-          type: integer
-          description: Quantity of products.
-          example: 3
-        mac_addresses:
-          type: array
-          description: List of device MAC addresses. *(Only if order has been shipped)*
-          example:
-          - 00:24:e4:xx:xx:xx
-          - 00:24:e4:xx:xx:xx
-          - 00:24:e4:xx:xx:xx
-          items:
-            type: macaddress
-        hash_deviceids:
-          type: array
-          example:
-          - 892359876fd8805ac45bab078c4828692f0276b1
-          - a1b2c3d4e5f6
-        serial_numbers:
-          type: array
-          example:
-          - SN-001122334455
-          - SN-001122334456
-    dropshipment_create_order_product_object:
-      type: object
-      properties:
-        ean:
-          type: string
-          description: EAN of the product.
-          example: '3700546702518'
-        partner_ref:
-          type: string
-          example: REF-12345
-        quantity:
-          type: integer
-          description: Quantity of products.
-          example: 3
-    dropshipment_create_order_object:
-      type: object
-      properties:
-        order_id:
-          type: string
-          description: Withings generated identifier used to track your order.
-          example: D12345678
-        customer_ref_id:
-          type: string
-          description: Random identifier you must provide in input parameters. It is used to track your order and must be unique.
-          example: MOUVEMENTREFERENCE12345678
-        dropshipmentorderid:
-          type: string
-          description: Unique identifier of the dropshipment order.
-          example: '32948634'
-        status:
-          type: string
-          description: 'Status of the order. Value can be:
-
-
-
-            | Value|
-
-            |---|
-
-            |CREATED|
-
-            |ADDRESS VERIFICATION|
-
-            |ADDRESS ERROR|
-
-            |VERIFIED|
-
-            |PROCESSING|
-
-            |FAILED|
-
-            |OPEN|
-
-            |SHIPPED|
-
-            |TRASHED|
-
-            |BACKHOLD|
-
-            '
-          example: ADDRESS VERIFICATION
-        products:
-          type: array
-          items:
-            $ref: '#/components/schemas/dropshipment_create_order_product_object'
 x-tagGroups:
 - name: Api Reference Content
   tags:
