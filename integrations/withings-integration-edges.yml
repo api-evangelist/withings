@@ -83,11 +83,47 @@ edges:
     - oauth
   detected_by: sweep-health-wellness.py
   first_seen: '2026-10-15'
+- partner_name: FDA (AI-enabled medical devices)
+  partner: null
+  partner_match: register
+  type: contract
+  channel: regulator-register
+  relationship: standard-participant
+  direction: partner-built
+  evidence: https://www.accessdata.fda.gov/scripts/cdrh/cfdocs/cfpmn/pmn.cfm?ID=K240795
+  category: FDA-authorized AI-enabled medical device
+  contract_reference:
+    register: FDA AI-enabled medical devices list (fda.gov/media/178541 CSV)
+    standard: FDA AI-enabled medical device authorization
+    spec_file: null
+    role: fda-ai-device-holder
+    registered_name: Withings
+    register_id: K240795
+    matched_domain: withings.com
+    matched_by: domain
+    identity: wikidata Q3569499 'Withings' P856 https://www.withings.com
+    identity_source: wikidata P856 (labelled provenance step; Kin 2026-10-15 decision 1)
+    devices_sample:
+    - Withings ECG App
+    - Withings Scan Monitor 2.0
+    certified_products:
+    - product: FDA-authorized AI-enabled device (Cardiovascular)
+      panel: Cardiovascular
+      lapsed: false
+      latest_authorization: '2025-06-15'
+    signal_note: certified_products = one entry per lead review PANEL, never per device; devices and submission
+      numbers are context, never counted. The list carries current authorizations only, so lapsed is always false
+    detected_by: sweep-medtech.py
+    detected: '2026-10-18'
+  detected_by: sweep-medtech.py
+  first_seen: '2026-10-18'
 generated: '2026-10-12'
 method: searched
 checked:
 - eclinicalworks/integrations/eclinicalworks-integration-edges.yml
 - https://docs.junction.com/wearables/providers/introduction
 - https://docs.tryterra.co/reference/health-and-fitness-api/supported-integrations
+- https://lantern.healthit.gov/api/daily/download
+- https://www.fda.gov/medical-devices/software-medical-device-samd/artificial-intelligence-enabled-medical-devices
 source:
 - eclinicalworks/integrations/eclinicalworks-integration-edges.yml
