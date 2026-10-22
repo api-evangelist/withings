@@ -117,6 +117,46 @@ edges:
     detected: '2026-10-18'
   detected_by: sweep-medtech.py
   first_seen: '2026-10-18'
+- partner_name: Health Canada (Medical Device Licence)
+  partner: null
+  partner_match: register
+  type: contract
+  channel: regulator-register
+  relationship: standard-participant
+  direction: partner-built
+  evidence: https://health-products.canada.ca/api/medical-devices/company/?id=143027&lang=en&type=json
+  category: Canadian medical device licence
+  contract_reference:
+    register: Health Canada Medical Devices Active Licence Listing (MDALL) public API (health-products.canada.ca/api/medical-devices)
+    standard: Canada Medical Devices Regulations (SOR/98-282), Medical Device Licence
+    spec_file: null
+    role: licence-holder
+    registered_name: WITHINGS
+    register_country: FR
+    register_id: https://health-products.canada.ca/api/medical-devices/company/?id=143027&lang=en&type=json
+    company_status: A
+    matched_domain: withings.com
+    matched_by: domain
+    certified_products:
+    - product: Health Canada Medical Device Licence, Class II
+      product_type: Class II
+      risk_class: 2
+      lapsed: true
+      first_issued: '2016-11-14'
+      conditional: false
+      licences_sample:
+      - NOKIA THERMO SMART TEMPORAL THERMOMETER
+      - NOKIA WIRELESS BLOOD PRESSURE MONITOR
+      - WITHINGS THERMO SMART TEMPORAL THERMOMETER
+    signal_note: certified_products = one entry per device RISK CLASS licensed by Health Canada, lapsed when no
+      licence of that class is still issued (status I / D, no end date); licence names are a sample, licence and
+      device counts are context, never counted
+    detected_by: sweep-canada-medical-device-licensing.py
+    detected: '2026-10-22'
+    identity: wikidata Q3569499 'Withings' P856 https://www.withings.com
+    identity_source: wikidata P856 (labelled provenance step; Kin 2026-10-15 decision 1)
+  detected_by: sweep-canada-medical-device-licensing.py
+  first_seen: '2026-10-22'
 generated: '2026-10-12'
 method: searched
 checked:
@@ -125,5 +165,7 @@ checked:
 - https://docs.tryterra.co/reference/health-and-fitness-api/supported-integrations
 - https://lantern.healthit.gov/api/daily/download
 - https://www.fda.gov/medical-devices/software-medical-device-samd/artificial-intelligence-enabled-medical-devices
+- https://health-products.canada.ca/api/medical-devices/company/?lang=en&type=json
+- https://health-products.canada.ca/api/medical-devices/licence/?lang=en&type=json
 source:
 - eclinicalworks/integrations/eclinicalworks-integration-edges.yml
