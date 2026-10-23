@@ -234,3 +234,31 @@
     detected: '2026-10-22'
   status: not-a-workflow
   arazzo: null
+- slug: withings-ifttt
+  label: IFTTT
+  partner: ifttt
+  partner_name: IFTTT
+  type: marketplace
+  marketplace: ifttt-services
+  channel: ipaas-listing
+  evidence: https://ifttt.com/withings
+  source: edge
+  relationship: ipaas-bridge
+  contract_reference:
+    register: IFTTT service directory (ifttt.com/explore/services; ifttt.com/<service>)
+    spec_file: null
+    role: ipaas-connector:ifttt
+    registered_name: Withings
+    matched_domain: withings.com
+    matched_by: domain
+    app_slug: withings
+    ifttt_category: Health & fitness
+    builder: unknown (the service page does not say who built it)
+    detected_by: sweep-ifttt-services.py
+    detected: '2026-10-23'
+    signal_note: one edge per (provider, platform); triggers, actions and applet counts are context, never read
+    other_apps:
+    - WithingsSleep
+    - withingshome
+  status: not-a-workflow
+  arazzo: null
